@@ -26,6 +26,12 @@ const Pricing = ({
   langName: string;
 }) => {
   const TIERS = ALL_TIERS[`TIERS_${langName.toUpperCase()}`];
+  // Get the button properties from the first tier to apply to all buttons
+  const firstTierButtonProps = TIERS[0] ? {
+    color: TIERS[0].buttonColor,
+    variant: TIERS[0].buttonVariant,
+  } : { color: "primary", variant: "solid" }; // Fallback if TIERS[0] is undefined
+
   return (
     <section
       id={id}
@@ -79,9 +85,9 @@ const Pricing = ({
               <Button
                 fullWidth
                 as={Link}
-                color={tier.buttonColor}
+                color={firstTierButtonProps.color}
+                variant={firstTierButtonProps.variant}
                 href={tier.href}
-                variant={tier.buttonVariant}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="rounded-full px-6 py-3"
