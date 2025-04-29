@@ -1,49 +1,47 @@
-const TestimonialsData = {
-  Hero: {
-    title1: "Launch",
-    title2: "Your Online Business",
-    title3: "Fast",
-    description: "NolanDex is your all-in-one partner for launching a complete online business in hours. From professional websites to marketing and automation, we make going digital easy, fast, and stress-free."
+export const TestimonialsData = [
+  {
+    user: {
+      name: "Emily Carter",
+      username: "emily_startsup",
+      image: "/images/users/emily.jpeg",
+    },
+    content:
+      "NolanDex made launching my online business effortless. My website and automation systems were live in just a few hours — and I landed my first sale the same day.",
   },
-  SocialProof: {
-    maker: "Entrepreneurs trust NolanDex to grow smarter"
+  {
+    user: {
+      name: "James Miller",
+      username: "jamesresells",
+      image: "/images/users/james.jpeg",
+    },
+    content:
+      "Joining NolanDex as a reseller was a game changer. No upfront cost, ready-to-use content, and I could immediately focus on making sales.",
   },
-  Showcase: {
-    title: "Showcase",
-    description: "Join 1000+ Entrepreneurs Building Thriving Online Businesses with NolanDex"
+  {
+    user: {
+      name: "Sophie Williams",
+      username: "sophiemarket",
+      image: "/images/users/sophie.jpeg",
+    },
+    content:
+      "I was able to build my own brand while reselling through NolanDex. Everything looked professional and original — perfect for standing out online.",
   },
-  Feature: {
-    title: "What We Offer"
+  {
+    user: {
+      name: "Liam Johnson",
+      username: "liam.biz",
+      image: "/images/users/liam.jpeg",
+    },
+    content:
+      "NolanDex delivered a complete, ready-to-sell business setup. Website, automation, and even marketing content — all done. I just had to launch.",
   },
-  Pricing: {
-    title: "Pricing",
-    title2: "Launch your business with confidence.",
-    description: "NolanDex offers a complete solution with a 50% money-back guarantee if your business doesn’t grow in 30 days.",
-    doYouLike: "Ready to start your online business with NolanDex?",
-    follow: "Follow us on Twitter for tips and updates."
-  },
-  Testimonials: {
-    title: "Testimonials",
-    description1: "If NolanDex helped you launch your business,",
-    description2: "send us your story",
-    description3: "— we’d love to share it here!"
-  },
-  FAQ: {
-    title: "FAQs",
-    description: "Got questions about launching your online business? Here are the answers you need."
-  },
-  CTA: {
-    title: "Start Your Online Business Today",
-    description1: "Launch",
-    description2: "your business,",
-    description3: "sell",
-    description4: "smarter, and",
-    description5: "grow stress-free",
-    description6: "with NolanDex!"
-  },
-  CTAButton: {
-    title: "Get Started Now"
+  {
+    user: {
+      name: "Olivia Smith",
+      username: "olivia.launches",
+      image: "/images/users/olivia.jpeg",
+    },
+    content:
+      "Highly impressed! Quick setup, excellent support, and my online business finally looks legit and trustworthy to customers.",
   }
-};
-
-export default TestimonialsData;
+];
