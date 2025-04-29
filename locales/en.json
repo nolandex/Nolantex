@@ -1,47 +1,47 @@
 {
   "Hero": {
-    "title1": "Ship",
-    "title2": "Landing Page",
-    "title3": "Fast",
-    "description": "A free, open-source, and powerful landing page boilerplate, ideal for various projects, enabling you to create a landing page in under an hour."
+    "title1": "Start",
+    "title2": "Your Online",
+    "title3": "Business Fast",
+    "description": "NolanDex helps you build a complete online business — website, branding, automation, and content — all done in just a few hours."
   },
   "SocialProof": {
-    "maker": "makers ship fast"
+    "maker": "Limited Offer: Get 50% Off If Your Business Doesn't Grow in 30 Days!"
   },
   "Showcase": {
-    "title": "Showcase",
-    "description": "Join 1000+ Makers Boosting Conversions with Our Landing Page Boilerplate"
+    "title": "Success Stories",
+    "description": "Join 100+ clients who’ve launched their business quickly and easily with NolanDex."
   },
   "Feature": {
-    "title": "Features"
+    "title": "What You Get"
   },
   "Pricing": {
-    "title": "Pricing",
-    "title2": "Get unlimited access.",
-    "description": "The page you are currently viewing is an open-source, free boilerplate.",
-    "doYouLike": "Do you like this landing page boilerplate?",
-    "follow": "Follow my Twitter."
+    "title": "Our Packages",
+    "title2": "Simple pricing. Full service.",
+    "description": "Choose the package that fits your needs. Fast setup, great results, no stress.",
+    "doYouLike": "Love what we offer?",
+    "follow": "Follow us on Instagram @nolandavidco"
   },
   "Testimonials": {
-    "title": "Testimonials",
-    "description1": "If you use this landing page template and recommend it on your Twitter,",
-    "description2": "please let me know",
-    "description3": ". I will display your tweet and recommendation here."
+    "title": "Client Reviews",
+    "description1": "Real feedback from people who’ve built their business with NolanDex.",
+    "description2": "See their stories",
+    "description3": "and results."
   },
   "FAQ": {
     "title": "FAQs",
-    "description": "Here are some of the most frequently asked questions."
+    "description": "Find answers to common questions about our service."
   },
   "CTA": {
-    "title": "Build Your Landing Page Now",
-    "description1": "Build",
-    "description2": "your landing page,",
-    "description3": "show",
-    "description4": "your product, and",
-    "description5": "start earning",
-    "description6": "!"
+    "title": "Launch Your Business Today",
+    "description1": "Let us build",
+    "description2": "your business website,",
+    "description3": "boost",
+    "description4": "your brand, and",
+    "description5": "help you sell",
+    "description6": "online fast."
   },
   "CTAButton": {
-    "title": "Get Boilerplate"
+    "title": "Get Started Now"
   }
 }
