@@ -29,7 +29,7 @@ const Pricing = ({
   return (
     <section
       id={id}
-      className="flex flex-col justify-center max-w-4xl items-center pt-16 bg-gray-800"
+      className="flex flex-col justify-center max-w-4xl items-center pt-16"
     >
       <div className="flex flex-col text-center max-w-xl">
         <h2 className="text-center text-white">
