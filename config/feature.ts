@@ -220,7 +220,7 @@ interface FeaturesCollection {
 
 export const ALL_FEATURES: FeaturesCollection = {
   FEATURES_EN,
-  FEATURES_ID,
+  FEATURES_ZH,
   FEATURES_JA,
   FEATURES_AR,
   FEATURES_ES,
