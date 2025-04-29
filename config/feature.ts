@@ -40,7 +40,7 @@ export const FEATURES_EN = [
 ];
 
 // INDONESIAN
-export const FEATURES_ID = [
+export const FEATURES_ZH = [
   {
     title: "Website Profesional",
     content: "Bangun website menarik dan responsif yang siap tampil di Google dan meningkatkan kredibilitas bisnismu.",
