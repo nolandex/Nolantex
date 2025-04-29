@@ -84,7 +84,7 @@ const Header = () => {
         </div>
 
         {/* Mobile menu button */}
-        <div className="md:hidden translate-y-[-2px]">
+        <div className="md:hidden">
           <button
             aria-label="Open Menu"
             title="Open Menu"
