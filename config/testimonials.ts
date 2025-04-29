@@ -1,4 +1,4 @@
-const testimonials = {
+const TestimonialsData = {
   Hero: {
     title1: "Launch",
     title2: "Your Online Business",
@@ -46,4 +46,4 @@ const testimonials = {
   }
 };
 
-export default testimonials;
+export default TestimonialsData;
