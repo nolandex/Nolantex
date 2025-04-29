@@ -53,16 +53,18 @@ const Pricing = ({
             </CardHeader>
             <Divider />
             <CardBody className="gap-8">
-              <p className="flex items-baseline gap-1 pt-2">
-                <span className="inline bg-gradient-to-br from-foreground to-foreground-600 bg-clip-text text-2xl font-semibold leading-7 tracking-tight text-transparent">
-                  {tier.price}
-                </span>
-                {typeof tier.price !== "string" ? (
-                  <span className="text-small font-medium text-default-400">
+              <div className="inline-flex items-center bg-gray-900 rounded-full px-4 py-2">
+                <p className="flex items-baseline gap-1">
+                  <span className="inline bg-gradient-to-br from-foreground to-foreground-600 bg-clip-text text-2xl font-semibold leading-7 tracking-tight text-transparent">
                     {tier.price}
                   </span>
-                ) : null}
-              </p>
+                  {typeof tier.price !== "string" ? (
+                    <span className="text-small font-medium text-default-400">
+                      {tier.price}
+                    </span>
+                  ) : null}
+                </p>
+              </div>
               <ul className="flex flex-col gap-2">
                 {tier.features?.map((feature) => (
                   <li key={feature} className="flex items-center gap-2">
@@ -81,6 +83,7 @@ const Pricing = ({
                 variant={tier.buttonVariant}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
+                className="rounded-full px-6 py-3"
               >
                 {tier.buttonText}
               </Button>
@@ -91,7 +94,7 @@ const Pricing = ({
       <Spacer y={12} />
       <div className="flex py-2">
         <p className="text-default-400 text-center">
-          {locale.doYouLike}&nbsp;
+          {locale.doYouLike} 
           <Link
             color="foreground"
             href={siteConfig.authors[0].twitter}
