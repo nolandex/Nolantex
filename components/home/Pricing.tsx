@@ -29,7 +29,7 @@ const Pricing = ({
   return (
     <section
       id={id}
-      className="flex flex-col justify-center max-w-4xl items-center pt-16"
+      className="flex flex-col justify-center max-w-4xl items-center pt-16 bg-gray-800"
     >
       <div className="flex flex-col text-center max-w-xl">
         <h2 className="text-center text-white">
@@ -46,25 +46,26 @@ const Pricing = ({
       <Spacer y={8} />
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 justify-items-center">
         {TIERS?.map((tier) => (
-          <Card key={tier.key} className="p-3 flex-1 w-[90%]" shadow="md">
+          <Card
+            key={tier.key}
+            className="p-3 flex-1 w-[90%] bg-gray-900 rounded-xl shadow-lg"
+          >
             <CardHeader className="flex flex-col items-start gap-2 pb-6">
               <h2 className="text-large font-medium">{tier.title}</h2>
               <p className="text-medium text-default-500">{tier.description}</p>
             </CardHeader>
             <Divider />
             <CardBody className="gap-8">
-              <div className="inline-flex items-center bg-gray-900 rounded-full px-4 py-2">
-                <p className="flex items-baseline gap-1">
-                  <span className="inline bg-gradient-to-br from-foreground to-foreground-600 bg-clip-text text-2xl font-semibold leading-7 tracking-tight text-transparent">
+              <p className="flex items-baseline gap-1 pt-2">
+                <span className="inline bg-gradient-to-br from-foreground to-foreground-600 bg-clip-text text-2xl font-semibold leading-7 tracking-tight text-transparent">
+                  {tier.price}
+                </span>
+                {typeof tier.price !== "string" ? (
+                  <span className="text-small font-medium text-default-400">
                     {tier.price}
                   </span>
-                  {typeof tier.price !== "string" ? (
-                    <span className="text-small font-medium text-default-400">
-                      {tier.price}
-                    </span>
-                  ) : null}
-                </p>
-              </div>
+                ) : null}
+              </p>
               <ul className="flex flex-col gap-2">
                 {tier.features?.map((feature) => (
                   <li key={feature} className="flex items-center gap-2">
