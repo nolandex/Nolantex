@@ -1,103 +1,170 @@
-<div class="faq-content lang-en active">
-  <h3>What is NolanDex?</h3>
-  <p>NolanDex helps aspiring entrepreneurs and small businesses build their complete digital presence — from websites and chatbots to content, automation, and promotion strategies.</p>
-
-  <h3>What will I get when I join?</h3>
-  <p>You will receive a full business setup, including a website, chatbot, content templates, automation setup, and access to our marketing and copywriting strategies.</p>
-
-  <h3>How much does it cost?</h3>
-  <p>Our complete setup service is only $20 . No monthly fees, no hidden charges — just one-time setup.</p>
-
-  <h3>Can I earn money with NolanDex?</h3>
-  <p>Yes, we offer a zero-investment Sales Partner program. You can resell NolanDex services and earn profit on every sale.</p>
-
-  <h3>Do I need any technical skills?</h3>
-  <p>No, we do everything for you — from building the website to integrating automation tools. You just focus on promoting your business.</p>
-
-  <h3>Can I use my own domain name?</h3>
-  <p>Yes! You can use a free NolanDex subdomain or connect your own custom domain name anytime.</p>
-
-  <h3>How fast is the setup process?</h3>
-  <p>Typically within 24–48 hours after we receive your brief and content preferences.</p>
-
-  <h3>Where can I get support?</h3>
-  <p>You can contact us anytime via WhatsApp at <strong>0851-5677-9923</strong> or on Instagram at <strong>@nolandavidco</strong>.</p>
-</div>
-
-<div class="faq-content lang-ja">
-  <h3>NolanDexとは何ですか？</h3>
-  <p>NolanDexは、起業家や小規模ビジネスのために、ウェブサイト、チャットボット、コンテンツ、オートメーション、プロモーションまで、デジタルプレゼンスを包括的に構築します。</p>
-
-  <h3>参加すると何が得られますか？</h3>
-  <p>ウェブサイト、チャットボット、テンプレート、オートメーション設定、マーケティング戦略など、ビジネス構築に必要なすべてを提供します。</p>
-
-  <h3>料金はいくらですか？</h3>
-  <p>料金は一括でたったのRp200.000です。月額費用や隠れた料金は一切ありません。</p>
-
-  <h3>収益を得ることはできますか？</h3>
-  <p>はい、NolanDexの販売パートナー制度を利用して、サービスを再販し利益を得ることができます。</p>
-
-  <h3>技術的なスキルは必要ですか？</h3>
-  <p>いいえ、すべてお任せいただけます。あなたはビジネスのプロモーションに集中するだけです。</p>
-
-  <h3>独自ドメインは使用できますか？</h3>
-  <p>はい、無料のNolanDexサブドメインか、独自ドメインを接続することができます。</p>
-
-  <h3>設定にはどれくらい時間がかかりますか？</h3>
-  <p>通常、ヒアリング完了から24～48時間以内にセットアップされます。</p>
-
-  <h3>サポートはどこで受けられますか？</h3>
-  <p>WhatsApp（0851-5677-9923）またはInstagram（@nolandavidco）でいつでもお問い合わせください。</p>
-</div>
-
-<div class="faq-content lang-id">
-  <h3>Apa itu NolanDex?</h3>
-  <p>NolanDex membantu calon pengusaha dan bisnis kecil membangun kehadiran digital lengkap — mulai dari website, chatbot, konten, automasi, hingga strategi promosi.</p>
-
-  <h3>Apa yang saya dapatkan saat bergabung?</h3>
-  <p>Kamu akan mendapatkan setup bisnis lengkap: website, chatbot, template konten, setup automasi, dan strategi marketing + copywriting.</p>
-
-  <h3>Berapa biayanya?</h3>
-  <p>Hanya Rp200.000 untuk seluruh setup. Tidak ada biaya bulanan, tidak ada biaya tersembunyi.</p>
-
-  <h3>Apakah saya bisa menghasilkan uang?</h3>
-  <p>Bisa! Kami punya program Sales Partner tanpa modal. Kamu bisa jual ulang layanan NolanDex dan dapatkan untung setiap penjualan.</p>
-
-  <h3>Apakah saya perlu skill teknis?</h3>
-  <p>Tidak. Semua dikerjakan oleh tim kami — kamu hanya fokus promosi dan jualan.</p>
-
-  <h3>Apakah saya bisa pakai domain sendiri?</h3>
-  <p>Bisa. Kamu bisa pakai subdomain gratis dari NolanDex atau sambungkan domain milikmu sendiri.</p>
-
-  <h3>Berapa lama proses setup?</h3>
-  <p>Biasanya hanya 1–2 hari kerja setelah kami menerima brief dan preferensi kamu.</p>
-
-  <h3>Di mana saya bisa minta bantuan?</h3>
-  <p>Hubungi kami lewat WhatsApp di <strong>0851-5677-9923</strong> atau Instagram <strong>@nolandavidco</strong>.</p>
-</div>
-
-<div class="faq-content lang-ar">
-  <h3>ما هو NolanDex؟</h3>
-  <p>NolanDex يساعد رواد الأعمال والشركات الصغيرة على إنشاء وجود رقمي متكامل — من المواقع والدردشات الآلية إلى المحتوى والأتمتة والاستراتيجيات الترويجية.</p>
-
-  <h3>ماذا سأحصل عند الانضمام؟</h3>
-  <p>ستحصل على إعداد كامل للأعمال يشمل الموقع، شات بوت، قوالب محتوى، إعداد الأتمتة، واستراتيجيات التسويق والكتابة الإعلانية.</p>
-
-  <h3>كم يكلف ذلك؟</h3>
-  <p>بسعر Rp200.000 فقط كدفعة واحدة. لا توجد رسوم شهرية أو تكاليف خفية.</p>
-
-  <h3>هل يمكنني جني المال من NolanDex؟</h3>
-  <p>نعم! لدينا برنامج شريك مبيعات بدون رأس مال. يمكنك إعادة بيع خدمات NolanDex والربح من كل عملية بيع.</p>
-
-  <h3>هل أحتاج إلى مهارات تقنية؟</h3>
-  <p>لا، نحن نقوم بكل شيء نيابة عنك — فقط ركز على الترويج لعملك.</p>
-
-  <h3>هل يمكنني استخدام نطاق خاص بي؟</h3>
-  <p>نعم، يمكنك استخدام نطاق فرعي مجاني أو ربط نطاقك الخاص.</p>
-
-  <h3>كم من الوقت يستغرق الإعداد؟</h3>
-  <p>عادة ما يستغرق 24–48 ساعة بعد استلام التفاصيل.</p>
-
-  <h3>أين يمكنني الحصول على الدعم؟</h3>
-  <p>يمكنك التواصل معنا عبر WhatsApp على <strong>0851-5677-9923</strong> أو Instagram <strong>@nolandavidco</strong>.</p>
-</div>
+export const faqs = {
+  en: [
+    {
+      question: "What is NolanDex?",
+      answer:
+        "NolanDex helps aspiring entrepreneurs and small businesses build their complete digital presence — from websites and chatbots to content, automation, and promotion strategies.",
+    },
+    {
+      question: "What will I get when I join?",
+      answer:
+        "You will receive a full business setup, including a website, chatbot, content templates, automation setup, and access to our marketing and copywriting strategies.",
+    },
+    {
+      question: "How much does it cost?",
+      answer:
+        "Our complete setup service is only Rp200.000. No monthly fees, no hidden charges — just one-time setup.",
+    },
+    {
+      question: "Can I earn money with NolanDex?",
+      answer:
+        "Yes, we offer a zero-investment Sales Partner program. You can resell NolanDex services and earn profit on every sale.",
+    },
+    {
+      question: "Do I need any technical skills?",
+      answer:
+        "No, we do everything for you — from building the website to integrating automation tools. You just focus on promoting your business.",
+    },
+    {
+      question: "Can I use my own domain name?",
+      answer:
+        "Yes! You can use a free NolanDex subdomain or connect your own custom domain name anytime.",
+    },
+    {
+      question: "How fast is the setup process?",
+      answer:
+        "Typically within 24–48 hours after we receive your brief and content preferences.",
+    },
+    {
+      question: "Where can I get support?",
+      answer:
+        "You can contact us anytime via WhatsApp at 0851-5677-9923 or on Instagram at @nolandavidco.",
+    },
+  ],
+  ja: [
+    {
+      question: "NolanDexとは何ですか？",
+      answer:
+        "NolanDexは、ウェブサイト、チャットボット、コンテンツ、自動化、プロモーション戦略まで、起業家や中小企業のデジタルプレゼンス構築を支援します。",
+    },
+    {
+      question: "参加すると何が得られますか？",
+      answer:
+        "ウェブサイト、チャットボット、テンプレート、自動化のセットアップ、マーケティング・コピーライティング戦略へのアクセスが含まれます。",
+    },
+    {
+      question: "料金はいくらですか？",
+      answer:
+        "一度きりのセットアップ料金はわずかRp200.000。月額料金や隠れた費用はありません。",
+    },
+    {
+      question: "NolanDexで収入を得ることはできますか？",
+      answer:
+        "はい、投資不要のセールスパートナープログラムをご用意しています。サービスを再販して利益を得ることができます。",
+    },
+    {
+      question: "技術的なスキルは必要ですか？",
+      answer:
+        "いいえ、私たちがすべてセットアップします。あなたはビジネスの宣伝に集中してください。",
+    },
+    {
+      question: "独自のドメインは使用できますか？",
+      answer:
+        "はい、無料のNolanDexサブドメインか、独自ドメインを接続できます。",
+    },
+    {
+      question: "セットアップにはどれくらいかかりますか？",
+      answer:
+        "通常、希望内容の受領から24〜48時間以内に完了します。",
+    },
+    {
+      question: "サポートはどこで受けられますか？",
+      answer:
+        "WhatsApp（0851-5677-9923）またはInstagram（@nolandavidco）からご連絡ください。",
+    },
+  ],
+  id: [
+    {
+      question: "Apa itu NolanDex?",
+      answer:
+        "NolanDex membantu calon pengusaha dan UMKM membangun kehadiran digital lengkap — dari website, chatbot, konten, otomatisasi, hingga strategi promosi.",
+    },
+    {
+      question: "Apa yang saya dapatkan saat bergabung?",
+      answer:
+        "Kamu akan mendapatkan setup bisnis lengkap: website, chatbot, template konten, sistem otomatisasi, serta akses ke strategi marketing dan copywriting kami.",
+    },
+    {
+      question: "Berapa biayanya?",
+      answer:
+        "Layanan setup lengkap hanya Rp200.000. Tanpa biaya bulanan, tanpa biaya tersembunyi — cukup sekali bayar.",
+    },
+    {
+      question: "Apakah saya bisa menghasilkan uang dari NolanDex?",
+      answer:
+        "Ya! Kami menyediakan program Sales Partner tanpa modal. Kamu bisa jual ulang layanan NolanDex dan mendapat keuntungan dari setiap penjualan.",
+    },
+    {
+      question: "Apakah saya butuh skill teknis?",
+      answer:
+        "Tidak. Kami yang akan mengerjakan semuanya. Kamu hanya perlu fokus promosi.",
+    },
+    {
+      question: "Apakah saya bisa pakai domain sendiri?",
+      answer:
+        "Bisa! Kamu bebas pakai subdomain NolanDex gratis atau menghubungkan domain kamu sendiri.",
+    },
+    {
+      question: "Berapa lama proses setup-nya?",
+      answer:
+        "Biasanya selesai dalam 24–48 jam setelah kami terima brief dan preferensi konten kamu.",
+    },
+    {
+      question: "Saya bisa minta bantuan lewat mana?",
+      answer:
+        "Hubungi kami kapan saja lewat WhatsApp 0851-5677-9923 atau Instagram @nolandavidco.",
+    },
+  ],
+  ar: [
+    {
+      question: "ما هو NolanDex؟",
+      answer:
+        "NolanDex يساعد رواد الأعمال والشركات الصغيرة في بناء حضورهم الرقمي الكامل — من المواقع وروبوتات الدردشة إلى المحتوى والأتمتة واستراتيجيات الترويج.",
+    },
+    {
+      question: "ماذا سأحصل عند الانضمام؟",
+      answer:
+        "ستحصل على إعداد تجاري كامل يشمل موقعًا إلكترونيًا، روبوت دردشة، قوالب محتوى، إعداد الأتمتة، والوصول إلى استراتيجيات التسويق والكتابة الإعلانية.",
+    },
+    {
+      question: "كم يكلف ذلك؟",
+      answer:
+        "الخدمة كاملة بسعر Rp200.000 فقط، دفعة واحدة دون أي رسوم شهرية أو تكاليف خفية.",
+    },
+    {
+      question: "هل يمكنني كسب المال من خلال NolanDex؟",
+      answer:
+        "نعم، لدينا برنامج شركاء مبيعات بدون استثمار. يمكنك إعادة بيع خدمات NolanDex وربح عمولة عن كل عملية بيع.",
+    },
+    {
+      question: "هل أحتاج إلى مهارات تقنية؟",
+      answer:
+        "لا، نحن نقوم بكل شيء من أجلك. ركّز فقط على الترويج لنشاطك التجاري.",
+    },
+    {
+      question: "هل يمكنني استخدام اسم نطاق خاص بي؟",
+      answer:
+        "نعم! يمكنك استخدام نطاق فرعي مجاني من NolanDex أو ربط اسم نطاق خاص بك.",
+    },
+    {
+      question: "كم من الوقت يستغرق الإعداد؟",
+      answer:
+        "عادة ما يتم خلال 24–48 ساعة بعد استلام المتطلبات والمحتوى.",
+    },
+    {
+      question: "أين يمكنني الحصول على الدعم؟",
+      answer:
+        "يمكنك التواصل معنا عبر WhatsApp على الرقم 0851-5677-9923 أو على Instagram @nolandavidco.",
+    },
+  ],
+};
