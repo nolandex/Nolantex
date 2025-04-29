@@ -6,7 +6,7 @@ import { MenuIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CgClose } from "react-icons/cg";
 import { ThemedButton } from "../ThemedButton";
 
@@ -20,27 +20,41 @@ const links = [
 const Header = () => {
   const params = useParams();
   const lang = params.lang;
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="py-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <nav className="relative z-50 flex justify-between items-center">
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-background/95 backdrop-blur-sm ${
+        isScrolled ? "py-2 shadow-md" : "py-4"
+      } mx-auto max-w-7xl px-4 sm:px-6 lg:px-8`}
+    >
+      <nav className="relative flex justify-between items-center">
         {/* Left section */}
         <div className="flex items-center md:gap-x-12 flex-1">
           <Link
             href="/"
             aria-label="Landing Page Boilerplate"
             title="Landing Page Boilerplate"
-            className="flex items-center space-x-1 font-bold"
+            className="flex items-center space-x-1 font-bold translate-y-[-2px]"
           >
             <Image
               alt="Logo"
               src="/logo.svg"
-              className="w-8 h-8"
-              width={32}
-              height={32}
+              className="w-7 h-7"
+              width={28}
+              height={28}
             />
-            <span className="text-gray-950 dark:text-gray-300 hidden md:block">
+            <span className="text-gray-950 dark:text-gray-300 hidden md:block text-lg">
               {siteConfig.name}
             </span>
           </Link>
@@ -54,7 +68,7 @@ const Header = () => {
                 href={`/${lang === "en" ? "" : lang}${link.href}`}
                 aria-label={link.label}
                 title={link.label}
-                className="tracking-wide transition-colors duration-200 font-normal"
+                className="tracking-wide transition-colors duration-200 font-normal text-sm"
               >
                 {link.label}
               </Link>
@@ -70,14 +84,14 @@ const Header = () => {
         </div>
 
         {/* Mobile menu button */}
-        <div className="md:hidden">
+        <div className="md:hidden translate-y-[-2px]">
           <button
             aria-label="Open Menu"
             title="Open Menu"
             className="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline hover:bg-deep-purple-50 focus:bg-deep-purple-50"
             onClick={() => setIsMenuOpen(true)}
           >
-            <MenuIcon />
+            <MenuIcon className="w-6 h-6" />
           </button>
           {isMenuOpen && (
             <div className="absolute top-0 left-0 w-full z-50">
@@ -93,11 +107,11 @@ const Header = () => {
                       <Image
                         alt={siteConfig.name}
                         src="/logo.svg"
-                        className="w-8 h-8"
-                        width={32}
-                        height={32}
+                        className="w-7 h-7"
+                        width={28}
+                        height={28}
                       />
-                      <span className="ml-2 text-xl font-bold tracking-wide text-gray-950 dark:text-gray-300">
+                      <span className="ml-2 text-lg font-bold tracking-wide text-gray-950 dark:text-gray-300">
                         {siteConfig.name}
                       </span>
                     </Link>
@@ -109,7 +123,7 @@ const Header = () => {
                       className="tracking-wide transition-colors duration-200 font-normal"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      <CgClose />
+                      <CgClose className="w-6 h-6" />
                     </button>
                   </div>
                 </div>
@@ -121,7 +135,7 @@ const Header = () => {
                           href={link.href}
                           aria-label={link.label}
                           title={link.label}
-                          className="font-medium tracking-wide transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          className="font-medium tracking-wide transition-colors duration-200 hover:text-deep-purple-accent-400 text-sm"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           {link.label}
