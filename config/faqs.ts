@@ -1,51 +1,51 @@
 export const FAQS_EN = [
   {
-    title: "What is a landing page?",
-    content: "A landing page is a targeted web page designed for a specific marketing or advertising campaign. It’s where visitors 'land' after clicking a link from an email, social media, or ads on platforms like Google, Bing, or Instagram. Unlike general websites, landing pages focus on a single goal, such as capturing leads or driving sales, through a clear call to action (CTA).",
+    title: "What is NolanDex?",
+    content: "NolanDex is a comprehensive digital solutions provider that helps aspiring entrepreneurs and small businesses establish a strong online presence. We offer services like website creation, chatbot development, social media management, and automation, along with a reseller program for partners to promote our services without upfront costs.",
   },
   {
-    title: "How can I create an effective landing page for my business?",
-    content: "To create an effective landing page: 1) Select a template or design that aligns with your brand and campaign goals. 2) Define a clear objective and CTA, such as signing up or making a purchase. 3) Craft persuasive, concise content that resonates with your audience. 4) Use high-quality visuals and forms to enhance engagement. 5) Ensure mobile responsiveness and fast loading times. 6) Optimize for SEO to increase visibility. 7) Launch and track performance to refine and improve results.",
+    title: "How can NolanDex help me build my digital presence?",
+    content: "NolanDex streamlines your digital setup with: 1) Custom website design tailored to your brand. 2) Chatbot creation for enhanced customer engagement. 3) Social media content planning and management. 4) Automation tools to save time and boost efficiency. 5) Strategic promotion to reach your audience. Our team guides you through every step to ensure a professional online presence.",
   },
   {
-    title: "Why are landing pages essential for my marketing strategy?",
-    content: "Landing pages are vital because they streamline the user journey, guiding visitors toward a specific action without distractions. By focusing on one offer or goal, they boost conversion rates, enhance ad performance, and deliver a tailored experience that aligns with your audience’s needs, ultimately driving better ROI for your campaigns.",
+    title: "Why is a strong digital presence important for my business?",
+    content: "A robust digital presence helps small businesses and entrepreneurs connect with customers, build credibility, and compete effectively. NolanDex’s targeted solutions, from websites to social media, ensure your brand stands out, engages your audience, and drives growth with minimal hassle.",
   },
   {
-    title: "What makes your landing page services unique?",
-    content: "Our landing page services combine cutting-edge design, user-focused functionality, and data-driven optimization. We provide customizable, responsive templates and expert support to create high-converting pages tailored to your business needs, all while ensuring fast deployment and seamless integration with your marketing tools.",
+    title: "What makes NolanDex’s services unique?",
+    content: "NolanDex offers an all-in-one solution, combining website development, chatbot integration, social media management, and automation under one roof. Our user-friendly approach, tailored strategies, and reseller program empower entrepreneurs to succeed online without needing technical expertise or large budgets.",
   },
   {
-    title: "Do I need technical skills to work with your landing page solutions?",
-    content: "No advanced technical skills are required. Our solutions are designed for ease of use, with intuitive interfaces for beginners to edit content and visuals. For advanced customization, our team offers support, and developers can leverage our flexible tools to meet specific requirements.",
+    title: "Do I need technical skills to use NolanDex’s services?",
+    content: "No technical skills are required. NolanDex’s services are designed to be accessible for beginners, with intuitive tools and expert support. Whether you’re setting up a website or automating tasks, our team handles the technical details, allowing you to focus on your business.",
   },
   {
-    title: "How do I get started with your landing page services?",
-    content: "Start by contacting us to discuss your goals or explore our platform to choose a template. Customize the content, visuals, and CTA to fit your campaign, then deploy the page using our hosting or your own server. We provide step-by-step guidance to ensure a smooth process.",
+    title: "How do I get started with NolanDex?",
+    content: "Contact us at support@nolandex.com or via our social media (@NolanDex) to discuss your goals. We’ll assess your needs, recommend tailored services, and guide you through the setup process, from website design to automation, ensuring a seamless start to your digital journey.",
   },
   {
-    title: "Are your landing pages optimized for mobile devices?",
-    content: "Yes, all our landing pages are fully responsive, ensuring a seamless experience across desktops, tablets, and smartphones. This guarantees your audience enjoys optimal usability and visuals, regardless of the device they use.",
+    title: "Are NolanDex’s websites and tools mobile-friendly?",
+    content: "Yes, all NolanDex websites, chatbots, and digital tools are fully responsive, ensuring a seamless experience across desktops, tablets, and smartphones. This guarantees your customers enjoy optimal functionality and visuals on any device.",
   },
   {
-    title: "Can I use your landing pages for commercial purposes?",
-    content: "Absolutely. Our landing pages are designed for both personal and commercial use. Whether you’re promoting a product, service, or event, our solutions are flexible and scalable to support your business goals.",
+    title: "Can I use NolanDex’s services for my commercial business?",
+    content: "Absolutely. NolanDex’s services are tailored for commercial use, supporting entrepreneurs and small businesses in promoting products, services, or brands. Our scalable solutions grow with your business, from startups to established ventures.",
   },
   {
-    title: "Do you provide customization or development services?",
-    content: "Yes, we offer tailored development services for landing pages. Reach out to us at [your email] or [your social media handle] to discuss your project, and our team will create a solution that meets your unique needs.",
+    title: "What is the NolanDex reseller program?",
+    content: "Our reseller program allows partners to promote and sell NolanDex’s digital services without upfront capital. You earn commissions by connecting clients to our solutions, with full support from our team. Contact us at support@nolandex.com to learn more and join.",
   },
   {
-    title: "Are there any limitations to using your landing page solutions?",
-    content: "There are no major restrictions. You can freely customize and deploy our landing pages to suit your campaigns. We also encourage feedback and collaboration to enhance our offerings, ensuring they evolve with your business needs.",
+    title: "Are there any limitations to using NolanDex’s services?",
+    content: "There are no major restrictions. Our services are flexible, allowing you to customize websites, chatbots, and more to fit your needs. We encourage feedback to improve our offerings and ensure they align with your business goals.",
   },
   {
-    title: "Do your landing pages include SEO features?",
-    content: "Yes, our landing pages are built with SEO best practices, including optimized load times, meta tags, and mobile-friendly design, to help improve your search engine rankings and attract more organic traffic.",
+    title: "Can I customize NolanDex’s services?",
+    content: "Yes, our solutions are fully customizable to match your brand and business needs.",
   },
   {
-    title: "What should I do if I face issues with your landing page services?",
-    content: "If you encounter any challenges, our support team is here to help. Contact us via [your email] or [your social media handle], and we’ll provide prompt assistance to resolve your issue and ensure your campaign runs smoothly.",
+    title: "What should I do if I face issues with NolanDex’s services?",
+    content: "If you encounter any challenges, our support team is ready to assist. Reach out via support@nolandex.com or @NolanDex on social media, and we’ll provide prompt solutions to keep your digital presence running smoothly.",
   },
 ];
 
@@ -221,7 +221,7 @@ export const FAQS_ES = [
   },
   {
     title: "¿Qué habilidades necesito para usar esta plantilla?",
-    content: "Para usar nuestra plantilla de página de destino, solo necesitas habilidades básicas de edición web. El crammed de la plantilla está pensado para que los usuarios no técnicos puedan comenzar fácilmente, mientras que también ofrece una alta personalización para desarrolladores experimentados.",
+    content: "Para usar nuestra plantilla de página de destino, solo necesitas habilidades básicas de edición web. El diseño de la plantilla está pensado para que los usuarios no técnicos puedan comenzar fácilmente, mientras que también ofrece una alta personalización para desarrolladores experimentados.",
   },
   {
     title: "¿Cómo puedo empezar con la plantilla de página de destino?",
