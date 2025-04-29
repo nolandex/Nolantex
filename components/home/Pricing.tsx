@@ -27,10 +27,12 @@ const Pricing = ({
 }) => {
   const TIERS = ALL_TIERS[`TIERS_${langName.toUpperCase()}`];
   // Get the button properties from the first tier to apply to all buttons
-  const firstTierButtonProps = TIERS[0] ? {
-    color: TIERS[0].buttonColor,
-    variant: TIERS[0].buttonVariant,
-  } : { color: "primary", variant: "solid" }; // Fallback if TIERS[0] is undefined
+  const firstTierButtonProps = TIERS[0]
+    ? {
+        color: TIERS[0].buttonColor,
+        variant: TIERS[0].buttonVariant,
+      }
+    : { color: "primary" as const, variant: "solid" as const }; // 'as const' for fallback literal types
 
   return (
     <section
