@@ -3,7 +3,7 @@ export const TestimonialsData = [
     user: {
       name: "Emily Carter",
       username: "emily_startsup",
-      image: "/images/users/emily.jpeg",
+      image: "/images/users/logo1.png",
     },
     content:
       "NolanDex made launching my online business effortless. My website and automation systems were live in just a few hours — and I landed my first sale the same day.",
@@ -12,7 +12,7 @@ export const TestimonialsData = [
     user: {
       name: "James Miller",
       username: "jamesresells",
-      image: "/images/users/james.jpeg",
+      image: "/images/users/logo2.png",
     },
     content:
       "Joining NolanDex as a reseller was a game changer. No upfront cost, ready-to-use content, and I could immediately focus on making sales.",
@@ -21,7 +21,7 @@ export const TestimonialsData = [
     user: {
       name: "Sophie Williams",
       username: "sophiemarket",
-      image: "/images/users/sophie.jpeg",
+      image: "/images/users/logo3.png",
     },
     content:
       "I was able to build my own brand while reselling through NolanDex. Everything looked professional and original — perfect for standing out online.",
@@ -30,7 +30,7 @@ export const TestimonialsData = [
     user: {
       name: "Liam Johnson",
       username: "liam.biz",
-      image: "/images/users/liam.jpeg",
+      image: "/images/users/logo4.png",
     },
     content:
       "NolanDex delivered a complete, ready-to-sell business setup. Website, automation, and even marketing content — all done. I just had to launch.",
@@ -39,7 +39,7 @@ export const TestimonialsData = [
     user: {
       name: "Olivia Smith",
       username: "olivia.launches",
-      image: "/images/users/olivia.jpeg",
+      image: "/images/users/logo5.png",
     },
     content:
       "Highly impressed! Quick setup, excellent support, and my online business finally looks legit and trustworthy to customers.",
