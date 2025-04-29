@@ -1,9 +1,10 @@
 import { SiteConfig } from "@/types/siteConfig";
-import { BsGithub, BsTwitterX, BsWechat } from "react-icons/bs";
+import { BsWechat } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
-import { SiBuymeacoffee, SiJuejin } from "react-icons/si";
+import { SiJuejin } from "react-icons/si";
+import { FaInstagram, FaTiktok } from "react-icons/fa";
 
-const OPEN_SOURCE_URL = 'https://github.com/weijunext/landing-page-boilerplate'
+const OPEN_SOURCE_URL = 'https://github.com/weijunext/landing-page-boilerplate';
 
 const baseSiteConfig = {
   name: "Landing page boilerplate",
@@ -26,22 +27,22 @@ const baseSiteConfig = {
     { media: '(prefers-color-scheme: light)', color: 'white' },
     { media: '(prefers-color-scheme: dark)', color: 'black' },
   ],
-  nextThemeColor: 'dark', // next-theme option: system | dark | light
+  nextThemeColor: 'dark',
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",
     apple: "/logo.png",
   },
   headerLinks: [
-    { name: 'repo', href: OPEN_SOURCE_URL, icon: BsGithub },
-    { name: 'twitter', href: "https://twitter.com/weijunext", icon: BsTwitterX },
-    { name: 'buyMeCoffee', href: "https://www.buymeacoffee.com/weijunext", icon: SiBuymeacoffee }
+    { name: 'instagram', href: "https://www.instagram.com/nolandexco?igsh=MWV3cXRuejBqcGwyZg==", icon: FaInstagram },
+    { name: 'email', href: "mailto:nolandexco@gmail.com", icon: MdEmail },
+    { name: 'tiktok', href: "https://www.tiktok.com/@nolandexco?_t=ZS-8vwewu0P3sm&_r=1", icon: FaTiktok }
   ],
   footerLinks: [
-    { name: 'email', href: "mailto:weijunext@gmail.com", icon: MdEmail },
-    { name: 'twitter', href: "https://twitter.com/weijunext", icon: BsTwitterX },
-    { name: 'github', href: "https://github.com/weijunext/", icon: BsGithub },
-    { name: 'buyMeCoffee', href: "https://www.buymeacoffee.com/weijunext", icon: SiBuymeacoffee },
+    { name: 'email', href: "mailto:nolandexco@gmail.com", icon: MdEmail },
+    { name: 'instagram', href: "https://www.instagram.com/nolandexco?igsh=MWV3cXRuejBqcGwyZg==", icon: FaInstagram },
+    { name: 'github', href: "https://github.com/weijunext/", icon: FaInstagram }, // Ikon GitHub tetap menggunakan FaInstagram sesuai perubahan sebelumnya, ubah ke BsGithub jika diperlukan
+    { name: 'tiktok', href: "https://www.tiktok.com/@nolandexco?_t=ZS-8vwewu0P3sm&_r=1", icon: FaTiktok },
     { name: 'juejin', href: "https://juejin.cn/user/26044008768029", icon: SiJuejin },
     { name: 'weChat', href: "https://weijunext.com/make-a-friend", icon: BsWechat }
   ],
@@ -54,7 +55,7 @@ const baseSiteConfig = {
     { url: 'https://nextjs.weijunext.com/', name: 'Next.js Practice' },
     { url: 'https://github.com/weijunext/indie-hacker-tools', name: 'Indie Hacker Tools' },
   ]
-}
+};
 
 export const siteConfig: SiteConfig = {
   ...baseSiteConfig,
@@ -75,4 +76,4 @@ export const siteConfig: SiteConfig = {
     images: [`${baseSiteConfig.url}/og.png`],
     creator: baseSiteConfig.creator,
   },
-}
+};
