@@ -3,7 +3,6 @@
 import { useState } from "react";
 import {
   Button,
-  ButtonGroup,
   Card,
   CardBody,
   CardFooter,
@@ -67,40 +66,47 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
         <p className="text-medium text-default-500">{locale.description}</p>
       </div>
       <Spacer y={6} />
-      <ButtonGroup>
-        <Button
-          color={activeTab === "setup" ? "primary" : "default"}
-          onClick={() => setActiveTab("setup")}
-          radius="md"
-          className="bg-gradient-to-r from-blue-600 to-blue-500 text-white"
-        >
-          {langName === "en" ? "Setup" : "Free"}
-        </Button>
-        <Button
-          color={activeTab === "website" ? "primary" : "default"}
-          onClick={() => setActiveTab("website")}
-          radius="md"
-          className="bg-gradient-to-r from-blue-600 to-blue-500 text-white"
-        >
-          {langName === "en" ? "Website" : "Custom"}
-        </Button>
-      </ButtonGroup>
-      <Spacer y={6} />
-      <div className="grid grid-cols-1 gap-1 sm:grid-cols-1 justify-items-center">
+      <div className="w-[85%] max-w-lg">
         {selectedTier ? (
           <Card
             key={selectedTier.key}
-            className="p-2 flex-1 w-[85%] bg-gradient-to-br from-gray-900 to-gray-800 rounded-[8px]"
+            className="p-2 bg-gradient-to-br from-gray-900 to-gray-800 rounded-[8px]"
             shadow="md"
             radius="md"
           >
-            <CardHeader className="flex flex-col items-start gap-1 pb-4">
-              <h2 className="text-medium font-medium text-white">
-                {selectedTier.title || "Untitled"}
-              </h2>
-              <p className="text-sm text-gray-400">
-                {selectedTier.description || "No description"}
-              </p>
+            <CardHeader className="flex flex-col items-start gap-1 pb-0">
+              {/* Tab Navigation */}
+              <div className="flex w-full border-b border-gray-700">
+                <button
+                  onClick={() => setActiveTab("setup")}
+                  className={`flex-1 py-2 text-sm font-medium text-center transition-colors duration-200 ${
+                    activeTab === "setup"
+                      ? "text-blue-400 border-b-2 border-blue-400"
+                      : "text-gray-400 hover:text-gray-200"
+                  }`}
+                >
+                  {langName === "en" ? "Setup" : "Free"}
+                </button>
+                <button
+                  onClick={() => setActiveTab("website")}
+                  className={`flex-1 py-2 text-sm font-medium text-center transition-colors duration-200 ${
+                    activeTab === "website"
+                      ? "text-blue-400 border-b-2 border-blue-400"
+                      : "text-gray-400 hover:text-gray-200"
+                  }`}
+                >
+                  {langName === "en" ? "Website" : "Custom"}
+                </button>
+              </div>
+              {/* Tier Title and Description */}
+              <div className="pt-4">
+                <h2 className="text-medium font-medium text-white">
+                  {selectedTier.title || "Untitled"}
+                </h2>
+                <p className="text-sm text-gray-400">
+                  {selectedTier.description || "No description"}
+                </p>
+              </div>
             </CardHeader>
             <Divider className="bg-gray-700" />
             <CardBody className="gap-6">
@@ -134,7 +140,7 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 radius="md"
-                className="bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-[8px]"
+                className="bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-[8px] hover:from-blue-700 hover:to-blue-600 transition-all duration-200"
               >
                 {selectedTier.buttonText || "Buy"}
               </Button>
