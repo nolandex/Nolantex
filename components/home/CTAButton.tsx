@@ -5,7 +5,7 @@ import Link from "next/link";
 const CTAButton = ({ locale }: { locale: any }) => {
   return (
     <Link
-      href="#Pricings"
+      href="#Pricing"
       target="_blank"
       rel="noopener noreferrer nofollow"
     >
