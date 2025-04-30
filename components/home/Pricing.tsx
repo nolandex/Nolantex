@@ -54,9 +54,9 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
         {TIERS?.map((tier: any) => (
           <Card
             key={tier.key}
-            className="p-3 flex-1 w-[90%] bg-gradient-to-br from-gray-900 to-gray-800 rounded-[50px]" // Custom rounded corners
+            className="p-3 flex-1 w-[90%] bg-gradient-to-br from-gray-900 to-gray-800"
             shadow="md"
-            radius="lg" // Max NextUI radius
+            radius="sm" // Slightly rounded corners for the card
           >
             <CardHeader className="flex flex-col items-start gap-2 pb-6">
               <h2 className="text-large font-medium text-white">{tier.title}</h2>
@@ -92,8 +92,8 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
                 variant={TIERS[0].buttonVariant}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
-                radius="lg" // Max NextUI radius
-                className="bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-[50px]" // Custom rounded corners
+                radius="sm" // Slightly rounded corners for the button
+                className="bg-gradient-to-r from-blue-600 to-blue-500 text-white"
               >
                 Buy
               </Button>
