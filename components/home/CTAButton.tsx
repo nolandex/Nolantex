@@ -9,15 +9,12 @@ interface CTAButtonProps {
   locale: {
     title: string;
   };
-  pricingId?: string;
 }
 
-const CTAButton: React.FC<CTAButtonProps> = ({ 
-  locale, 
-  pricingId = "pricing" 
-}) => {
+const CTAButton: React.FC<CTAButtonProps> = ({ locale }) => {
   const router = useRouter();
   const pathname = usePathname();
+  const pricingId = "Pricing"; // Menggunakan "Pricing" sesuai dengan header
 
   const scrollToSection = (id: string) => {
     if (typeof window === 'undefined') return;
@@ -37,7 +34,7 @@ const CTAButton: React.FC<CTAButtonProps> = ({
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    
+
     if (pathname === '/') {
       scrollToSection(pricingId);
     } else {
