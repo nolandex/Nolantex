@@ -9,32 +9,40 @@ export default function WordForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validasi: minimal 20 kata
+    // Validasi minimal 20 kata
     if (message.trim().split(/\s+/).length < 20) {
       alert("Please write at least 20 words.");
       return;
     }
 
-    // Kirim ke Formspree atau tujuan lain
-    await fetch("https://formspree.io/f/your-id", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message }),
-    });
+    try {
+      const response = await fetch("https://formspree.io/f/xblodbdo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message }),
+      });
 
-    setSubmitted(true);
-    setMessage("");
+      if (response.ok) {
+        setSubmitted(true);
+        setMessage("");
+      } else {
+        alert("Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Error sending message.");
+    }
   };
 
   return (
     <div className="max-w-xl mx-auto px-4 py-12">
-      <h2 className="text-2xl font-bold mb-4 text-center">Tell Us Your Story</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Tell Us Your Idea</h2>
       {submitted ? (
-        <p className="text-green-600 text-center">Thanks! We received your message.</p>
+        <p className="text-green-600 text-center">Thank you! We received your message.</p>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           <textarea
-            className="w-full p-3 border rounded resize-none"
+            className="w-full p-3 border border-gray-300 rounded resize-none"
             rows={6}
             placeholder="Write at least 20 words..."
             value={message}
