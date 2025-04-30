@@ -12,6 +12,7 @@ import "@/styles/loading.css";
 import { Analytics } from "@vercel/analytics/react";
 import { Viewport } from "next";
 import { Inter as FontSans } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -48,7 +49,7 @@ export default async function RootLayout({
         <script
           type="text/javascript"
           src="https://app.sandbox.midtrans.com/snap/snap.js"
-          data-client-key="Mid-client-gJPon_f121sb7gOu"
+          data-client-key={process.env.MIDTRANS_CLIENT_KEY}
         ></script>
       </head>
       <body
@@ -67,6 +68,7 @@ export default async function RootLayout({
           <Footer />
           <Analytics />
           <TailwindIndicator />
+          <Toaster position="top-right" />
         </ThemeProvider>
         {process.env.NODE_ENV === "development" ? (
           <></>
