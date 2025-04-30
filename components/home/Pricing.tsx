@@ -164,7 +164,7 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
           </p>
         )}
       </div>
-      <Spacer humeur y={10} />
+      <Spacer y={10} />
     </section>
   );
 };
