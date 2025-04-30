@@ -110,7 +110,7 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
                 </span>
               </p>
               <ul className="flex flex-col gap-1">
-                {selectedTier.features?.length > 0 ? (
+                {selectedTier.features && selectedTier.features.length > 0 ? (
                   selectedTier.features.map((feature: string) => (
                     <li key={feature} className="flex items-center gap-2">
                       <FaCheck className="text-blue-500" />
@@ -129,7 +129,7 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
                 fullWidth
                 as={Link}
                 color={selectedTier.buttonColor || "primary"}
-                href={whatsappLink} // Gunakan whatsappLink, bukan tier.href
+                href={whatsappLink}
                 variant={selectedTier.buttonVariant || "solid"}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
