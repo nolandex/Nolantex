@@ -10,34 +10,44 @@ import {
   Link,
   Spacer,
 } from "@nextui-org/react";
-
 import { siteConfig } from "@/config/site";
 import { ALL_TIERS } from "@/config/tiers";
 import { FaCheck } from "react-icons/fa";
 import { RoughNotation } from "react-rough-notation";
+import { useEffect, useRef } from "react";
 
 const Pricing = ({
-  id,
+  id = "pricing", // Default ID if not provided
   locale,
   langName,
 }: {
-  id: string;
+  id?: string;
   locale: any;
   langName: string;
 }) => {
+  const sectionRef = useRef<HTMLElement>(null);
   const TIERS = ALL_TIERS[`TIERS_${langName.toUpperCase()}`];
-  // Get the button properties from the first tier to apply to all buttons
+  
+  // Get the button properties from the first tier
   const firstTierButtonProps = TIERS[0]
     ? {
         color: TIERS[0].buttonColor,
         variant: TIERS[0].buttonVariant,
       }
-    : { color: "primary" as const, variant: "solid" as const }; // 'as const' for fallback literal types
+    : { color: "primary" as const, variant: "solid" as const };
+
+  // Handle scroll behavior if coming from anchor link
+  useEffect(() => {
+    if (window.location.hash === `#${id}` && sectionRef.current) {
+      sectionRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [id]);
 
   return (
     <section
+      ref={sectionRef}
       id={id}
-      className="flex flex-col justify-center max-w-4xl items-center pt-16"
+      className="flex flex-col justify-center max-w-4xl items-center pt-16 scroll-mt-16" // Added scroll-mt for better positioning
     >
       <div className="flex flex-col text-center max-w-xl">
         <h2 className="text-center text-white">
