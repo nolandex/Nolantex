@@ -8,7 +8,6 @@ import {
   CardFooter,
   CardHeader,
   Divider,
-  Link,
   Spacer,
 } from "@nextui-org/react";
 import { siteConfig } from "@/config/site";
@@ -40,7 +39,7 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
     zh: "https://wa.me/6285156779923?text=Hi%2C%20saya%20tertarik%20dengan%20layanan%20setup%20bisnis%20Anda", // Contoh link untuk ZH
     ja: "https://wa.me/6281234567891?text=こんにちは、ビジネス設定サービスに興味があります", // Contoh link untuk JA
     ar: "https://wa.me/6281234567892?text=مرحبا، أنا مهتم بخدمات إعداد الأعمال", // Contoh link untuk AR
-    es: "https://wa.me/6281234567893?text=Hola, estoy interesado en tus servicios de configuración de negocios", // Contoh link untuk ES
+    es: "https://wa.me/6281234567893?text=Hola, estoy interesado en tus servicios de configuración de negocios", // Contoh link para ES
     ru: "https://wa.me/6281234567894?text=Здравствуйте, я заинтересован в ваших услугах по настройке бизнеса", // Contoh link untuk RU
   };
 
@@ -165,19 +164,6 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
         )}
       </div>
       <Spacer y={10} />
-      <div className="flex py-2">
-        <p className="text-gray-500 text-center">
-          {locale.doYouLike}{" "}
-          <Link
-            color="foreground"
-            href={siteConfig.authors[0].twitter}
-            underline="always"
-            rel="noopener noreferrer nofollow"
-          >
-            {locale.follow}
-          </Link>
-        </p>
-      </div>
     </section>
   );
 };
