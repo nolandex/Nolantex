@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { RocketIcon } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
 interface CTAButtonProps {
@@ -12,36 +11,11 @@ interface CTAButtonProps {
 }
 
 const CTAButton: React.FC<CTAButtonProps> = ({ locale }) => {
-  const router = useRouter();
-  const pathname = usePathname();
-  const pricingId = "Pricing"; // Menggunakan "Pricing" sesuai dengan header
-
-  const scrollToSection = (id: string) => {
-    if (typeof window === 'undefined') return;
-
-    const element = document.getElementById(id);
-    if (!element) return;
-
-    const headerHeight = 100; // Sesuaikan dengan tinggi header Anda
-    const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    });
-  };
+  const whatsappLink = "https://wa.me/6285156779923?text=Halo%2C%20saya%20tertarik%20dengan%20layanan%20NolanDex.";
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-
-    if (pathname === '/') {
-      scrollToSection(pricingId);
-    } else {
-      router.push(`/#${pricingId}`);
-      // Handle scroll setelah navigasi
-      setTimeout(() => scrollToSection(pricingId), 500);
-    }
+    window.open(whatsappLink, '_blank');
   };
 
   return (
@@ -57,7 +31,7 @@ const CTAButton: React.FC<CTAButtonProps> = ({ locale }) => {
       }}
       onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#1d4ed8'}
       onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#3b82f6'}
-      aria-label={`Scroll to ${pricingId} section`}
+      aria-label="Chat via WhatsApp"
     >
       <RocketIcon style={{ height: '1rem', width: '1rem' }} />
       {locale.title}
