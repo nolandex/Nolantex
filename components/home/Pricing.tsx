@@ -15,15 +15,20 @@ import { ALL_TIERS } from "@/config/tiers";
 import { FaCheck } from "react-icons/fa";
 import { RoughNotation } from "react-rough-notation";
 
-const Pricing = ({
-  id,
-  locale,
-  langName,
-}: {
+// Define TypeScript interface for props
+interface PricingProps {
   id: string;
-  locale: any;
+  locale: {
+    title: string;
+    title2: string;
+    description: string;
+    doYouLike: string;
+    follow: string;
+  };
   langName: string;
-}) => {
+}
+
+const Pricing = ({ id, locale, langName }: PricingProps) => {
   const TIERS = ALL_TIERS[`TIERS_${langName.toUpperCase()}`];
 
   return (
@@ -37,7 +42,7 @@ const Pricing = ({
             {locale.title}
           </RoughNotation>
         </h2>
-        <h      <h3 className="text-4xl font-medium tracking-tight mt-2">
+        <h3 className="text-4xl font-medium tracking-tight mt-2">
           {locale.title2}
         </h3>
         <Spacer y={4} />
@@ -45,12 +50,12 @@ const Pricing = ({
       </div>
       <Spacer y={8} />
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 justify-items-center">
-        {TIERS?.map((tier, index) => (
+        {TIERS?.map((tier: any, index: number) => (
           <Card
             key={tier.key}
             className="p-3 flex-1 w-[90%] bg-gradient-to-br from-gray-900 to-gray-800"
             shadow="md"
-            radius="lg" // Rounded corners for the card
+            radius="lg"
           >
             <CardHeader className="flex flex-col items-start gap-2 pb-6">
               <h2 className="text-large font-medium text-white">{tier.title}</h2>
@@ -69,7 +74,7 @@ const Pricing = ({
                 ) : null}
               </p>
               <ul className="flex flex-col gap-2">
-                {tier.features?.map((feature) => (
+                {tier.features?.map((feature: string) => (
                   <li key={feature} className="flex items-center gap-2">
                     <FaCheck className="text-blue-500" />
                     <p className="text-gray-400">{feature}</p>
@@ -81,12 +86,12 @@ const Pricing = ({
               <Button
                 fullWidth
                 as={Link}
-                color={TIERS[0].buttonColor} // Use first tier's button color for all
+                color={TIERS[0].buttonColor}
                 href={tier.href}
-                variant={TIERS[0].buttonVariant} // Use first tier's button variant for all
+                variant={TIERS[0].buttonVariant}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
-                radius="lg" // Rounded corners for the button
+                radius="lg"
                 className="bg-gradient-to-r from-blue-600 to-blue-500 text-white"
               >
                 {tier.buttonText}
@@ -98,7 +103,7 @@ const Pricing = ({
       <Spacer y={12} />
       <div className="flex py-2">
         <p className="text-gray-500 text-center">
-          {locale.doYouLike} 
+          {locale.doYouLike}{" "}
           <Link
             color="foreground"
             href={siteConfig.authors[0].twitter}
