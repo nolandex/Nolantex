@@ -54,9 +54,9 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
         {TIERS?.map((tier: any) => (
           <Card
             key={tier.key}
-            className="p-3 flex-1 w-[90%] bg-gradient-to-br from-gray-900 to-gray-800"
+            className="p-3 flex-1 w-[90%] bg-gradient-to-br from-gray-900 to-gray-800 rounded-[50px]" // Custom rounded corners
             shadow="md"
-            radius="full" // Highly rounded corners for the card
+            radius="lg" // Max NextUI radius
           >
             <CardHeader className="flex flex-col items-start gap-2 pb-6">
               <h2 className="text-large font-medium text-white">{tier.title}</h2>
@@ -88,12 +88,12 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
                 fullWidth
                 as={Link}
                 color={TIERS[0].buttonColor}
-                href={whatsappLink} // Link to WhatsApp
+                href={whatsappLink} // WhatsApp link
                 variant={TIERS[0].buttonVariant}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
-                radius="full" // Highly rounded corners for the button
-                className="bg-gradient-to-r from-blue-600 to-blue-500 text-white"
+                radius="lg" // Max NextUI radius
+                className="bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-[50px]" // Custom rounded corners
               >
                 Buy
               </Button>
