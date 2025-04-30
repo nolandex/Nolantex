@@ -19,43 +19,52 @@ const CTAButton: React.FC<CTAButtonProps> = ({
   const router = useRouter();
   const pathname = usePathname();
 
+  const scrollToSection = (id: string) => {
+    if (typeof window === 'undefined') return;
+
+    const element = document.getElementById(id);
+    if (!element) return;
+
+    const headerHeight = 100; // Sesuaikan dengan tinggi header Anda
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+  };
+
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     
-    if (typeof window === 'undefined') return;
-
-    const targetElement = document.getElementById(pricingId);
-    
     if (pathname === '/') {
-      if (targetElement) {
-        // Smooth scroll with offset for fixed header
-        window.scrollTo({
-          top: targetElement.offsetTop - 100,
-          behavior: 'smooth'
-        });
-      }
+      scrollToSection(pricingId);
     } else {
-      // Navigate to home page with hash
       router.push(`/#${pricingId}`);
-      // Scroll handled by Pricing component's useEffect
+      // Handle scroll setelah navigasi
+      setTimeout(() => scrollToSection(pricingId), 500);
     }
   };
 
   return (
-    <a 
-      href={`#${pricingId}`} 
+    <Button
       onClick={handleClick}
-      className="inline-flex" // Ensures proper button styling
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '0.5rem',
+        backgroundColor: '#3b82f6',
+        color: 'white',
+        transition: 'background-color 0.3s ease'
+      }}
+      onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#1d4ed8'}
+      onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#3b82f6'}
+      aria-label={`Scroll to ${pricingId} section`}
     >
-      <Button
-        variant="default"
-        className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white transition-colors duration-300"
-        aria-label={`Scroll to ${pricingId} section`}
-      >
-        <RocketIcon className="h-4 w-4" />
-        {locale.title}
-      </Button>
-    </a>
+      <RocketIcon style={{ height: '1rem', width: '1rem' }} />
+      {locale.title}
+    </Button>
   );
 };
 
