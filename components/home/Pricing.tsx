@@ -97,7 +97,7 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
                       : "text-gray-400 hover:text-gray-200"
                   }`}
                 >
-                  {langName === "zh" ? "设置" : "Setup"}
+                  Setup
                 </button>
                 <button
                   onClick={() => setActiveTab("website")}
@@ -107,7 +107,7 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
                       : "text-gray-400 hover:text-gray-200"
                   }`}
                 >
-                  {langName === "zh" ? "网站" : "Website"}
+                  Website
                 </button>
               </div>
               {/* Tier Title and Description */}
