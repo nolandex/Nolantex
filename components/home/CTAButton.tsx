@@ -5,7 +5,7 @@ import Link from "next/link";
 const CTAButton = ({ locale }: { locale: any }) => {
   return (
     <Link
-      href="https://wa.me/6285156779923?text=Hi%2C%20I'm%20interested%20in%20your%20business%20setup%20services"
+      href="#Pricings"
       target="_blank"
       rel="noopener noreferrer nofollow"
     >
