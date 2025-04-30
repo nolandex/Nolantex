@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Script from "next/script";
 import {
   Button,
   Card,
@@ -16,6 +15,7 @@ import { ALL_TIERS } from "@/config/tiers";
 import { FaCheck } from "react-icons/fa";
 import { RoughNotation } from "react-rough-notation";
 import { TiersEnum } from "@/types/pricing";
+import { toast } from "react-hot-toast";
 
 // Define TypeScript interface for props
 interface PricingProps {
@@ -41,24 +41,59 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
 
   const handleMidtransPay = async () => {
     try {
-      const res = await fetch("/api/create-transaction", {
+      const orderId = `ORDER-${Date.now()}`;
+      const grossAmount = selectedTier?.rawPrice || 20000;
+      const customerDetails = {
+        first_name: "Nolan User",
+        email: "nolan@email.com",
+      };
+      const itemDetails = [
+        {
+          id: selectedTier?.key || "ITEM1",
+          price: grossAmount,
+          quantity: 1,
+          name: selectedTier?.title || "Produk Tes",
+        },
+      ];
+
+      const res = await fetch("/api/midtrans", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          amount: selectedTier?.rawPrice || 20000,
-          name: "Nolan User",
-          email: "nolan@email.com",
+          orderId,
+          grossAmount,
+          customerDetails,
+          itemDetails,
         }),
       });
+
       const data = await res.json();
 
-      if (data.token) {
-        window.snap.pay(data.token);
+      if (data.snapToken) {
+        window.snap.pay(data.snapToken, {
+          onSuccess: (result: any) => {
+            toast.success("Pembayaran berhasil!");
+            console.log("Pembayaran sukses:", result);
+          },
+          onPending: (result: any) => {
+            toast("Pembayaran tertunda, silakan cek status.");
+            console.log("Pembayaran tertunda:", result);
+          },
+          onError: (result: any) => {
+            toast.error("Pembayaran gagal.");
+            console.error("Pembayaran gagal:", result);
+          },
+          onClose: () => {
+            toast("Popup pembayaran ditutup.");
+            console.log("Popup pembayaran ditutup");
+          },
+        });
       } else {
-        alert("Gagal mendapatkan token pembayaran.");
+        toast.error("Gagal mendapatkan token pembayaran.");
       }
     } catch (error) {
-      alert("Terjadi kesalahan.");
+      toast.error("Terjadi kesalahan saat memproses pembayaran.");
+      console.error("Error:", error);
     }
   };
 
@@ -67,10 +102,6 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
       id={id}
       className="flex flex-col justify-center max-w-3xl items-center pt-12"
     >
-      <Script
-        src="https://app.sandbox.midtrans.com/snap/snap.js"
-        data-client-key="Mid-client-gJPon_f121sb7gOu"
-      />
       <div className="flex flex-col text-center max-w-lg">
         <h2 className="text-center text-white">
           <RoughNotation type="highlight" show={true} color="#2563EB">
