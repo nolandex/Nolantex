@@ -50,12 +50,12 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
       </div>
       <Spacer y={8} />
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 justify-items-center">
-        {TIERS?.map((tier: any, index: number) => (
+        {TIERS?.map((tier: any) => (
           <Card
             key={tier.key}
             className="p-3 flex-1 w-[90%] bg-gradient-to-br from-gray-900 to-gray-800"
             shadow="md"
-            radius="lg"
+            radius="lg" // More rounded corners for the card
           >
             <CardHeader className="flex flex-col items-start gap-2 pb-6">
               <h2 className="text-large font-medium text-white">{tier.title}</h2>
@@ -86,15 +86,15 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
               <Button
                 fullWidth
                 as={Link}
-                color={TIERS[0].buttonColor}
+                color={TIERS[0].buttonColor} // Use first tier's button color
                 href={tier.href}
-                variant={TIERS[0].buttonVariant}
+                variant={TIERS[0].buttonVariant} // Use first tier's button variant
                 target="_blank"
                 rel="noopener noreferrer nofollow"
-                radius="lg"
+                radius="lg" // More rounded corners for the button
                 className="bg-gradient-to-r from-blue-600 to-blue-500 text-white"
               >
-                {tier.buttonText}
+                Buy
               </Button>
             </CardFooter>
           </Card>
