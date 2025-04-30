@@ -1,18 +1,20 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { RocketIcon } from "lucide-react";
 import Link from "next/link";
 
 const CTAButton = ({ locale }: { locale: any }) => {
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault(); // Mencegah perilaku default link
+    e.preventDefault();
     const pricingSection = document.getElementById("pricings");
     if (pricingSection) {
-      pricingSection.scrollIntoView({ behavior: "smooth" }); // Scroll halus ke section
+      pricingSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
-    <Link href="#Pricing" onClick={handleScroll}>
+    <Link href="#pricings" onClick={handleScroll}>
       <Button
         variant="default"
         className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white"
