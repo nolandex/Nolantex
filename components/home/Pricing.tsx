@@ -33,8 +33,19 @@ interface PricingProps {
 const Pricing = ({ id, locale, langName }: PricingProps) => {
   const [activeTab, setActiveTab] = useState<"setup" | "website">("setup");
   const TIERS = ALL_TIERS[`TIERS_${langName.toUpperCase()}`];
-  const whatsappLink =
-    "https://wa.me/6285156779923?text=Hi%2C%20I'm%20interested%20in%20your%20business%20setup%20services";
+
+  // Mapping link berdasarkan bahasa
+  const linkByLanguage: { [key: string]: string } = {
+    en: "https://wa.me/6285156779923?text=Hi%2C%20I'm%20interested%20in%20your%20business%20setup%20services",
+    zh: "https://wa.me/6285156779923?text=Hi%2C%20saya%20tertarik%20dengan%20layanan%20setup%20bisnis%20Anda", // Contoh link untuk ZH
+    ja: "https://wa.me/6281234567891?text=こんにちは、ビジネス設定サービスに興味があります", // Contoh link untuk JA
+    ar: "https://wa.me/6281234567892?text=مرحبا، أنا مهتم بخدمات إعداد الأعمال", // Contoh link untuk AR
+    es: "https://wa.me/6281234567893?text=Hola, estoy interesado en tus servicios de configuración de negocios", // Contoh link untuk ES
+    ru: "https://wa.me/6281234567894?text=Здравствуйте, я заинтересован в ваших услугах по настройке бизнеса", // Contoh link untuk RU
+  };
+
+  // Pilih link berdasarkan langName, fallback ke 'en' jika tidak ditemukan
+  const whatsappLink = linkByLanguage[langName] || linkByLanguage.en;
 
   // Filter tier berdasarkan activeTab
   const selectedTier = TIERS?.find(
@@ -47,6 +58,7 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
   console.log("activeTab:", activeTab);
   console.log("TIERS:", TIERS);
   console.log("selectedTier:", selectedTier);
+  console.log("whatsappLink:", whatsappLink);
 
   return (
     <section
