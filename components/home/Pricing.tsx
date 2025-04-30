@@ -9,7 +9,7 @@ import {
   CardHeader,
   Divider,
   Spacer,
-  Link, // Tambahkan kembali impor Link
+  Link,
 } from "@nextui-org/react";
 import { siteConfig } from "@/config/site";
 import { ALL_TIERS } from "@/config/tiers";
@@ -37,11 +37,11 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
   // Mapping link berdasarkan bahasa
   const linkByLanguage: { [key: string]: string } = {
     en: "https://wa.me/6285156779923?text=Hi%2C%20I'm%20interested%20in%20your%20business%20setup%20services",
-    zh: "https://wa.me/6285156779923?text=Hi%2C%20saya%20tertarik%20dengan%20layanan%20setup%20bisnis%20Anda", // Contoh link untuk ZH
-    ja: "https://wa.me/6281234567891?text=こんにちは、ビジネス設定サービスに興味があります", // Contoh link untuk JA
-    ar: "https://wa.me/6281234567892?text=مرحبا، أنا مهتم بخدمات إعداد الأعمال", // Contoh link untuk AR
-    es: "https://wa.me/6281234567893?text=Hola, estoy interesado en tus servicios de configuración de negocios", // Contoh link untuk ES
-    ru: "https://wa.me/6281234567894?text=Здравствуйте, я заинтересован в ваших услугах по настройке бизнеса", // Contoh link untuk RU
+    zh: "https://wa.me/6285156779923?text=Hi%2C%20saya%20tertarik%20dengan%20layanan%20setup%20bisnis%20Anda",
+    ja: "https://wa.me/6281234567891?text=こんにちは、ビジネス設定サービスに興味があります",
+    ar: "https://wa.me/6281234567892?text=مرحبا، أنا مهتم بخدمات إعداد الأعمال",
+    es: "https://wa.me/6281234567893?text=Hola, estoy interesado en tus servicios de configuración de negocios",
+    ru: "https://wa.me/6281234567894?text=Здравствуйте, я заинтересован в ваших услугах по настройке бизнеса",
   };
 
   // Pilih link berdasarkan langName, fallback ke 'en' jika tidak ditemukan
@@ -121,9 +121,9 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
               </div>
             </CardHeader>
             <Divider className="bg-gray-700" />
-            <CardBody className="gap-6">
-              <p className="flex items-baseline gap-1 pt-2">
-                <span className="inline bg-gradient-to-br from-white to-gray-400 bg-clip-text text-xl font-semibold leading-7 tracking-tight text-transparent">
+            <CardBody className="gap-8">
+              <p className="flex items-baseline gap-1 pt-2 pb-4">
+                <span className="inline bg-gradient-to-br from-white to-gray-400 bg-clip-text text-4xl font-bold leading-7 tracking-tight text-transparent">
                   {selectedTier.price || "N/A"}
                 </span>
               </p>
