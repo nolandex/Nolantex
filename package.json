@@ -22,7 +22,7 @@
     "framer-motion": "^11.0.14",
     "jsdom": "^24.1.1",
     "lucide-react": "^0.316.0",
-    "midtrans-client": "^2.2.0",
+    "midtrans-client": "^1.4.2",
     "negotiator": "^0.6.3",
     "next": "14.1.0",
     "next-themes": "^0.2.1",
