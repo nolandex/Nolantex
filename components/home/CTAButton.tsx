@@ -7,7 +7,7 @@ import Link from "next/link";
 const CTAButton = ({ locale }: { locale: any }) => {
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const pricingSection = document.getElementById("pricings");
+    const pricingSection = document.getElementById("Pricing");
     if (pricingSection) {
       pricingSection.scrollIntoView({ behavior: "smooth" });
     }
