@@ -1,4 +1,5 @@
-"use client";
+'use client';
+
 import HeaderLinks from "@/components/header/HeaderLinks";
 import { LangSwitcher } from "@/components/header/LangSwitcher";
 import { siteConfig } from "@/config/site";
@@ -22,7 +23,6 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -38,7 +38,7 @@ const Header = () => {
       } mx-auto max-w-7xl px-4 sm:px-6 lg:px-8`}
     >
       <nav className="relative flex justify-between items-center">
-        {/* Left section */}
+        {/* Left */}
         <div className="flex items-center md:gap-x-12 flex-1">
           <Link
             href="/"
@@ -52,7 +52,7 @@ const Header = () => {
           </Link>
         </div>
 
-        {/* Center section - Navigation */}
+        {/* Center */}
         <ul className="hidden md:flex items-center justify-center gap-6 flex-1">
           {links.map((link) => (
             <li key={link.label}>
@@ -68,16 +68,20 @@ const Header = () => {
           ))}
         </ul>
 
-        {/* Right section - Desktop */}
+        {/* Right - Desktop */}
         <div className="hidden md:flex items-center justify-end gap-x-6 flex-1">
           <HeaderLinks />
           <ThemedButton />
-          <LangSwitcher />
+          <div className="shrink-0 scale-90 min-w-fit">
+            <LangSwitcher />
+          </div>
         </div>
 
-        {/* Right section - Mobile */}
+        {/* Right - Mobile */}
         <div className="md:hidden flex items-center gap-x-4">
-          <LangSwitcher /> {/* Pindah ke sini, di sebelah hamburger */}
+          <div className="shrink-0 scale-90 min-w-fit">
+            <LangSwitcher />
+          </div>
           <button
             aria-label="Open Menu"
             title="Open Menu"
@@ -90,28 +94,24 @@ const Header = () => {
             <div className="absolute top-0 left-0 w-full z-50">
               <div className="p-5 bg-background border rounded shadow-sm">
                 <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <Link
-                      href="/"
-                      aria-label="NolanDex"
-                      title="NolanDex"
-                      className="inline-flex items-center"
-                    >
-                      <span className="ml-2 text-lg font-bold tracking-wide text-gray-950 dark:text-gray-300">
-                        NolanDex
-                      </span>
-                    </Link>
-                  </div>
-                  <div>
-                    <button
-                      aria-label="Close Menu"
-                      title="Close Menu"
-                      className="tracking-wide transition-colors duration-200 font-normal"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      <CgClose className="w-6 h-6" />
-                    </button>
-                  </div>
+                  <Link
+                    href="/"
+                    aria-label="NolanDex"
+                    title="NolanDex"
+                    className="inline-flex items-center"
+                  >
+                    <span className="ml-2 text-lg font-bold tracking-wide text-gray-950 dark:text-gray-300">
+                      NolanDex
+                    </span>
+                  </Link>
+                  <button
+                    aria-label="Close Menu"
+                    title="Close Menu"
+                    className="tracking-wide transition-colors duration-200 font-normal"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <CgClose className="w-6 h-6" />
+                  </button>
                 </div>
                 <nav>
                   <ul className="space-y-4">
@@ -134,7 +134,6 @@ const Header = () => {
                   <div className="flex items-center gap-x-5 justify-between">
                     <HeaderLinks />
                     <ThemedButton />
-                    {/* LangSwitcher dihapus dari sini */}
                   </div>
                 </div>
               </div>
