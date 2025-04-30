@@ -68,15 +68,16 @@ const Header = () => {
           ))}
         </ul>
 
-        {/* Right section */}
+        {/* Right section - Desktop */}
         <div className="hidden md:flex items-center justify-end gap-x-6 flex-1">
           <HeaderLinks />
           <ThemedButton />
           <LangSwitcher />
         </div>
 
-        {/* Mobile menu button */}
-        <div className="md:hidden">
+        {/* Right section - Mobile */}
+        <div className="md:hidden flex items-center gap-x-4">
+          <LangSwitcher /> {/* Pindah ke sini, di sebelah hamburger */}
           <button
             aria-label="Open Menu"
             title="Open Menu"
@@ -132,10 +133,8 @@ const Header = () => {
                 <div className="pt-4">
                   <div className="flex items-center gap-x-5 justify-between">
                     <HeaderLinks />
-                    <div className="flex items-center justify-end gap-x-5">
-                      <ThemedButton />
-                      <LangSwitcher />
-                    </div>
+                    <ThemedButton />
+                    {/* LangSwitcher dihapus dari sini */}
                   </div>
                 </div>
               </div>
