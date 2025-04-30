@@ -1,7 +1,6 @@
 import { SiteConfig } from "@/types/siteConfig";
-import { BsWechat } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
-import { FaFacebook, FaWhatsapp, FaTiktok, FaTelegram } from "react-icons/fa";
+import { FaFacebook, FaWhatsapp, FaTiktok, FaTelegram, FaInstagram, FaDiscord } from "react-icons/fa";
 
 const OPEN_SOURCE_URL = 'https://github.com/weijunext/landing-page-boilerplate';
 
@@ -40,20 +39,12 @@ const baseSiteConfig = {
   footerLinks: [
     { name: 'email', href: "mailto:nolandexco@gmail.com", icon: MdEmail },
     { name: 'instagram', href: "https://www.instagram.com/nolandexco?igsh=MWV3cXRuejBqcGwyZg==", icon: FaInstagram },
-    { name: 'github', href: "https://discord.gg/cW4DKGpk", icon: FaTwitter }, // Ikon tetap FaInstagram sesuai input
+    { name: 'discord', href: "https://discord.gg/cW4DKGpk", icon: FaDiscord },
     { name: 'tiktok', href: "https://www.tiktok.com/@nolandexco?_t=ZS-8vwewu0P3sm&_r=1", icon: FaTiktok },
     { name: 'facebook', href: "https://www.facebook.com/nolandexco", icon: FaFacebook },
     { name: 'telegram', href: "https://t.me/nolandex", icon: FaTelegram }
   ],
-  footerProducts: [
-    { url: 'https://phcopilot.ai/', name: 'Product Hunt Copilot' },
-    { url: 'https://smartexcel.cc/', name: 'Smart Excel' },
-    { url: 'https://landingpage.weijunext.com/', name: 'Landing Page Boilerplate' },
-    { url: 'https://weijunext.com/', name: 'J实验室' },
-    { url: 'https://nextjscn.org/', name: 'Next.js 中文文档' },
-    { url: 'https://nextjs.weijunext.com/', name: 'Next.js Practice' },
-    { url: 'https://github.com/weijunext/indie-hacker-tools', name: 'Indie Hacker Tools' },
-  ]
+  footerProducts: [] // Dikosongkan sesuai permintaan
 };
 
 export const siteConfig: SiteConfig = {
