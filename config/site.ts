@@ -2,25 +2,23 @@ import { SiteConfig } from "@/types/siteConfig";
 import { MdEmail } from "react-icons/md";
 import { FaFacebook, FaWhatsapp, FaTiktok, FaTelegram, FaInstagram, FaDiscord } from "react-icons/fa";
 
-const OPEN_SOURCE_URL = 'https://github.com/weijunext/landing-page-boilerplate';
-
 const baseSiteConfig = {
   name: "NolanDex",
   description:
     "A comprehensive digital solutions provider helping entrepreneurs and small businesses build their online presence with websites, chatbots, social media, automation, and a reseller program.",
-  url: "https://landingpage.weijunext.com",
-  ogImage: "https://landingpage.weijunext.com/og.png",
+  url: "https://nolandex.com", // Ganti dari weijunext.com ke nolandex.com
+  ogImage: "https://nolandex.com/og.png", // Ganti dari weijunext.com ke nolandex.com
   metadataBase: '/',
   keywords: ["digital presence", "website creation", "chatbots", "social media management", "automation", "reseller program"],
   authors: [
     {
-      name: "weijunext",
-      url: "https://weijunext.com",
-      twitter: 'https://twitter.com/weijunext',
+      name: "NolanDex", // Ganti dari weijunext ke NolanDex
+      url: "", // Dikosongkan untuk menghapus link eksternal
+      twitter: "", // Dikosongkan untuk menghapus link eksternal
     }
   ],
-  creator: '@weijunext',
-  openSourceURL: 'https://github.com/weijunext/landing-page-boilerplate',
+  creator: '@NolanDex', // Ganti dari @weijunext ke @NolanDex
+  openSourceURL: "", // Dikosongkan untuk menghapus link eksternal
   themeColors: [
     { media: '(prefers-color-scheme: light)', color: 'white' },
     { media: '(prefers-color-scheme: dark)', color: 'black' },
@@ -44,7 +42,7 @@ const baseSiteConfig = {
     { name: 'facebook', href: "https://www.facebook.com/nolandexco", icon: FaFacebook },
     { name: 'telegram', href: "https://t.me/nolandex", icon: FaTelegram }
   ],
-  footerProducts: [] // Dikosongkan sesuai permintaan
+  footerProducts: [] // Tetap kosong sesuai perubahan sebelumnya
 };
 
 export const siteConfig: SiteConfig = {
