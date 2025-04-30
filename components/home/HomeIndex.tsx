@@ -6,6 +6,7 @@ import Pricing from "@/components/home/Pricing";
 import ScrollingLogos from "@/components/home/ScrollingLogos";
 import SocialProof from "@/components/home/SocialProof";
 import Testimonials from "@/components/home/Testimonials";
+import WordForm from "@/components/home/WordForm";
 import { defaultLocale, getDictionary } from "@/lib/i18n";
 
 export default async function HomeIndex({ lang }: { lang: string }) {
@@ -34,6 +35,9 @@ export default async function HomeIndex({ lang }: { lang: string }) {
 
       {/* FAQ (Frequently Asked Questions) */}
       <FAQ id="FAQ" locale={dict.FAQ} langName={langName} />
+
+      {/* Form input 20 kata */}
+      <WordForm />
 
       {/* CTA (Call to Action) */}
       <CTA locale={dict.CTA} CTALocale={dict.CTAButton} />
