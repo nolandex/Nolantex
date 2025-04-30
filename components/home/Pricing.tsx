@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Script from "next/script";
 import {
   Button,
   Card,
@@ -9,7 +10,6 @@ import {
   CardHeader,
   Divider,
   Spacer,
-  Link,
 } from "@nextui-org/react";
 import { siteConfig } from "@/config/site";
 import { ALL_TIERS } from "@/config/tiers";
@@ -34,37 +34,43 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
   const [activeTab, setActiveTab] = useState<"setup" | "website">("setup");
   const TIERS = ALL_TIERS[`TIERS_${langName.toUpperCase()}`];
 
-  // Mapping link berdasarkan bahasa
-  const linkByLanguage: { [key: string]: string } = {
-    en: "https://wa.me/6285156779923?text=Hi%2C%20I'm%20interested%20in%20your%20business%20setup%20services",
-    zh: "https://wa.me/6285156779923?text=Hi%2C%20saya%20tertarik%20dengan%20layanan%20setup%20bisnis%20Anda",
-    ja: "https://wa.me/6281234567891?text=こんにちは、ビジネス設定サービスに興味があります",
-    ar: "https://wa.me/6281234567892?text=مرحبا، أنا مهتم بخدمات إعداد الأعمال",
-    es: "https://wa.me/6281234567893?text=Hola, estoy interesado en tus servicios de configuración de negocios",
-    ru: "https://wa.me/6281234567894?text=Здравствуйте, я заинтересован в ваших услугах по настройке бизнеса",
-  };
-
-  // Pilih link berdasarkan langName, fallback ke 'en' jika tidak ditemukan
-  const whatsappLink = linkByLanguage[langName] || linkByLanguage.en;
-
-  // Filter tier berdasarkan activeTab
   const selectedTier = TIERS?.find(
     (tier: any) =>
       tier.key === (activeTab === "setup" ? TiersEnum.Free : TiersEnum.Customize)
   );
 
-  // Debugging logs
-  console.log("langName:", langName);
-  console.log("activeTab:", activeTab);
-  console.log("TIERS:", TIERS);
-  console.log("selectedTier:", selectedTier);
-  console.log("whatsappLink:", whatsappLink);
+  const handleMidtransPay = async () => {
+    try {
+      const res = await fetch("/api/create-transaction", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: selectedTier?.rawPrice || 20000,
+          name: "Nolan User",
+          email: "nolan@email.com",
+        }),
+      });
+      const data = await res.json();
+
+      if (data.token) {
+        window.snap.pay(data.token);
+      } else {
+        alert("Gagal mendapatkan token pembayaran.");
+      }
+    } catch (error) {
+      alert("Terjadi kesalahan.");
+    }
+  };
 
   return (
     <section
       id={id}
       className="flex flex-col justify-center max-w-3xl items-center pt-12"
     >
+      <Script
+        src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="Mid-client-gJPon_f121sb7gOu"
+      />
       <div className="flex flex-col text-center max-w-lg">
         <h2 className="text-center text-white">
           <RoughNotation type="highlight" show={true} color="#2563EB">
@@ -145,16 +151,12 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
             <CardFooter>
               <Button
                 fullWidth
-                as={Link}
-                color={selectedTier.buttonColor || "primary"}
-                href={whatsappLink}
-                variant={selectedTier.buttonVariant || "solid"}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
+                onClick={handleMidtransPay}
+                color="primary"
                 radius="md"
                 className="bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-[8px] hover:from-blue-700 hover:to-blue-600 transition-all duration-200"
               >
-                {selectedTier.buttonText || "Buy"}
+                Bayar Sekarang
               </Button>
             </CardFooter>
           </Card>
