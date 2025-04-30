@@ -97,7 +97,7 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
                       : "text-gray-400 hover:text-gray-200"
                   }`}
                 >
-                  {langName === "en" ? "Setup" : "Free"}
+                  {langName === "zh" ? "设置" : "Setup"}
                 </button>
                 <button
                   onClick={() => setActiveTab("website")}
@@ -107,7 +107,7 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
                       : "text-gray-400 hover:text-gray-200"
                   }`}
                 >
-                  {langName === "en" ? "Website" : "Custom"}
+                  {langName === "zh" ? "网站" : "Website"}
                 </button>
               </div>
               {/* Tier Title and Description */}
@@ -164,7 +164,7 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
           </p>
         )}
       </div>
-      <Spacer y={10} />
+      <Spacer humeur y={10} />
     </section>
   );
 };
