@@ -30,6 +30,7 @@ interface PricingProps {
 
 const Pricing = ({ id, locale, langName }: PricingProps) => {
   const TIERS = ALL_TIERS[`TIERS_${langName.toUpperCase()}`];
+  const whatsappLink = "https://wa.me/6285156779923?text=Hi%2C%20I'm%20interested%20in%20your%20business%20setup%20services";
 
   return (
     <section
@@ -55,7 +56,7 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
             key={tier.key}
             className="p-3 flex-1 w-[90%] bg-gradient-to-br from-gray-900 to-gray-800"
             shadow="md"
-            radius="lg" // More rounded corners for the card
+            radius="full" // Highly rounded corners for the card
           >
             <CardHeader className="flex flex-col items-start gap-2 pb-6">
               <h2 className="text-large font-medium text-white">{tier.title}</h2>
@@ -86,12 +87,12 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
               <Button
                 fullWidth
                 as={Link}
-                color={TIERS[0].buttonColor} // Use first tier's button color
-                href={tier.href}
-                variant={TIERS[0].buttonVariant} // Use first tier's button variant
+                color={TIERS[0].buttonColor}
+                href={whatsappLink} // Link to WhatsApp
+                variant={TIERS[0].buttonVariant}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
-                radius="lg" // More rounded corners for the button
+                radius="full" // Highly rounded corners for the button
                 className="bg-gradient-to-r from-blue-600 to-blue-500 text-white"
               >
                 Buy
