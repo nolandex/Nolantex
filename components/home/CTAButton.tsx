@@ -1,41 +1,23 @@
-'use client';
-
 import { Button } from "@/components/ui/button";
 import { RocketIcon } from "lucide-react";
-import React from "react";
+import Link from "next/link";
 
-interface CTAButtonProps {
-  locale: {
-    title: string;
-  };
-}
-
-const CTAButton: React.FC<CTAButtonProps> = ({ locale }) => {
-  const whatsappLink = "https://wa.me/6285156779923?text=Halo%2C%20saya%20tertarik%20dengan%20layanan%20NolanDex.";
-
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    window.open(whatsappLink, '_blank');
-  };
-
+const CTAButton = ({ locale }: { locale: any }) => {
   return (
-    <Button
-      onClick={handleClick}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: '0.5rem',
-        backgroundColor: '#3b82f6',
-        color: 'white',
-        transition: 'background-color 0.3s ease'
-      }}
-      onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#1d4ed8'}
-      onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#3b82f6'}
-      aria-label="Chat via WhatsApp"
+    <Link
+      href="https://wa.me/6285156779923?text=Hi%2C%20I'm%20interested%20in%20your%20business%20setup%20services"
+      target="_blank"
+      rel="noopener noreferrer nofollow"
     >
-      <RocketIcon style={{ height: '1rem', width: '1rem' }} />
-      {locale.title}
-    </Button>
+      <Button
+        variant="default"
+        className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white"
+        aria-label="Get Boilerplate"
+      >
+        <RocketIcon />
+        {locale.title}
+      </Button>
+    </Link>
   );
 };
 
