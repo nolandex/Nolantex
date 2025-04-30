@@ -10,7 +10,6 @@ import {
   Link,
   Spacer,
 } from "@nextui-org/react";
-
 import { siteConfig } from "@/config/site";
 import { ALL_TIERS } from "@/config/tiers";
 import { FaCheck } from "react-icons/fa";
@@ -26,6 +25,7 @@ const Pricing = ({
   langName: string;
 }) => {
   const TIERS = ALL_TIERS[`TIERS_${langName.toUpperCase()}`];
+
   return (
     <section
       id={id}
@@ -37,7 +37,7 @@ const Pricing = ({
             {locale.title}
           </RoughNotation>
         </h2>
-        <h3 className="text-4xl font-medium tracking-tight mt-2">
+        <h      <h3 className="text-4xl font-medium tracking-tight mt-2">
           {locale.title2}
         </h3>
         <Spacer y={4} />
@@ -45,20 +45,25 @@ const Pricing = ({
       </div>
       <Spacer y={8} />
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 justify-items-center">
-        {TIERS?.map((tier) => (
-          <Card key={tier.key} className="p-3 flex-1 w-[90%]" shadow="md">
+        {TIERS?.map((tier, index) => (
+          <Card
+            key={tier.key}
+            className="p-3 flex-1 w-[90%] bg-gradient-to-br from-gray-900 to-gray-800"
+            shadow="md"
+            radius="lg" // Rounded corners for the card
+          >
             <CardHeader className="flex flex-col items-start gap-2 pb-6">
-              <h2 className="text-large font-medium">{tier.title}</h2>
-              <p className="text-medium text-default-500">{tier.description}</p>
+              <h2 className="text-large font-medium text-white">{tier.title}</h2>
+              <p className="text-medium text-gray-400">{tier.description}</p>
             </CardHeader>
-            <Divider />
+            <Divider className="bg-gray-700" />
             <CardBody className="gap-8">
               <p className="flex items-baseline gap-1 pt-2">
-                <span className="inline bg-gradient-to-br from-foreground to-foreground-600 bg-clip-text text-2xl font-semibold leading-7 tracking-tight text-transparent">
+                <span className="inline bg-gradient-to-br from-white to-gray-400 bg-clip-text text-2xl font-semibold leading-7 tracking-tight text-transparent">
                   {tier.price}
                 </span>
                 {typeof tier.price !== "string" ? (
-                  <span className="text-small font-medium text-default-400">
+                  <span className="text-small font-medium text-gray-500">
                     {tier.price}
                   </span>
                 ) : null}
@@ -67,7 +72,7 @@ const Pricing = ({
                 {tier.features?.map((feature) => (
                   <li key={feature} className="flex items-center gap-2">
                     <FaCheck className="text-blue-500" />
-                    <p className="text-default-500">{feature}</p>
+                    <p className="text-gray-400">{feature}</p>
                   </li>
                 ))}
               </ul>
@@ -76,11 +81,13 @@ const Pricing = ({
               <Button
                 fullWidth
                 as={Link}
-                color={tier.buttonColor}
+                color={TIERS[0].buttonColor} // Use first tier's button color for all
                 href={tier.href}
-                variant={tier.buttonVariant}
+                variant={TIERS[0].buttonVariant} // Use first tier's button variant for all
                 target="_blank"
                 rel="noopener noreferrer nofollow"
+                radius="lg" // Rounded corners for the button
+                className="bg-gradient-to-r from-blue-600 to-blue-500 text-white"
               >
                 {tier.buttonText}
               </Button>
@@ -90,8 +97,8 @@ const Pricing = ({
       </div>
       <Spacer y={12} />
       <div className="flex py-2">
-        <p className="text-default-400 text-center">
-          {locale.doYouLike}&nbsp;
+        <p className="text-gray-500 text-center">
+          {locale.doYouLike} 
           <Link
             color="foreground"
             href={siteConfig.authors[0].twitter}
