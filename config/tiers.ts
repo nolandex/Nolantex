@@ -1,20 +1,6 @@
 import { siteConfig } from "@/config/site";
 import { Tier, TiersEnum } from "@/types/pricing";
 
-// Pastikan antarmuka Tier memiliki properti rawPrice
-export interface Tier {
-  key: TiersEnum;
-  title: string;
-  price: string;
-  rawPrice: number; // Tambahkan properti ini
-  href: string;
-  description: string;
-  features: string[];
-  buttonText: string;
-  buttonColor: string;
-  buttonVariant: string;
-}
-
 export const TIERS_EN: Array<Tier> = [
   {
     key: TiersEnum.Free,
@@ -137,7 +123,7 @@ export const TIERS_AR: Array<Tier> = [
     price: "مجاناً",
     rawPrice: 0, // Gratis
     href: siteConfig.openSourceURL || "#",
-    description: "يمكنك نسخ قالب صفحة الهبوط من مستودع GitHub بحرية.",
+    description: "يمكنك نسخ قالب صفحة الهبوط من مستودع GitHub بحرية。",
     features: [
       "مجاني",
       "الوصول إلى كامل الكود",
@@ -154,7 +140,7 @@ export const TIERS_AR: Array<Tier> = [
     price: "$188",
     rawPrice: 18800, // $188 dalam cent
     href: siteConfig.authors[0].twitter || "#",
-    description: "ادفع لتخصيص صفحة هبوط حصرية.",
+    description: "ادفع لتخصيص صفحة هبوط حصرية。",
     features: [
       "الوصول إلى كامل الكود",
       "التطوير الثانوي",
