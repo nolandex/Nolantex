@@ -1,11 +1,26 @@
 import { siteConfig } from "@/config/site";
 import { Tier, TiersEnum } from "@/types/pricing";
 
+// Pastikan antarmuka Tier memiliki properti rawPrice
+export interface Tier {
+  key: TiersEnum;
+  title: string;
+  price: string;
+  rawPrice: number; // Tambahkan properti ini
+  href: string;
+  description: string;
+  features: string[];
+  buttonText: string;
+  buttonColor: string;
+  buttonVariant: string;
+}
+
 export const TIERS_EN: Array<Tier> = [
   {
     key: TiersEnum.Free,
     title: "Online Business Setup",
     price: "$20",
+    rawPrice: 2000, // $20 dalam cent
     href: siteConfig.openSourceURL || "#",
     description: "Ideal for individuals or small businesses looking to set up their online presence",
     features: [
@@ -22,9 +37,10 @@ export const TIERS_EN: Array<Tier> = [
   {
     key: TiersEnum.Customize,
     title: "Website",
+    price: "$10",
+    rawPrice: 1000, // $10 dalam cent
     href: siteConfig.authors[0].twitter || "#",
     description: "Perfect for businesses ready to establish a professional website and digital presence",
-    price: "$10",
     features: [
       "E-commerce websites",
       "Portfolio websites",
@@ -43,8 +59,9 @@ export const TIERS_ZH: Array<Tier> = [
     key: TiersEnum.Free,
     title: "Setup Bisnis Online",
     price: "Rp50.000",
+    rawPrice: 50000, // Rp50.000 dalam Rupiah
     href: siteConfig.openSourceURL || "#",
-    description: "Mulai Nisnis Anda, Kami Siapkan Semua",
+    description: "Mulai Bisnis Anda, Kami Siapkan Semua",
     features: [
       "Website",
       "Chatbot Otomatis",
@@ -58,9 +75,10 @@ export const TIERS_ZH: Array<Tier> = [
   {
     key: TiersEnum.Customize,
     title: "Website",
+    price: "Rp24.999",
+    rawPrice: 24999, // Rp24.999 dalam Rupiah
     href: siteConfig.authors[0].twitter || "#",
     description: "Website untuk Bisnis anda gratis Domain my.id / web.id",
-    price: "Rp24.999",
     features: [
       "Toko Online",
       "Landing Page",
@@ -79,6 +97,7 @@ export const TIERS_JA: Array<Tier> = [
     key: TiersEnum.Free,
     title: "オープンソース / 無料",
     price: "無料",
+    rawPrice: 0, // Gratis
     href: siteConfig.openSourceURL || "#",
     description: "GitHubリポジトリからランディングページのボイラープレートを自由にクローンできます。",
     features: [
@@ -94,9 +113,10 @@ export const TIERS_JA: Array<Tier> = [
   {
     key: TiersEnum.Customize,
     title: "カスタマイズ",
+    price: "$188",
+    rawPrice: 18800, // $188 dalam cent
     href: siteConfig.authors[0].twitter || "#",
     description: "専用のランディングページをカスタマイズするために支払います。",
-    price: "$188",
     features: [
       "全コードへのアクセス",
       "二次開発",
@@ -115,6 +135,7 @@ export const TIERS_AR: Array<Tier> = [
     key: TiersEnum.Free,
     title: "مفتوح المصدر / مجاني",
     price: "مجاناً",
+    rawPrice: 0, // Gratis
     href: siteConfig.openSourceURL || "#",
     description: "يمكنك نسخ قالب صفحة الهبوط من مستودع GitHub بحرية.",
     features: [
@@ -130,9 +151,10 @@ export const TIERS_AR: Array<Tier> = [
   {
     key: TiersEnum.Customize,
     title: "تخصيص",
+    price: "$188",
+    rawPrice: 18800, // $188 dalam cent
     href: siteConfig.authors[0].twitter || "#",
     description: "ادفع لتخصيص صفحة هبوط حصرية.",
-    price: "$188",
     features: [
       "الوصول إلى كامل الكود",
       "التطوير الثانوي",
@@ -151,6 +173,7 @@ export const TIERS_ES: Array<Tier> = [
     key: TiersEnum.Free,
     title: "Código Abierto / Gratuito",
     price: "Gratis",
+    rawPrice: 0, // Gratis
     href: siteConfig.openSourceURL || "#",
     description: "Clona libremente la plantilla de página de aterrizaje desde el repositorio de GitHub.",
     features: [
@@ -166,9 +189,10 @@ export const TIERS_ES: Array<Tier> = [
   {
     key: TiersEnum.Customize,
     title: "Personalizar",
+    price: "$188",
+    rawPrice: 18800, // $188 dalam cent
     href: siteConfig.authors[0].twitter || "#",
     description: "Paga para personalizar una página de aterrizaje exclusiva.",
-    price: "$188",
     features: [
       "Acceso a todo el código",
       "Desarrollo secundario",
@@ -187,6 +211,7 @@ export const TIERS_RU: Array<Tier> = [
     key: TiersEnum.Free,
     title: "Открытый Источник / Бесплатно",
     price: "Бесплатно",
+    rawPrice: 0, // Gratis
     href: siteConfig.openSourceURL || "#",
     description: "Свободно клонируйте шаблон лендинга из репозитория на GitHub.",
     features: [
@@ -202,9 +227,10 @@ export const TIERS_RU: Array<Tier> = [
   {
     key: TiersEnum.Customize,
     title: "Настройка",
+    price: "$188",
+    rawPrice: 18800, // $188 dalam cent
     href: siteConfig.authors[0].twitter || "#",
     description: "Оплатите персонализацию эксклюзивной лендинг страницы.",
-    price: "$188",
     features: [
       "Доступ ко всему коду",
       "Вторичная разработка",
