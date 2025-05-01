@@ -40,12 +40,17 @@ const Pricing = ({ id, locale, langName }: PricingProps) => {
   );
 
   const handleMidtransPay = async () => {
+    if (!selectedTier) {
+      alert("Tidak ada tier yang dipilih.");
+      return;
+    }
+
     try {
       const res = await fetch("/api/create-transaction", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          amount: selectedTier?.rawPrice || 20000,
+          amount: selectedTier.rawPrice || 20000, // rawPrice sudah ada di tipe Tier
           name: "Nolan User",
           email: "nolan@email.com",
         }),
