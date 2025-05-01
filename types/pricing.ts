@@ -9,7 +9,7 @@ export enum TiersEnum {
   Free = "free",
   Pro = "pro",
   Team = "team",
-  Customize = "customize"
+  Customize = "customize",
 }
 
 export type Frequency = {
@@ -18,10 +18,11 @@ export type Frequency = {
   priceSuffix: string;
 };
 
-export type Tier = {
+export interface Tier {
   key: TiersEnum;
   title: string;
   price: string;
+  rawPrice: number; // Tambahkan properti ini
   priceSuffix?: string;
   href: string;
   description?: string;
@@ -31,4 +32,4 @@ export type Tier = {
   buttonText: string;
   buttonColor?: ButtonProps["color"];
   buttonVariant: ButtonProps["variant"];
-};
+}
