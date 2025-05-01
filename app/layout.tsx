@@ -48,7 +48,7 @@ export default async function RootLayout({
         <script
           type="text/javascript"
           src="https://app.sandbox.midtrans.com/snap/snap.js"
-          data-client-key="Mid-client-gJPon_f121sb7gOu"
+          data-client-key="SB-Mid-client-2Jja2G7bzxSbRvmC"
         ></script>
       </head>
       <body
