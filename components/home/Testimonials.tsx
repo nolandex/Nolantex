@@ -25,11 +25,15 @@ const Testimonials = ({ id, locale }: { id: string; locale: any }) => {
       interval = setInterval(() => {
         if (scrollRef.current) {
           const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-          // Jika di ujung kanan, kembali ke awal
-          if (scrollLeft + clientWidth >= scrollWidth - 1) {
+          const cardWidth = 300 + 16; // Lebar kartu (300px) + gap (16px, dari gap-4)
+          const maxScroll = scrollWidth - clientWidth;
+
+          // Jika sudah di ujung kanan, kembali ke awal
+          if (scrollLeft >= maxScroll - 1) {
             scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
           } else {
-            scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
+            // Geser satu testimonial (300px + gap)
+            scrollRef.current.scrollBy({ left: cardWidth, behavior: "smooth" });
           }
         }
       }, 3000); // Geser setiap 3 detik
@@ -38,9 +42,19 @@ const Testimonials = ({ id, locale }: { id: string; locale: any }) => {
   }, [isAutoScroll]);
 
   // Hentikan auto-scroll saat pengguna menginteraksi (scroll manual)
-  const handleScroll = () => {
-    setIsAutoScroll(false); // Hentikan auto-scroll saat pengguna menggeser
+  const handleInteractionStart = () => {
+    setIsAutoScroll(false); // Hentikan auto-scroll
   };
+
+  // Mulai ulang auto-scroll setelah 5 detik tanpa interaksi
+  useEffect(() => {
+    if (!isAutoScroll) {
+      const timeout = setTimeout(() => {
+        setIsAutoScroll(true); // Mulai ulang auto-scroll setelah 5 detik
+      }, 5000);
+      return () => clearTimeout(timeout);
+    }
+  }, [isAutoScroll]);
 
   return (
     <section
@@ -59,7 +73,8 @@ const Testimonials = ({ id, locale }: { id: string; locale: any }) => {
         {/* Konten Testimonial */}
         <div
           ref={scrollRef}
-          onScroll={handleScroll} // Deteksi scroll manual
+          onMouseDown={handleInteractionStart} // Deteksi interaksi mouse
+          onTouchStart={handleInteractionStart} // Deteksi interaksi sentuh
           className="w-full overflow-x-auto snap-x snap-mandatory flex flex-row gap-4 pb-4 scrollbar-thin scrollbar-thumb-gray-400 dark:scrollbar-thumb-gray-500 scrollbar-track-gray-100 dark:scrollbar-track-gray-800"
         >
           {TestimonialsData.map((testimonial, index) => (
