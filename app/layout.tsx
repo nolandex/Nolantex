@@ -42,7 +42,7 @@ export default async function RootLayout({
   params: { lang: string | undefined };
 }) {
   return (
-    <html lang="id" suppressHydrationWarning> {/* Hardcode ke bahasa Indonesia */}
+    <html lang="id" suppressHydrationWarning>
       <Head>
         <link
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
