@@ -9,8 +9,8 @@ import { CgClose } from "react-icons/cg";
 import { ThemedButton } from "../ThemedButton";
 
 const links = [
-  { label: "Home", href: "/" }, // Ubah ke rute halaman utama
-  { label: "Layanan", href: "/layanan" }, // Rute statis tanpa prefiks bahasa
+  { label: "Home", href: "/" },
+  { label: "Layanan", href: "/layanan" },
 ];
 
 const Header = () => {
