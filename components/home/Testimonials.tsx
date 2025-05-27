@@ -41,20 +41,15 @@ const Testimonials = ({ id, locale }: { id: string; locale: any }) => {
     return () => clearInterval(interval); // Bersihkan interval saat unmount
   }, [isAutoScroll]);
 
-  // Hentikan auto-scroll saat pengguna menginteraksi (scroll manual)
-  const handleInteractionStart = () => {
-    setIsAutoScroll(false); // Hentikan auto-scroll
+  // Hentikan auto-scroll saat disentuh
+  const handleTouchStart = () => {
+    setIsAutoScroll(false); // Hentikan auto-scroll saat disentuh
   };
 
-  // Mulai ulang auto-scroll setelah 5 detik tanpa interaksi
-  useEffect(() => {
-    if (!isAutoScroll) {
-      const timeout = setTimeout(() => {
-        setIsAutoScroll(true); // Mulai ulang auto-scroll setelah 5 detik
-      }, 5000);
-      return () => clearTimeout(timeout);
-    }
-  }, [isAutoScroll]);
+  // Lanjutkan auto-scroll saat sentuhan dilepas
+  const handleTouchEnd = () => {
+    setIsAutoScroll(true); // Lanjutkan auto-scroll segera setelah dilepas
+  };
 
   return (
     <section
@@ -73,8 +68,10 @@ const Testimonials = ({ id, locale }: { id: string; locale: any }) => {
         {/* Konten Testimonial */}
         <div
           ref={scrollRef}
-          onMouseDown={handleInteractionStart} // Deteksi interaksi mouse
-          onTouchStart={handleInteractionStart} // Deteksi interaksi sentuh
+          onTouchStart={handleTouchStart} // Hentikan saat disentuh
+          onTouchEnd={handleTouchEnd} // Lanjutkan saat dilepas
+          onMouseDown={handleTouchStart} // Dukung interaksi mouse
+          onMouseUp={handleTouchEnd} // Lanjutkan saat mouse dilepas
           className="w-full overflow-x-auto snap-x snap-mandatory flex flex-row gap-4 pb-4 scrollbar-thin scrollbar-thumb-gray-400 dark:scrollbar-thumb-gray-500 scrollbar-track-gray-100 dark:scrollbar-track-gray-800"
         >
           {TestimonialsData.map((testimonial, index) => (
