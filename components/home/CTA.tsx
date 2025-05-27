@@ -1,5 +1,6 @@
+// components/home/CTA.tsx
 /* eslint-disable react/no-unescaped-entities */
-import CTAButton from "@/components/home/CTAButton";
+import CTAButton from "./CTAButton";
 import { RoughNotation } from "react-rough-notation";
 
 interface LocaleProps {
