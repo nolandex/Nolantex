@@ -22,8 +22,12 @@ const Hero = ({
         <p className="mx-auto mt-6 max-w-2xl text-2xl tracking-tight text-slate-700 dark:text-slate-400">
           {locale.description}
         </p>
+
+        {/* Button dipindah ke dalam section untuk lebih rapi */}
+        <div className="mt-10">
+          <CTAButton locale={CTALocale} href="/second" />
+        </div>
       </section>
-      <CTAButton locale={CTALocale}></CTAButton>
     </>
   );
 };
