@@ -1,16 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import HeaderLinks from "@/components/header/HeaderLinks";
 import { MenuIcon } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { CgClose } from "react-icons/cg";
-import { ThemedButton } from "../ThemedButton";
 
 const links = [
   { label: "Home", href: "/" },
-  { label: "Layanan", href: "/layanan" },
+  { label: "Layanan", href: "/id/layanan" },
 ];
 
 const Header = () => {
@@ -32,7 +30,6 @@ const Header = () => {
       } mx-auto max-w-7xl px-4 sm:px-6 lg:px-8`}
     >
       <nav className="relative flex justify-between items-center">
-        {/* Left */}
         <div className="flex items-center md:gap-x-12 flex-1">
           <Link
             href="/"
@@ -45,8 +42,6 @@ const Header = () => {
             </span>
           </Link>
         </div>
-
-        {/* Center */}
         <ul className="hidden md:flex items-center justify-center gap-6 flex-1">
           {links.map((link) => (
             <li key={link.label}>
@@ -61,13 +56,6 @@ const Header = () => {
             </li>
           ))}
         </ul>
-
-        {/* Right - Desktop */}
-        <div className="hidden md:flex items-center justify-end gap-x-6 flex-1">
-          <HeaderLinks />
-        </div>
-
-        {/* Right - Mobile */}
         <div className="md:hidden flex items-center gap-x-4">
           <button
             aria-label="Open Menu"
@@ -117,12 +105,6 @@ const Header = () => {
                     ))}
                   </ul>
                 </nav>
-                <div className="pt-4">
-                  <div className="flex items-center gap-x-5 justify-between">
-                    <HeaderLinks />
-                    <ThemedButton />
-                  </div>
-                </div>
               </div>
             </div>
           )}
