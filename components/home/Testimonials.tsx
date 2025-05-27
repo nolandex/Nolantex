@@ -4,37 +4,29 @@
 import { TestimonialsData } from "@/config/testimonials";
 import Image from "next/image";
 import { useRef, useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react"; // Pastikan lucide-react terinstal
 
 const Testimonials = ({ id, locale }: { id: string; locale: any }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isAutoScroll, setIsAutoScroll] = useState(true); // State untuk mengontrol auto-scroll
+  const firstTestimonialRef = useRef<HTMLDivElement>(null); // Ref untuk testimonial pertama
+  const [testimonialHeight, setTestimonialHeight] = useState("auto"); // State untuk tinggi
 
-  // Fungsi untuk menggeser ke kiri
-  const scrollLeft = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
-      setIsAutoScroll(false); // Hentikan auto-scroll saat diklik
+  // Hitung tinggi testimonial pertama
+  useEffect(() => {
+    if (firstTestimonialRef.current) {
+      setTestimonialHeight(`${firstTestimonialRef.current.offsetHeight}px`);
     }
-  };
+  }, []);
 
-  // Fungsi untuk menggeser ke kanan
-  const scrollRight = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
-      setIsAutoScroll(false); // Hentikan auto-scroll saat diklik
-    }
-  };
-
-  // Auto-scroll setiap 3 detik
+  // Auto-scroll setiap 3 detik dengan loop tanpa batas
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isAutoScroll && scrollRef.current) {
       interval = setInterval(() => {
         if (scrollRef.current) {
           const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-          // Jika sudah di ujung kanan, kembali ke awal
-          if (scrollLeft + clientWidth >= scrollWidth) {
+          // Jika di ujung kanan, kembali ke awal
+          if (scrollLeft + clientWidth >= scrollWidth - 1) {
             scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
           } else {
             scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
@@ -45,11 +37,9 @@ const Testimonials = ({ id, locale }: { id: string; locale: any }) => {
     return () => clearInterval(interval); // Bersihkan interval saat unmount
   }, [isAutoScroll]);
 
-  // Fungsi untuk menghitung tinggi testimonial pertama
-  const getFirstTestimonialHeight = () => {
-    // Asumsi tinggi default berdasarkan konten testimonial pertama
-    // Anda bisa mengukur tinggi secara dinamis jika diperlukan
-    return "auto"; // Ganti dengan nilai tetap (misalnya, "300px") jika ingin tinggi statis
+  // Hentikan auto-scroll saat pengguna menginteraksi (scroll manual)
+  const handleScroll = () => {
+    setIsAutoScroll(false); // Hentikan auto-scroll saat pengguna menggeser
   };
 
   return (
@@ -66,23 +56,18 @@ const Testimonials = ({ id, locale }: { id: string; locale: any }) => {
         </p>
       </div>
       <div className="relative w-full">
-        {/* Tombol Panah Kiri */}
-        <button
-          onClick={scrollLeft}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white p-2 rounded-full shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors z-10"
-        >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
         {/* Konten Testimonial */}
         <div
           ref={scrollRef}
+          onScroll={handleScroll} // Deteksi scroll manual
           className="w-full overflow-x-auto snap-x snap-mandatory flex flex-row gap-4 pb-4 scrollbar-thin scrollbar-thumb-gray-400 dark:scrollbar-thumb-gray-500 scrollbar-track-gray-100 dark:scrollbar-track-gray-800"
         >
           {TestimonialsData.map((testimonial, index) => (
             <div
+              ref={index === 0 ? firstTestimonialRef : null} // Ref pada testimonial pertama
               className="snap-start flex-shrink-0 w-[300px] mb-4 transition-all hover:scale-105 hover:shadow-lg"
               key={index}
-              style={{ minHeight: getFirstTestimonialHeight() }} // Samakan tinggi dengan testimonial pertama
+              style={{ minHeight: testimonialHeight }} // Samakan tinggi
             >
               <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 flex flex-col items-start gap-3 h-full bg-white dark:bg-gradient-to-br dark:from-gray-800 dark:to-gray-900">
                 <div className="flex items-start justify-between w-full">
@@ -111,13 +96,6 @@ const Testimonials = ({ id, locale }: { id: string; locale: any }) => {
             </div>
           ))}
         </div>
-        {/* Tombol Panah Kanan */}
-        <button
-          onClick={scrollRight}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white p-2 rounded-full shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors z-10"
-        >
-          <ChevronRight className="w-6 h-6" />
-        </button>
       </div>
     </section>
   );
