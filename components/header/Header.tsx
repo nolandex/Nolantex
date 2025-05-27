@@ -11,8 +11,8 @@ import { CgClose } from "react-icons/cg";
 import { ThemedButton } from "../ThemedButton";
 
 const links = [
-  { label: "Home", href: "#Home" }, // Ganti Features menjadi Home
-  { label: "Layanan", href: "/layanan" }, // Ganti Pricing menjadi Layanan
+  { label: "Home", href: "#Home" },
+  { label: "Layanan", href: "/layanan" },
 ];
 
 const Header = () => {
@@ -69,18 +69,10 @@ const Header = () => {
         {/* Right - Desktop */}
         <div className="hidden md:flex items-center justify-end gap-x-6 flex-1">
           <HeaderLinks />
-          <ThemedButton />
-          <div className="shrink-0 scale-90 min-w-fit">
-            <LangSwitcher />
-          </div>
         </div>
 
         {/* Right - Mobile */}
         <div className="md:hidden flex items-center gap-x-4">
-          <ThemedButton />
-          <div className="shrink-0 scale-90 min-w-fit">
-            <LangSwitcher />
-          </div>
           <button
             aria-label="Open Menu"
             title="Open Menu"
