@@ -3,22 +3,32 @@
 import { Button } from "@/components/ui/button";
 import { RocketIcon } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-const CTAButton = ({ locale }: { locale: any }) => {
-  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
+interface CTAButtonProps {
+  locale: any;
+  href?: string;
+}
+
+const CTAButton = ({ locale, href = "#" }: CTAButtonProps) => {
+  const router = useRouter();
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!href.startsWith("#")) return;
+
     e.preventDefault();
-    const pricingSection = document.getElementById("Pricing");
-    if (pricingSection) {
-      pricingSection.scrollIntoView({ behavior: "smooth" });
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
-    <Link href="#Pricing" onClick={handleScroll}>
+    <Link href={href} onClick={handleClick}>
       <Button
         variant="default"
         className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white"
-        aria-label="Get Boilerplate"
+        aria-label="CTA Button"
       >
         <RocketIcon />
         {locale.title}
