@@ -3,7 +3,7 @@
 
 import { Button } from "@/components/ui/button";
 import { RocketIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation"; // Menggunakan next/navigation untuk App Router
 
 interface CTAButtonProps {
   locale: {
@@ -15,7 +15,8 @@ export default function CTAButton({ locale }: CTAButtonProps) {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push("/second");
+    // Ubah path ini ke halaman tujuan Anda
+    router.push("/second-page"); // Mengarahkan ke halaman '/second-page'
   };
 
   return (
