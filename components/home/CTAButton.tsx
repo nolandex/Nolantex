@@ -1,20 +1,31 @@
-// /app/test-button.tsx
+// components/home/CTAButton.tsx
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { RocketIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export default function TestButton() {
+interface CTAButtonProps {
+  locale: {
+    title: string;
+  };
+}
+
+export default function CTAButton({ locale }: CTAButtonProps) {
   const router = useRouter();
 
+  const handleClick = () => {
+    router.push("/second");
+  };
+
   return (
-    <button 
-      onClick={() => {
-        console.log("Test button clicked");
-        router.push("/second");
-      }}
-      className="p-4 bg-red-500 text-white"
+    <Button
+      onClick={handleClick}
+      variant="default"
+      className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white"
     >
-      TEST BUTTON (Harusnya Work)
-    </button>
+      <RocketIcon className="w-4 h-4" />
+      {locale.title}
+    </Button>
   );
 }
