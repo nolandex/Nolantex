@@ -1,8 +1,8 @@
-'use client';
+/* eslint-disable react/no-unescaped-entities */
+"use client";
 
 import HeaderLinks from "@/components/header/HeaderLinks";
 import { LangSwitcher } from "@/components/header/LangSwitcher";
-import { siteConfig } from "@/config/site";
 import { MenuIcon } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -11,10 +11,8 @@ import { CgClose } from "react-icons/cg";
 import { ThemedButton } from "../ThemedButton";
 
 const links = [
-  { label: "Features", href: "#Features" },
-  { label: "Pricing", href: "#Pricing" },
-  { label: "Testimonials", href: "#Testimonials" },
-  { label: "FAQ", href: "#FAQ" },
+  { label: "Home", href: "#Home" }, // Ganti Features menjadi Home
+  { label: "Layanan", href: "/layanan" }, // Ganti Pricing menjadi Layanan
 ];
 
 const Header = () => {
@@ -42,12 +40,12 @@ const Header = () => {
         <div className="flex items-center md:gap-x-12 flex-1">
           <Link
             href="/"
-            aria-label="NolanDex"
-            title="NolanDex"
+            aria-label="Bisnovo"
+            title="Bisnovo"
             className="flex items-center space-x-1 font-bold translate-y-[-2px]"
           >
             <span className="text-gray-950 dark:text-gray-300 text-lg">
-              NolanDex
+              Bisnovo
             </span>
           </Link>
         </div>
@@ -79,6 +77,7 @@ const Header = () => {
 
         {/* Right - Mobile */}
         <div className="md:hidden flex items-center gap-x-4">
+          <ThemedButton />
           <div className="shrink-0 scale-90 min-w-fit">
             <LangSwitcher />
           </div>
@@ -96,12 +95,12 @@ const Header = () => {
                 <div className="flex items-center justify-between mb-4">
                   <Link
                     href="/"
-                    aria-label="NolanDex"
-                    title="NolanDex"
+                    aria-label="Bisnovo"
+                    title="Bisnovo"
                     className="inline-flex items-center"
                   >
                     <span className="ml-2 text-lg font-bold tracking-wide text-gray-950 dark:text-gray-300">
-                      NolanDex
+                      Bisnovo
                     </span>
                   </Link>
                   <button
@@ -134,6 +133,7 @@ const Header = () => {
                   <div className="flex items-center gap-x-5 justify-between">
                     <HeaderLinks />
                     <ThemedButton />
+                    <LangSwitcher />
                   </div>
                 </div>
               </div>
