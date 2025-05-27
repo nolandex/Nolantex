@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { RocketIcon } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 interface CTAButtonProps {
   locale: any;
@@ -11,20 +10,20 @@ interface CTAButtonProps {
 }
 
 const CTAButton = ({ locale, href = "#" }: CTAButtonProps) => {
-  const router = useRouter();
+  const isAnchorLink = href.startsWith("#");
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!href.startsWith("#")) return;
-
-    e.preventDefault();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
+    if (isAnchorLink) {
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
   return (
-    <Link href={href} onClick={handleClick}>
+    <Link href={href} onClick={handleClick} scroll={!isAnchorLink}>
       <Button
         variant="default"
         className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white"
