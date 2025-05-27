@@ -2,22 +2,18 @@
 "use client";
 
 import HeaderLinks from "@/components/header/HeaderLinks";
-import { LangSwitcher } from "@/components/header/LangSwitcher";
 import { MenuIcon } from "lucide-react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { CgClose } from "react-icons/cg";
 import { ThemedButton } from "../ThemedButton";
 
 const links = [
-  { label: "Home", href: "#Home" },
-  { label: "Layanan", href: "/layanan" },
+  { label: "Home", href: "/" }, // Ubah ke rute halaman utama
+  { label: "Layanan", href: "/layanan" }, // Rute statis tanpa prefiks bahasa
 ];
 
 const Header = () => {
-  const params = useParams();
-  const lang = params.lang;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -55,7 +51,7 @@ const Header = () => {
           {links.map((link) => (
             <li key={link.label}>
               <Link
-                href={`/${lang === "en" ? "" : lang}${link.href}`}
+                href={link.href}
                 aria-label={link.label}
                 title={link.label}
                 className="tracking-wide transition-colors duration-200 font-normal text-sm"
@@ -125,7 +121,6 @@ const Header = () => {
                   <div className="flex items-center gap-x-5 justify-between">
                     <HeaderLinks />
                     <ThemedButton />
-                    <LangSwitcher />
                   </div>
                 </div>
               </div>
