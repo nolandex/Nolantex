@@ -1,17 +1,23 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
+import HeaderLinks from "@/components/header/HeaderLinks";
+import { LangSwitcher } from "@/components/header/LangSwitcher";
 import { MenuIcon } from "lucide-react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { CgClose } from "react-icons/cg";
+import { ThemedButton } from "../ThemedButton";
 
 const links = [
-  { label: "Home", href: "/" },
-  { label: "Layanan", href: "/id/layanan" },
+  { label: "Home", href: "#Home" },
+  { label: "Layanan", href: "/layanan" },
 ];
 
 const Header = () => {
+  const params = useParams();
+  const lang = params.lang;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -30,6 +36,7 @@ const Header = () => {
       } mx-auto max-w-7xl px-4 sm:px-6 lg:px-8`}
     >
       <nav className="relative flex justify-between items-center">
+        {/* Left */}
         <div className="flex items-center md:gap-x-12 flex-1">
           <Link
             href="/"
@@ -42,11 +49,13 @@ const Header = () => {
             </span>
           </Link>
         </div>
+
+        {/* Center */}
         <ul className="hidden md:flex items-center justify-center gap-6 flex-1">
           {links.map((link) => (
             <li key={link.label}>
               <Link
-                href={link.href}
+                href={`/${lang === "en" ? "" : lang}${link.href}`}
                 aria-label={link.label}
                 title={link.label}
                 className="tracking-wide transition-colors duration-200 font-normal text-sm"
@@ -56,6 +65,13 @@ const Header = () => {
             </li>
           ))}
         </ul>
+
+        {/* Right - Desktop */}
+        <div className="hidden md:flex items-center justify-end gap-x-6 flex-1">
+          <HeaderLinks />
+        </div>
+
+        {/* Right - Mobile */}
         <div className="md:hidden flex items-center gap-x-4">
           <button
             aria-label="Open Menu"
@@ -105,6 +121,13 @@ const Header = () => {
                     ))}
                   </ul>
                 </nav>
+                <div className="pt-4">
+                  <div className="flex items-center gap-x-5 justify-between">
+                    <HeaderLinks />
+                    <ThemedButton />
+                    <LangSwitcher />
+                  </div>
+                </div>
               </div>
             </div>
           )}
