@@ -1,8 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
+"use client"; // Tambahkan direktif ini di baris pertama
+
 import { TestimonialsData } from "@/config/testimonials";
 import Image from "next/image";
 import { useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react"; // Pastikan Anda memiliki lucide-react terinstal
+import { ChevronLeft, ChevronRight } from "lucide-react"; // Pastikan lucide-react terinstal
 
 const Testimonials = ({ id, locale }: { id: string; locale: any }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
