@@ -7,6 +7,7 @@ import { useTheme } from 'next-themes'
 export default function SecondPage() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const [activeCategory, setActiveCategory] = useState('all') // State untuk kategori aktif
 
   useEffect(() => {
     setMounted(true)
@@ -17,45 +18,58 @@ export default function SecondPage() {
       name: 'Paket Bisnis Online',
       price: 'Rp 1.500.000',
       image: '/images/business-package.jpg',
+      category: 'business',
     },
     {
       name: 'Website',
       price: 'Rp 2.000.000',
       image: '/images/website.jpg',
+      category: 'website',
     },
-    // Produk baru ditambahkan di sini
     {
       name: 'SEO Optimization',
       price: 'Rp 1.200.000',
       image: '/images/seo-optimization.jpg',
+      category: 'website',
     },
     {
       name: 'Digital Marketing',
       price: 'Rp 1.800.000',
       image: '/images/digital-marketing.jpg',
+      category: 'website',
     },
     {
       name: 'Graphic Design',
       price: 'Rp 900.000',
       image: '/images/graphic-design.jpg',
+      category: 'website',
     },
     {
       name: 'Mobile App Development',
       price: 'Rp 3.500.000',
       image: '/images/mobile-app.jpg',
+      category: 'website',
     },
     {
       name: 'Email Marketing',
       price: 'Rp 700.000',
       image: '/images/email-marketing.jpg',
+      category: 'website',
     },
-    // Produk ketiga dari daftar sebelumnya
     {
       name: 'Chatbot AI',
       price: 'Rp 800.000',
       image: '/images/chatbot.jpg',
+      category: 'website',
     },
   ]
+
+  // Filter produk berdasarkan kategori aktif
+  const filteredProducts = activeCategory === 'business'
+    ? products.filter(product => product.category === 'business')
+    : activeCategory === 'website'
+      ? products.filter(product => product.category === 'website')
+      : products
 
   if (!mounted) return null
 
@@ -72,12 +86,45 @@ export default function SecondPage() {
       </div>
 
       <div className="container mx-auto px-4">
+        {/* Tombol Kategori */}
+        <div className="flex justify-center gap-4 mb-6">
+          <button
+            onClick={() => setActiveCategory('business')}
+            className={`px-4 py-2 rounded-md font-medium ${
+              activeCategory === 'business'
+                ? theme === 'dark'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-blue-500 text-white'
+                : theme === 'dark'
+                  ? 'bg-gray-700 text-gray-200'
+                  : 'bg-gray-200 text-gray-700'
+            }`}
+          >
+            Paket Bisnis Online
+          </button>
+          <button
+            onClick={() => setActiveCategory('website')}
+            className={`px-4 py-2 rounded-md font-medium ${
+              activeCategory === 'website'
+                ? theme === 'dark'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-blue-500 text-white'
+                : theme === 'dark'
+                  ? 'bg-gray-700 text-gray-200'
+                  : 'bg-gray-200 text-gray-700'
+            }`}
+          >
+            Website
+          </button>
+        </div>
+
+        {/* Daftar Produk */}
         <div className="flex flex-wrap justify-center gap-6">
-          {products.map((product, index) => (
+          {filteredProducts.map((product, index) => (
             <div
               key={index}
               className={`
-                ${index === 0 ? 'w-full' : 'w-full sm:w-[calc(50%-12px)]'}
+                ${index === 0 && activeCategory !== 'website' ? 'w-full' : 'w-full sm:w-[calc(50%-12px)]'}
                 rounded-lg overflow-hidden shadow-md transition-all
                 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}
               `}
@@ -98,7 +145,7 @@ export default function SecondPage() {
                     <h3 className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>
                       {product.name}
                     </h3>
-                    <p className={`text-sm font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+            <p className={`text-sm font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
                       {product.price}
                     </p>
                   </div>
