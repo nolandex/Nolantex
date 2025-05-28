@@ -119,13 +119,14 @@ export default function SecondPage() {
         </div>
 
         {/* Daftar Produk */}
-        <div className="flex flex-wrap justify-center gap-6">
+        <div className="flex flex-col gap-2">
           {filteredProducts.map((product, index) => (
             <div
               key={index}
               className={`
-                w-full sm:w-[calc(50%-12px)] rounded-lg overflow-hidden shadow-md transition-all
+                w-full rounded-lg overflow-hidden shadow-md transition-all
                 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}
+                p-0
               `}
             >
               <div className="h-[140px] relative">
@@ -138,26 +139,24 @@ export default function SecondPage() {
                 />
               </div>
               <div className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}></div>
-              <div className="p-3">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <h3 className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>
-                      {product.name}
-                    </h3>
-                    <p className={`text-sm font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
-                      {product.price}
-                    </p>
-                  </div>
-                  <button
-                    className={`px-3 py-1.5 rounded-md text-xs font-medium ${
-                      theme === 'dark'
-                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                        : 'bg-blue-500 hover:bg-blue-600 text-white'
-                    }`}
-                  >
-                    Beli Sekarang
-                  </button>
+              <div className="p-3 flex justify-between items-center">
+                <div>
+                  <h3 className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>
+                    {product.name}
+                  </h3>
+                  <p className={`text-sm font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                    {product.price}
+                  </p>
                 </div>
+                <button
+                  className={`px-3 py-1.5 rounded-md text-xs font-medium ${
+                    theme === 'dark'
+                      ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                      : 'bg-blue-500 hover:bg-blue-600 text-white'
+                  }`}
+                >
+                  Beli Sekarang
+                </button>
               </div>
             </div>
           ))}
