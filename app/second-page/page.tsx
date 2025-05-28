@@ -1,28 +1,31 @@
-'use client';
+'use client'
 
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
+import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
 
 export default function SecondPage() {
-  const [mounted, setMounted] = useState(false);
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('light')
+  const [mounted, setMounted] = useState(false)
 
-  // Detect system theme and set initial state
+  // Initialize theme on mount
   useEffect(() => {
-    setMounted(true);
-    const storedTheme = localStorage.getItem('theme') || 
-                      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    setTheme(storedTheme);
-  }, []);
+    setMounted(true)
+    const savedTheme = localStorage.getItem('theme') || 
+                      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+    setTheme(savedTheme)
+  }, [])
 
-  // Apply theme class to document element
+  // Apply theme class to HTML element and save to localStorage
   useEffect(() => {
     if (mounted) {
-      document.documentElement.classList.remove('light', 'dark');
-      document.documentElement.classList.add(theme);
-      localStorage.setItem('theme', theme);
+      document.documentElement.className = theme
+      localStorage.setItem('theme', theme)
     }
-  }, [theme, mounted]);
+  }, [theme, mounted])
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark')
+  }
 
   const products = [
     {
@@ -35,12 +38,23 @@ export default function SecondPage() {
       price: 'Rp 2.000.000',
       image: '/images/website.jpg',
     },
-  ];
+  ]
 
-  if (!mounted) return null; // Prevent hydration mismatch
+  if (!mounted) return null // Prevent hydration mismatch
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
+      {/* Theme Toggle Button */}
+      <div className="fixed top-4 right-4">
+        <button
+          onClick={toggleTheme}
+          className={`p-2 rounded-full ${theme === 'dark' ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'}`}
+          aria-label="Toggle dark mode"
+        >
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+      </div>
+
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-center gap-6">
           {products.map((product, index) => (
@@ -91,5 +105,5 @@ export default function SecondPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }
