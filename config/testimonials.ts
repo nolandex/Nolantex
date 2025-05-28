@@ -1,47 +1,47 @@
 export const TestimonialsData = [
   {
     user: {
-      name: "Emily Carter",
-      username: "emily_startsup",
+      name: "Dewi Anggraeni",
+      username: "pengusaha_fashion",
       image: "/images/users/1.png",
     },
     content:
-      "NolanDex made launching my online business effortless. My website and automation systems were live in just a few hours — and I landed my first sale the same day.",
+      "Bisnovo bantu saya bangun bisnis online dalam hitungan jam! Website dan sistem otomatis langsung aktif, dan saya dapat penjualan di hari yang sama. Mantap banget!",
   },
   {
     user: {
-      name: "James Miller",
-      username: "jamesresells",
+      name: "Rudi Santoso",
+      username: "reseller_handal",
       image: "/images/users/2.png",
     },
     content:
-      "Joining NolanDex as a reseller was a game changer. No upfront cost, ready-to-use content, and I could immediately focus on making sales.",
+      "Gabung jadi reseller Bisnovo itu game changer! Tanpa modal awal, konten siap pakai, langsung fokus jualan. Penghasilan pun langsung mengalir!",
   },
   {
     user: {
-      name: "Sophie Williams",
-      username: "sophiemarket",
+      name: "Siti Rahayu",
+      username: "seller_premium",
       image: "/images/users/3.png",
     },
     content:
-      "I was able to build my own brand while reselling through NolanDex. Everything looked professional and original — perfect for standing out online.",
+      "Bisnovo bikin saya punya brand sendiri dengan tampilan profesional. Produk terlihat eksklusif, beda dari yang lain—bikin customer langsung percaya!",
   },
   {
     user: {
-      name: "Liam Johnson",
-      username: "liam.biz",
+      name: "Budi Setiawan",
+      username: "digital_marketer",
       image: "/images/users/4.png",
     },
     content:
-      "NolanDex delivered a complete, ready-to-sell business setup. Website, automation, and even marketing content — all done. I just had to launch.",
+      "Semua serba instan! Website, sistem otomatis, bahkan konten promosi—semua disiapkan Bisnovo. Tinggal fokus jualan, untung pun datang terus!",
   },
   {
     user: {
-      name: "Olivia Smith",
-      username: "olivia.launches",
+      name: "Anisa Putri",
+      username: "online_shop_owner",
       image: "/images/users/5.png",
     },
     content:
-      "Highly impressed! Quick setup, excellent support, and my online business finally looks legit and trustworthy to customers.",
+      "Bisnovo bikin bisnis online saya terlihat kredibel dan profesional. Dukungan timnya cepat banget, bikin saya makin percaya diri jualan online!",
   }
 ];
