@@ -43,28 +43,30 @@ const Header = () => {
               Bisnovo
             </span>
           </Link>
-          <ThemedButton /> {/* Pindahkan ThemedButton ke kiri */}
         </div>
 
         {/* Center */}
-        <ul className="hidden md:flex items-center justify-center gap-6 flex-1">
-          {links.map((link) => (
-            <li key={link.label}>
-              <Link
-                href={link.href}
-                aria-label={link.label}
-                title={link.label}
-                className="tracking-wide transition-colors duration-200 font-normal text-sm"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="hidden md:flex items-center justify-center gap-6 flex-1">
+          <ul className="flex items-center gap-6">
+            {links.map((link) => (
+              <li key={link.label}>
+                <Link
+                  href={link.href}
+                  aria-label={link.label}
+                  title={link.label}
+                  className="tracking-wide transition-colors duration-200 font-normal text-sm"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <ThemedButton /> {/* ThemedButton diletakkan di sebelah menu */}
+        </div>
 
         {/* Right - Desktop */}
         <div className="hidden md:flex items-center justify-end gap-x-6 flex-1">
-          {/* HeaderLinks dihapus */}
+          {/* HeaderLinks sudah dihapus */}
         </div>
 
         {/* Right - Mobile */}
@@ -117,12 +119,7 @@ const Header = () => {
                     ))}
                   </ul>
                 </nav>
-                <div className="pt-4">
-                  <div className="flex items-center gap-x-5 justify-between">
-                    <ThemedButton /> {/* ThemedButton tetap di mobile */}
-                    {/* HeaderLinks dihapus */}
-                  </div>
-                </div>
+                {/* ThemedButton dihapus dari menu mobile */}
               </div>
             </div>
           )}
