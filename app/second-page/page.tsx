@@ -125,22 +125,16 @@ export default function SecondPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {filteredProducts.map((product, index) => (
             <div key={index} className={`rounded-lg overflow-hidden ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}>
-              {/* Video Thumbnail */}
-              <div
-                className="h-40 relative overflow-hidden bg-gray-900 cursor-pointer group"
-                style={{
-                  backgroundImage: `url(https://img.youtube.com/vi/${product.videoId}/maxresdefault.jpg)`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-                onClick={() => window.open(`https://www.youtube.com/watch?v=${product.videoId}`, "_blank")}
-              >
-                {/* Play Button Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 group-hover:bg-opacity-30 transition-all duration-300">
-                  <div className="w-12 h-12 rounded-full bg-blue-500 bg-opacity-90 flex items-center justify-center group-hover:bg-opacity-100 group-hover:scale-110 transition-all duration-300">
-                    <Play className="h-5 w-5 text-white" fill="white" />
-                  </div>
-                </div>
+              {/* Embedded YouTube Video */}
+              <div className="relative h-40 overflow-hidden bg-gray-900">
+                <iframe
+                  className="absolute inset-0 w-full h-full"
+                  src={`https://www.youtube.com/embed/${product.videoId}?rel=0`}
+                  title={product.name}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
               </div>
 
               {/* Product Content */}
@@ -150,12 +144,7 @@ export default function SecondPage() {
                   <h3 className={`text-lg font-semibold ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
                     {product.name}
                   </h3>
-
-                  <div
-                    className={`px-3 py-1 rounded-md text-base font-bold ${
-                      theme === "dark" ? "bg-blue-600" : "bg-blue-500"
-                    } text-white`}
-                  >
+                  <div className={`px-3 py-1 rounded-md text-base font-bold text-white`}>
                     {product.price}
                   </div>
                 </div>
@@ -209,11 +198,7 @@ export default function SecondPage() {
               </div>
 
               {/* Price */}
-              <div
-                className={`inline-block px-3 py-1 rounded-md text-lg font-bold mb-4 ${
-                  theme === "dark" ? "bg-blue-600" : "bg-blue-500"
-                } text-white`}
-              >
+              <div className={`inline-block px-3 py-1 rounded-md text-lg font-bold text-white mb-4`}>
                 {selectedProduct.price}
               </div>
 
