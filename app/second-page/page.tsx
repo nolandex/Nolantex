@@ -18,7 +18,7 @@ export default function SecondPage() {
       name: 'Paket Bisnis Online',
       price: 'Rp 1.500.000',
       image: '/images/business-package.jpg',
-      category: 'business',
+      category:irdiği
     },
     {
       name: 'Website',
@@ -128,7 +128,7 @@ export default function SecondPage() {
               key={index}
               className={`
                 ${
-                  filteredProducts.length === 1 ? 'w-full max-w-[600px]' : 'w-full sm:w-[48%] lg:w-[31%]'
+                  filteredProducts.length === 1 ? 'w-full' : 'w-full sm:w-[48%] lg:w-[31%]'
                 }
                 rounded-lg overflow-hidden shadow-md transition-all
                 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}
@@ -143,7 +143,7 @@ export default function SecondPage() {
                   priority
                 />
               </div>
-              <div className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}></div>
+              <div className={`border-t ${theme === 'dark' ? 'border-gray-200' : 'border-gray-200'}`}></div>
               <div className="p-4">
                 <div className="flex justify-between items-center flex-wrap gap-2">
                   <div>
