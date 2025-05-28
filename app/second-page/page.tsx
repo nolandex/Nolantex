@@ -38,11 +38,6 @@ export default function SecondPage() {
       price: 'Rp 500.000',
       image: '/images/promotion.jpg',
     },
-    {
-      name: 'Copywriting & Caption',
-      price: 'Rp 600.000',
-      image: '/images/copywriting.jpg',
-    },
   ]
 
   if (!mounted) return null
@@ -60,12 +55,13 @@ export default function SecondPage() {
       </div>
 
       <div className="container mx-auto px-4">
-        <div className="flex flex-wrap justify-center gap-6">
+        <div className="flex flex-wrap justify-center gap-4">
           {products.map((product, index) => (
             <div
               key={index}
               className={`
-                ${index === 0 ? 'w-full' : 'w-full sm:w-[calc(50%-12px)]'}
+                ${index === 0 ? 'w-full' : 'w-[calc(50%-8px)]'}
+                sm:w-[calc(50%-8px)]
                 rounded-lg overflow-hidden shadow-md transition-all
                 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}
               `}
