@@ -1,11 +1,25 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { useTheme } from '../../lib/ThemeContext'
 
 export default function SecondPage() {
-  const { theme, toggleTheme } = useTheme()
+  const [theme, setTheme] = useState<'light' | 'dark'>('light')
+
+  useEffect(() => {
+    // Only run on client side
+    const storedTheme = localStorage.getItem('theme') as 'light' | 'dark' || 
+                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    setTheme(storedTheme)
+    document.documentElement.className = storedTheme
+  }, [])
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark'
+    setTheme(newTheme)
+    localStorage.setItem('theme', newTheme)
+    document.documentElement.className = newTheme
+  }
 
   const products = [
     {
