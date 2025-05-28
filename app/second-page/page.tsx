@@ -1,18 +1,13 @@
+// app/second-page/page.tsx
+
 import React from 'react';
 
-// You might not need these imports if you're using Tailwind CSS directly,
-// but they are good practice for external CSS or fonts if not globally linked.
-// import 'https://cdn.tailwindcss.com'; // Tailwind CSS is typically set up in tailwind.config.js or globals.css
-// import 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap';
-// import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css';
-
-// Define the component for your second page
 export default function SecondPage() {
   return (
-    // The main content of your page, structured as a React component's JSX
     <html lang="en">
      <head>
-      <meta charset="utf-8"/>
+      {/* Change 'charset' to 'charSet' here */}
+      <meta charSet="utf-8"/>
       <meta content="width=device-width, initial-scale=1" name="viewport"/>
       <title>Paket Bisnis Online</title>
       {/*
