@@ -1,12 +1,9 @@
-// app/second-page/page.tsx
-
 import React from 'react';
 
 export default function SecondPage() {
   return (
     <html lang="en">
      <head>
-      {/* Change 'charset' to 'charSet' here */}
       <meta charSet="utf-8"/>
       <meta content="width=device-width, initial-scale=1" name="viewport"/>
       <title>Paket Bisnis Online</title>
@@ -14,8 +11,6 @@ export default function SecondPage() {
         If Tailwind CSS is already configured globally in your Next.js project (which is common),
         you don't need these <script> and <link> tags here.
         They are typically included in _app.tsx or a global CSS file.
-        If your project is *not* using Tailwind CSS globally, you might need to reconsider
-        how you're importing it or if these links are actually working as expected in a component.
         For a proper Next.js setup with Tailwind, you'd usually import the generated CSS.
       */}
       <script src="https://cdn.tailwindcss.com"></script>
@@ -128,11 +123,12 @@ export default function SecondPage() {
            Epic Account
           </h3>
          </div>
-         <div class="flex items-center justify-between px-5 py-3 font-semibold text-gray-700 text-sm">
-          <span class="block">
+         {/* THIS IS THE LINE THAT WAS MISSED (line 131 in the error log) */}
+         <div className="flex items-center justify-between px-5 py-3 font-semibold text-gray-700 text-sm">
+          <span className="block">
            Rp 1.500.000
           </span>
-          <button class="border border-gray-300 rounded-md px-3 py-1 text-sm font-normal text-gray-700 hover:bg-gray-100" type="button">
+          <button className="border border-gray-300 rounded-md px-3 py-1 text-sm font-normal text-gray-700 hover:bg-gray-100" type="button">
            Beli Sekarang
           </button>
          </div>
