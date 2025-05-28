@@ -74,22 +74,26 @@ export default function SecondPage() {
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
-      <div className="fixed top-4 right-4">
+      {/* Toggle Theme Button */}
+      <div className="fixed top-4 right-4 z-50">
         <button
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          className={`p-2 rounded-full ${theme === 'dark' ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'}`}
+          className={`p-2 rounded-full transition ${
+            theme === 'dark' ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'
+          }`}
           aria-label="Toggle dark mode"
         >
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
       </div>
 
+      {/* Main Container */}
       <div className="container mx-auto px-4">
         {/* Category Buttons */}
         <div className="flex justify-center gap-4 mb-6">
           <button
             onClick={() => setActiveCategory('business')}
-            className={`px-4 py-2 rounded-md font-medium ${
+            className={`px-4 py-2 rounded-md font-medium transition ${
               activeCategory === 'business'
                 ? theme === 'dark'
                   ? 'bg-blue-600 text-white'
@@ -103,7 +107,7 @@ export default function SecondPage() {
           </button>
           <button
             onClick={() => setActiveCategory('website')}
-            className={`px-4 py-2 rounded-md font-medium ${
+            className={`px-4 py-2 rounded-md font-medium transition ${
               activeCategory === 'website'
                 ? theme === 'dark'
                   ? 'bg-blue-600 text-white'
@@ -117,18 +121,16 @@ export default function SecondPage() {
           </button>
         </div>
 
-        {/* Product Grid */}
+        {/* Products Grid */}
         <div className="flex flex-wrap justify-center gap-6">
           {filteredProducts.map((product, index) => (
             <div
               key={index}
-              className={`
-                w-full sm:w-[48%] lg:w-[31%]
-                rounded-lg overflow-hidden shadow-md transition-all
-                ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}
-              `}
+              className={`w-full sm:w-[48%] lg:w-[31%] rounded-lg overflow-hidden shadow-md transition-all ${
+                theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
+              }`}
             >
-              <div className="h-[200px] relative">
+              <div className="relative h-[200px]">
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -137,7 +139,9 @@ export default function SecondPage() {
                   priority
                 />
               </div>
-              <div className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}></div>
+              <div
+                className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}
+              ></div>
               <div className="p-4">
                 <div className="flex justify-between items-center flex-wrap gap-2">
                   <div>
@@ -149,7 +153,7 @@ export default function SecondPage() {
                     </p>
                   </div>
                   <button
-                    className={`px-4 py-2 rounded-md text-sm font-medium ${
+                    className={`px-4 py-2 rounded-md text-sm font-medium transition ${
                       theme === 'dark'
                         ? 'bg-blue-600 hover:bg-blue-700 text-white'
                         : 'bg-blue-500 hover:bg-blue-600 text-white'
