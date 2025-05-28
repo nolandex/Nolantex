@@ -85,7 +85,7 @@ export default function SecondPage() {
       </div>
 
       <div className="container mx-auto px-4">
-        {/* Kategori */}
+        {/* Tombol Kategori */}
         <div className="flex justify-center gap-4 mb-6">
           <button
             onClick={() => setActiveCategory('business')}
@@ -118,18 +118,18 @@ export default function SecondPage() {
         </div>
 
         {/* Produk */}
-        <div className="flex flex-wrap justify-center gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProducts.map((product, index) => (
             <div
               key={index}
               className={`
-                w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]
-                max-w-md
+                ${filteredProducts.length === 1 ? 'col-span-1 sm:col-span-2 lg:col-span-3' : ''}
+                w-full
                 rounded-lg overflow-hidden shadow-md transition-all
                 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}
               `}
             >
-              <div className="h-[140px] relative">
+              <div className="h-[200px] relative">
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -139,18 +139,18 @@ export default function SecondPage() {
                 />
               </div>
               <div className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}></div>
-              <div className="p-3">
-                <div className="flex justify-between items-center">
+              <div className="p-4">
+                <div className="flex justify-between items-center flex-wrap gap-2">
                   <div>
-                    <h3 className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>
+                    <h3 className={`text-lg font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>
                       {product.name}
                     </h3>
-                    <p className={`text-sm font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                    <p className={`text-sm font-bold ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
                       {product.price}
                     </p>
                   </div>
                   <button
-                    className={`px-3 py-1.5 rounded-md text-xs font-medium ${
+                    className={`px-4 py-2 rounded-md text-sm font-medium ${
                       theme === 'dark'
                         ? 'bg-blue-600 hover:bg-blue-700 text-white'
                         : 'bg-blue-500 hover:bg-blue-600 text-white'
