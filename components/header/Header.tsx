@@ -1,24 +1,18 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import HeaderLinks from "@/components/header/HeaderLinks";
-// import { LangSwitcher } from "@/components/header/LangSwitcher"; // Dihapus karena tidak diperlukan
 import { MenuIcon } from "lucide-react";
 import Link from "next/link";
-// import { useParams } from "next/navigation"; // Dihapus karena tidak memerlukan params.lang
 import { useState, useEffect } from "react";
 import { CgClose } from "react-icons/cg";
 import { ThemedButton } from "../ThemedButton";
 
-// Mengubah links sesuai permintaan
 const links = [
-  { label: "Home", href: "/" }, // Home mengarah ke halaman utama (root)
-  { label: "Product", href: "/second-page" }, // Product mengarah ke halaman kedua
+  { label: "Home", href: "/" },
+  { label: "Product", href: "/second-page" },
 ];
 
 const Header = () => {
-  // const params = useParams(); // Tidak perlu lagi
-  // const lang = params.lang; // Tidak perlu lagi
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -40,7 +34,7 @@ const Header = () => {
         {/* Left */}
         <div className="flex items-center md:gap-x-12 flex-1">
           <Link
-            href="/" // Tetap mengarah ke root
+            href="/"
             aria-label="Bisnovo"
             title="Bisnovo"
             className="flex items-center space-x-1 font-bold translate-y-[-2px]"
@@ -49,6 +43,7 @@ const Header = () => {
               Bisnovo
             </span>
           </Link>
+          <ThemedButton /> {/* Pindahkan ThemedButton ke kiri */}
         </div>
 
         {/* Center */}
@@ -56,7 +51,6 @@ const Header = () => {
           {links.map((link) => (
             <li key={link.label}>
               <Link
-                // Hapus bagian `/${lang === "en" ? "" : lang}`
                 href={link.href}
                 aria-label={link.label}
                 title={link.label}
@@ -70,9 +64,7 @@ const Header = () => {
 
         {/* Right - Desktop */}
         <div className="hidden md:flex items-center justify-end gap-x-6 flex-1">
-          <HeaderLinks />
-          {/* <LangSwitcher /> // Dihapus dari sini */}
-          <ThemedButton /> {/* Pindahkan ThemedButton ke sini jika diinginkan */}
+          {/* HeaderLinks dihapus */}
         </div>
 
         {/* Right - Mobile */}
@@ -90,7 +82,7 @@ const Header = () => {
               <div className="p-5 bg-background border rounded shadow-sm">
                 <div className="flex items-center justify-between mb-4">
                   <Link
-                    href="/" // Tetap mengarah ke root
+                    href="/"
                     aria-label="Bisnovo"
                     title="Bisnovo"
                     className="inline-flex items-center"
@@ -127,9 +119,8 @@ const Header = () => {
                 </nav>
                 <div className="pt-4">
                   <div className="flex items-center gap-x-5 justify-between">
-                    <HeaderLinks />
-                    <ThemedButton />
-                    {/* <LangSwitcher /> // Dihapus dari sini */}
+                    <ThemedButton /> {/* ThemedButton tetap di mobile */}
+                    {/* HeaderLinks dihapus */}
                   </div>
                 </div>
               </div>
