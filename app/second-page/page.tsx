@@ -33,11 +33,19 @@ export default function SecondPage() {
   if (!mounted) return null
 
   return (
-    <div className={`min-h-screen pt-20 pb-8 ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
+    <div
+      className={`min-h-screen pt-20 pb-8 ${
+        theme === 'dark' ? 'bg-gray-900' : 'bg-white'
+      }`}
+    >
       <div className="fixed top-4 right-4">
         <button
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          className={`p-2 rounded-full ${theme === 'dark' ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'}`}
+          className={`p-2 rounded-full ${
+            theme === 'dark'
+              ? 'bg-gray-700 text-yellow-300'
+              : 'bg-gray-200 text-gray-700'
+          }`}
           aria-label="Toggle dark mode"
         >
           {theme === 'dark' ? '☀️' : '🌙'}
@@ -49,12 +57,11 @@ export default function SecondPage() {
           {products.map((product, index) => (
             <div
               key={index}
-              className={`
-                ${index === 0 ? 'w-full' : 'w-[calc(50%-8px)']}
-                sm:w-[calc(50%-8px)]
-                rounded-lg overflow-hidden shadow-md transition-all
-                ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}
-              `}
+              className={`${
+                index === 0 ? 'w-full' : 'w-[calc(50%-8px)]'
+              } sm:w-[calc(50%-8px)] rounded-lg overflow-hidden shadow-md transition-all ${
+                theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
+              }`}
             >
               <div className="h-[140px] relative">
                 <Image
@@ -65,14 +72,26 @@ export default function SecondPage() {
                   priority
                 />
               </div>
-              <div className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}></div>
+              <div
+                className={`border-t ${
+                  theme === 'dark' ? 'border-gray-700' : 'border-gray-200'
+                }`}
+              ></div>
               <div className="p-3">
                 <div className="flex justify-between items-center">
                   <div>
-                    <h3 className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>
+                    <h3
+                      className={`text-sm font-medium ${
+                        theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
+                      }`}
+                    >
                       {product.name}
                     </h3>
-                    <p className={`text-sm font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                    <p
+                      className={`text-sm font-semibold ${
+                        theme === 'dark' ? 'text-blue-400' : 'text-blue-600'
+                      }`}
+                    >
                       {product.price}
                     </p>
                   </div>
