@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
-import { Play, CheckCircle, X } from "lucide-react"
+import { CheckCircle, X } from "lucide-react"
 
 interface Product {
   name: string
@@ -23,16 +23,14 @@ export default function SecondPage() {
     setMounted(true)
   }, [])
 
-  const products = [
-    // Kategori Paket Bisnis Online
+  const products: Product[] = [
     {
       name: "Paket Bisnis Starter",
       price: "Rp 50.000",
       videoId: "dQw4w9WgXcQ",
       category: "business",
       features: ["Website Profesional", "Chatbot Otomatis", "Social Media Content"],
-      description:
-        "Paket lengkap untuk memulai bisnis online Anda dengan website profesional dan tools marketing otomatis.",
+      description: "Paket lengkap untuk memulai bisnis online Anda dengan website profesional dan tools marketing otomatis.",
     },
     {
       name: "Paket Bisnis Pro",
@@ -42,8 +40,6 @@ export default function SecondPage() {
       features: ["Semua fitur Starter", "Social Media Booster", "Copywriting Tricks"],
       description: "Paket premium dengan fitur lengkap untuk mengembangkan bisnis online Anda ke level profesional.",
     },
-
-    // Kategori Website
     {
       name: "Website Toko Online",
       price: "Rp 25.000",
@@ -66,12 +62,10 @@ export default function SecondPage() {
       videoId: "dQw4w9WgXcQ",
       category: "website",
       features: ["Portfolio kreatif", "Galeri foto", "Contact form"],
-      description:
-        "Website portfolio profesional untuk menampilkan karya dan layanan Anda dengan tampilan yang elegan.",
+      description: "Website portfolio profesional untuk menampilkan karya dan layanan Anda dengan tampilan yang elegan.",
     },
   ]
 
-  // Filter produk berdasarkan kategori aktif
   const filteredProducts = products.filter((product) => product.category === activeCategory)
 
   const openModal = (product: Product) => {
@@ -92,11 +86,11 @@ export default function SecondPage() {
           <div className={`inline-flex rounded-lg p-1 ${theme === "dark" ? "bg-gray-800" : "bg-white"} shadow-md`}>
             <button
               onClick={() => setActiveCategory("business")}
-              className={`px-6 py-2.5 rounded-md font-medium text-sm transition-all duration-300 ${
+              className={`px-6 py-2.5 rounded-md font-medium text-sm transition-colors duration-300 ${
                 activeCategory === "business"
                   ? theme === "dark"
-                    ? "bg-blue-600 text-white shadow-sm"
-                    : "bg-blue-500 text-white shadow-sm"
+                    ? "bg-blue-600 text-white"
+                    : "bg-blue-500 text-white"
                   : theme === "dark"
                     ? "text-gray-300 hover:text-white"
                     : "text-gray-700 hover:text-gray-900"
@@ -106,11 +100,11 @@ export default function SecondPage() {
             </button>
             <button
               onClick={() => setActiveCategory("website")}
-              className={`px-6 py-2.5 rounded-md font-medium text-sm transition-all duration-300 ${
+              className={`px-6 py-2.5 rounded-md font-medium text-sm transition-colors duration-300 ${
                 activeCategory === "website"
                   ? theme === "dark"
-                    ? "bg-blue-600 text-white shadow-sm"
-                    : "bg-blue-500 text-white shadow-sm"
+                    ? "bg-blue-600 text-white"
+                    : "bg-blue-500 text-white"
                   : theme === "dark"
                     ? "text-gray-300 hover:text-white"
                     : "text-gray-700 hover:text-gray-900"
@@ -124,9 +118,12 @@ export default function SecondPage() {
         {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {filteredProducts.map((product, index) => (
-            <div key={index} className={`rounded-lg overflow-hidden ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}>
+            <div
+              key={index}
+              className="rounded-lg overflow-hidden shadow-lg"
+            >
               {/* Embedded YouTube Video */}
-              <div className="relative h-40 overflow-hidden bg-gray-900">
+              <div className="relative aspect-video bg-gray-900">
                 <iframe
                   className="absolute inset-0 w-full h-full"
                   src={`https://www.youtube.com/embed/${product.videoId}?rel=0`}
@@ -138,21 +135,18 @@ export default function SecondPage() {
               </div>
 
               {/* Product Content */}
-              <div className="p-5">
-                {/* Header with Name and Price */}
+              <div className={`p-5 ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}>
                 <div className="flex justify-between items-center mb-4">
                   <h3 className={`text-lg font-semibold ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
                     {product.name}
                   </h3>
-                  <div className={`px-3 py-1 rounded-md text-base font-bold text-white`}>
+                  <div className="px-3 py-1 rounded-md text-base font-bold text-gray-900">
                     {product.price}
                   </div>
                 </div>
-
-                {/* Action Buttons */}
                 <div className="flex gap-3">
                   <button
-                    className={`flex-1 py-2.5 px-4 rounded-md font-medium text-sm transition-all duration-300 ${
+                    className={`flex-1 py-2.5 px-4 rounded-md font-medium text-sm transition-colors duration-300 ${
                       theme === "dark"
                         ? "bg-blue-600 hover:bg-blue-700 text-white"
                         : "bg-blue-500 hover:bg-blue-600 text-white"
@@ -162,7 +156,7 @@ export default function SecondPage() {
                   </button>
                   <button
                     onClick={() => openModal(product)}
-                    className={`px-4 py-2.5 rounded-md font-medium text-sm transition-all duration-300 ${
+                    className={`px-4 py-2.5 rounded-md font-medium text-sm transition-colors duration-300 ${
                       theme === "dark"
                         ? "bg-gray-700 hover:bg-gray-600 text-gray-200"
                         : "bg-gray-100 hover:bg-gray-200 text-gray-700"
@@ -180,11 +174,10 @@ export default function SecondPage() {
         {selectedProduct && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div
-              className={`max-w-md w-full rounded-lg ${
+              className={`max-w-md w-full rounded-lg shadow-lg ${
                 theme === "dark" ? "bg-gray-800" : "bg-white"
               } p-6 max-h-[80vh] overflow-y-auto`}
             >
-              {/* Modal Header */}
               <div className="flex justify-between items-start mb-4">
                 <h2 className={`text-xl font-bold ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
                   {selectedProduct.name}
@@ -196,13 +189,9 @@ export default function SecondPage() {
                   <X className={`h-5 w-5 ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`} />
                 </button>
               </div>
-
-              {/* Price */}
-              <div className={`inline-block px-3 py-1 rounded-md text-lg font-bold text-white mb-4`}>
+              <div className="px-3 py-1 rounded-md text-lg font-bold text-gray-900 mb-4">
                 {selectedProduct.price}
               </div>
-
-              {/* Description */}
               <div className="mb-6">
                 <h3 className={`text-sm font-semibold mb-2 ${theme === "dark" ? "text-gray-200" : "text-gray-700"}`}>
                   Deskripsi
@@ -211,8 +200,6 @@ export default function SecondPage() {
                   {selectedProduct.description}
                 </p>
               </div>
-
-              {/* Features */}
               <div className="mb-6">
                 <h3 className={`text-sm font-semibold mb-3 ${theme === "dark" ? "text-gray-200" : "text-gray-700"}`}>
                   Fitur yang Didapat
@@ -228,11 +215,9 @@ export default function SecondPage() {
                   ))}
                 </ul>
               </div>
-
-              {/* Modal Actions */}
               <div className="flex gap-3">
                 <button
-                  className={`flex-1 py-2.5 px-4 rounded-md font-medium text-sm transition-all duration-300 ${
+                  className={`flex-1 py-2.5 px-4 rounded-md font-medium text-sm transition-colors duration-300 ${
                     theme === "dark"
                       ? "bg-blue-600 hover:bg-blue-700 text-white"
                       : "bg-blue-500 hover:bg-blue-600 text-white"
@@ -242,11 +227,11 @@ export default function SecondPage() {
                 </button>
                 <button
                   onClick={closeModal}
-                  className={`px-4 py-2.5 rounded-md font-medium text-sm transition-all duration-300 ${
+                  className={`px-4 py-2.5 rounded-md font-medium text-sm transition-colors duration-300 ${
                     theme === "dark"
                       ? "bg-gray-700 hover:bg-gray-600 text-gray-200"
                       : "bg-gray-100 hover:bg-gray-200 text-gray-700"
-                  }`}
+                    }`}
                 >
                   Tutup
                 </button>
