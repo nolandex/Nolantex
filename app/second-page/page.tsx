@@ -53,13 +53,11 @@ export default function SecondPage() {
       </div>
 
       <div className="container mx-auto px-4">
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex flex-col gap-4">
           {products.map((product, index) => (
             <div
               key={index}
-              className={`${
-                index === 0 ? 'w-full' : 'w-[calc(50%-8px)]'
-              } sm:w-[calc(50%-8px)] rounded-lg overflow-hidden shadow-md transition-all ${
+              className={`w-full rounded-lg overflow-hidden shadow-md transition-all ${
                 theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
               }`}
             >
