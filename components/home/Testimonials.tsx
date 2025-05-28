@@ -4,6 +4,7 @@
 import { TestimonialsData } from "@/config/testimonials";
 import Image from "next/image";
 import { useRef, useEffect, useState } from "react";
+import { RoughNotation } from "react-rough-notation";
 
 const Testimonials = ({ id, locale }: { id: string; locale: any }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -58,7 +59,9 @@ const Testimonials = ({ id, locale }: { id: string; locale: any }) => {
     >
       <div className="flex flex-col text-center max-w-xl gap-4">
         <h2 className="text-center text-3xl font-bold text-gray-900 dark:text-white">
-          {locale.title}
+          <RoughNotation type="highlight" show={true} color="#2563EB">
+            {locale.title}
+          </RoughNotation>
         </h2>
         <p className="text-large text-gray-600 dark:text-gray-400">
           {locale.description1}
