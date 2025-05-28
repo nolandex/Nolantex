@@ -82,21 +82,6 @@ export default function SecondPage() {
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-50'}`}>
-      {/* Toggle Theme Button */}
-      <div className="fixed top-4 right-4 z-50">
-        <button
-          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          className={`p-3 rounded-full shadow-lg transition-all duration-300 ${
-            theme === 'dark' 
-              ? 'bg-gray-700 text-yellow-300 hover:bg-gray-600' 
-              : 'bg-white text-gray-700 hover:bg-gray-100'
-          }`}
-          aria-label="Toggle dark mode"
-        >
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-      </div>
-
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-8">
