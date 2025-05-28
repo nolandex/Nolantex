@@ -1,67 +1,35 @@
-"use client";
-import { ALL_FAQS } from "@/config/faqs";
-import { Accordion, AccordionItem } from "@nextui-org/react";
-import { PlusIcon } from "lucide-react";
-import { RoughNotation } from "react-rough-notation";
+export const FAQS_EN = [
+  {
+    title: "Kenapa Bisnovo Penting untuk Bisnismu?",
+    content:
+      "Tanpa branding, website, dan sistem digital, pelanggan sulit percaya. Bisnovo bantu kamu punya bisnis online yang terlihat profesional — dari nol, tanpa ribet.",
+  },
+  {
+    title: "Apa Saja yang Saya Dapat dari Bisnovo?",
+    content:
+      "Website, chatbot, konten sosial media, strategi promosi — semua lengkap! Fokus kamu tinggal jualan, kami yang urus teknis dan brandingnya.",
+  },
+  {
+    title: "Gak Punya Skill Teknis, Gimana?",
+    content:
+      "Gak masalah! Semua kami siapkan. Kamu tinggal terima jadi dan mulai promosi. Simple, cepat, dan bisa langsung jalan.",
+  },
+  {
+    title: "Bisa Dapat Uang dari Bisnovo?",
+    content:
+      "Bisa! Gabung program reseller gratis dan langsung dapat website. Cocok untuk kamu yang mau mulai usaha tanpa modal.",
+  },
+  {
+    title: "Gimana Cara Mulainya?",
+    content:
+      "Chat kami via WhatsApp 085156779923 atau email ke bisnovohq@gmail.com. Kami bantu setup dari A–Z biar kamu langsung siap jualan!",
+  },
+];
 
-// update rough notation highlight
-function triggerResizeEvent() {
-  const event = new Event("resize");
-  window.dispatchEvent(event);
+interface FAQSCollection {
+  [key: string]: { title: string; content: string }[];
 }
 
-const FAQ = ({
-  id,
-  locale,
-  langName,
-}: {
-  id: string;
-  locale: any;
-  langName: string;
-}) => {
-  const FAQS = ALL_FAQS[`FAQS_${langName.toUpperCase()}`];
-
-  return (
-    <section
-      id={id}
-      className="flex flex-col justify-center max-w-[88%] items-center py-16 gap-12"
-    >
-      <div className="flex flex-col text-center gap-4">
-        <h2 className="text-center text-white">
-          <RoughNotation type="highlight" show={true} color="#2563EB">
-            {locale.title}
-          </RoughNotation>
-        </h2>
-        <p className="text-large text-default-500">{locale.description}</p>
-      </div>
-      <Accordion
-        fullWidth
-        keepContentMounted
-        className="gap-3"
-        itemClasses={{
-          base: "px-6 !bg-default-100 !shadow-none hover:!bg-default-200/50",
-          title: "font-medium",
-          trigger: "py-6",
-          content: "pt-0 pb-6 text-base text-default-500",
-        }}
-        items={FAQS}
-        selectionMode="multiple"
-        variant="splitted"
-        onSelectionChange={triggerResizeEvent}
-      >
-        {FAQS?.map((item) => (
-          <AccordionItem
-            key={item.title}
-            indicator={<PlusIcon />}
-            title={item.title}
-            HeadingComponent="h3"
-          >
-            {item.content}
-          </AccordionItem>
-        ))}
-      </Accordion>
-    </section>
-  );
+export const ALL_FAQS: FAQSCollection = {
+  FAQS_EN,
 };
-
-export default FAQ;
