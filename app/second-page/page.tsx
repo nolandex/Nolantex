@@ -39,7 +39,7 @@ export default function SecondPage() {
       price: 'Rp 25.000',
       videoId: 'dQw4w9WgXcQ',
       category: 'website',
-      features: ['E-commerce lengkap', 'Domain gratis', 'Hosting unlimited'],
+      features: ['Domain gratis', 'Hosting unlimited', 'Responsif'],
       description: 'Website toko online lengkap dengan sistem pembayaran dan manajemen produk yang mudah digunakan.'
     },
     {
@@ -47,7 +47,7 @@ export default function SecondPage() {
       price: 'Rp 25.000',
       videoId: 'dQw4w9WgXcQ',
       category: 'website',
-      features: ['Landing page profesional', 'SEO optimized', 'Mobile responsive'],
+      features: ['Domain gratis', 'Hosting unlimited', 'Responsif'],
       description: 'Landing page yang dioptimalkan untuk konversi tinggi dengan desain yang menarik dan responsif.'
     },
   ]
@@ -253,4 +253,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-            }
+              }
