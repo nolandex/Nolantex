@@ -9,7 +9,6 @@ export default function SecondPage() {
 
   const products = [
     { name: 'Paket Bisnis Online', price: 'Rp 1.500.000', image: '/images/business-package.jpg' },
-    { name: 'Website', price: 'Rp 2.000.000', image: '/images/website.jpg' },
   ];
 
   return (
@@ -25,21 +24,19 @@ export default function SecondPage() {
             key={index}
             className={`p-4 rounded-md shadow-md ${
               theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100'
-            } flex items-center h-32`}
+            } flex flex-col items-center h-48`} // Increased height
           >
             <Image
               src={product.image}
               alt={product.name}
               width={120}
               height={80}
-              className="rounded-md object-cover mr-4"
+              className="rounded-md object-cover mb-3"
             />
-            <div className="flex flex-col flex-1">
-              <h2 className="text-lg font-semibold text-left">{product.name}</h2>
-              <p className="text-md text-left">{product.price}</p>
-            </div>
+            <h2 className="text-lg font-semibold text-center">{product.name}</h2>
+            <p className="text-md text-center mb-3">{product.price}</p>
             <button
-              className={`px-3 py-1 rounded-md text-sm ml-4 ${
+              className={`px-3 py-1 rounded-md text-sm ${
                 theme === 'dark' ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'bg-blue-500 hover:bg-blue-600 text-white'
               }`}
             >
