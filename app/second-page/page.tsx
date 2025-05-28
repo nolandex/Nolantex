@@ -125,7 +125,7 @@ export default function SecondPage() {
               key={index}
               className={`
                 w-full rounded-lg overflow-hidden shadow-md transition-all
-                ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}
+                bg-transparent
                 p-0
               `}
             >
