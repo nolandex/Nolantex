@@ -9,9 +9,9 @@ export default function SecondPage() {
       <title>Paket Bisnis Online</title>
       {/*
         If Tailwind CSS is already configured globally in your Next.js project (which is common),
-        you don't need these <script> and <link> tags here.
-        They are typically included in _app.tsx or a global CSS file.
-        For a proper Next.js setup with Tailwind, you'd usually import the generated CSS.
+        you typically don't need these <script> and <link> tags here.
+        They are usually included in _app.tsx or a global CSS file.
+        For a proper Next.js setup with Tailwind, you'd generally import the generated CSS.
       */}
       <script src="https://cdn.tailwindcss.com"></script>
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
@@ -123,7 +123,7 @@ export default function SecondPage() {
            Epic Account
           </h3>
          </div>
-         {/* THIS IS THE LINE THAT WAS MISSED (line 131 in the error log) */}
+         {/* All 'class' attributes in this final section have been converted to 'className' */}
          <div className="flex items-center justify-between px-5 py-3 font-semibold text-gray-700 text-sm">
           <span className="block">
            Rp 1.500.000
