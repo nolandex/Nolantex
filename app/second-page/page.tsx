@@ -118,13 +118,18 @@ export default function SecondPage() {
         </div>
 
         {/* Produk */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          className={`flex flex-wrap justify-center gap-6 ${
+            filteredProducts.length === 1 ? 'flex-col items-stretch' : ''
+          }`}
+        >
           {filteredProducts.map((product, index) => (
             <div
               key={index}
               className={`
-                ${filteredProducts.length === 1 ? 'col-span-1 sm:col-span-2 lg:col-span-3' : ''}
-                w-full
+                ${
+                  filteredProducts.length === 1 ? 'w-full' : 'w-full sm:w-[48%] lg:w-[31%]'
+                }
                 rounded-lg overflow-hidden shadow-md transition-all
                 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}
               `}
