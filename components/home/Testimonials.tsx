@@ -81,9 +81,7 @@ const Testimonials = ({ id, locale }: { id: string; locale: any }) => {
               key={index}
               style={{ minHeight: testimonialHeight }} // Samakan tinggi
             >
-              <div
-                className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 flex flex-col items-start gap-3 h-full bg-default-100 hover:bg-default-200/50 transition-colors duration-200"
-              >
+              <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 flex flex-col items-start gap-3 h-full bg-white dark:bg-gradient-to-br dark:from-gray-800 dark:to-gray-900">
                 <div className="flex items-start justify-between w-full">
                   <div className="flex items-start gap-2">
                     <Image
