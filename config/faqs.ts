@@ -17,7 +17,7 @@ export const FAQS_EN = [
   {
     title: "Bisa Dapat Uang dari Bisnovo?",
     content:
-      "Bisa! Gabung program reseller gratis dan langsung dapat paket bisnis online. Cocok untuk kamu yang mau mulai usaha tanpa modal.",
+      "Bisa! Gabung program reseller gratis dan langsung dapat website. Cocok untuk kamu yang mau mulai usaha tanpa modal.",
   },
   {
     title: "Gimana Cara Mulainya?",
