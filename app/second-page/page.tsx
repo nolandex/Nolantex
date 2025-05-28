@@ -26,7 +26,7 @@ export default function SecondPage() {
     {
       name: 'E-commerce',
       price: 'Rp 25.000',
-      image: '/images/ecommerce.jpg', // Ganti dengan path gambar yang sesuai
+      image: '/images/ecommerce.jpg',
     },
   ]
 
