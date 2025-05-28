@@ -22,37 +22,34 @@ export default function SecondPage() {
   ];
 
   return (
-    <div
-      className={`min-h-screen p-6 flex flex-col items-center justify-center ${
-        theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'
-      }`}
-    >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
+    <div className={`min-h-screen p-4 flex items-center justify-center ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
+      <div className="flex flex-wrap justify-center gap-5">
         {products.map((product, index) => (
-          <div
-            key={index}
-            className={`p-4 rounded-lg shadow-lg ${
-              theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100'
-            } flex flex-col w-[280px] h-[280px]`}
-          >
-            <div className="flex-1 flex items-center justify-center mb-2">
+          <div key={index} className="flex flex-col w-[240px]">
+            {/* Product Image */}
+            <div className="h-[140px] relative rounded-t-md overflow-hidden">
               <Image
                 src={product.image}
                 alt={product.name}
-                width={220}
-                height={120}
-                className="rounded-md object-cover max-h-[120px]"
+                fill
+                className="object-cover"
               />
             </div>
             
-            <div className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-300'} pt-3`}></div>
-            
-            <div className="flex justify-between items-center mt-2">
-              <span className="text-sm font-medium">{product.name}</span>
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-semibold">{product.price}</span>
+            {/* Product Info */}
+            <div className={`p-3 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'} rounded-b-md`}>
+              <div className="flex justify-between items-center">
+                <span className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                  {product.name}
+                </span>
+                <span className="text-sm font-semibold">
+                  {product.price}
+                </span>
+              </div>
+              
+              <div className="flex justify-end mt-2">
                 <button
-                  className={`px-3 py-1 rounded-md text-sm font-medium ${
+                  className={`px-3 py-1 text-xs rounded-md ${
                     theme === 'dark'
                       ? 'bg-blue-600 hover:bg-blue-700 text-white'
                       : 'bg-blue-500 hover:bg-blue-600 text-white'
