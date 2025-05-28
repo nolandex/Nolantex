@@ -100,39 +100,40 @@ export default function SecondPage() {
                   : 'bg-white border border-gray-200'
               }`}
             >
-              {/* Product Image */}
-              <div className="h-36 relative overflow-hidden">
-                <Image
-                  src={product.image || "/placeholder.svg"}
-                  alt={product.name}
-                  fill
-                  className="object-cover transition-transform duration-300 hover:scale-110"
-                  priority
-                />
-                {/* Price Badge */}
-                <div className="absolute top-4 right-4">
-                  <span className={`px-3 py-1 rounded-full text-sm font-bold ${
-                    product.price === 'Rp 0' 
-                      ? 'bg-green-500 text-white'
-                      : 'bg-blue-500 text-white'
-                  }`}>
-                    {product.price}
-                  </span>
-                </div>
-              </div>
-
               {/* Product Info */}
               <div className="p-6">
-                <h3 className={`text-xl font-bold mb-4 ${
+                {/* Product Name - Kiri Atas */}
+                <h3 className={`text-xl font-bold mb-4 text-left ${
                   theme === 'dark' ? 'text-white' : 'text-gray-900'
                 }`}>
                   {product.name}
                 </h3>
 
-                {/* Action Buttons */}
-                <div className="flex gap-3">
+                {/* Product Image - Ditengah */}
+                <div className="h-36 relative overflow-hidden rounded-lg mb-4 mx-auto">
+                  <Image
+                    src={product.image || "/placeholder.svg"}
+                    alt={product.name}
+                    fill
+                    className="object-cover transition-transform duration-300 hover:scale-110"
+                    priority
+                  />
+                  {/* Price Badge */}
+                  <div className="absolute top-4 right-4">
+                    <span className={`px-3 py-1 rounded-full text-sm font-bold ${
+                      product.price === 'Rp 0' 
+                        ? 'bg-green-500 text-white'
+                        : 'bg-blue-500 text-white'
+                    }`}>
+                      {product.price}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Action Buttons - Diperkecil */}
+                <div className="flex gap-2">
                   <button
-                    className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${
+                    className={`flex-1 py-2 px-3 rounded-md font-medium text-sm transition-all duration-300 ${
                       theme === 'dark'
                         ? 'bg-blue-600 hover:bg-blue-700 text-white'
                         : 'bg-blue-500 hover:bg-blue-600 text-white'
@@ -141,7 +142,7 @@ export default function SecondPage() {
                     Beli Sekarang
                   </button>
                   <button
-                    className={`px-4 py-3 rounded-lg font-semibold transition-all duration-300 border ${
+                    className={`px-3 py-2 rounded-md font-medium text-sm transition-all duration-300 border ${
                       theme === 'dark'
                         ? 'border-gray-600 text-gray-300 hover:bg-gray-700'
                         : 'border-gray-300 text-gray-700 hover:bg-gray-50'
@@ -157,4 +158,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-}
+              }
