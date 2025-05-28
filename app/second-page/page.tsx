@@ -15,28 +15,18 @@ export default function SecondPage() {
   const products = [
     {
       name: 'Paket Bisnis Online',
-      price: 'Rp 1.500.000',
+      price: 'Rp 50.000',
       image: '/images/business-package.jpg',
     },
     {
-      name: 'Website',
-      price: 'Rp 2.000.000',
+      name: 'Landing Page',
+      price: 'Rp 25.000',
       image: '/images/website.jpg',
     },
     {
-      name: 'Chatbot AI',
-      price: 'Rp 800.000',
-      image: '/images/chatbot.jpg',
-    },
-    {
-      name: 'Konten Sosial Media',
-      price: 'Rp 750.000',
-      image: '/images/social-content.jpg',
-    },
-    {
-      name: 'Strategi Promosi',
-      price: 'Rp 500.000',
-      image: '/images/promotion.jpg',
+      name: 'E-Commerce',
+      price: 'Rp 25.000',
+      image: '/images/ecommerce.jpg',
     },
   ]
 
@@ -60,7 +50,7 @@ export default function SecondPage() {
             <div
               key={index}
               className={`
-                ${index === 0 ? 'w-full' : 'w-[calc(50%-8px)]'}
+                ${index === 0 ? 'w-full' : 'w-[calc(50%-8px)']}
                 sm:w-[calc(50%-8px)]
                 rounded-lg overflow-hidden shadow-md transition-all
                 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}
