@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useTheme } from 'next-themes'
 
 export default function SecondPage() {
-  const { theme, setTheme } = useTheme()
+  const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [activeCategory, setActiveCategory] = useState('business')
 
@@ -20,14 +20,12 @@ export default function SecondPage() {
       price: 'Rp 50.000',
       image: '/placeholder.svg?height=140&width=300',
       category: 'business',
-      description: 'Website + Chatbot + Social Media Content'
     },
     {
       name: 'Paket Bisnis Pro',
       price: 'Rp 150.000',
       image: '/placeholder.svg?height=140&width=300',
       category: 'business',
-      description: 'Semua fitur Starter + Social Media Booster + Copywriting'
     },
     
     // Kategori Website
@@ -36,21 +34,18 @@ export default function SecondPage() {
       price: 'Rp 25.000',
       image: '/placeholder.svg?height=140&width=300',
       category: 'website',
-      description: 'E-commerce lengkap + Domain gratis + Hosting unlimited'
     },
     {
       name: 'Website Landing Page',
       price: 'Rp 15.000',
       image: '/placeholder.svg?height=140&width=300',
       category: 'website',
-      description: 'Landing page profesional + SEO optimized'
     },
     {
       name: 'Website Portfolio',
       price: 'Rp 20.000',
       image: '/placeholder.svg?height=140&width=300',
       category: 'website',
-      description: 'Portfolio kreatif + Galeri foto + Contact form'
     },
   ]
 
@@ -61,21 +56,6 @@ export default function SecondPage() {
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-50'}`}>
-      {/* Toggle Theme Button */}
-      <div className="fixed top-4 right-4 z-50">
-        <button
-          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          className={`p-3 rounded-full shadow-lg transition-all duration-300 ${
-            theme === 'dark' 
-              ? 'bg-gray-700 text-yellow-300 hover:bg-gray-600' 
-              : 'bg-white text-gray-700 hover:bg-gray-100'
-          }`}
-          aria-label="Toggle dark mode"
-        >
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-      </div>
-
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Category Buttons */}
         <div className="flex justify-center gap-4 mb-8">
@@ -114,7 +94,7 @@ export default function SecondPage() {
           {filteredProducts.map((product, index) => (
             <div
               key={index}
-              className={`rounded-xl overflow-hidden shadow-lg transition-all duration-300 ${
+              className={`rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl ${
                 theme === 'dark' 
                   ? 'bg-gray-800 border border-gray-700' 
                   : 'bg-white border border-gray-200'
@@ -143,7 +123,7 @@ export default function SecondPage() {
 
               {/* Product Info */}
               <div className="p-6">
-                <h3 className={`text-xl font-bold mb-2 ${
+                <h3 className={`text-xl font-bold mb-4 ${
                   theme === 'dark' ? 'text-white' : 'text-gray-900'
                 }`}>
                   {product.name}
@@ -177,4 +157,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-                                           }
+}
