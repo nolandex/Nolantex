@@ -1,38 +1,11 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import Image from 'next/image'
+import { useTheme } from '../../lib/ThemeContext'
 
 export default function SecondPage() {
-  // Theme management with proper cross-page synchronization
-  useEffect(() => {
-    // Initialize theme from localStorage or system preference
-    const initialTheme = localStorage.getItem('theme') || 
-                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    document.documentElement.className = initialTheme
-
-    // Listen for theme changes from other pages
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === 'theme') {
-        document.documentElement.className = e.newValue || 'light'
-      }
-    }
-
-    window.addEventListener('storage', handleStorageChange)
-    return () => window.removeEventListener('storage', handleStorageChange)
-  }, [])
-
-  const toggleTheme = () => {
-    const newTheme = document.documentElement.className === 'dark' ? 'light' : 'dark'
-    document.documentElement.className = newTheme
-    localStorage.setItem('theme', newTheme)
-    
-    // Trigger storage event to sync across tabs/pages
-    window.dispatchEvent(new StorageEvent('storage', {
-      key: 'theme',
-      newValue: newTheme
-    }))
-  }
+  const { theme, toggleTheme } = useTheme()
 
   const products = [
     {
@@ -48,15 +21,15 @@ export default function SecondPage() {
   ]
 
   return (
-    <div className="min-h-screen pt-20 pb-8 bg-white dark:bg-gray-900">
+    <div className={`min-h-screen pt-20 pb-8 ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
       {/* Theme Toggle Button */}
       <div className="fixed top-4 right-4">
         <button
           onClick={toggleTheme}
-          className="p-2 rounded-full bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-yellow-300"
+          className={`p-2 rounded-full ${theme === 'dark' ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'}`}
           aria-label="Toggle theme"
         >
-          {typeof document !== 'undefined' && document.documentElement.className === 'dark' ? '☀️' : '🌙'}
+          {theme === 'dark' ? '☀️' : '🌙'}
         </button>
       </div>
 
@@ -65,7 +38,9 @@ export default function SecondPage() {
           {products.map((product, index) => (
             <div 
               key={index} 
-              className="w-full sm:w-[260px] rounded-lg overflow-hidden shadow-md transition-colors bg-gray-50 dark:bg-gray-800"
+              className={`w-full sm:w-[260px] rounded-lg overflow-hidden shadow-md transition-colors ${
+                theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
+              }`}
             >
               {/* Product Image */}
               <div className="h-[140px] relative">
@@ -79,21 +54,25 @@ export default function SecondPage() {
               </div>
               
               {/* Divider */}
-              <div className="border-t border-gray-200 dark:border-gray-700" />
+              <div className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`} />
 
               {/* Product Info */}
               <div className="p-3">
                 <div className="flex justify-between items-center">
                   <div>
-                    <h3 className="text-sm font-medium text-gray-800 dark:text-gray-200">
+                    <h3 className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>
                       {product.name}
                     </h3>
-                    <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+                    <p className={`text-sm font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
                       {product.price}
                     </p>
                   </div>
                   <button
-                    className="px-3 py-1.5 rounded-md text-xs font-medium bg-blue-500 hover:bg-blue-600 text-white dark:bg-blue-600 dark:hover:bg-blue-700"
+                    className={`px-3 py-1.5 rounded-md text-xs font-medium ${
+                      theme === 'dark'
+                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                        : 'bg-blue-500 hover:bg-blue-600 text-white'
+                    }`}
                   >
                     Beli Sekarang
                   </button>
