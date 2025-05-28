@@ -18,7 +18,7 @@ export default function SecondPage() {
       name: 'Paket Bisnis Online',
       price: 'Rp 1.500.000',
       image: '/images/business-package.jpg',
-      category:irdiği
+      category: 'business',
     },
     {
       name: 'Website',
@@ -85,7 +85,7 @@ export default function SecondPage() {
       </div>
 
       <div className="container mx-auto px-4">
-        {/* Tombol Kategori */}
+        {/* Category Buttons */}
         <div className="flex justify-center gap-4 mb-6">
           <button
             onClick={() => setActiveCategory('business')}
@@ -117,19 +117,13 @@ export default function SecondPage() {
           </button>
         </div>
 
-        {/* Produk */}
-        <div
-          className={`flex flex-wrap justify-center gap-6 ${
-            filteredProducts.length === 1 ? 'flex-col items-center' : ''
-          }`}
-        >
+        {/* Product Grid */}
+        <div className="flex flex-wrap justify-center gap-6">
           {filteredProducts.map((product, index) => (
             <div
               key={index}
               className={`
-                ${
-                  filteredProducts.length === 1 ? 'w-full' : 'w-full sm:w-[48%] lg:w-[31%]'
-                }
+                w-full sm:w-[48%] lg:w-[31%]
                 rounded-lg overflow-hidden shadow-md transition-all
                 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}
               `}
@@ -143,7 +137,7 @@ export default function SecondPage() {
                   priority
                 />
               </div>
-              <div className={`border-t ${theme === 'dark' ? 'border-gray-200' : 'border-gray-200'}`}></div>
+              <div className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}></div>
               <div className="p-4">
                 <div className="flex justify-between items-center flex-wrap gap-2">
                   <div>
