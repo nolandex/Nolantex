@@ -4,24 +4,20 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 export default function SecondPage() {
-  const [theme, setTheme] = useState('light')
-  const [mounted, setMounted] = useState(false)
-
-  // Initialize theme on mount
-  useEffect(() => {
-    setMounted(true)
-    const savedTheme = localStorage.getItem('theme') || 
-                      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-    setTheme(savedTheme)
-  }, [])
-
-  // Apply theme class to HTML element and save to localStorage
-  useEffect(() => {
-    if (mounted) {
-      document.documentElement.className = theme
-      localStorage.setItem('theme', theme)
+  const [theme, setTheme] = useState(() => {
+    // Initialize theme from localStorage or system preference
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') || 
+             (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
     }
-  }, [theme, mounted])
+    return 'light' // Default during SSR
+  })
+
+  // Apply theme class to HTML element whenever theme changes
+  useEffect(() => {
+    document.documentElement.className = theme
+    localStorage.setItem('theme', theme)
+  }, [theme])
 
   const toggleTheme = () => {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark')
@@ -40,8 +36,6 @@ export default function SecondPage() {
     },
   ]
 
-  if (!mounted) return null // Prevent hydration mismatch
-
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
       {/* Theme Toggle Button */}
@@ -49,7 +43,7 @@ export default function SecondPage() {
         <button
           onClick={toggleTheme}
           className={`p-2 rounded-full ${theme === 'dark' ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'}`}
-          aria-label="Toggle dark mode"
+          aria-label="Toggle theme"
         >
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
@@ -60,7 +54,7 @@ export default function SecondPage() {
           {products.map((product, index) => (
             <div 
               key={index} 
-              className={`w-full sm:w-[260px] rounded-lg overflow-hidden shadow-md transition-all ${
+              className={`w-full sm:w-[260px] rounded-lg overflow-hidden shadow-md transition-colors ${
                 theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
               }`}
             >
@@ -76,7 +70,7 @@ export default function SecondPage() {
               </div>
               
               {/* Divider */}
-              <div className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}></div>
+              <div className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`} />
 
               {/* Product Info */}
               <div className="p-3">
