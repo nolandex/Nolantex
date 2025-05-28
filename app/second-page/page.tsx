@@ -7,7 +7,7 @@ import { useTheme } from 'next-themes'
 export default function SecondPage() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const [activeCategory, setActiveCategory] = useState('all') // State untuk kategori aktif
+  const [activeCategory, setActiveCategory] = useState('all')
 
   useEffect(() => {
     setMounted(true)
@@ -64,7 +64,6 @@ export default function SecondPage() {
     },
   ]
 
-  // Filter produk berdasarkan kategori aktif
   const filteredProducts = activeCategory === 'business'
     ? products.filter(product => product.category === 'business')
     : activeCategory === 'website'
@@ -86,7 +85,7 @@ export default function SecondPage() {
       </div>
 
       <div className="container mx-auto px-4">
-        {/* Tombol Kategori */}
+        {/* Kategori */}
         <div className="flex justify-center gap-4 mb-6">
           <button
             onClick={() => setActiveCategory('business')}
@@ -118,64 +117,47 @@ export default function SecondPage() {
           </button>
         </div>
 
-        {/* Daftar Produk */}
-        <div className={`flex flex-wrap justify-center gap-6 ${
-          activeCategory === 'website' ? 'flex-col' : ''
-        }`}>
+        {/* Produk */}
+        <div className="flex flex-wrap justify-center gap-6">
           {filteredProducts.map((product, index) => (
             <div
               key={index}
               className={`
-                ${activeCategory === 'website' ? 'w-full' : 'w-full'}
+                w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]
+                max-w-md
                 rounded-lg overflow-hidden shadow-md transition-all
                 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}
-                ${activeCategory === 'website' ? 'flex items-center' : ''}
               `}
             >
-              {activeCategory === 'website' && (
-                <div className="w-1/3 h-[140px] relative">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                </div>
-              )}
-              {activeCategory !== 'website' && (
-                <div className="h-[140px] relative">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                </div>
-              )}
-              <div className={`${activeCategory === 'website' ? 'w-2/3' : 'w-full'}`}>
-                <div className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}></div>
-                <div className="p-3">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <h3 className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>
-                        {product.name}
-                      </h3>
-                      <p className={`text-sm font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
-                        {product.price}
-                      </p>
-                    </div>
-                    <button
-                      className={`px-3 py-1.5 rounded-md text-xs font-medium ${
-                        theme === 'dark'
-                          ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                          : 'bg-blue-500 hover:bg-blue-600 text-white'
-                      }`}
-                    >
-                      Beli Sekarang
-                    </button>
+              <div className="h-[140px] relative">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              <div className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}></div>
+              <div className="p-3">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h3 className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>
+                      {product.name}
+                    </h3>
+                    <p className={`text-sm font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                      {product.price}
+                    </p>
                   </div>
+                  <button
+                    className={`px-3 py-1.5 rounded-md text-xs font-medium ${
+                      theme === 'dark'
+                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                        : 'bg-blue-500 hover:bg-blue-600 text-white'
+                    }`}
+                  >
+                    Beli Sekarang
+                  </button>
                 </div>
               </div>
             </div>
