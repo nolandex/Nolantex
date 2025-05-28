@@ -27,7 +27,7 @@ export const FAQS_EN = [
   {
     title: "Gimana Cara Mulai Pakai Bisnovo?",
     content:
-      "Mulai sekarang! Chat kami di @Bisnovo atau kirim email ke support@bisnovo.com. Kami bantu rancang strategi dan setup digital-mu. Aksi: Jangan tunda, pelanggan kamu nunggu!",
+      "Mulai sekarang! Chat kami di WhatsApp 085156779923 atau email ke bisnovohq@gmail.com. Kami bantu rancang strategi dan setup digital-mu. Aksi: Jangan tunda, pelanggan kamu nunggu!",
   },
   {
     title: "Apakah Bisnovo Mobile-Friendly?",
@@ -57,7 +57,7 @@ export const FAQS_EN = [
   {
     title: "Kalau Ada Masalah, Gimana?",
     content:
-      "Tenang, kami punya tim support siap bantu. Hubungi support@bisnovo.com atau DM ke @Bisnovo. Aksi: Jangan ragu tanya, kami siap bantu cepat!",
+      "Tenang, kami punya tim support siap bantu. Hubungi kami lewat WhatsApp 085156779923 atau email ke bisnovohq@gmail.com. Aksi: Jangan ragu tanya, kami siap bantu cepat!",
   },
 ];
 
