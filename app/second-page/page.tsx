@@ -8,11 +8,11 @@ export default function SecondPage() {
   useEffect(() => {
     // Initialize theme from localStorage or system preference
     const initialTheme = localStorage.getItem('theme') || 
-                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     document.documentElement.className = initialTheme
 
     // Listen for theme changes from other pages
-    const handleStorageChange = (e) => {
+    const handleStorageChange = (e: StorageEvent) => {
       if (e.key === 'theme') {
         document.documentElement.className = e.newValue || 'light'
       }
