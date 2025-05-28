@@ -24,19 +24,24 @@ export default function SecondPage() {
       image: '/images/website.jpg',
     },
     {
-      name: 'Website',
-      price: 'Rp 2.000.000',
-      image: '/images/website.jpg',
+      name: 'Chatbot AI',
+      price: 'Rp 800.000',
+      image: '/images/chatbot.jpg',
     },
     {
-      name: 'Website',
-      price: 'Rp 2.000.000',
-      image: '/images/website.jpg',
+      name: 'Konten Sosial Media',
+      price: 'Rp 750.000',
+      image: '/images/social-content.jpg',
     },
     {
-      name: 'Website',
-      price: 'Rp 2.000.000',
-      image: '/images/website.jpg',
+      name: 'Strategi Promosi',
+      price: 'Rp 500.000',
+      image: '/images/promotion.jpg',
+    },
+    {
+      name: 'Copywriting & Caption',
+      price: 'Rp 600.000',
+      image: '/images/copywriting.jpg',
     },
   ]
 
@@ -55,15 +60,17 @@ export default function SecondPage() {
       </div>
 
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-items-center">
+        <div className="flex flex-wrap justify-center gap-6">
           {products.map((product, index) => (
-            <div 
-              key={index} 
-              className={`w-full max-w-[300px] rounded-lg overflow-hidden shadow-md transition-all ${
-                theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
-              }`}
+            <div
+              key={index}
+              className={`
+                ${index === 0 ? 'w-full' : 'w-full sm:w-[calc(50%-12px)]'}
+                rounded-lg overflow-hidden shadow-md transition-all
+                ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}
+              `}
             >
-              <div className="h-[180px] relative">
+              <div className="h-[140px] relative">
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -73,7 +80,7 @@ export default function SecondPage() {
                 />
               </div>
               <div className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}></div>
-              <div className="p-4">
+              <div className="p-3">
                 <div className="flex justify-between items-center">
                   <div>
                     <h3 className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>
@@ -84,7 +91,7 @@ export default function SecondPage() {
                     </p>
                   </div>
                   <button
-                    className={`px-4 py-2 rounded-md text-xs font-medium ${
+                    className={`px-3 py-1.5 rounded-md text-xs font-medium ${
                       theme === 'dark'
                         ? 'bg-blue-600 hover:bg-blue-700 text-white'
                         : 'bg-blue-500 hover:bg-blue-600 text-white'
