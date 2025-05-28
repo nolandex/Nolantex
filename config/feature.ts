@@ -5,37 +5,37 @@ import { FaToolbox } from "react-icons/fa";
 import { FaEarthAsia, FaMobileScreenButton } from "react-icons/fa6";
 import { MdCloudUpload } from "react-icons/md";
 
-// ENGLISH
+// ENGLISH (in Bahasa Indonesia - PAS format & short)
 export const FEATURES_EN = [
   {
-    title: "Professional Website",
-    content: "Build a responsive, stunning website that boosts your credibility and appears on Google.",
-    icon: FaMobileScreenButton,
-  },
-  {
-    title: "Automated Chatbot",
-    content: "Provide 24/7 customer support via WhatsApp and Instagram with smart automation.",
-    icon: MdCloudUpload,
-  },
-  {
-    title: "Social Media Content",
-    content: "Ready-to-post designs and captions to grow your brand and engage your audience.",
+    title: "Gabung Reseller Gratis",
+    content:
+      "Gratis Website,Gak punya produk? Gabung jadi reseller Bisnovo dan langsung jualan dengan paket lengkap — tanpa modal.",
     icon: FaToolbox,
   },
   {
-    title: "Social Media Booster",
-    content: "Smart strategies to grow followers and increase interactions quickly and effectively.",
+    title: "Website Profesional",
+    content:
+      "Bisnis tanpa website susah dipercaya. Kami bantu buatkan website keren dan lengkap.",
+    icon: FaMobileScreenButton,
+  },
+  {
+    title: "Chatbot 24 Jam",
+    content:
+      "Capek balas chat? Chatbot kami layani pembeli otomatis, bahkan saat kamu offline.",
+    icon: MdCloudUpload,
+  },
+  {
+    title: "Konten Sosmed Siap Pakai",
+    content:
+      "Susah bikin konten? Dapatkan desain dan caption harian yang siap posting.",
     icon: FaEarthAsia,
   },
   {
-    title: "Copywriting Tricks",
-    content: "Powerful words that attract attention and drive sales — no fluff, just results.",
+    title: "Booster Sosmed",
+    content:
+      "Follower seret? Kami bantu naikkan interaksi dan pertumbuhan akun kamu.",
     icon: MagnetIcon,
-  },
-  {
-    title: "Promotion Strategies",
-    content: "We guide your campaigns with proven tactics and tools to maximize your reach.",
-    icon: BsGithub,
   },
 ];
 
