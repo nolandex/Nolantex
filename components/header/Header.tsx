@@ -1,133 +1,62 @@
-/* eslint-disable react/no-unescaped-entities */
-"use client";
+import { SiteConfig } from "@/types/siteConfig";
+import { MdEmail } from "react-icons/md";
+import { FaFacebook, FaWhatsapp, FaTiktok, FaTelegram, FaInstagram, FaDiscord } from "react-icons/fa";
+import { FaXTwitter, FaThreads } from "react-icons/fa6";
 
-import { MenuIcon } from "lucide-react";
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { CgClose } from "react-icons/cg";
-import { ThemedButton } from "../ThemedButton";
-
-const links = [
-  { label: "Home", href: "/" },
-  { label: "Product", href: "/second-page" },
-];
-
-const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  return (
-    <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-background/95 backdrop-blur-sm ${
-        isScrolled ? "py-2 shadow-md" : "py-4"
-      } mx-auto max-w-7xl px-4 sm:px-6 lg:px-8`}
-    >
-      <nav className="relative flex justify-between items-center">
-        {/* Left */}
-        <div className="flex items-center md:gap-x-12 flex-1">
-          <Link
-            href="/"
-            aria-label="Bisnovo"
-            title="Bisnovo"
-            className="flex items-center space-x-1 font-bold translate-y-[-2px]"
-          >
-            <span className="text-gray-950 dark:text-gray-300 text-lg">
-              Bisnovo
-            </span>
-          </Link>
-        </div>
-
-        {/* Center */}
-        <div className="hidden md:flex items-center justify-center gap-6 flex-1">
-          <ul className="flex items-center gap-6">
-            {links.map((link) => (
-              <li key={link.label}>
-                <Link
-                  href={link.href}
-                  aria-label={link.label}
-                  title={link.label}
-                  className="tracking-wide transition-colors duration-200 font-normal text-sm"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <ThemedButton /> {/* ThemedButton di sebelah menu untuk desktop */}
-        </div>
-
-        {/* Right - Desktop */}
-        <div className="hidden md:flex items-center justify-end gap-x-6 flex-1">
-          {/* HeaderLinks sudah dihapus */}
-        </div>
-
-        {/* Right - Mobile */}
-        <div className="md:hidden flex items-center gap-x-4">
-          <ThemedButton /> {/* ThemedButton di sebelah ikon hamburger */}
-          <button
-            aria-label="Open Menu"
-            title="Open Menu"
-            className="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline hover:bg-deep-purple-50 focus:bg-deep-purple-50"
-            onClick={() => setIsMenuOpen(true)}
-          >
-            <MenuIcon className="w-6 h-6" />
-          </button>
-          {isMenuOpen && (
-            <div className="absolute top-0 left-0 w-full z-50">
-              <div className="p-5 bg-background border rounded shadow-sm">
-                <div className="flex items-center justify-between mb-4">
-                  <Link
-                    href="/"
-                    aria-label="Bisnovo"
-                    title="Bisnovo"
-                    className="inline-flex items-center"
-                  >
-                    <span className="ml-2 text-lg font-bold tracking-wide text-gray-950 dark:text-gray-300">
-                      Bisnovo
-                    </span>
-                  </Link>
-                  <button
-                    aria-label="Close Menu"
-                    title="Close Menu"
-                    className="tracking-wide transition-colors duration-200 font-normal"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <CgClose className="w-6 h-6" />
-                  </button>
-                </div>
-                <nav>
-                  <ul className="space-y-4">
-                    {links.map((link) => (
-                      <li key={link.label}>
-                        <Link
-                          href={link.href}
-                          aria-label={link.label}
-                          title={link.label}
-                          className="font-medium tracking-wide transition-colors duration-200 hover:text-deep-purple-accent-400 text-sm"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          {link.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-                {/* ThemedButton dihapus dari dalam menu hamburger */}
-              </div>
-            </div>
-          )}
-        </div>
-      </nav>
-    </header>
-  );
+const baseSiteConfig = {
+  name: "Bisnovo",
+  description:
+    "A comprehensive digital solutions provider helping entrepreneurs and small businesses build their online presence with websites, chatbots, social media, automation, and a reseller program.",
+  url: "https://bisnovo.com",
+  ogImage: "https://bisnovo.com/og.png",
+  metadataBase: '/',
+  keywords: ["digital presence", "website creation", "chatbots", "social media management", "automation", "reseller program"],
+  authors: [
+    {
+      name: "Bisnovo",
+      url: "",
+      twitter: "",
+    }
+  ],
+  creator: '@bisnovo',
+  openSourceURL: "",
+  themeColors: [
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: 'black' },
+  ],
+  nextThemeColor: 'dark',
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/logo.png",
+  },
+  headerLinks: [
+    { name: 'whatsapp', href: "https://wa.me/6285156779923?text=Hi%2C%20I'm%20interested%20in%20your%20business%20setup%20services", icon: FaWhatsapp },
+    { name: 'email', href: "mailto:bisnovohq@gmail.com", icon: MdEmail },
+    { name: 'tiktok', href: "https://www.tiktok.com/@bisnovo", icon: FaTiktok },
+    { name: 'instagram', href: "https://www.instagram.com/bisnovo/", icon: FaInstagram },
+  ],
+  footerLinks: [], // Kosongkan semua tautan di footer
+  footerProducts: []
 };
 
-export default Header;
+export const siteConfig: SiteConfig = {
+  ...baseSiteConfig,
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: baseSiteConfig.url,
+    title: baseSiteConfig.name,
+    images: [`${baseSiteConfig.url}/og.png`],
+    description: baseSiteConfig.description,
+    siteName: baseSiteConfig.name,
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: baseSiteConfig.url,
+    title: baseSiteConfig.name,
+    description: baseSiteConfig.description,
+    images: [`${baseSiteConfig.url}/og.png`],
+    creator: baseSiteConfig.creator,
+  },
+};
