@@ -4,15 +4,26 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 export default function SecondPage() {
-  const [theme, setTheme] = useState('light'); // Default to light theme
+  const [mounted, setMounted] = useState(false);
+  const [theme, setTheme] = useState('light');
 
-  // Set theme from localStorage on initial render to prevent flash
+  // Detect system theme and set initial state
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(savedTheme);
+    setMounted(true);
+    const storedTheme = localStorage.getItem('theme') || 
+                      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    setTheme(storedTheme);
   }, []);
 
-  // Product data
+  // Apply theme class to document element
+  useEffect(() => {
+    if (mounted) {
+      document.documentElement.classList.remove('light', 'dark');
+      document.documentElement.classList.add(theme);
+      localStorage.setItem('theme', theme);
+    }
+  }, [theme, mounted]);
+
   const products = [
     {
       name: 'Paket Bisnis Online',
@@ -26,19 +37,21 @@ export default function SecondPage() {
     },
   ];
 
+  if (!mounted) return null; // Prevent hydration mismatch
+
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
       <div className="container mx-auto px-4">
-        <div className="flex flex-wrap justify-center gap-8">
+        <div className="flex flex-wrap justify-center gap-6">
           {products.map((product, index) => (
             <div 
               key={index} 
-              className={`w-full sm:w-[280px] rounded-lg overflow-hidden shadow-md transition-all ${
+              className={`w-full sm:w-[260px] rounded-lg overflow-hidden shadow-md transition-all ${
                 theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
               }`}
             >
               {/* Product Image */}
-              <div className="h-[160px] relative">
+              <div className="h-[140px] relative">
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -48,24 +61,22 @@ export default function SecondPage() {
                 />
               </div>
               
+              {/* Divider */}
+              <div className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}></div>
+
               {/* Product Info */}
-              <div className="p-4">
-                <div className="space-y-1">
-                  <h3 className={`text-lg font-medium ${
-                    theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
-                  }`}>
-                    {product.name}
-                  </h3>
-                  <p className={`text-lg font-semibold ${
-                    theme === 'dark' ? 'text-blue-400' : 'text-blue-600'
-                  }`}>
-                    {product.price}
-                  </p>
-                </div>
-                
-                <div className="mt-4 flex justify-end">
+              <div className="p-3">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h3 className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>
+                      {product.name}
+                    </h3>
+                    <p className={`text-sm font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                      {product.price}
+                    </p>
+                  </div>
                   <button
-                    className={`px-4 py-2 rounded-md text-sm font-medium ${
+                    className={`px-3 py-1.5 rounded-md text-xs font-medium ${
                       theme === 'dark'
                         ? 'bg-blue-600 hover:bg-blue-700 text-white'
                         : 'bg-blue-500 hover:bg-blue-600 text-white'
