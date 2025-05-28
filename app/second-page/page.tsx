@@ -34,7 +34,10 @@ export default function SecondPage() {
   const handleScroll = (direction: 'left' | 'right') => {
     if (!scrollRef.current) return
     const scrollAmount = scrollRef.current.offsetWidth * 0.6
-    scrollRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' })
+    scrollRef.current.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth',
+    })
   }
 
   if (!mounted) return null
@@ -45,7 +48,9 @@ export default function SecondPage() {
       <div className="fixed top-4 right-4 z-10">
         <button
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          className={`p-2 rounded-full ${theme === 'dark' ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'}`}
+          className={`p-2 rounded-full ${
+            theme === 'dark' ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'
+          }`}
           aria-label="Toggle dark mode"
         >
           {theme === 'dark' ? '☀️' : '🌙'}
@@ -112,28 +117,30 @@ export default function SecondPage() {
         </div>
 
         {/* Slider Section */}
-        <div className="relative">
+        <div className="relative mt-8">
+          {/* Scroll Buttons */}
           <button
             onClick={() => handleScroll('left')}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/70 dark:bg-gray-800/70 p-2 rounded-full shadow hover:scale-110"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 dark:bg-gray-800/80 p-2 rounded-full shadow hover:scale-110"
           >
             ◀
           </button>
           <button
             onClick={() => handleScroll('right')}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/70 dark:bg-gray-800/70 p-2 rounded-full shadow hover:scale-110"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 dark:bg-gray-800/80 p-2 rounded-full shadow hover:scale-110"
           >
             ▶
           </button>
 
+          {/* Horizontal Scrollable Area */}
           <div
             ref={scrollRef}
-            className="flex overflow-x-auto space-x-4 scrollbar-hide py-4 px-2"
+            className="flex overflow-x-auto scroll-smooth space-x-4 scrollbar-hide px-2 py-4"
           >
             {clonedProducts.map((product, index) => (
               <div
                 key={index}
-                className={`flex-shrink-0 w-[calc(50%-12px)] rounded-lg overflow-hidden shadow-md transition-all ${
+                className={`flex-shrink-0 w-[calc(50%-8px)] sm:w-[calc(50%-12px)] rounded-lg overflow-hidden shadow-md transition-all ${
                   theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
                 }`}
               >
