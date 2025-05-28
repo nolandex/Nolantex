@@ -1,23 +1,24 @@
 import { SiteConfig } from "@/types/siteConfig";
 import { MdEmail } from "react-icons/md";
 import { FaFacebook, FaWhatsapp, FaTiktok, FaTelegram, FaInstagram, FaDiscord } from "react-icons/fa";
+import { FaXTwitter, FaThreads } from "react-icons/fa6"; // Tambahkan ikon untuk X dan Threads
 
 const baseSiteConfig = {
-  name: "NolanDex",
+  name: "Bisnovo",
   description:
     "A comprehensive digital solutions provider helping entrepreneurs and small businesses build their online presence with websites, chatbots, social media, automation, and a reseller program.",
-  url: "https://nolandex.com", // Ganti dari weijunext.com ke nolandex.com
-  ogImage: "https://nolandex.com/og.png", // Ganti dari weijunext.com ke nolandex.com
+  url: "https://bisnovo.com", // Ganti dari nolandex.com ke bisnovo.com
+  ogImage: "https://bisnovo.com/og.png", // Ganti dari nolandex.com ke bisnovo.com
   metadataBase: '/',
   keywords: ["digital presence", "website creation", "chatbots", "social media management", "automation", "reseller program"],
   authors: [
     {
-      name: "NolanDex", // Ganti dari weijunext ke NolanDex
+      name: "Bisnovo", // Ganti dari NolanDex ke Bisnovo
       url: "", // Dikosongkan untuk menghapus link eksternal
       twitter: "", // Dikosongkan untuk menghapus link eksternal
     }
   ],
-  creator: '@NolanDex', // Ganti dari @weijunext ke @NolanDex
+  creator: '@bisnovo', // Ganti dari @NolanDex ke @bisnovo
   openSourceURL: "", // Dikosongkan untuk menghapus link eksternal
   themeColors: [
     { media: '(prefers-color-scheme: light)', color: 'white' },
@@ -30,17 +31,20 @@ const baseSiteConfig = {
     apple: "/logo.png",
   },
   headerLinks: [
-    { name: 'whatsapp', href: "https://wa.me/6285156779923?text=Hi%2C%20I'm%20interested%20in%20your%20business%20setup%20services", icon: FaWhatsapp },
-    { name: 'email', href: "mailto:nolandexco@gmail.com", icon: MdEmail },
-    { name: 'tiktok', href: "https://www.tiktok.com/@nolandexco?_t=ZS-8vwewu0P3sm&_r=1", icon: FaTiktok }
+    { name: 'whatsapp', href: "https://wa.me/6285156779923?text=Hi%2C%20I'm%20interested%20in%20your%20business%20setup%20services", icon: FaWhatsapp }, // Tetap gunakan WhatsApp dari konfigurasi sebelumnya
+    { name: 'email', href: "mailto:bisnovohq@gmail.com", icon: MdEmail }, // Ganti ke bisnovohq@gmail.com
+    { name: 'tiktok', href: "https://www.tiktok.com/@bisnovo", icon: FaTiktok }, // Ganti ke https://www.tiktok.com/@bisnovo
+    { name: 'instagram', href: "https://www.instagram.com/bisnovo/", icon: FaInstagram }, // Tambahkan Instagram ke header
   ],
   footerLinks: [
-    { name: 'email', href: "mailto:nolandexco@gmail.com", icon: MdEmail },
-    { name: 'instagram', href: "https://www.instagram.com/nolandexco?igsh=MWV3cXRuejBqcGwyZg==", icon: FaInstagram },
-    { name: 'discord', href: "https://discord.gg/cW4DKGpk", icon: FaDiscord },
-    { name: 'tiktok', href: "https://www.tiktok.com/@nolandexco?_t=ZS-8vwewu0P3sm&_r=1", icon: FaTiktok },
-    { name: 'facebook', href: "https://www.facebook.com/nolandexco", icon: FaFacebook },
-    { name: 'telegram', href: "https://t.me/nolandex", icon: FaTelegram }
+    { name: 'email', href: "mailto:bisnovohq@gmail.com", icon: MdEmail }, // Ganti ke bisnovohq@gmail.com
+    { name: 'instagram', href: "https://www.instagram.com/bisnovo/", icon: FaInstagram }, // Ganti ke https://www.instagram.com/bisnovo/
+    { name: 'discord', href: "https://discord.gg/g7AP56Ub", icon: FaDiscord }, // Ganti ke https://discord.gg/g7AP56Ub
+    { name: 'tiktok', href: "https://www.tiktok.com/@bisnovo", icon: FaTiktok }, // Ganti ke https://www.tiktok.com/@bisnovo
+    { name: 'facebook', href: "https://www.facebook.com/bisnovo", icon: FaFacebook }, // Ganti ke https://www.facebook.com/bisnovo
+    { name: 'telegram', href: "https://t.me/bisnovo", icon: FaTelegram }, // Ganti ke https://t.me/bisnovo
+    { name: 'twitter', href: "https://x.com/bisnovo?s=09", icon: FaXTwitter }, // Tambahkan X/Twitter
+    { name: 'threads', href: "https://www.threads.net/@bisnovo", icon: FaThreads }, // Tambahkan Threads
   ],
   footerProducts: [] // Tetap kosong sesuai perubahan sebelumnya
 };
