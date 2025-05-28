@@ -117,10 +117,7 @@ export default function SecondPage() {
       {/* Products Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
         {filteredProducts.map((product, index) => (
-          <div
-            key={index}
-            className="rounded-lg overflow-hidden shadow-lg"
-          >
+          <div key={index} className="rounded-lg overflow-hidden shadow-lg">
             {/* Embedded YouTube Video */}
             <div className="relative aspect-video bg-gray-900">
               <iframe
@@ -133,9 +130,12 @@ export default function SecondPage() {
               ></iframe>
             </div>
 
+            {/* Divider */}
+            <hr className={`border-t ${theme === "dark" ? "border-gray-700" : "border-gray-300"}`} />
+
             {/* Product Content */}
-            <div className={`p-5 ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}>
-              <div className="flex justify-between items-center mb-4">
+            <div className="p-5">
+              <div className="flex items-center justify-between mb-4">
                 <h3 className={`text-lg font-semibold ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
                   {product.name}
                 </h3>
@@ -147,9 +147,9 @@ export default function SecondPage() {
                   {product.price}
                 </div>
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-2">
                 <button
-                  className={`flex-1 py-2.5 px-4 rounded-md font-medium text-sm transition-colors duration-300 ${
+                  className={`flex-1 py-2 px-3 rounded-md font-medium text-xs transition-colors duration-300 ${
                     theme === "dark"
                       ? "bg-blue-600 hover:bg-blue-700 text-white"
                       : "bg-blue-500 hover:bg-blue-600 text-white"
@@ -159,7 +159,7 @@ export default function SecondPage() {
                 </button>
                 <button
                   onClick={() => openModal(product)}
-                  className={`px-4 py-2.5 rounded-md font-medium text-sm transition-colors duration-300 ${
+                  className={`px-3 py-2 rounded-md font-medium text-xs transition-colors duration-300 ${
                     theme === "dark"
                       ? "bg-gray-700 hover:bg-gray-600 text-gray-200"
                       : "bg-gray-100 hover:bg-gray-200 text-gray-700"
