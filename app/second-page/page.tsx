@@ -4,21 +4,27 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 export default function SecondPage() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light')
+  const [theme, setTheme] = useState('light')
+  const [mounted, setMounted] = useState(false)
 
+  // Initialize theme on mount
   useEffect(() => {
-    // Only run on client side
-    const storedTheme = localStorage.getItem('theme') as 'light' | 'dark' || 
-                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    setTheme(storedTheme)
-    document.documentElement.className = storedTheme
+    setMounted(true)
+    const savedTheme = localStorage.getItem('theme') || 
+                      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+    setTheme(savedTheme)
   }, [])
 
+  // Apply theme class to HTML element and save to localStorage
+  useEffect(() => {
+    if (mounted) {
+      document.documentElement.className = theme
+      localStorage.setItem('theme', theme)
+    }
+  }, [theme, mounted])
+
   const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark'
-    setTheme(newTheme)
-    localStorage.setItem('theme', newTheme)
-    document.documentElement.className = newTheme
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark')
   }
 
   const products = [
@@ -34,6 +40,8 @@ export default function SecondPage() {
     },
   ]
 
+  if (!mounted) return null // Prevent hydration mismatch
+
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
       {/* Theme Toggle Button */}
@@ -41,7 +49,7 @@ export default function SecondPage() {
         <button
           onClick={toggleTheme}
           className={`p-2 rounded-full ${theme === 'dark' ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'}`}
-          aria-label="Toggle theme"
+          aria-label="Toggle dark mode"
         >
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
@@ -52,7 +60,7 @@ export default function SecondPage() {
           {products.map((product, index) => (
             <div 
               key={index} 
-              className={`w-full sm:w-[260px] rounded-lg overflow-hidden shadow-md transition-colors ${
+              className={`w-full sm:w-[260px] rounded-lg overflow-hidden shadow-md transition-all ${
                 theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
               }`}
             >
@@ -68,7 +76,7 @@ export default function SecondPage() {
               </div>
               
               {/* Divider */}
-              <div className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`} />
+              <div className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}></div>
 
               {/* Product Info */}
               <div className="p-3">
