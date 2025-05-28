@@ -31,31 +31,36 @@ export default function SecondPage() {
         {products.map((product, index) => (
           <div
             key={index}
-            className={`p-6 rounded-lg shadow-lg ${
+            className={`p-4 rounded-lg shadow-lg ${
               theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100'
-            } flex flex-col items-center justify-between h-[350px] w-[300px]`}
+            } flex flex-col w-[280px] h-[280px]`}
           >
-            <Image
-              src={product.image}
-              alt={product.name}
-              width={250}
-              height={150}
-              className="rounded-md object-cover"
-            />
-            <div className="flex flex-col items-center w-full">
-              <div className="flex justify-between w-full items-end">
-                <span className="text-lg">{product.name}</span>
-                <span className="text-lg font-medium">{product.price}</span>
+            <div className="flex-1 flex items-center justify-center mb-2">
+              <Image
+                src={product.image}
+                alt={product.name}
+                width={220}
+                height={120}
+                className="rounded-md object-cover max-h-[120px]"
+              />
+            </div>
+            
+            <div className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-300'} pt-3`}></div>
+            
+            <div className="flex justify-between items-center mt-2">
+              <span className="text-sm font-medium">{product.name}</span>
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-semibold">{product.price}</span>
+                <button
+                  className={`px-3 py-1 rounded-md text-sm font-medium ${
+                    theme === 'dark'
+                      ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                      : 'bg-blue-500 hover:bg-blue-600 text-white'
+                  }`}
+                >
+                  Beli
+                </button>
               </div>
-              <button
-                className={`px-4 py-2 rounded-md font-medium w-full mt-4 ${
-                  theme === 'dark'
-                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                    : 'bg-blue-500 hover:bg-blue-600 text-white'
-                }`}
-              >
-                Beli Sekarang
-              </button>
             </div>
           </div>
         ))}
