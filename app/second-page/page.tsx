@@ -1,11 +1,16 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { useTheme } from 'next-themes';
 
 export default function SecondPage() {
-  const { theme } = useTheme();
+  const [theme, setTheme] = useState('light'); // Default to light theme
+
+  // Set theme from localStorage on initial render to prevent flash
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+  }, []);
 
   // Product data
   const products = [
@@ -22,13 +27,13 @@ export default function SecondPage() {
   ];
 
   return (
-    <div className={`min-h-screen py-8 ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
+    <div className={`min-h-screen pt-20 pb-8 ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
       <div className="container mx-auto px-4">
-        <div className="flex flex-wrap justify-center gap-6">
+        <div className="flex flex-wrap justify-center gap-8">
           {products.map((product, index) => (
             <div 
               key={index} 
-              className={`w-full sm:w-[300px] rounded-lg overflow-hidden shadow-md ${
+              className={`w-full sm:w-[280px] rounded-lg overflow-hidden shadow-md transition-all ${
                 theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
               }`}
             >
@@ -39,23 +44,26 @@ export default function SecondPage() {
                   alt={product.name}
                   fill
                   className="object-cover"
+                  priority
                 />
               </div>
               
               {/* Product Info */}
               <div className="p-4">
-                <h3 className={`text-md font-medium mb-3 ${
-                  theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
-                }`}>
-                  {product.name}
-                </h3>
-                
-                <div className="flex justify-between items-center">
-                  <span className={`text-md font-semibold ${
+                <div className="space-y-1">
+                  <h3 className={`text-lg font-medium ${
+                    theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
+                  }`}>
+                    {product.name}
+                  </h3>
+                  <p className={`text-lg font-semibold ${
                     theme === 'dark' ? 'text-blue-400' : 'text-blue-600'
                   }`}>
                     {product.price}
-                  </span>
+                  </p>
+                </div>
+                
+                <div className="mt-4 flex justify-end">
                   <button
                     className={`px-4 py-2 rounded-md text-sm font-medium ${
                       theme === 'dark'
