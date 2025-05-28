@@ -7,7 +7,8 @@ import { useTheme } from 'next-themes'
 export default function SecondPage() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const scrollRef = useRef(null)
+  // Explicitly type the ref as HTMLDivElement
+  const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setMounted(true)
