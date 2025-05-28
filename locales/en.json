@@ -1,47 +1,47 @@
 {
   "Hero": {
-    "title1": "Start",
-    "title2": "Your Online",
-    "title3": "Business Fast",
-    "description": "NolanDex helps you build a complete online business — website, branding, automation, and content — all done in just a few hours."
+    "title1": "Mulai",
+    "title2": "Bisnis Online",
+    "title3": "dengan Cepat",
+    "description": "Bisnovo bantu kamu bikin bisnis online lengkap — dari website, branding, konten, sampai otomatisasi. Semua selesai dalam hitungan jam."
   },
   "SocialProof": {
-    "maker": "Limited Offer: Get 50% Off If Your Business Doesn't Grow in 30 Days!"
+    "maker": "Promo Terbatas: Diskon 50% jika bisnismu tidak berkembang dalam 30 hari!"
   },
   "Showcase": {
-    "title": "Success Stories",
-    "description": "Join 100+ clients who’ve launched their business quickly and easily with NolanDex."
+    "title": "Cerita Sukses",
+    "description": "Lebih dari 1000+ orang sudah berhasil mulai bisnisnya dengan cepat dan mudah bersama Bisnovo."
   },
   "Feature": {
-    "title": "What You Get"
+    "title": "Yang Kamu Dapatkan"
   },
   "Pricing": {
-    "title": "Our Packages",
-    "title2": "Simple pricing. Full service.",
-    "description": "Choose the package that fits your needs. Fast setup, great results, no stress.",
-    "doYouLike": "Love what we offer?",
-    "follow": "Follow us on Instagram nolandexco"
+    "title": "Paket Layanan",
+    "title2": "Harga simpel. Layanan lengkap.",
+    "description": "Pilih paket yang sesuai kebutuhanmu. Cepat, praktis, dan hasil maksimal.",
+    "doYouLike": "Tertarik dengan layanan kami?",
+    "follow": "Follow Instagram kami @bisnovoco"
   },
   "Testimonials": {
-    "title": "Client Reviews",
-    "description1": "Real feedback from people who’ve built their business with NolanDex.",
-    "description2": "See their stories",
-    "description3": "and results."
+    "title": "Testimoni Klien",
+    "description1": "Pendapat nyata dari mereka yang sudah membangun bisnis dengan Bisnovo.",
+    "description2": "Lihat cerita mereka",
+    "description3": "dan hasilnya."
   },
   "FAQ": {
-    "title": "FAQs",
-    "description": "Find answers to common questions about our service."
+    "title": "Pertanyaan Umum",
+    "description": "Temukan jawaban atas pertanyaan yang sering ditanyakan tentang layanan kami."
   },
   "CTA": {
-    "title": "Launch Your Business Today",
-    "description1": "Let us build",
-    "description2": "your business website,",
-    "description3": "boost",
-    "description4": "your brand, and",
-    "description5": "help you sell",
-    "description6": "online fast."
+    "title": "Mulai Bisnismu Hari Ini",
+    "description1": "Kami bantu buatkan",
+    "description2": "website bisnismu,",
+    "description3": "kuatkan",
+    "description4": "brand kamu, dan",
+    "description5": "bantu kamu jualan",
+    "description6": "secara online."
   },
   "CTAButton": {
-    "title": "Get Started Now"
+    "title": "Mulai Sekarang"
   }
 }
