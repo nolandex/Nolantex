@@ -2,30 +2,15 @@
 
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { useTheme } from 'next-themes'
 
 export default function SecondPage() {
-  const [theme, setTheme] = useState('light')
+  const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
-  // Initialize theme on mount
   useEffect(() => {
     setMounted(true)
-    const savedTheme = localStorage.getItem('theme') || 
-                      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-    setTheme(savedTheme)
   }, [])
-
-  // Apply theme class to HTML element and save to localStorage
-  useEffect(() => {
-    if (mounted) {
-      document.documentElement.className = theme
-      localStorage.setItem('theme', theme)
-    }
-  }, [theme, mounted])
-
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark')
-  }
 
   const products = [
     {
@@ -40,14 +25,13 @@ export default function SecondPage() {
     },
   ]
 
-  if (!mounted) return null // Prevent hydration mismatch
+  if (!mounted) return null
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
-      {/* Theme Toggle Button */}
       <div className="fixed top-4 right-4">
         <button
-          onClick={toggleTheme}
+          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           className={`p-2 rounded-full ${theme === 'dark' ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'}`}
           aria-label="Toggle dark mode"
         >
@@ -64,7 +48,6 @@ export default function SecondPage() {
                 theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
               }`}
             >
-              {/* Product Image */}
               <div className="h-[140px] relative">
                 <Image
                   src={product.image}
@@ -74,11 +57,7 @@ export default function SecondPage() {
                   priority
                 />
               </div>
-              
-              {/* Divider */}
               <div className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}></div>
-
-              {/* Product Info */}
               <div className="p-3">
                 <div className="flex justify-between items-center">
                   <div>
