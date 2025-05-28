@@ -124,7 +124,7 @@ export default function SecondPage() {
             <div
               key={index}
               className={`
-                ${index === 0 && activeCategory !== 'website' ? 'w-full' : 'w-full sm:w-[calc(50%-12px)]'}
+                w-full sm:w-[calc(50%-12px)]
                 rounded-lg overflow-hidden shadow-md transition-all
                 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}
               `}
@@ -145,7 +145,7 @@ export default function SecondPage() {
                     <h3 className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>
                       {product.name}
                     </h3>
-            <p className={`text-sm font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                    <p className={`text-sm font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
                       {product.price}
                     </p>
                   </div>
