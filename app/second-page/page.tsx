@@ -7,7 +7,7 @@ import { useTheme } from 'next-themes'
 export default function SecondPage() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const [activeCategory, setActiveCategory] = useState('all')
+  const [activeCategory, setActiveCategory] = useState('all') // State untuk kategori aktif
 
   useEffect(() => {
     setMounted(true)
@@ -64,6 +64,7 @@ export default function SecondPage() {
     },
   ]
 
+  // Filter produk berdasarkan kategori aktif
   const filteredProducts = activeCategory === 'business'
     ? products.filter(product => product.category === 'business')
     : activeCategory === 'website'
@@ -74,26 +75,22 @@ export default function SecondPage() {
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
-      {/* Toggle Theme Button */}
-      <div className="fixed top-4 right-4 z-50">
+      <div className="fixed top-4 right-4">
         <button
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          className={`p-2 rounded-full transition ${
-            theme === 'dark' ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'
-          }`}
+          className={`p-2 rounded-full ${theme === 'dark' ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'}`}
           aria-label="Toggle dark mode"
         >
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
       </div>
 
-      {/* Main Container */}
       <div className="container mx-auto px-4">
-        {/* Category Buttons */}
+        {/* Tombol Kategori */}
         <div className="flex justify-center gap-4 mb-6">
           <button
             onClick={() => setActiveCategory('business')}
-            className={`px-4 py-2 rounded-md font-medium transition ${
+            className={`px-4 py-2 rounded-md font-medium ${
               activeCategory === 'business'
                 ? theme === 'dark'
                   ? 'bg-blue-600 text-white'
@@ -107,7 +104,7 @@ export default function SecondPage() {
           </button>
           <button
             onClick={() => setActiveCategory('website')}
-            className={`px-4 py-2 rounded-md font-medium transition ${
+            className={`px-4 py-2 rounded-md font-medium ${
               activeCategory === 'website'
                 ? theme === 'dark'
                   ? 'bg-blue-600 text-white'
@@ -121,16 +118,18 @@ export default function SecondPage() {
           </button>
         </div>
 
-        {/* Products Grid */}
+        {/* Daftar Produk */}
         <div className="flex flex-wrap justify-center gap-6">
           {filteredProducts.map((product, index) => (
             <div
               key={index}
-              className={`w-full sm:w-[48%] lg:w-[31%] rounded-lg overflow-hidden shadow-md transition-all ${
-                theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
-              }`}
+              className={`
+                w-full
+                rounded-lg overflow-hidden shadow-md transition-all
+                ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}
+              `}
             >
-              <div className="relative h-[200px]">
+              <div className="h-[140px] relative">
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -139,21 +138,19 @@ export default function SecondPage() {
                   priority
                 />
               </div>
-              <div
-                className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}
-              ></div>
-              <div className="p-4">
-                <div className="flex justify-between items-center flex-wrap gap-2">
+              <div className={`border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}></div>
+              <div className="p-3">
+                <div className="flex justify-between items-center">
                   <div>
-                    <h3 className={`text-lg font-semibold ${theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>
+                    <h3 className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>
                       {product.name}
                     </h3>
-                    <p className={`text-sm font-bold ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
+                    <p className={`text-sm font-semibold ${theme === 'dark' ? 'text-blue-400' : 'text-blue-600'}`}>
                       {product.price}
                     </p>
                   </div>
                   <button
-                    className={`px-4 py-2 rounded-md text-sm font-medium transition ${
+                    className={`px-3 py-1.5 rounded-md text-xs font-medium ${
                       theme === 'dark'
                         ? 'bg-blue-600 hover:bg-blue-700 text-white'
                         : 'bg-blue-500 hover:bg-blue-600 text-white'
