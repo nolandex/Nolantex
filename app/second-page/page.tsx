@@ -4,11 +4,20 @@ import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
 import { Play, CheckCircle, X } from "lucide-react"
 
+interface Product {
+  name: string
+  price: string
+  videoId: string
+  category: string
+  features: string[]
+  description: string
+}
+
 export default function SecondPage() {
   const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [activeCategory, setActiveCategory] = useState("business")
-  const [selectedProduct, setSelectedProduct] = useState(null)
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
 
   useEffect(() => {
     setMounted(true)
@@ -65,7 +74,7 @@ export default function SecondPage() {
   // Filter produk berdasarkan kategori aktif
   const filteredProducts = products.filter((product) => product.category === activeCategory)
 
-  const openModal = (product) => {
+  const openModal = (product: Product) => {
     setSelectedProduct(product)
   }
 
