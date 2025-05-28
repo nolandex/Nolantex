@@ -120,7 +120,7 @@ export default function SecondPage() {
         {/* Produk */}
         <div
           className={`flex flex-wrap justify-center gap-6 ${
-            filteredProducts.length === 1 ? 'flex-col items-stretch' : ''
+            filteredProducts.length === 1 ? 'flex-col items-center' : ''
           }`}
         >
           {filteredProducts.map((product, index) => (
@@ -128,7 +128,7 @@ export default function SecondPage() {
               key={index}
               className={`
                 ${
-                  filteredProducts.length === 1 ? 'w-full' : 'w-full sm:w-[48%] lg:w-[31%]'
+                  filteredProducts.length === 1 ? 'w-full max-w-[600px]' : 'w-full sm:w-[48%] lg:w-[31%]'
                 }
                 rounded-lg overflow-hidden shadow-md transition-all
                 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}
