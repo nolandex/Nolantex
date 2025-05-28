@@ -25,7 +25,7 @@ export default function SecondPage() {
             key={index}
             className={`p-4 rounded-md shadow-md ${
               theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100'
-            } flex items-center h-32`} // Reduced height
+            } flex items-center h-32`}
           >
             <Image
               src={product.image}
