@@ -124,8 +124,8 @@ export default function SecondPage() {
             <div
               key={index}
               className={`
-                ${index === 0 && activeCategory !== 'website' ? 'w-full' : 'w-full sm:w-[calc(50%-12px)]'}
-                rounded-lg overflow-hidden shadow-md transition-all
+                w-full sm:w-[calc(50%-12px)] rounded-lg overflow-hidden shadow-md transition-all
+                ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}
               `}
             >
               <div className="h-[140px] relative">
