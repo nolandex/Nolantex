@@ -124,7 +124,7 @@ export default function SecondPage() {
             <div
               key={index}
               className={`
-                w-full sm:w-[calc(50%-12px)]
+                w-full
                 rounded-lg overflow-hidden shadow-md transition-all
                 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}
               `}
