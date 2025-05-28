@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
 import { useTheme } from 'next-themes'
 
 export default function SecondPage() {
@@ -18,13 +17,13 @@ export default function SecondPage() {
     {
       name: 'Paket Bisnis Starter',
       price: 'Rp 50.000',
-      image: '/1.jpg',
+      videoId: '-RLoM6px0iY', // YouTube video ID
       category: 'business',
     },
     {
       name: 'Paket Bisnis Pro',
       price: 'Rp 150.000',
-      image: '/2.jpg',
+      videoId: 'dQw4w9WgXcQ', // YouTube video ID
       category: 'business',
     },
     
@@ -32,19 +31,19 @@ export default function SecondPage() {
     {
       name: 'Website Toko Online',
       price: 'Rp 25.000',
-      image: '/3.jpg',
+      videoId: 'dQw4w9WgXcQ', // YouTube video ID
       category: 'website',
     },
     {
       name: 'Website Landing Page',
       price: 'Rp 15.000',
-      image: '/4.jpg',
+      videoId: 'dQw4w9WgXcQ', // YouTube video ID
       category: 'website',
     },
     {
       name: 'Website Portfolio',
       price: 'Rp 20.000',
-      image: '/5.jpg',
+      videoId: 'dQw4w9WgXcQ', // YouTube video ID
       category: 'website',
     },
   ]
@@ -102,35 +101,38 @@ export default function SecondPage() {
             >
               {/* Product Info */}
               <div className="p-6">
-                {/* Product Name - Kiri Atas */}
-                <h3 className={`text-xl font-bold mb-4 text-left ${
-                  theme === 'dark' ? 'text-white' : 'text-gray-900'
-                }`}>
-                  {product.name}
-                </h3>
-
-                {/* Product Image - Ditengah */}
-                <div className="h-36 relative overflow-hidden rounded-lg mb-4 mx-auto">
-                  <Image
-                    src={product.image || "/placeholder.svg"}
-                    alt={product.name}
-                    fill
-                    className="object-cover transition-transform duration-300 hover:scale-110"
-                    priority
-                  />
-                  {/* Price Badge */}
-                  <div className="absolute top-4 right-4">
-                    <span className={`px-3 py-1 rounded-full text-sm font-bold ${
-                      product.price === 'Rp 0' 
-                        ? 'bg-green-500 text-white'
-                        : 'bg-blue-500 text-white'
-                    }`}>
-                      {product.price}
-                    </span>
-                  </div>
+                {/* Header dengan Nama Produk dan Harga */}
+                <div className="flex justify-between items-start mb-4">
+                  {/* Product Name - Kiri Atas */}
+                  <h3 className={`text-xl font-bold ${
+                    theme === 'dark' ? 'text-white' : 'text-gray-900'
+                  }`}>
+                    {product.name}
+                  </h3>
+                  
+                  {/* Price - Kanan Atas */}
+                  <span className={`px-3 py-1 rounded-full text-sm font-bold ${
+                    product.price === 'Rp 0' 
+                      ? 'bg-green-500 text-white'
+                      : 'bg-blue-500 text-white'
+                  }`}>
+                    {product.price}
+                  </span>
                 </div>
 
-                {/* Action Buttons - Diperkecil */}
+                {/* YouTube Video - Ditengah */}
+                <div className="h-36 relative overflow-hidden rounded-lg mb-4">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${product.videoId}`}
+                    title={product.name}
+                    className="w-full h-full"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+
+                {/* Action Buttons */}
                 <div className="flex gap-2">
                   <button
                     className={`flex-1 py-2 px-3 rounded-md font-medium text-sm transition-all duration-300 ${
@@ -139,7 +141,7 @@ export default function SecondPage() {
                         : 'bg-blue-500 hover:bg-blue-600 text-white'
                     }`}
                   >
-                    Beli Sekarang
+                    Bayar
                   </button>
                   <button
                     className={`px-3 py-2 rounded-md font-medium text-sm transition-all duration-300 border ${
@@ -158,4 +160,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-              }
+}
