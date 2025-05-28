@@ -1,46 +1,63 @@
-'use client';
+'use client'; // Enable client-side rendering for interactivity
 
 import React from 'react';
-import Image from 'next/image';
-import { useTheme } from 'next-themes';
+import Image from 'next/image'; // Next.js Image component for optimized images
+import { useTheme } from 'next-themes'; // For dark/light mode support
 
 export default function SecondPage() {
-  const { theme } = useTheme();
+  const { theme } = useTheme(); // Access current theme (light or dark)
 
+  // Product data
   const products = [
-    { name: 'Paket Bisnis Online', price: 'Rp 1.500.000', image: '/images/business-package.jpg' },
+    {
+      name: 'Paket Bisnis Online',
+      price: 'Rp 1.500.000',
+      image: '/images/business-package.jpg', // Replace with actual image path
+      description: 'Solusi lengkap untuk memulai bisnis online Anda.',
+    },
+    {
+      name: 'Website',
+      price: 'Rp 2.000.000',
+      image: '/images/website.jpg', // Replace with actual image path
+      description: 'Website profesional untuk meningkatkan kehadiran digital Anda.',
+    },
   ];
 
   return (
     <div
-      className={`min-h-screen p-6 flex flex-col items-center ${
+      className={`min-h-screen p-6 flex flex-col items-center justify-center ${
         theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'
       }`}
     >
       <h1 className="text-3xl font-bold mb-8">Produk Kami</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
         {products.map((product, index) => (
           <div
             key={index}
-            className={`p-4 rounded-md shadow-md ${
+            className={`p-6 rounded-lg shadow-lg ${
               theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100'
-            } flex flex-col items-center h-48`} // Increased height
+            } flex flex-col items-center justify-between h-[450px]`} // Increased height (e.g., h-[450px]) and adjusted justify content
           >
-            <Image
-              src={product.image}
-              alt={product.name}
-              width={120}
-              height={80}
-              className="rounded-md object-cover mb-3"
-            />
-            <h2 className="text-lg font-semibold text-center">{product.name}</h2>
-            <p className="text-md text-center mb-3">{product.price}</p>
+            <div className="flex flex-col items-center flex-grow"> {/* Container for image and text */}
+              <Image
+                src={product.image}
+                alt={product.name}
+                width={300}
+                height={200}
+                className="rounded-md mb-4 object-cover"
+              />
+              <h2 className="text-xl font-semibold mb-2 text-center">{product.name}</h2>
+              <p className="text-lg mb-2">{product.price}</p>
+              <p className="text-center mb-4 flex-grow">{product.description}</p> {/* flex-grow to push button down */}
+            </div>
             <button
-              className={`px-3 py-1 rounded-md text-sm ${
-                theme === 'dark' ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'bg-blue-500 hover:bg-blue-600 text-white'
+              className={`px-4 py-2 rounded-md font-medium mt-auto ${ // mt-auto to keep button at bottom
+                theme === 'dark'
+                  ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                  : 'bg-blue-500 hover:bg-blue-600 text-white'
               }`}
             >
-              Beli
+              Beli Sekarang
             </button>
           </div>
         ))}
