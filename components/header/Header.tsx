@@ -61,7 +61,7 @@ const Header = () => {
               </li>
             ))}
           </ul>
-          <ThemedButton /> {/* ThemedButton diletakkan di sebelah menu */}
+          <ThemedButton /> {/* ThemedButton di sebelah menu untuk desktop */}
         </div>
 
         {/* Right - Desktop */}
@@ -71,6 +71,7 @@ const Header = () => {
 
         {/* Right - Mobile */}
         <div className="md:hidden flex items-center gap-x-4">
+          <ThemedButton /> {/* ThemedButton di sebelah ikon hamburger */}
           <button
             aria-label="Open Menu"
             title="Open Menu"
@@ -119,7 +120,7 @@ const Header = () => {
                     ))}
                   </ul>
                 </nav>
-                {/* ThemedButton dihapus dari menu mobile */}
+                {/* ThemedButton dihapus dari dalam menu hamburger */}
               </div>
             </div>
           )}
