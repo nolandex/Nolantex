@@ -9,8 +9,8 @@ interface Product {
   price: string
   videoId: string
   category: string
-  features: string[] // Tambahkan properti features
-  description: string // Tambahkan properti description
+  features: string[]
+  description: string
 }
 
 export default function SecondPage() {
@@ -33,14 +33,6 @@ export default function SecondPage() {
       features: ['Website Profesional', 'Chatbot Otomatis', 'Social Media Content'],
       description: 'Paket lengkap untuk memulai bisnis online Anda dengan website profesional dan tools marketing otomatis.'
     },
-    {
-      name: 'Paket Bisnis Pro',
-      price: 'Rp 150.000',
-      videoId: 'dQw4w9WgXcQ',
-      category: 'business',
-      features: ['Semua fitur Starter', 'Social Media Booster', 'Copywriting Tricks'],
-      description: 'Paket premium dengan fitur lengkap untuk mengembangkan bisnis online Anda ke level profesional.'
-    },
     // Kategori Website
     {
       name: 'Website Toko Online',
@@ -52,19 +44,11 @@ export default function SecondPage() {
     },
     {
       name: 'Website Landing Page',
-      price: 'Rp 15.000',
+      price: 'Rp 25.000',
       videoId: 'dQw4w9WgXcQ',
       category: 'website',
       features: ['Landing page profesional', 'SEO optimized', 'Mobile responsive'],
       description: 'Landing page yang dioptimalkan untuk konversi tinggi dengan desain yang menarik dan responsif.'
-    },
-    {
-      name: 'Website Portfolio',
-      price: 'Rp 20.000',
-      videoId: 'dQw4w9WgXcQ',
-      category: 'website',
-      features: ['Portfolio kreatif', 'Galeri foto', 'Contact form'],
-      description: 'Website portfolio profesional untuk menampilkan karya dan layanan Anda dengan tampilan yang elegan.'
     },
   ]
 
@@ -269,4 +253,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-}
+            }
