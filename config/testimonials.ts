@@ -37,7 +37,7 @@ export const TestimonialsData = [
   },
   {
     user: {
-      name: "Anisa Putri",
+      name: "Fandi Pratama",
       username: "online_shop_owner",
       image: "/images/users/5.png",
     },
