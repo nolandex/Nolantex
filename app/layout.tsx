@@ -29,6 +29,7 @@ export const metadata = {
   openGraph: siteConfig.openGraph,
   twitter: siteConfig.twitter,
 };
+
 export const viewport: Viewport = {
   themeColor: siteConfig.themeColors,
 };
@@ -42,7 +43,16 @@ export default async function RootLayout({
 }) {
   return (
     <html lang={lang || defaultLocale} suppressHydrationWarning>
-      <head />
+      <head>
+        {/* 🟩 Tambahan untuk dukungan PWA */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Bisnovo" />
+        <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
