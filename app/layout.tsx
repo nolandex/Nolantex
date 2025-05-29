@@ -31,7 +31,10 @@ export const metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: siteConfig.themeColors,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" }, // Warna untuk mode terang
+    { media: "(prefers-color-scheme: dark)", color: "#000000" }, // Warna untuk mode gelap
+  ],
 };
 
 export default async function RootLayout({
@@ -42,14 +45,14 @@ export default async function RootLayout({
   params: { lang: string | undefined };
 }) {
   return (
-    <html lang={lang || defaultLocale} suppressHydrationWarning>
+    <html lang={lang || defaultLocale} suppressHydrationWarning className="light">
       <head>
-        {/* 🟩 Tambahan untuk dukungan PWA */}
+        {/* Tambahan untuk dukungan PWA */}
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#ffffff" /> {/* Ubah ke warna mode terang */}
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Bisnovo" />
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
       </head>
@@ -61,8 +64,8 @@ export default async function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme={siteConfig.nextThemeColor}
-          enableSystem
+          defaultTheme="light" // Paksa mode terang sebagai default
+          enableSystem={false} // Nonaktifkan pengaturan tema berdasarkan sistem
         >
           <Header />
           <main className="flex flex-col items-center py-6">{children}</main>
