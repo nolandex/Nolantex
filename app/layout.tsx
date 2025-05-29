@@ -10,7 +10,6 @@ import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 import "@/styles/loading.css";
 import { Analytics } from "@vercel/analytics/react";
-import { Viewport } from "next";
 import { Inter as FontSans } from "next/font/google";
 
 export const fontSans = FontSans({
@@ -30,10 +29,10 @@ export const metadata = {
   twitter: siteConfig.twitter,
 };
 
-export const viewport: Viewport = {
+export const viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" }, // Warna untuk mode terang
-    { media: "(prefers-color-scheme: dark)", color: "#000000" }, // Warna untuk mode gelap
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
 };
 
@@ -45,16 +44,25 @@ export default async function RootLayout({
   params: { lang: string | undefined };
 }) {
   return (
-    <html lang={lang || defaultLocale} suppressHydrationWarning className="light">
+    <html lang={lang || defaultLocale} suppressHydrationWarning>
       <head>
-        {/* Tambahan untuk dukungan PWA */}
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#ffffff" /> {/* Ubah ke warna mode terang */}
+        <meta name="theme-color" content="#ffffff" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Bisnovo" />
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (localStorage.getItem('theme') === null) {
+                document.documentElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+              }
+            `,
+          }}
+        />
       </head>
       <body
         className={cn(
@@ -64,8 +72,9 @@ export default async function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="light" // Paksa mode terang sebagai default
-          enableSystem={false} // Nonaktifkan pengaturan tema berdasarkan sistem
+          defaultTheme="light"
+          enableSystem={false}
+          disableTransitionOnChange
         >
           <Header />
           <main className="flex flex-col items-center py-6">{children}</main>
@@ -73,9 +82,7 @@ export default async function RootLayout({
           <Analytics />
           <TailwindIndicator />
         </ThemeProvider>
-        {process.env.NODE_ENV === "development" ? (
-          <></>
-        ) : (
+        {process.env.NODE_ENV === "development" ? null : (
           <>
             <GoogleAnalytics />
             <BaiDuAnalytics />
