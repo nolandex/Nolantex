@@ -28,7 +28,7 @@ export const FEATURES_EN = [
   {
     title: "Konten Sosmed Siap Pakai",
     content:
-      "Susah bikin konten? Dapatkan desain dan caption harian yang siap posting.",
+      "Susah bikin konten? Dapatkan puluhan desain konten yang siap posting.",
     icon: FaEarthAsia,
   },
   {
