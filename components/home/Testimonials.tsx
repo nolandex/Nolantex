@@ -58,7 +58,7 @@ const Testimonials = ({ id, locale }: { id: string; locale: any }) => {
       className="flex flex-col justify-center items-center pt-16 gap-12 max-w-[88%] mx-auto"
     >
       <div className="flex flex-col text-center max-w-xl gap-4">
-        <h2 className="text-center text-3xl font-bold text-gray-900 dark:text-white">
+        <h2 className="text-center text-3xl font-bold text-white">
           <RoughNotation type="highlight" show={true} color="#2563EB">
             {locale.title}
           </RoughNotation>
