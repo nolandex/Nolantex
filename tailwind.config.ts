@@ -1,14 +1,14 @@
 import { nextui } from "@nextui-org/react";
 import type { Config } from "tailwindcss";
 
-const config = {
-  darkMode: "class",
+const config: Config = {
+  darkMode: "class", // Tetap gunakan class untuk mendukung tema terang/gelap
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   prefix: "",
   theme: {
@@ -21,42 +21,38 @@ const config = {
     },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        // primary: {
-        //   DEFAULT: "hsl(var(--primary))",
-        //   foreground: "hsl(var(--primary-foreground))",
-        // },
+        border: "hsl(var(--border) / 1)", // Pastikan opasitas default
+        input: "hsl(var(--input) / 1)",
+        ring: "hsl(var(--ring) / 1)",
+        background: "hsl(var(--background) / 1)",
+        foreground: "hsl(var(--foreground) / 1)",
         primary: {
-          foreground: "#FFFFFF",
-          DEFAULT: "#3B82F6",
+          DEFAULT: "#3B82F6", // Warna biru untuk mode terang
+          foreground: "#FFFFFF", // Warna teks untuk kontras
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "hsl(var(--secondary) / 1)",
+          foreground: "hsl(var(--secondary-foreground) / 1)",
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: "hsl(var(--destructive) / 1)",
+          foreground: "hsl(var(--destructive-foreground) / 1)",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "hsl(var(--muted) / 1)",
+          foreground: "hsl(var(--muted-foreground) / 1)",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "hsl(var(--accent) / 1)",
+          foreground: "hsl(var(--accent-foreground) / 1)",
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: "hsl(var(--popover) / 1)",
+          foreground: "hsl(var(--popover-foreground) / 1)",
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: "hsl(var(--card) / 1)",
+          foreground: "hsl(var(--card-foreground) / 1)",
         },
       },
       borderRadius: {
@@ -91,6 +87,6 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate"), nextui()],
-} satisfies Config
+};
 
-export default config
+export default config;
