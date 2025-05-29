@@ -56,10 +56,13 @@ export default async function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              if (localStorage.getItem('theme') === null) {
-                document.documentElement.classList.add('light');
-                localStorage.setItem('theme', 'light');
-              }
+              (function() {
+                if (!localStorage.getItem('theme')) {
+                  localStorage.setItem('theme', 'light');
+                  document.documentElement.classList.add('light');
+                  document.documentElement.classList.remove('dark');
+                }
+              })();
             `,
           }}
         />
