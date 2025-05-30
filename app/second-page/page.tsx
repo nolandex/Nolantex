@@ -15,7 +15,7 @@ interface Product {
 export default function SecondPage() {
   const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const [activeCategory, setActiveCategory] = useState("business")
+  const [activeCategory, setActiveCategory] = useState("website")
   const [showExample, setShowExample] = useState<Product | null>(null)
 
   useEffect(() => {
@@ -45,6 +45,62 @@ export default function SecondPage() {
       category: "website",
       features: ["Domain gratis", "Hosting gratis"],
       exampleUrl: "https://unbounce.com",
+    },
+    {
+      name: "Undangan Digital",
+      price: "Rp 25.000",
+      category: "website",
+      features: ["Domain gratis", "Hosting gratis"],
+      exampleUrl: "https://invitation-demo.vercel.app",
+    },
+    {
+      name: "Ulang Tahun",
+      price: "Rp 25.000",
+      category: "website",
+      features: ["Domain gratis", "Hosting gratis"],
+      exampleUrl: "https://birthday-demo.vercel.app",
+    },
+    {
+      name: "Portfolio",
+      price: "Rp 25.000",
+      category: "website",
+      features: ["Domain gratis", "Hosting gratis"],
+      exampleUrl: "https://portfolio-demo.vercel.app",
+    },
+    {
+      name: "Kursus Online",
+      price: "Rp 25.000",
+      category: "website",
+      features: ["Domain gratis", "Hosting gratis"],
+      exampleUrl: "https://course-demo.vercel.app",
+    },
+    {
+      name: "Keanggotaan",
+      price: "Rp 25.000",
+      category: "website",
+      features: ["Domain gratis", "Hosting gratis"],
+      exampleUrl: "https://membership-demo.vercel.app",
+    },
+    {
+      name: "Acara",
+      price: "Rp 25.000",
+      category: "website",
+      features: ["Domain gratis", "Hosting gratis"],
+      exampleUrl: "https://event-demo.vercel.app",
+    },
+    {
+      name: "Pemesanan",
+      price: "Rp 25.000",
+      category: "website",
+      features: ["Domain gratis", "Hosting gratis"],
+      exampleUrl: "https://booking-demo.vercel.app",
+    },
+    {
+      name: "Afiliasi",
+      price: "Rp 25.000",
+      category: "website",
+      features: ["Domain gratis", "Hosting gratis"],
+      exampleUrl: "https://affiliate-demo.vercel.app",
     },
   ]
 
