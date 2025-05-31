@@ -8,6 +8,7 @@ interface Product {
   name: string
   price: string
   category: string
+  subcategory?: string // Added for Business/Non-Business
   features: string[]
   exampleUrl: string
 }
@@ -16,6 +17,7 @@ export default function SecondPage() {
   const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [activeCategory, setActiveCategory] = useState("website")
+  const [activeSubcategory, setActiveSubcategory] = useState("all") // Added for subcategory filter
   const [showExample, setShowExample] = useState<Product | null>(null)
 
   useEffect(() => {
@@ -25,38 +27,39 @@ export default function SecondPage() {
   const products: Product[] = [
     // Business Online Package Category
     {
-      name: "Online Business Package",
+      name: "Business Online Package",
       price: "Rp 50,000",
       category: "business",
-      features: ["Website", "Automated Chatbot", "Social Media Content", "Social Media Booster", "Promotional tools"],
+      features: ["Landing Page Website", "Automatic Chatbot", "Social Media Content", "Social Media Booster", "Promotion Tricks"],
       exampleUrl: "https://example.com",
     },
     {
       name: "Instagram Booster",
       price: "Rp 55,000",
       category: "business",
-      features: ["3,000 Followers", "5,000 Likes"],
+      features: ["3K Followers", "5K Likes"],
       exampleUrl: "https://example.com/instagram",
     },
     {
       name: "TikTok Booster",
-      price: "Rp 50,000",
+      price: "Rp 70,000",
       category: "business",
-      features: ["2,000 Followers", "100,000 Views", "8,000 Likes", "1,000 Shares", "1,000 Saves"],
+      features: ["3K Followers", "100K Views", "8K Likes", "1K Shares", "1K Saves"],
       exampleUrl: "https://example.com/tiktok",
     },
     {
       name: "Telegram Booster",
       price: "Rp 50,000",
       category: "business",
-      features: ["3,000 Subscribers/members", "30,000 Views", "1,000 Reactions"],
+      features: ["3K Followers", "10K Views", "1K Reactions"],
       exampleUrl: "https://example.com/telegram",
     },
-    // Website Category
+    // Website Category - Business
     {
       name: "Simple Store",
       price: "Rp 25,000",
       category: "website",
+      subcategory: "business",
       features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://shopify.com",
     },
@@ -64,27 +67,15 @@ export default function SecondPage() {
       name: "Landing Page",
       price: "Rp 25,000",
       category: "website",
+      subcategory: "business",
       features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://unbounce.com",
-    },
-    {
-      name: "Digital Invitation",
-      price: "Rp 25,000",
-      category: "website",
-      features: ["Free Domain", "Free Hosting"],
-      exampleUrl: "https://invitation-demo.vercel.app",
-    },
-    {
-      name: "Birthday",
-      price: "Rp 25,000",
-      category: "website",
-      features: ["Free Domain", "Free Hosting"],
-      exampleUrl: "https://birthday-demo.vercel.app",
     },
     {
       name: "Portfolio",
       price: "Rp 25,000",
       category: "website",
+      subcategory: "business",
       features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://portfolio-demo.vercel.app",
     },
@@ -92,6 +83,7 @@ export default function SecondPage() {
       name: "Online Course",
       price: "Rp 25,000",
       category: "website",
+      subcategory: "business",
       features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://course-demo.vercel.app",
     },
@@ -99,20 +91,15 @@ export default function SecondPage() {
       name: "Membership",
       price: "Rp 25,000",
       category: "website",
+      subcategory: "business",
       features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://membership-demo.vercel.app",
-    },
-    {
-      name: "Event",
-      price: "Rp 25,000",
-      category: "website",
-      features: ["Free Domain", "Free Hosting"],
-      exampleUrl: "https://event-demo.vercel.app",
     },
     {
       name: "Booking",
       price: "Rp 25,000",
       category: "website",
+      subcategory: "business",
       features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://booking-demo.vercel.app",
     },
@@ -120,6 +107,7 @@ export default function SecondPage() {
       name: "Affiliate",
       price: "Rp 25,000",
       category: "website",
+      subcategory: "business",
       features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://affiliate-demo.vercel.app",
     },
@@ -127,13 +115,45 @@ export default function SecondPage() {
       name: "Link in Bio",
       price: "Rp 25,000",
       category: "website",
+      subcategory: "business",
       features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://linkinbio-demo.vercel.app",
     },
+    // Website Category - Non-Business
+    {
+      name: "Digital Invitation",
+      price: "Rp 25,000",
+      category: "website",
+      subcategory: "non-business",
+      features: ["Free Domain", "Free Hosting"],
+      exampleUrl: "https://invitation-demo.vercel.app",
+    },
+    {
+      name: "Birthday",
+      price: "Rp 25,000",
+      category: "website",
+      subcategory: "non-business",
+      features: ["Free Domain", "Free Hosting"],
+      exampleUrl: "https://birthday-demo.vercel.app",
+    },
+    {
+      name: "Event",
+      price: "Rp 25,000",
+      category: "website",
+      subcategory: "non-business",
+      features: ["Free Domain", "Free Hosting"],
+      exampleUrl: "https://event-demo.vercel.app",
+    },
   ]
 
-  // Filter products by active category
-  const filteredProducts = products.filter((product) => product.category === activeCategory)
+  // Filter products by active category and subcategory
+  const filteredProducts = products.filter((product) => {
+    if (product.category !== activeCategory) return false
+    if (activeCategory === "website" && activeSubcategory !== "all") {
+      return product.subcategory === activeSubcategory
+    }
+    return true
+  })
 
   const openExample = (product: Product) => {
     setShowExample(product)
@@ -151,7 +171,10 @@ export default function SecondPage() {
         {/* Category Buttons */}
         <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mb-6">
           <button
-            onClick={() => setActiveCategory("business")}
+            onClick={() => {
+              setActiveCategory("business")
+              setActiveSubcategory("all") // Reset subcategory when switching
+            }}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
               activeCategory === "business"
                 ? theme === "dark"
@@ -162,10 +185,13 @@ export default function SecondPage() {
                   : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
             }`}
           >
-            Online Business Package
+            Business Online Package
           </button>
           <button
-            onClick={() => setActiveCategory("website")}
+            onClick={() => {
+              setActiveCategory("website")
+              setActiveSubcategory("all") // Reset subcategory when switching
+            }}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
               activeCategory === "website"
                 ? theme === "dark"
@@ -179,6 +205,54 @@ export default function SecondPage() {
             Website
           </button>
         </div>
+
+        {/* Subcategory Buttons for Website Category */}
+        {activeCategory === "website" && (
+          <div className="flex justify-center gap-2 sm:gap-4 mb-6">
+            <button
+              onClick={() => setActiveSubcategory("all")}
+              className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
+                activeSubcategory === "all"
+                  ? theme === "dark"
+                    ? "bg-blue-600 text-white shadow-lg"
+                    : "bg-blue-500 text-white shadow-lg"
+                  : theme === "dark"
+                    ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+                    : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
+              }`}
+            >
+              All
+            </button>
+            <button
+              onClick={() => setActiveSubcategory("business")}
+              className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
+                activeSubcategory === "business"
+                  ? theme === "dark"
+                    ? "bg-blue-600 text-white shadow-lg"
+                    : "bg-blue-500 text-white shadow-lg"
+                  : theme === "dark"
+                    ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+                    : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
+              }`}
+            >
+              Business
+            </button>
+            <button
+              onClick={() => setActiveSubcategory("non-business")}
+              className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
+                activeSubcategory === "non-business"
+                  ? theme === "dark"
+                    ? "bg-blue-600 text-white shadow-lg"
+                    : "bg-blue-500 text-white shadow-lg"
+                  : theme === "dark"
+                    ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+                    : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
+              }`}
+            >
+              Non-Business
+            </button>
+          </div>
+        )}
 
         {/* Products Grid */}
         <div className="grid grid-cols-2 gap-3 sm:gap-4">
@@ -304,4 +378,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-        }
+                }
