@@ -8,7 +8,7 @@ interface Product {
   name: string
   price: string
   category: string
-  subcategory?: string
+  subcategory?: string // Added for Business/Non-Business
   features: string[]
   exampleUrl: string
 }
@@ -16,7 +16,8 @@ interface Product {
 export default function SecondPage() {
   const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const [activeSubcategory, setActiveSubcategory] = useState("business")
+  const [activeCategory, setActiveCategory] = useState("website")
+  const [activeSubcategory, setActiveSubcategory] = useState("business") // Default to "business" instead of "all"
   const [showExample, setShowExample] = useState<Product | null>(null)
 
   useEffect(() => {
@@ -24,6 +25,36 @@ export default function SecondPage() {
   }, [])
 
   const products: Product[] = [
+    // Business Online Package Category
+    {
+      name: "Business Online Package",
+      price: "Rp 50,000",
+      category: "business",
+      features: ["Landing Page Website", "Automatic Chatbot", "Social Media Content", "Social Media Booster", "Promotion Tricks"],
+      exampleUrl: "https://example.com",
+    },
+    {
+      name: "Instagram Booster",
+      price: "Rp 55,000",
+      category: "business",
+      features: ["3K Followers", "5K Likes"],
+      exampleUrl: "https://example.com/instagram",
+    },
+    {
+      name: "TikTok Booster",
+      price: "Rp 70,000",
+      category: "business",
+      features: ["3K Followers", "100K Views", "8K Likes", "1K Shares", "1K Saves"],
+      exampleUrl: "https://example.com/tiktok",
+    },
+    {
+      name: "Telegram Booster",
+      price: "Rp 50,000",
+      category: "business",
+      features: ["3K Followers", "10K Views", "1K Reactions"],
+      exampleUrl: "https://example.com/telegram",
+    },
+    // Website Category - Business
     {
       name: "Simple Store",
       price: "Rp 25,000",
@@ -88,6 +119,7 @@ export default function SecondPage() {
       features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://linkinbio-demo.vercel.app",
     },
+    // Website Category - Non-Business
     {
       name: "Digital Invitation",
       price: "Rp 25,000",
@@ -112,39 +144,39 @@ export default function SecondPage() {
       features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://event-demo.vercel.app",
     },
-    {
-      name: "Paket Bisnis Online",
-      price: "Rp 200,000",
-      category: "website",
-      subcategory: "paket",
-      features: ["Website", "Chatbot", "Sosmed", "Copywriting", "Promosi"],
-      exampleUrl: "https://bisnisonline-demo.vercel.app",
-    },
   ]
 
-  const filteredProducts = products.filter(
-    (product) =>
-      product.category === "website" &&
-      (
-        (activeSubcategory === "paket" && product.name === "Paket Bisnis Online") ||
-        product.subcategory === activeSubcategory
-      )
-  )
+  // Filter products by active category and subcategory
+  const filteredProducts = products.filter((product) => {
+    if (product.category !== activeCategory) return false
+    if (activeCategory === "website") {
+      return product.subcategory === activeSubcategory
+    }
+    return true
+  })
 
-  const openExample = (product: Product) => setShowExample(product)
-  const closeExample = () => setShowExample(null)
+  const openExample = (product: Product) => {
+    setShowExample(product)
+  }
+
+  const closeExample = () => {
+    setShowExample(null)
+  }
 
   if (!mounted) return null
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
       <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
-        {/* Subcategory Buttons */}
-        <div className="flex justify-center gap-2 sm:gap-4 mb-6">
+        {/* Category Buttons */}
+        <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mb-6">
           <button
-            onClick={() => setActiveSubcategory("business")}
+            onClick={() => {
+              setActiveCategory("business")
+              setActiveSubcategory("business") // Reset to a valid subcategory
+            }}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
-              activeSubcategory === "business"
+              activeCategory === "business"
                 ? theme === "dark"
                   ? "bg-blue-600 text-white shadow-lg"
                   : "bg-blue-500 text-white shadow-lg"
@@ -153,12 +185,15 @@ export default function SecondPage() {
                   : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
             }`}
           >
-            Business
+            Business Online Package
           </button>
           <button
-            onClick={() => setActiveSubcategory("non-business")}
+            onClick={() => {
+              setActiveCategory("website")
+              setActiveSubcategory("business") // Default to "business" subcategory
+            }}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
-              activeSubcategory === "non-business"
+              activeCategory === "website"
                 ? theme === "dark"
                   ? "bg-blue-600 text-white shadow-lg"
                   : "bg-blue-500 text-white shadow-lg"
@@ -167,23 +202,43 @@ export default function SecondPage() {
                   : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
             }`}
           >
-            Non-Business
-          </button>
-          <button
-            onClick={() => setActiveSubcategory("paket")}
-            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
-              activeSubcategory === "paket"
-                ? theme === "dark"
-                  ? "bg-blue-600 text-white shadow-lg"
-                  : "bg-blue-500 text-white shadow-lg"
-                : theme === "dark"
-                  ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
-                  : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
-            }`}
-          >
-            Paket Bisnis Online
+            Website
           </button>
         </div>
+
+        {/* Subcategory Buttons for Website Category */}
+        {activeCategory === "website" && (
+          <div className="flex justify-center gap-2 sm:gap-4 mb-6">
+            <button
+              onClick={() => setActiveSubcategory("business")}
+              className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
+                activeSubcategory === "business"
+                  ? theme === "dark"
+                    ? "bg-blue-600 text-white shadow-lg"
+                    : "bg-blue-500 text-white shadow-lg"
+                  : theme === "dark"
+                    ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+                    : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
+              }`}
+            >
+              Business
+            </button>
+            <button
+              onClick={() => setActiveSubcategory("non-business")}
+              className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
+                activeSubcategory === "non-business"
+                  ? theme === "dark"
+                    ? "bg-blue-600 text-white shadow-lg"
+                    : "bg-blue-500 text-white shadow-lg"
+                  : theme === "dark"
+                    ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+                    : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
+              }`}
+            >
+              Non-Business
+            </button>
+          </div>
+        )}
 
         {/* Products Grid */}
         <div className="grid grid-cols-2 gap-3 sm:gap-4">
@@ -194,7 +249,9 @@ export default function SecondPage() {
                 theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
               }`}
             >
+              {/* Product Info */}
               <div className="p-3">
+                {/* Header with Product Name and Price */}
                 <div className="flex justify-between items-start mb-2">
                   <h3
                     className={`text-sm font-bold leading-tight ${theme === "dark" ? "text-white" : "text-gray-900"}`}
@@ -216,6 +273,7 @@ export default function SecondPage() {
                   </span>
                 </div>
 
+                {/* Features */}
                 <div className="mb-3">
                   <ul className="space-y-1">
                     {product.features.map((feature, i) => (
@@ -233,6 +291,7 @@ export default function SecondPage() {
                   </ul>
                 </div>
 
+                {/* Action Buttons */}
                 <div className="flex gap-2">
                   <button
                     className={`flex-1 py-1.5 px-3 rounded-md font-medium text-xs transition-all duration-300 shadow-sm hover:shadow-md ${
@@ -260,7 +319,7 @@ export default function SecondPage() {
           ))}
         </div>
 
-        {/* Example Modal */}
+        {/* Example Website Modal */}
         {showExample && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
             <div
@@ -268,6 +327,7 @@ export default function SecondPage() {
                 theme === "dark" ? "bg-gray-800" : "bg-white"
               } overflow-hidden shadow-2xl`}
             >
+              {/* Modal Header */}
               <div
                 className={`flex justify-between items-center p-4 border-b ${
                   theme === "dark" ? "border-gray-700 bg-gray-750" : "border-gray-200 bg-gray-50"
@@ -287,11 +347,15 @@ export default function SecondPage() {
                   <X className="h-5 w-5" />
                 </button>
               </div>
+
+              {/* Embedded Website */}
               <div className="h-full">
                 <iframe
                   src={showExample.exampleUrl}
                   title={`Example ${showExample.name}`}
-                  className="w-full h-full border-none"
+                  className="w-full h-full"
+                  frameBorder="0"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                 />
               </div>
             </div>
