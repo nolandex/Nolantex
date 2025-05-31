@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { use.Theme } from "next-themes"
+import { useTheme } from "next-themes" // Fixed: Changed use.Theme to useTheme
 import { X, CheckCircle, ExternalLink } from "lucide-react"
 
 interface Product {
@@ -9,7 +9,7 @@ interface Product {
   price: string
   category: string
   subcategory?: string
-  features?: string[] // Made optional since Instagram Booster won't use it
+  features?: string[]
   exampleUrl: string
 }
 
@@ -19,14 +19,13 @@ export default function SecondPage() {
   const [activeCategory, setActiveCategory] = useState("website")
   const [activeSubcategory, setActiveSubcategory] = useState("business")
   const [showExample, setShowExample] = useState<Product | null>(null)
-  const [instagramBoosterOption, setInstagramBoosterOption] = useState("5K") // Default to 5K
+  const [instagramBoosterOption, setInstagramBoosterOption] = useState("5K")
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
   const products: Product[] = [
-    // Business Online Package Category
     {
       name: "Business Online Package",
       price: "Rp 50,000",
@@ -54,7 +53,6 @@ export default function SecondPage() {
       features: ["3K Followers", "10K Views", "1K Reactions"],
       exampleUrl: "https://example.com/telegram",
     },
-    // Website Category - Business
     {
       name: "Simple Store",
       price: "Rp 25,000",
@@ -119,7 +117,6 @@ export default function SecondPage() {
       features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://linkinbio-demo.vercel.app",
     },
-    // Website Category - Non-Business
     {
       name: "Digital Invitation",
       price: "Rp 25,000",
@@ -146,7 +143,6 @@ export default function SecondPage() {
     },
   ]
 
-  // Filter products by active category and subcategory
   const filteredProducts = products.filter((product) => {
     if (product.category !== activeCategory) return false
     if (activeCategory === "website") {
@@ -168,7 +164,6 @@ export default function SecondPage() {
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
       <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
-        {/* Category Buttons */}
         <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mb-6">
           <button
             onClick={() => {
@@ -206,7 +201,6 @@ export default function SecondPage() {
           </button>
         </div>
 
-        {/* Subcategory Buttons for Website Category */}
         {activeCategory === "website" && (
           <div className="flex justify-center gap-2 sm:gap-4 mb-6">
             <button
@@ -240,7 +234,6 @@ export default function SecondPage() {
           </div>
         )}
 
-        {/* Products Grid */}
         <div className="grid grid-cols-2 gap-3 sm:gap-4">
           {filteredProducts.map((product, index) => (
             <div
@@ -249,9 +242,7 @@ export default function SecondPage() {
                 theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
               }`}
             >
-              {/* Product Info */}
               <div className="p-3">
-                {/* Header with Product Name and Price */}
                 <div className="flex justify-between items-start mb-2">
                   <h3
                     className={`text-sm font-bold leading-tight ${theme === "dark" ? "text-white" : "text-gray-900"}`}
@@ -273,7 +264,6 @@ export default function SecondPage() {
                   </span>
                 </div>
 
-                {/* Instagram Booster Dropdown */}
                 {product.name === "Instagram Booster" ? (
                   <div className="mb-3">
                     <select
@@ -290,7 +280,6 @@ export default function SecondPage() {
                     </select>
                   </div>
                 ) : (
-                  // Features for other products
                   product.features && (
                     <div className="mb-3">
                       <ul className="space-y-1">
@@ -311,7 +300,6 @@ export default function SecondPage() {
                   )
                 )}
 
-                {/* Action Buttons */}
                 <div className="flex gap-2">
                   <button
                     className={`flex-1 py-1.5 px-3 rounded-md font-medium text-xs transition-all duration-300 shadow-sm hover:shadow-md ${
@@ -339,7 +327,6 @@ export default function SecondPage() {
           ))}
         </div>
 
-        {/* Example Website Modal */}
         {showExample && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
             <div
@@ -347,7 +334,6 @@ export default function SecondPage() {
                 theme === "dark" ? "bg-gray-800" : "bg-white"
               } overflow-hidden shadow-2xl`}
             >
-              {/* Modal Header */}
               <div
                 className={`flex justify-between items-center p-4 border-b ${
                   theme === "dark" ? "border-gray-700 bg-gray-750" : "border-gray-200 bg-gray-50"
@@ -367,8 +353,6 @@ export default function SecondPage() {
                   <X className="h-5 w-5" />
                 </button>
               </div>
-
-              {/* Embedded Website */}
               <div className="h-full">
                 <iframe
                   src={showExample.exampleUrl}
@@ -384,4 +368,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-                        }
+}
