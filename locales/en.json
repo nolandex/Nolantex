@@ -1,47 +1,47 @@
 {
   "Hero": {
-    "title1": "Mulai",
+    "title1": "Bangun",
     "title2": "Bisnis Online",
-    "title3": "dengan Cepat",
-    "description": "Bisnovo bantu kamu bikin bisnis online lengkap — dari website, chatbot , konten sosmed , sosmed booster. Semua dengan cepat"
+    "title3": "Mudah & Cepat",
+    "description": "Dapatkan website, konten sosmed , sosmed booster, chatbot, dan copywriting. Join reseller gratis, untung minimal Rp20.000/produk. Mulai sekarang!"
   },
   "SocialProof": {
-    "maker": " orang sudah berhasil mulai bisnisnya dengan cepat dan mudah bersama Bisnovo"
+    "maker": "1000+ orang sudah sukses membangun bisnis online bersama kami"
   },
   "Showcase": {
-    "title": "Cerita Sukses",
-    "description": "Lebih dari 1000+ orang sudah berhasil mulai bisnisnya dengan cepat dan mudah bersama Bisnovo."
+    "title": "Kisah Sukses",
+    "description": "Lebih dari 1000 UMKM dan reseller sudah sukses go online dengan mudah bersama kami."
   },
   "Feature": {
-    "title": "Kenapa harus gabung kami"
+    "title": "Mengapa Pilih Kami"
   },
   "Pricing": {
-    "title": "Paket Layanan",
-    "title2": "Harga simpel. Layanan lengkap.",
-    "description": "Pilih paket yang sesuai kebutuhanmu. Cepat, praktis, dan hasil maksimal.",
-    "doYouLike": "Tertarik dengan layanan kami?",
-    "follow": "Follow Instagram kami @bisnovoco"
+    "title": "Pilih Paket Anda",
+    "title2": "Harga Terjangkau, Layanan Komplit",
+    "description": "Paket lengkap untuk bisnis online atau reseller. Praktis, cepat, dan hasil nyata.",
+    "doYouLike": "Mau bisnis online yang gampang?",
+    "follow": "Ikuti Instagram kami @bisnovoco"
   },
   "Testimonials": {
-    "title": "Testimoni",
-    "description1": "Pendapat nyata dari mereka yang sudah membangun bisnis dengan Bisnovo.",
-    "description2": "Lihat cerita mereka",
-    "description3": "dan hasilnya."
+    "title": "Cerita Pelanggan",
+    "description1": "Pendapat nyata dari mereka yang sudah membangun bisnis dengan Bisnovo",
+    "description2": "Lihat kisah mereka",
+    "description3": "dan hasil nyatanya."
   },
   "FAQ": {
-    "title": "Pertanyaan Umum",
-    "description": "Temukan jawaban atas pertanyaan yang sering ditanyakan tentang layanan kami."
+    "title": "Pertanyaan Sering Diajukan",
+    "description": "Cari tahu jawaban atas pertanyaan tentang paket bisnis online dan program reseller kami."
   },
   "CTA": {
-    "title": "Mulai Bisnismu Hari Ini",
-    "description1": "Kami bantu buatkan",
-    "description2": "website bisnismu,",
-    "description3": "kuatkan",
-    "description4": "brand kamu, dan",
-    "description5": "bantu kamu jualan",
-    "description6": " secara online."
+    "title": "Mulai Bisnis Online Sekarang",
+    "description1": "Kami bantu buat",
+    "description2": "website profesional,",
+    "description3": "perkuat",
+    "description4": "brand Anda, dan",
+    "description5": "raup untung",
+    "description6": "dari reseller."
   },
   "CTAButton": {
-    "title": "Mulai Sekarang"
+    "title": "Daftar Sekarang"
   }
 }
