@@ -28,7 +28,7 @@ export default function SecondPage() {
       name: "Online Business Package",
       price: "Rp 50,000",
       category: "business",
-      features: ["Landing Page Website", "Automated Chatbot", "Social Media Content", "Social Media Booster", "Promotion Tips"],
+      features: ["Website", "Automated Chatbot", "Social Media Content", "Social Media Booster", "Promotional tools"],
       exampleUrl: "https://example.com",
     },
     {
@@ -40,16 +40,16 @@ export default function SecondPage() {
     },
     {
       name: "TikTok Booster",
-      price: "Rp 70,000",
+      price: "Rp 50,000",
       category: "business",
-      features: ["3,000 Followers", "100,000 Views", "8,000 Likes", "1,000 Shares", "1,000 Saves"],
+      features: ["2,000 Followers", "100,000 Views", "8,000 Likes", "1,000 Shares", "1,000 Saves"],
       exampleUrl: "https://example.com/tiktok",
     },
     {
       name: "Telegram Booster",
       price: "Rp 50,000",
       category: "business",
-      features: ["3,000 Followers", "10,000 Views", "1,000 Reactions"],
+      features: ["3,000 Subscribers/members", "30,000 Views", "1,000 Reactions"],
       exampleUrl: "https://example.com/telegram",
     },
     // Website Category
