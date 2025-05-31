@@ -42,9 +42,9 @@ export default function SecondPage() {
     },
     {
       name: "TikTok Booster",
-      price: "Rp 70,000",
+      price: "Rp 50,000",
       category: "business",
-      features: ["3K Followers", "100K Views", "8K Likes", "1K Shares", "1K Saves"],
+      features: ["2K Followers", "100K Views", "8K Likes", "1K Shares", "1K Saves"],
       exampleUrl: "https://example.com/tiktok",
     },
     {
