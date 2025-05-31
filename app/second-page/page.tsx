@@ -17,7 +17,7 @@ export default function SecondPage() {
   const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [activeCategory, setActiveCategory] = useState("website")
-  const [activeSubcategory, setActiveSubcategory] = useState("business") // Default to "business" instead of "all"
+  const [activeSubcategory, setActiveSubcategory] = useState("business") // Default to "business"
   const [showExample, setShowExample] = useState<Product | null>(null)
 
   useEffect(() => {
@@ -41,10 +41,24 @@ export default function SecondPage() {
       exampleUrl: "https://example.com/instagram",
     },
     {
-      name: "TikTok Booster",
-      price: "Rp 50,000",
+      name: "Followers Only 5K Followers",
+      price: "Rp 80,000",
       category: "business",
-      features: ["2K Followers", "100K Views", "8K Likes", "1K Shares", "1K Saves"],
+      features: ["5K Followers"],
+      exampleUrl: "https://example.com/instagram-5k",
+    },
+    {
+      name: "Followers Only 10K Followers",
+      price: "Rp 150,000",
+      category: "business",
+      features: ["10K Followers"],
+      exampleUrl: "https://example.com/instagram-10k",
+    },
+    {
+      name: "TikTok Booster",
+      price: "Rp 70,000",
+      category: "business",
+      features: ["3K Followers", "100K Views", "8K Likes", "1K Shares", "1K Saves"],
       exampleUrl: "https://example.com/tiktok",
     },
     {
@@ -173,7 +187,7 @@ export default function SecondPage() {
           <button
             onClick={() => {
               setActiveCategory("business")
-              setActiveSubcategory("business") // Reset to a valid subcategory
+              setActiveSubcategory("business")
             }}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
               activeCategory === "business"
@@ -190,7 +204,7 @@ export default function SecondPage() {
           <button
             onClick={() => {
               setActiveCategory("website")
-              setActiveSubcategory("business") // Default to "business" subcategory
+              setActiveSubcategory("business")
             }}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
               activeCategory === "website"
@@ -364,4 +378,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-}
+            }
