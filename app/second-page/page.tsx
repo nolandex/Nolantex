@@ -16,7 +16,6 @@ interface Product {
 export default function SecondPage() {
   const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const [activeCategory, setActiveCategory] = useState("website")
   const [activeSubcategory, setActiveSubcategory] = useState("business")
   const [showExample, setShowExample] = useState<Product | null>(null)
 
@@ -113,10 +112,23 @@ export default function SecondPage() {
       features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://event-demo.vercel.app",
     },
+    {
+      name: "Paket Bisnis Online",
+      price: "Rp 200,000",
+      category: "website",
+      subcategory: "paket",
+      features: ["Website", "Chatbot", "Sosmed", "Copywriting", "Promosi"],
+      exampleUrl: "https://bisnisonline-demo.vercel.app",
+    },
   ]
 
   const filteredProducts = products.filter(
-    (product) => product.category === "website" && product.subcategory === activeSubcategory
+    (product) =>
+      product.category === "website" &&
+      (
+        (activeSubcategory === "paket" && product.name === "Paket Bisnis Online") ||
+        product.subcategory === activeSubcategory
+      )
   )
 
   const openExample = (product: Product) => setShowExample(product)
@@ -127,7 +139,7 @@ export default function SecondPage() {
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
       <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
-        {/* Subcategory Buttons for Website Category */}
+        {/* Subcategory Buttons */}
         <div className="flex justify-center gap-2 sm:gap-4 mb-6">
           <button
             onClick={() => setActiveSubcategory("business")}
@@ -156,6 +168,20 @@ export default function SecondPage() {
             }`}
           >
             Non-Business
+          </button>
+          <button
+            onClick={() => setActiveSubcategory("paket")}
+            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
+              activeSubcategory === "paket"
+                ? theme === "dark"
+                  ? "bg-blue-600 text-white shadow-lg"
+                  : "bg-blue-500 text-white shadow-lg"
+                : theme === "dark"
+                  ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+                  : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
+            }`}
+          >
+            Paket Bisnis Online
           </button>
         </div>
 
