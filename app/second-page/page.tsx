@@ -1,15 +1,15 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useTheme } from "next-themes"
+import { use.Theme } from "next-themes"
 import { X, CheckCircle, ExternalLink } from "lucide-react"
 
 interface Product {
   name: string
   price: string
   category: string
-  subcategory?: string // Added for Business/Non-Business
-  features: string[]
+  subcategory?: string
+  features?: string[] // Made optional since Instagram Booster won't use it
   exampleUrl: string
 }
 
@@ -17,8 +17,9 @@ export default function SecondPage() {
   const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [activeCategory, setActiveCategory] = useState("website")
-  const [activeSubcategory, setActiveSubcategory] = useState("business") // Default to "business"
+  const [activeSubcategory, setActiveSubcategory] = useState("business")
   const [showExample, setShowExample] = useState<Product | null>(null)
+  const [instagramBoosterOption, setInstagramBoosterOption] = useState("5K") // Default to 5K
 
   useEffect(() => {
     setMounted(true)
@@ -35,24 +36,9 @@ export default function SecondPage() {
     },
     {
       name: "Instagram Booster",
-      price: "Rp 55,000",
+      price: instagramBoosterOption === "5K" ? "Rp 80,000" : "Rp 150,000",
       category: "business",
-      features: ["3K Followers", "5K Likes"],
       exampleUrl: "https://example.com/instagram",
-    },
-    {
-      name: "Instagram 5K Followers",
-      price: "Rp 80,000",
-      category: "business",
-      features: ["5K Followers"],
-      exampleUrl: "https://example.com/instagram-5k",
-    },
-    {
-      name: "Instagram 10K Followers",
-      price: "Rp 150,000",
-      category: "business",
-      features: ["10K Followers"],
-      exampleUrl: "https://example.com/instagram-10k",
     },
     {
       name: "TikTok Booster",
@@ -287,23 +273,43 @@ export default function SecondPage() {
                   </span>
                 </div>
 
-                {/* Features */}
-                <div className="mb-3">
-                  <ul className="space-y-1">
-                    {product.features.map((feature, i) => (
-                      <li key={i} className="flex items-center">
-                        <CheckCircle
-                          className={`h-3 w-3 mr-2 flex-shrink-0 ${
-                            theme === "dark" ? "text-green-400" : "text-green-500"
-                          }`}
-                        />
-                        <span className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-                          {feature}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {/* Instagram Booster Dropdown */}
+                {product.name === "Instagram Booster" ? (
+                  <div className="mb-3">
+                    <select
+                      value={instagramBoosterOption}
+                      onChange={(e) => setInstagramBoosterOption(e.target.value)}
+                      className={`w-full px-2 py-1.5 rounded-md text-xs border ${
+                        theme === "dark"
+                          ? "bg-gray-700 border-gray-600 text-gray-200"
+                          : "bg-white border-gray-300 text-gray-700"
+                      } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                    >
+                      <option value="5K">5K Followers</option>
+                      <option value="10K">10K Followers</option>
+                    </select>
+                  </div>
+                ) : (
+                  // Features for other products
+                  product.features && (
+                    <div className="mb-3">
+                      <ul className="space-y-1">
+                        {product.features.map((feature, i) => (
+                          <li key={i} className="flex items-center">
+                            <CheckCircle
+                              className={`h-3 w-3 mr-2 flex-shrink-0 ${
+                                theme === "dark" ? "text-green-400" : "text-green-500"
+                              }`}
+                            />
+                            <span className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                              {feature}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )
+                )}
 
                 {/* Action Buttons */}
                 <div className="flex gap-2">
@@ -378,4 +384,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-}
+                        }
