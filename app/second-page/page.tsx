@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useTheme } from "next-themes" // Fixed: Changed use.Theme to useTheme
+import { useTheme } from "next-themes"
 import { X, CheckCircle, ExternalLink } from "lucide-react"
 
 interface Product {
@@ -19,11 +19,24 @@ export default function SecondPage() {
   const [activeCategory, setActiveCategory] = useState("website")
   const [activeSubcategory, setActiveSubcategory] = useState("business")
   const [showExample, setShowExample] = useState<Product | null>(null)
-  const [instagramBoosterOption, setInstagramBoosterOption] = useState("5K")
+  const [instagramBoosterOption, setInstagramBoosterOption] = useState("3K") // Default to 3K
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  const getInstagramBoosterFeatures = (option: string) => {
+    switch (option) {
+      case "3K":
+        return ["3K Followers", "5K Likes"]
+      case "5K":
+        return ["5K Followers", "10K Likes"]
+      case "10K":
+        return ["10K Followers", "15K Likes"]
+      default:
+        return []
+    }
+  }
 
   const products: Product[] = [
     {
@@ -35,8 +48,9 @@ export default function SecondPage() {
     },
     {
       name: "Instagram Booster",
-      price: instagramBoosterOption === "5K" ? "Rp 80,000" : "Rp 150,000",
+      price: instagramBoosterOption === "3K" ? "Rp 50,000" : instagramBoosterOption === "5K" ? "Rp 80,000" : "Rp 150,000",
       category: "business",
+      features: getInstagramBoosterFeatures(instagramBoosterOption),
       exampleUrl: "https://example.com/instagram",
     },
     {
@@ -264,7 +278,7 @@ export default function SecondPage() {
                   </span>
                 </div>
 
-                {product.name === "Instagram Booster" ? (
+                {product.name === "Instagram Booster" && (
                   <div className="mb-3">
                     <select
                       value={instagramBoosterOption}
@@ -275,29 +289,30 @@ export default function SecondPage() {
                           : "bg-white border-gray-300 text-gray-700"
                       } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                     >
+                      <option value="3K">3K Followers</option>
                       <option value="5K">5K Followers</option>
                       <option value="10K">10K Followers</option>
                     </select>
                   </div>
-                ) : (
-                  product.features && (
-                    <div className="mb-3">
-                      <ul className="space-y-1">
-                        {product.features.map((feature, i) => (
-                          <li key={i} className="flex items-center">
-                            <CheckCircle
-                              className={`h-3 w-3 mr-2 flex-shrink-0 ${
-                                theme === "dark" ? "text-green-400" : "text-green-500"
-                              }`}
-                            />
-                            <span className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-                              {feature}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )
+                )}
+
+                {product.features && (
+                  <div className="mb-3">
+                    <ul className="space-y-1">
+                      {product.features.map((feature, i) => (
+                        <li key={i} className="flex items-center">
+                          <CheckCircle
+                            className={`h-3 w-3 mr-2 flex-shrink-0 ${
+                              theme === "dark" ? "text-green-400" : "text-green-500"
+                            }`}
+                          />
+                          <span className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                            {feature}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 )}
 
                 <div className="flex gap-2">
