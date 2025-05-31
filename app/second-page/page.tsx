@@ -23,88 +23,116 @@ export default function SecondPage() {
   }, [])
 
   const products: Product[] = [
-    // Kategori Paket Bisnis Online
+    // Business Online Package Category
     {
-      name: "Paket Bisnis Online",
-      price: "Rp 50.000",
+      name: "Online Business Package",
+      price: "Rp 50,000",
       category: "business",
-      features: ["Website Landing Page", "Chatbot Otomatis", "Social Media Content", "Sosmed Booster", "Trik Promosi"],
+      features: ["Landing Page Website", "Automated Chatbot", "Social Media Content", "Social Media Booster", "Promotion Tips"],
       exampleUrl: "https://example.com",
     },
-    // Kategori Website
     {
-      name: "Toko Online",
-      price: "Rp 25.000",
+      name: "Instagram Booster",
+      price: "Rp 55,000",
+      category: "business",
+      features: ["3,000 Followers", "5,000 Likes"],
+      exampleUrl: "https://example.com/instagram",
+    },
+    {
+      name: "TikTok Booster",
+      price: "Rp 70,000",
+      category: "business",
+      features: ["3,000 Followers", "100,000 Views", "8,000 Likes", "1,000 Shares", "1,000 Saves"],
+      exampleUrl: "https://example.com/tiktok",
+    },
+    {
+      name: "Telegram Booster",
+      price: "Rp 50,000",
+      category: "business",
+      features: ["3,000 Followers", "10,000 Views", "1,000 Reactions"],
+      exampleUrl: "https://example.com/telegram",
+    },
+    // Website Category
+    {
+      name: "Simple Store",
+      price: "Rp 25,000",
       category: "website",
-      features: ["Domain gratis", "Hosting gratis"],
+      features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://shopify.com",
     },
     {
       name: "Landing Page",
-      price: "Rp 25.000",
+      price: "Rp 25,000",
       category: "website",
-      features: ["Domain gratis", "Hosting gratis"],
+      features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://unbounce.com",
     },
     {
-      name: "Undangan Digital",
-      price: "Rp 25.000",
+      name: "Digital Invitation",
+      price: "Rp 25,000",
       category: "website",
-      features: ["Domain gratis", "Hosting gratis"],
+      features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://invitation-demo.vercel.app",
     },
     {
-      name: "Ulang Tahun",
-      price: "Rp 25.000",
+      name: "Birthday",
+      price: "Rp 25,000",
       category: "website",
-      features: ["Domain gratis", "Hosting gratis"],
+      features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://birthday-demo.vercel.app",
     },
     {
       name: "Portfolio",
-      price: "Rp 25.000",
+      price: "Rp 25,000",
       category: "website",
-      features: ["Domain gratis", "Hosting gratis"],
+      features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://portfolio-demo.vercel.app",
     },
     {
-      name: "Kursus Online",
-      price: "Rp 25.000",
+      name: "Online Course",
+      price: "Rp 25,000",
       category: "website",
-      features: ["Domain gratis", "Hosting gratis"],
+      features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://course-demo.vercel.app",
     },
     {
-      name: "Keanggotaan",
-      price: "Rp 25.000",
+      name: "Membership",
+      price: "Rp 25,000",
       category: "website",
-      features: ["Domain gratis", "Hosting gratis"],
+      features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://membership-demo.vercel.app",
     },
     {
-      name: "Acara",
-      price: "Rp 25.000",
+      name: "Event",
+      price: "Rp 25,000",
       category: "website",
-      features: ["Domain gratis", "Hosting gratis"],
+      features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://event-demo.vercel.app",
     },
     {
-      name: "Pemesanan",
-      price: "Rp 25.000",
+      name: "Booking",
+      price: "Rp 25,000",
       category: "website",
-      features: ["Domain gratis", "Hosting gratis"],
+      features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://booking-demo.vercel.app",
     },
     {
-      name: "Afiliasi",
-      price: "Rp 25.000",
+      name: "Affiliate",
+      price: "Rp 25,000",
       category: "website",
-      features: ["Domain gratis", "Hosting gratis"],
+      features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://affiliate-demo.vercel.app",
+    },
+    {
+      name: "Link in Bio",
+      price: "Rp 25,000",
+      category: "website",
+      features: ["Free Domain", "Free Hosting"],
+      exampleUrl: "https://linkinbio-demo.vercel.app",
     },
   ]
 
-  // Filter produk berdasarkan kategori aktif
+  // Filter products by active category
   const filteredProducts = products.filter((product) => product.category === activeCategory)
 
   const openExample = (product: Product) => {
@@ -134,7 +162,7 @@ export default function SecondPage() {
                   : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
             }`}
           >
-            Paket Bisnis Online
+            Online Business Package
           </button>
           <button
             onClick={() => setActiveCategory("website")}
@@ -163,7 +191,7 @@ export default function SecondPage() {
             >
               {/* Product Info */}
               <div className="p-3">
-                {/* Header dengan Nama Produk dan Harga */}
+                {/* Header with Product Name and Price */}
                 <div className="flex justify-between items-start mb-2">
                   <h3
                     className={`text-sm font-bold leading-tight ${theme === "dark" ? "text-white" : "text-gray-900"}`}
@@ -212,7 +240,7 @@ export default function SecondPage() {
                         : "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white"
                     }`}
                   >
-                    Bayar
+                    Pay
                   </button>
                   <button
                     onClick={() => openExample(product)}
@@ -223,7 +251,7 @@ export default function SecondPage() {
                     } flex items-center gap-1 shadow-sm hover:shadow-md`}
                   >
                     <ExternalLink className="h-3 w-3" />
-                    Contoh
+                    Example
                   </button>
                 </div>
               </div>
@@ -246,7 +274,7 @@ export default function SecondPage() {
                 }`}
               >
                 <h2 className={`text-lg font-bold ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-                  Contoh: {showExample.name}
+                  Example: {showExample.name}
                 </h2>
                 <button
                   onClick={closeExample}
@@ -264,7 +292,7 @@ export default function SecondPage() {
               <div className="h-full">
                 <iframe
                   src={showExample.exampleUrl}
-                  title={`Contoh ${showExample.name}`}
+                  title={`Example ${showExample.name}`}
                   className="w-full h-full"
                   frameBorder="0"
                   sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
@@ -276,4 +304,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-}
+        }
