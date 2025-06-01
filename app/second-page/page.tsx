@@ -19,7 +19,8 @@ export default function SecondPage() {
   const [activeCategory, setActiveCategory] = useState("website")
   const [activeSubcategory, setActiveSubcategory] = useState("business")
   const [showExample, setShowExample] = useState<Product | null>(null)
-  const [instagramBoosterOption, setInstagramBoosterOption] = useState("3K") // Default to 3K
+  const [instagramBoosterOption, setInstagramBoosterOption] = useState("3K")
+  const [tiktokBoosterOption, setTiktokBoosterOption] = useState("2K")
 
   useEffect(() => {
     setMounted(true)
@@ -28,11 +29,29 @@ export default function SecondPage() {
   const getInstagramBoosterFeatures = (option: string) => {
     switch (option) {
       case "3K":
-        return ["3K Followers", "5K Likes"]
+        return ["3K Followers", "5K Likes", "100K Views"]
       case "5K":
-        return ["5K Followers", "10K Likes"]
+        return ["5K Followers", "10K Likes", "170K Views"]
       case "10K":
-        return ["10K Followers", "15K Likes"]
+        return ["10K Followers", "15K Likes", "300K Views"]
+      default:
+        return []
+    }
+  }
+
+  const getTikTokBoosterFeatures = (option: string) => {
+    const baseViews = 70000
+    const baseLikes = 5000
+    const baseShares = 700
+    const baseSaves = 700
+
+    switch (option) {
+      case "2K":
+        return [`2K Followers`, `${baseViews / 1000}K Views`, `${baseLikes / 1000}K Likes`, `${baseShares} Shares`, `${baseSaves} Saves`]
+      case "4K":
+        return [`4K Followers`, `${(baseViews * 2) / 1000}K Views`, `${(baseLikes * 2) / 1000}K Likes`, `${baseShares * 2} Shares`, `${baseSaves * 2} Saves`]
+      case "6K":
+        return [`6K Followers`, `${(baseViews * 3) / 1000}K Views`, `${(baseLikes * 3) / 1000}K Likes`, `${baseShares * 3} Shares`, `${baseSaves * 3} Saves`]
       default:
         return []
     }
@@ -42,28 +61,28 @@ export default function SecondPage() {
     {
       name: "Business Online Package",
       price: "Rp 50,000",
-      category: "business",
+      category: "business_package",
       features: ["Landing Page Website", "Automatic Chatbot", "Social Media Content", "Social Media Booster", "Promotion Tricks"],
       exampleUrl: "https://example.com",
     },
     {
       name: "Instagram Booster",
       price: instagramBoosterOption === "3K" ? "Rp 50,000" : instagramBoosterOption === "5K" ? "Rp 80,000" : "Rp 150,000",
-      category: "business",
+      category: "social_boosters",
       features: getInstagramBoosterFeatures(instagramBoosterOption),
       exampleUrl: "https://example.com/instagram",
     },
     {
       name: "TikTok Booster",
-      price: "Rp 70,000",
-      category: "business",
-      features: ["3K Followers", "100K Views", "8K Likes", "1K Shares", "1K Saves"],
+      price: tiktokBoosterOption === "2K" ? "Rp 50,000" : tiktokBoosterOption === "4K" ? "Rp 80,000" : "Rp 100,000", // Updated dynamic price
+      category: "social_boosters",
+      features: getTikTokBoosterFeatures(tiktokBoosterOption),
       exampleUrl: "https://example.com/tiktok",
     },
     {
       name: "Telegram Booster",
       price: "Rp 50,000",
-      category: "business",
+      category: "social_boosters",
       features: ["3K Followers", "10K Views", "1K Reactions"],
       exampleUrl: "https://example.com/telegram",
     },
@@ -181,11 +200,11 @@ export default function SecondPage() {
         <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mb-6">
           <button
             onClick={() => {
-              setActiveCategory("business")
+              setActiveCategory("business_package")
               setActiveSubcategory("business")
             }}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
-              activeCategory === "business"
+              activeCategory === "business_package"
                 ? theme === "dark"
                   ? "bg-blue-600 text-white shadow-lg"
                   : "bg-blue-500 text-white shadow-lg"
@@ -195,6 +214,23 @@ export default function SecondPage() {
             }`}
           >
             Business Online Package
+          </button>
+          <button
+            onClick={() => {
+              setActiveCategory("social_boosters")
+              setActiveSubcategory("business")
+            }}
+            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
+              activeCategory === "social_boosters"
+                ? theme === "dark"
+                  ? "bg-blue-600 text-white shadow-lg"
+                  : "bg-blue-500 text-white shadow-lg"
+                : theme === "dark"
+                  ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+                  : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
+            }`}
+          >
+            Social Media Boosters
           </button>
           <button
             onClick={() => {
@@ -248,7 +284,7 @@ export default function SecondPage() {
           </div>
         )}
 
-        <div className="grid grid-cols-2 gap-3 sm:gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
           {filteredProducts.map((product, index) => (
             <div
               key={index}
@@ -280,6 +316,9 @@ export default function SecondPage() {
 
                 {product.name === "Instagram Booster" && (
                   <div className="mb-3">
+                    <label className={`block text-xs font-medium mb-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      Select Option:
+                    </label>
                     <select
                       value={instagramBoosterOption}
                       onChange={(e) => setInstagramBoosterOption(e.target.value)}
@@ -292,6 +331,27 @@ export default function SecondPage() {
                       <option value="3K">3K Followers</option>
                       <option value="5K">5K Followers</option>
                       <option value="10K">10K Followers</option>
+                    </select>
+                  </div>
+                )}
+
+                {product.name === "TikTok Booster" && (
+                  <div className="mb-3">
+                     <label className={`block text-xs font-medium mb-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      Select Follower Count:
+                    </label>
+                    <select
+                      value={tiktokBoosterOption}
+                      onChange={(e) => setTiktokBoosterOption(e.target.value)}
+                      className={`w-full px-2 py-1.5 rounded-md text-xs border ${
+                        theme === "dark"
+                          ? "bg-gray-700 border-gray-600 text-gray-200"
+                          : "bg-white border-gray-300 text-gray-700"
+                      } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                    >
+                      <option value="2K">2K Followers (Rp 50.000)</option>
+                      <option value="4K">4K Followers (Rp 80.000)</option>
+                      <option value="6K">6K Followers (Rp 100.000)</option>
                     </select>
                   </div>
                 )}
@@ -368,7 +428,7 @@ export default function SecondPage() {
                   <X className="h-5 w-5" />
                 </button>
               </div>
-              <div className="h-full">
+              <div className="h-full pb-12 sm:pb-10">
                 <iframe
                   src={showExample.exampleUrl}
                   title={`Example ${showExample.name}`}
