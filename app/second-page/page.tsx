@@ -74,7 +74,7 @@ export default function SecondPage() {
     },
     {
       name: "TikTok Booster",
-      price: tiktokBoosterOption === "2K" ? "Rp 50,000" : tiktokBoosterOption === "4K" ? "Rp 80,000" : "Rp 100,000", // Updated dynamic price
+      price: tiktokBoosterOption === "2K" ? "Rp 50,000" : tiktokBoosterOption === "4K" ? "Rp 80,000" : "Rp 100,000",
       category: "social_boosters",
       features: getTikTokBoosterFeatures(tiktokBoosterOption),
       exampleUrl: "https://example.com/tiktok",
@@ -284,7 +284,8 @@ export default function SecondPage() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+        {/* Changed back to grid-cols-2 for all sizes as per original user code structure */}
+        <div className="grid grid-cols-2 gap-3 sm:gap-4">
           {filteredProducts.map((product, index) => (
             <div
               key={index}
