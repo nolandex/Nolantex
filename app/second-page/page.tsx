@@ -10,7 +10,8 @@ interface Product {
   category: string
   subcategory?: string
   features?: string[]
-  exampleUrl: string
+  exampleUrl?: string
+  imageUrl?: string
 }
 
 export default function SecondPage() {
@@ -21,6 +22,7 @@ export default function SecondPage() {
   const [showExample, setShowExample] = useState<Product | null>(null)
   const [instagramBoosterOption, setInstagramBoosterOption] = useState("3K")
   const [tiktokBoosterOption, setTiktokBoosterOption] = useState("2K")
+  const [telegramBoosterOption, setTelegramBoosterOption] = useState("3K")
 
   useEffect(() => {
     setMounted(true)
@@ -57,6 +59,19 @@ export default function SecondPage() {
     }
   }
 
+  const getTelegramBoosterFeatures = (option: string) => {
+    switch (option) {
+      case "3K":
+        return ["3K Followers", "10K Views", "1K Reactions"]
+      case "6K":
+        return ["6K Followers", "20K Views", "2K Reactions"]
+      case "9K":
+        return ["9K Followers", "30K Views", "3K Reactions"]
+      default:
+        return []
+    }
+  }
+
   const products: Product[] = [
     {
       name: "Business Online Package",
@@ -74,16 +89,16 @@ export default function SecondPage() {
     },
     {
       name: "TikTok Booster",
-      price: tiktokBoosterOption === "2K" ? "Rp 50,000" : tiktokBoosterOption === "4K" ? "Rp 80,000" : "Rp 100,000",
+      price: tiktokBoosterOption === "2K" ? "Rp 50,000" : tiktokBoosterOption === "4K" ? "Rp 80,000" : "Rp 120,000",
       category: "social_boosters",
       features: getTikTokBoosterFeatures(tiktokBoosterOption),
       exampleUrl: "https://example.com/tiktok",
     },
     {
       name: "Telegram Booster",
-      price: "Rp 50,000",
+      price: telegramBoosterOption === "3K" ? "Rp 50,000" : telegramBoosterOption === "6K" ? "Rp 100,000" : "Rp 150,000",
       category: "social_boosters",
-      features: ["3K Followers", "10K Views", "1K Reactions"],
+      features: getTelegramBoosterFeatures(telegramBoosterOption),
       exampleUrl: "https://example.com/telegram",
     },
     {
@@ -174,6 +189,36 @@ export default function SecondPage() {
       features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://event-demo.vercel.app",
     },
+    {
+      name: "Social Media Template 1",
+      price: "Rp 10,000",
+      category: "social_media_content",
+      imageUrl: "/templates/template1.jpg",
+    },
+    {
+      name: "Social Media Template 2",
+      price: "Rp 10,000",
+      category: "social_media_content",
+      imageUrl: "/templates/template2.jpg",
+    },
+    {
+      name: "Social Media Template 3",
+      price: "Rp 10,000",
+      category: "social_media_content",
+      imageUrl: "/templates/template3.jpg",
+    },
+    {
+      name: "Social Media Template 4",
+      price: "Rp 10,000",
+      category: "social_media_content",
+      imageUrl: "/templates/template4.jpg",
+    },
+    {
+      name: "Social Media Template 5",
+      price: "Rp 10,000",
+      category: "social_media_content",
+      imageUrl: "/templates/template5.jpg",
+    },
   ]
 
   const filteredProducts = products.filter((product) => {
@@ -197,7 +242,7 @@ export default function SecondPage() {
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
       <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
-        <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mb-6">
+        <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-6">
           <button
             onClick={() => {
               setActiveCategory("business_package")
@@ -249,6 +294,23 @@ export default function SecondPage() {
           >
             Website
           </button>
+          <button
+            onClick={() => {
+              setActiveCategory("social_media_content")
+              setActiveSubcategory("business")
+            }}
+            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
+              activeCategory === "social_media_content"
+                ? theme === "dark"
+                  ? "bg-blue-600 text-white shadow-lg"
+                  : "bg-blue-500 text-white shadow-lg"
+                : theme === "dark"
+                  ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+                  : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
+            }`}
+          >
+            Social Media Content
+          </button>
         </div>
 
         {activeCategory === "website" && (
@@ -284,7 +346,6 @@ export default function SecondPage() {
           </div>
         )}
 
-        {/* Changed back to grid-cols-2 for all sizes as per original user code structure */}
         <div className="grid grid-cols-2 gap-3 sm:gap-4">
           {filteredProducts.map((product, index) => (
             <div
@@ -294,6 +355,13 @@ export default function SecondPage() {
               }`}
             >
               <div className="p-3">
+                {product.imageUrl ? (
+                  <img
+                    src={product.imageUrl}
+                    alt={product.name}
+                    className="w-full h-32 object-cover rounded-md mb-3"
+                  />
+                ) : null}
                 <div className="flex justify-between items-start mb-2">
                   <h3
                     className={`text-sm font-bold leading-tight ${theme === "dark" ? "text-white" : "text-gray-900"}`}
@@ -338,7 +406,7 @@ export default function SecondPage() {
 
                 {product.name === "TikTok Booster" && (
                   <div className="mb-3">
-                     <label className={`block text-xs font-medium mb-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                    <label className={`block text-xs font-medium mb-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
                       Select Follower Count:
                     </label>
                     <select
@@ -350,9 +418,30 @@ export default function SecondPage() {
                           : "bg-white border-gray-300 text-gray-700"
                       } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                     >
-                      <option value="2K">2K Followers (Rp 50.000)</option>
-                      <option value="4K">4K Followers (Rp 80.000)</option>
-                      <option value="6K">6K Followers (Rp 100.000)</option>
+                      <option value="2K">2K Followers</option>
+                      <option value="4K">4K Followers</option>
+                      <option value="6K">6K Followers</option>
+                    </select>
+                  </div>
+                )}
+
+                {product.name === "Telegram Booster" && (
+                  <div className="mb-3">
+                    <label className={`block text-xs font-medium mb-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      Select Follower Count:
+                    </label>
+                    <select
+                      value={telegramBoosterOption}
+                      onChange={(e) => setTelegramBoosterOption(e.target.value)}
+                      className={`w-full px-2 py-1.5 rounded-md text-xs border ${
+                        theme === "dark"
+                          ? "bg-gray-700 border-gray-600 text-gray-200"
+                          : "bg-white border-gray-300 text-gray-700"
+                      } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                    >
+                      <option value="3K">3K Followers</option>
+                      <option value="6K">6K Followers</option>
+                      <option value="9K">9K Followers</option>
                     </select>
                   </div>
                 )}
@@ -386,17 +475,19 @@ export default function SecondPage() {
                   >
                     Pay
                   </button>
-                  <button
-                    onClick={() => openExample(product)}
-                    className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
-                      theme === "dark"
-                        ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500"
-                        : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
-                    } flex items-center gap-1 shadow-sm hover:shadow-md`}
-                  >
-                    <ExternalLink className="h-3 w-3" />
-                    Example
-                  </button>
+                  {product.exampleUrl && (
+                    <button
+                      onClick={() => openExample(product)}
+                      className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
+                        theme === "dark"
+                          ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500"
+                          : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
+                      } flex items-center gap-1 shadow-sm hover:shadow-md`}
+                    >
+                      <ExternalLink className="h-3 w-3" />
+                      Example
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
@@ -444,4 +535,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-}
+              }
