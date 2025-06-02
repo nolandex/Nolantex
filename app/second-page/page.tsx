@@ -2,9 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
-import { X, CheckCircle, ExternalLink, ChevronRight } from "lucide-react"
-import { Swiper, SwiperSlide } from "swiper/react"
-import "swiper/css"
+import { X, CheckCircle, ExternalLink } from "lucide-react"
 
 interface Product {
   name: string
@@ -25,6 +23,7 @@ export default function SecondPage() {
   const [instagramBoosterOption, setInstagramBoosterOption] = useState("3000")
   const [tiktokBoosterOption, setTiktokBoosterOption] = useState("2000")
   const [telegramBoosterOption, setTelegramBoosterOption] = useState("3000")
+  const [showImagePopup, setShowImagePopup] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -107,7 +106,7 @@ export default function SecondPage() {
       name: "Desain Konten",
       price: "Rp 10,000",
       category: "kebutuhan_bisnis",
-      imageUrl: "/templates/template1.jpg",
+      imageUrl: "https://via.placeholder.com/300x200?text=Template",
     },
     {
       name: "Landing Page",
@@ -215,7 +214,6 @@ export default function SecondPage() {
     return true
   })
 
-  // Group products into pairs for 2-column layout
   const groupedProducts: Product[][] = []
   for (let i = 0; i < filteredProducts.length; i += 2) {
     groupedProducts.push(filteredProducts.slice(i, i + 2))
@@ -227,6 +225,14 @@ export default function SecondPage() {
 
   const closeExample = () => {
     setShowExample(null)
+  }
+
+  const openImagePopup = () => {
+    setShowImagePopup(true)
+  }
+
+  const closeImagePopup = () => {
+    setShowImagePopup(false)
   }
 
   if (!mounted) return null
@@ -315,38 +321,13 @@ export default function SecondPage() {
                   }`}
                 >
                   <div className="p-3">
-                    {product.name === "Desain Konten" ? (
+                    {product.name === "Desain Konten" && product.imageUrl ? (
                       <div className="relative">
-                        <Swiper
-                          spaceBetween={10}
-                          slidesPerView={1}
-                          className="w-full h-32 mb-3"
-                        >
-                          {[
-                            "https://via.placeholder.com/300x200?text=Template+1",
-                            "https://via.placeholder.com/300x200?text=Template+2",
-                            "https://via.placeholder.com/300x200?text=Template+3",
-                          ].map((img, i) => (
-                            <SwiperSlide key={i}>
-                              <div className="relative w-full h-32">
-                                <img
-                                  src={img}
-                                  alt={`Desain Konten ${i + 1}`}
-                                  className="w-full h-full object-cover rounded-md"
-                                />
-                                <span
-                                  className={`absolute top-2 left-2 px-2 py-1 text-xs font-bold text-white bg-black bg-opacity-50 rounded`}
-                                >
-                                  No {i + 1}
-                                </span>
-                              </div>
-                            </SwiperSlide>
-                          ))}
-                        </Swiper>
-                        <ChevronRight
-                          className={`absolute top-1/2 right-2 transform -translate-y-1/2 h-4 w-4 ${
-                            theme === "dark" ? "text-gray-300" : "text-gray-600"
-                          } opacity-75`}
+                        <img
+                          src={product.imageUrl}
+                          alt={product.name}
+                          className="w-full h-32 object-cover rounded-md mb-3 cursor-pointer"
+                          onClick={openImagePopup}
                         />
                       </div>
                     ) : product.imageUrl ? (
@@ -528,7 +509,33 @@ export default function SecondPage() {
             </div>
           </div>
         )}
+
+        {showImagePopup && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2">
+            <div
+              className={`relative max-w-[90%] max-h-[90%] rounded-xl ${
+                theme === "dark" ? "bg-gray-800" : "bg-white"
+              } overflow-hidden shadow-2xl`}
+            >
+              <button
+                onClick={closeImagePopup}
+                className={`absolute top-2 right-2 p-2 rounded-lg transition-all duration-200 ${
+                  theme === "dark"
+                    ? "hover:bg-gray-700 text-gray-400 hover:text-white"
+                    : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                <X className="h-5 w-5" />
+              </button>
+              <img
+                src="https://via.placeholder.com/300x200?text=Template"
+                alt="Desain Konten"
+                className="w-full h-auto object-contain"
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
-                                                                            }
+}
