@@ -17,25 +17,25 @@ interface Product {
 export default function SecondPage() {
   const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const [activeCategory, setActiveCategory] = useState("website")
+  const [activeCategory, setActiveCategory] = useState("kebutuhan_bisnis")
   const [activeSubcategory, setActiveSubcategory] = useState("business")
   const [showExample, setShowExample] = useState<Product | null>(null)
-  const [instagramBoosterOption, setInstagramBoosterOption] = useState("3K")
-  const [tiktokBoosterOption, setTiktokBoosterOption] = useState("2K")
-  const [telegramBoosterOption, setTelegramBoosterOption] = useState("3K")
+  const [instagramBoosterOption, setInstagramBoosterOption] = useState("3000")
+  const [tiktokBoosterOption, setTiktokBoosterOption] = useState("2000")
+  const [telegramBoosterOption, setTelegramBoosterOption] = useState("3000")
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  const getInstagramBoosterFeatures = (option: string) => {
+  const getInstagramBoosterFeatures = (option: string) => .
     switch (option) {
-      case "3K":
-        return ["3K Followers", "5K Likes", "100K Views"]
-      case "5K":
-        return ["5K Followers", "10K Likes", "170K Views"]
-      case "10K":
-        return ["10K Followers", "15K Likes", "300K Views"]
+      case "3000":
+        return ["5000 Likes", "100000 Views"]
+      case "5000":
+        return ["10000 Likes", "170000 Views"]
+      case "10000":
+        return ["15000 Likes", "300000 Views"]
       default:
         return []
     }
@@ -48,12 +48,12 @@ export default function SecondPage() {
     const baseSaves = 700
 
     switch (option) {
-      case "2K":
-        return [`2K Followers`, `${baseViews / 1000}K Views`, `${baseLikes / 1000}K Likes`, `${baseShares} Shares`, `${baseSaves} Saves`]
-      case "4K":
-        return [`4K Followers`, `${(baseViews * 2) / 1000}K Views`, `${(baseLikes * 2) / 1000}K Likes`, `${baseShares * 2} Shares`, `${baseSaves * 2} Saves`]
-      case "6K":
-        return [`6K Followers`, `${(baseViews * 3) / 1000}K Views`, `${(baseLikes * 3) / 1000}K Likes`, `${baseShares * 3} Shares`, `${baseSaves * 3} Saves`]
+      case "2000":
+        return [`${baseViews} Views`, `${baseLikes} Likes`, `${baseShares} Shares`, `${baseSaves} Saves`]
+      case "4000":
+        return [`${baseViews * 2} Views`, `${baseLikes * 2} Likes`, `${baseShares * 2} Shares`, `${baseSaves * 2} Saves`]
+      case "6000":
+        return [`${baseViews * 3} Views`, `${baseLikes * 3} Likes`, `${baseShares * 3} Shares`, `${baseSaves * 3} Saves`]
       default:
         return []
     }
@@ -61,12 +61,12 @@ export default function SecondPage() {
 
   const getTelegramBoosterFeatures = (option: string) => {
     switch (option) {
-      case "3K":
-        return ["3K Followers", "10K Views", "1K Reactions"]
-      case "6K":
-        return ["6K Followers", "20K Views", "2K Reactions"]
-      case "9K":
-        return ["9K Followers", "30K Views", "3K Reactions"]
+      case "3000":
+        return ["10000 Views", "1000 Reactions"]
+      case "6000":
+        return ["20000 Views", "2000 Reactions"]
+      case "9000":
+        return ["30000 Views", "3000 Reactions"]
       default:
         return []
     }
@@ -74,30 +74,30 @@ export default function SecondPage() {
 
   const products: Product[] = [
     {
-      name: "Business Online Package",
+      name: "Kebutuhan Bisnis",
       price: "Rp 50,000",
-      category: "business_package",
+      category: "kebutuhan_bisnis",
       features: ["Landing Page Website", "Automatic Chatbot", "Social Media Content", "Social Media Booster", "Promotion Tricks"],
       exampleUrl: "https://example.com",
     },
     {
       name: "Instagram Booster",
-      price: instagramBoosterOption === "3K" ? "Rp 50,000" : instagramBoosterOption === "5K" ? "Rp 80,000" : "Rp 150,000",
-      category: "social_boosters",
+      price: instagramBoosterOption === "3000" ? "Rp 50,000" : instagramBoosterOption === "5000" ? "Rp 80,000" : "Rp 150,000",
+      category montrent à l'écran
       features: getInstagramBoosterFeatures(instagramBoosterOption),
       exampleUrl: "https://example.com/instagram",
     },
     {
       name: "TikTok Booster",
-      price: tiktokBoosterOption === "2K" ? "Rp 50,000" : tiktokBoosterOption === "4K" ? "Rp 80,000" : "Rp 120,000",
-      category: "social_boosters",
+      price: tiktokBoosterOption === "2000" ? "Rp 50,000" : tiktokBoosterOption === "4000" ? "Rp 80,000" : "Rp 120,000",
+      category: "kebutuhan_bisnis",
       features: getTikTokBoosterFeatures(tiktokBoosterOption),
       exampleUrl: "https://example.com/tiktok",
     },
     {
       name: "Telegram Booster",
-      price: telegramBoosterOption === "3K" ? "Rp 50,000" : telegramBoosterOption === "6K" ? "Rp 100,000" : "Rp 150,000",
-      category: "social_boosters",
+      price: telegramBoosterOption === "3000" ? "Rp 50,000" : telegramBoosterOption === "6000" ? "Rp 100,000" : "Rp 150,000",
+      category: "kebutuhan_bisnis",
       features: getTelegramBoosterFeatures(telegramBoosterOption),
       exampleUrl: "https://example.com/telegram",
     },
@@ -192,32 +192,8 @@ export default function SecondPage() {
     {
       name: "Social Media Template 1",
       price: "Rp 10,000",
-      category: "social_media_content",
+      category: "kebutuhan_bisnis",
       imageUrl: "/templates/template1.jpg",
-    },
-    {
-      name: "Social Media Template 2",
-      price: "Rp 10,000",
-      category: "social_media_content",
-      imageUrl: "/templates/template2.jpg",
-    },
-    {
-      name: "Social Media Template 3",
-      price: "Rp 10,000",
-      category: "social_media_content",
-      imageUrl: "/templates/template3.jpg",
-    },
-    {
-      name: "Social Media Template 4",
-      price: "Rp 10,000",
-      category: "social_media_content",
-      imageUrl: "/templates/template4.jpg",
-    },
-    {
-      name: "Social Media Template 5",
-      price: "Rp 10,000",
-      category: "social_media_content",
-      imageUrl: "/templates/template5.jpg",
     },
   ]
 
@@ -245,11 +221,11 @@ export default function SecondPage() {
         <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-6">
           <button
             onClick={() => {
-              setActiveCategory("business_package")
+              setActiveCategory("kebutuhan_bisnis")
               setActiveSubcategory("business")
             }}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
-              activeCategory === "business_package"
+              activeCategory === "kebutuhan_bisnis"
                 ? theme === "dark"
                   ? "bg-blue-600 text-white shadow-lg"
                   : "bg-blue-500 text-white shadow-lg"
@@ -258,24 +234,7 @@ export default function SecondPage() {
                   : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
             }`}
           >
-            Business Online Package
-          </button>
-          <button
-            onClick={() => {
-              setActiveCategory("social_boosters")
-              setActiveSubcategory("business")
-            }}
-            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
-              activeCategory === "social_boosters"
-                ? theme === "dark"
-                  ? "bg-blue-600 text-white shadow-lg"
-                  : "bg-blue-500 text-white shadow-lg"
-                : theme === "dark"
-                  ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
-                  : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
-            }`}
-          >
-            Social Media Boosters
+            Kebutuhan Bisnis
           </button>
           <button
             onClick={() => {
@@ -293,23 +252,6 @@ export default function SecondPage() {
             }`}
           >
             Website
-          </button>
-          <button
-            onClick={() => {
-              setActiveCategory("social_media_content")
-              setActiveSubcategory("business")
-            }}
-            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
-              activeCategory === "social_media_content"
-                ? theme === "dark"
-                  ? "bg-blue-600 text-white shadow-lg"
-                  : "bg-blue-500 text-white shadow-lg"
-                : theme === "dark"
-                  ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
-                  : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
-            }`}
-          >
-            Social Media Content
           </button>
         </div>
 
@@ -346,13 +288,13 @@ export default function SecondPage() {
           </div>
         )}
 
-        <div className="grid grid-cols-2 gap-3 sm:gap-4">
+        <div className="grid grid-cols-1 gap-3 sm:gap-4">
           {filteredProducts.map((product, index) => (
             <div
               key={index}
               className={`rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${
                 theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
-              }`}
+              } ${product.name === "Kebutuhan Bisnis" ? "col-span-1" : ""}`}
             >
               <div className="p-3">
                 {product.imageUrl ? (
@@ -397,9 +339,9 @@ export default function SecondPage() {
                           : "bg-white border-gray-300 text-gray-700"
                       } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                     >
-                      <option value="3K">3K Followers</option>
-                      <option value="5K">5K Followers</option>
-                      <option value="10K">10K Followers</option>
+                      <option value="3000">3000 Followers</option>
+                      <option value="5000">5000 Followers</option>
+                      <option value="10000">10000 Followers</option>
                     </select>
                   </div>
                 )}
@@ -418,9 +360,9 @@ export default function SecondPage() {
                           : "bg-white border-gray-300 text-gray-700"
                       } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                     >
-                      <option value="2K">2K Followers</option>
-                      <option value="4K">4K Followers</option>
-                      <option value="6K">6K Followers</option>
+                      <option value="2000">2000 Followers</option>
+                      <option value="4000">4000 Followers</option>
+                      <option value="6000">6000 Followers</option>
                     </select>
                   </div>
                 )}
@@ -439,9 +381,9 @@ export default function SecondPage() {
                           : "bg-white border-gray-300 text-gray-700"
                       } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                     >
-                      <option value="3K">3K Followers</option>
-                      <option value="6K">6K Followers</option>
-                      <option value="9K">9K Followers</option>
+                      <option value="3000">3000 Followers</option>
+                      <option value="6000">6000 Followers</option>
+                      <option value="9000">9000 Followers</option>
                     </select>
                   </div>
                 )}
@@ -535,4 +477,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-              }
+}
