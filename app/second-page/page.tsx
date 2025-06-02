@@ -28,7 +28,7 @@ export default function SecondPage() {
     setMounted(true)
   }, [])
 
-  const getInstagramBoosterFeatures = (option: string) => .
+  const getInstagramBoosterFeatures = (option: string) => {
     switch (option) {
       case "3000":
         return ["5000 Likes", "100000 Views"]
@@ -83,7 +83,7 @@ export default function SecondPage() {
     {
       name: "Instagram Booster",
       price: instagramBoosterOption === "3000" ? "Rp 50,000" : instagramBoosterOption === "5000" ? "Rp 80,000" : "Rp 150,000",
-      category montrent à l'écran
+      category: "kebutuhan_bisnis",
       features: getInstagramBoosterFeatures(instagramBoosterOption),
       exampleUrl: "https://example.com/instagram",
     },
@@ -411,7 +411,7 @@ export default function SecondPage() {
                   <button
                     className={`flex-1 py-1.5 px-3 rounded-md font-medium text-xs transition-all duration-300 shadow-sm hover:shadow-md ${
                       theme === "dark"
-                        ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
+                        ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hovered:to-blue-800 text-white"
                         : "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white"
                     }`}
                   >
@@ -477,4 +477,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-}
+                      }
