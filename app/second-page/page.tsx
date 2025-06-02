@@ -510,4 +510,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-    }
+}
