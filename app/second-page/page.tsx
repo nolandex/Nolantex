@@ -215,19 +215,11 @@ export default function SecondPage() {
     return true
   })
 
-  // Group products for 2-column layout, excluding Kebutuhan Bisnis and Desain Konten
+  // Group products into pairs for 2-column layout
   const groupedProducts: Product[][] = []
-  const singleColumnProducts: Product[] = []
-  filteredProducts.forEach((product) => {
-    if (product.name === "Kebutuhan Bisnis" || product.name === "Desain Konten") {
-      singleColumnProducts.push(product)
-    } else {
-      if (groupedProducts.length === 0 || groupedProducts[groupedProducts.length - 1].length === 2) {
-        groupedProducts.push([])
-      }
-      groupedProducts[groupedProducts.length - 1].push(product)
-    }
-  })
+  for (let i = 0; i < filteredProducts.length; i += 2) {
+    groupedProducts.push(filteredProducts.slice(i, i + 2))
+  }
 
   const openExample = (product: Product) => {
     setShowExample(product)
@@ -241,7 +233,7 @@ export default function SecondPage() {
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
-      <div className="container mx-auto max-w-full">
+      <div className="container mx-auto max-w-full px-2">
         <div className="grid grid-cols-2 gap-2 mb-6">
           <button
             onClick={() => {
@@ -312,126 +304,7 @@ export default function SecondPage() {
           </div>
         )}
 
-        <div className="space-y-4">
-          {/* Single-column products (Kebutuhan Bisnis, Desain Konten) */}
-          {singleColumnProducts.map((product, index) => (
-            <div
-              key={index}
-              className={`rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${
-                theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
-              } grid grid-cols-1`}
-            >
-              <div className="p-3">
-                {product.name === "Desain Konten" ? (
-                  <div className="relative">
-                    <Swiper
-                      spaceBetween={10}
-                      slidesPerView={1}
-                      className="w-full h-32 mb-3"
-                    >
-                      {[
-                        "https://via.placeholder.com/300x200?text=Template+1",
-                        "https://via.placeholder.com/300x200?text=Template+2",
-                        "https://via.placeholder.com/300x200?text=Template+3",
-                      ].map((img, i) => (
-                        <SwiperSlide key={i}>
-                          <div className="relative w-full h-32">
-                            <img
-                              src={img}
-                              alt={`Desain Konten ${i + 1}`}
-                              className="w-full h-full object-cover rounded-md"
-                            />
-                            <span
-                              className={`absolute top-2 left-2 px-2 py-1 text-xs font-bold text-white bg-black bg-opacity-50 rounded`}
-                            >
-                              No {i + 1}
-                            </span>
-                          </div>
-                        </SwiperSlide>
-                      ))}
-                    </Swiper>
-                    <ChevronRight
-                      className={`absolute top-1/2 right-2 transform -translate-y-1/2 h-4 w-4 ${
-                        theme === "dark" ? "text-gray-300" : "text-gray-600"
-                      } opacity-75`}
-                    />
-                  </div>
-                ) : product.imageUrl ? (
-                  <img
-                    src={product.imageUrl}
-                    alt={product.name}
-                    className="w-full h-32 object-cover rounded-md mb-3"
-                  />
-                ) : null}
-                <div className="flex justify-between items-start mb-2">
-                  <h3
-                    className={`text-sm font-bold leading-tight ${theme === "dark" ? "text-white" : "text-gray-900"}`}
-                  >
-                    {product.name}
-                  </h3>
-                  <span
-                    className={`px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap ml-2 ${
-                      product.price === "Rp 0"
-                        ? theme === "dark"
-                          ? "bg-green-600 text-white"
-                          : "bg-green-500 text-white"
-                        : theme === "dark"
-                          ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white"
-                          : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
-                    } shadow-sm`}
-                  >
-                    {product.price}
-                  </span>
-                </div>
-
-                {product.features && (
-                  <div className="mb-3">
-                    <ul className="space-y-1">
-                      {product.features.map((feature, i) => (
-                        <li key={i} className="flex items-center">
-                          <CheckCircle
-                            className={`h-3 w-3 mr-2 flex-shrink-0 ${
-                              theme === "dark" ? "text-green-400" : "text-green-500"
-                            }`}
-                          />
-                          <span className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-                            {feature}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                <div className="flex gap-2">
-                  <button
-                    className={`flex-1 py-1.5 px-3 rounded-md font-medium text-xs transition-all duration-300 shadow-sm hover:shadow-md ${
-                      theme === "dark"
-                        ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
-                        : "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white"
-                    }`}
-                  >
-                    Pay
-                  </button>
-                  {product.exampleUrl && (
-                    <button
-                      onClick={() => openExample(product)}
-                      className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
-                        theme === "dark"
-                          ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500"
-                          : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
-                      } flex items-center gap-1 shadow-sm hover:shadow-md`}
-                    >
-                      <ExternalLink className="h-3 w-3" />
-                      Example
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
-
-          {/* 2-column product groups (Instagram Booster, TikTok Booster, Telegram Booster) */}
+        <div className="space-y-3">
           {groupedProducts.map((group, groupIndex) => (
             <div key={groupIndex} className="grid grid-cols-2 gap-3">
               {group.map((product, index) => (
@@ -442,7 +315,41 @@ export default function SecondPage() {
                   }`}
                 >
                   <div className="p-3">
-                    {product.imageUrl ? (
+                    {product.name === "Desain Konten" ? (
+                      <div className="relative">
+                        <Swiper
+                          spaceBetween={10}
+                          slidesPerView={1}
+                          className="w-full h-32 mb-3"
+                        >
+                          {[
+                            "https://via.placeholder.com/300x200?text=Template+1",
+                            "https://via.placeholder.com/300x200?text=Template+2",
+                            "https://via.placeholder.com/300x200?text=Template+3",
+                          ].map((img, i) => (
+                            <SwiperSlide key={i}>
+                              <div className="relative w-full h-32">
+                                <img
+                                  src={img}
+                                  alt={`Desain Konten ${i + 1}`}
+                                  className="w-full h-full object-cover rounded-md"
+                                />
+                                <span
+                                  className={`absolute top-2 left-2 px-2 py-1 text-xs font-bold text-white bg-black bg-opacity-50 rounded`}
+                                >
+                                  No {i + 1}
+                                </span>
+                              </div>
+                            </SwiperSlide>
+                          ))}
+                        </Swiper>
+                        <ChevronRight
+                          className={`absolute top-1/2 right-2 transform -translate-y-1/2 h-4 w-4 ${
+                            theme === "dark" ? "text-gray-300" : "text-gray-600"
+                          } opacity-75`}
+                        />
+                      </div>
+                    ) : product.imageUrl ? (
                       <img
                         src={product.imageUrl}
                         alt={product.name}
@@ -624,4 +531,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-      }
+                                                                            }
