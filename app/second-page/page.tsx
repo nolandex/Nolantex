@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
 import { X, CheckCircle, ExternalLink } from "lucide-react"
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css"
 
 interface Product {
   name: string
@@ -77,7 +79,7 @@ export default function SecondPage() {
       name: "Kebutuhan Bisnis",
       price: "Rp 50,000",
       category: "kebutuhan_bisnis",
-      features: ["Landing Page Website", "Automatic Chatbot", "Social Media Content", "Social Media Booster", "Promotion Tricks"],
+      features: ["Landing Page Website", "Automatic Chatbot", "Social Media Content", "Social Media Booster", "Alat Promosi"],
       exampleUrl: "https://example.com",
     },
     {
@@ -102,12 +104,10 @@ export default function SecondPage() {
       exampleUrl: "https://example.com/telegram",
     },
     {
-      name: "Simple Store",
-      price: "Rp 25,000",
-      category: "website",
-      subcategory: "business",
-      features: ["Free Domain", "Free Hosting"],
-      exampleUrl: "https://shopify.com",
+      name: "Desain Konten",
+      price: "Rp 10,000",
+      category: "kebutuhan_bisnis",
+      imageUrl: "/templates/template1.jpg",
     },
     {
       name: "Landing Page",
@@ -116,6 +116,22 @@ export default function SecondPage() {
       subcategory: "business",
       features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://unbounce.com",
+    },
+    {
+      name: "Profil Bisnis",
+      price: "Rp 25,000",
+      category: "website",
+      subcategory: "business",
+      features: ["Free Domain", "Free Hosting"],
+      exampleUrl: "https://profil-bisnis-demo.vercel.app",
+    },
+    {
+      name: "Simple Store",
+      price: "Rp 25,000",
+      category: "website",
+      subcategory: "business",
+      features: ["Free Domain", "Free Hosting"],
+      exampleUrl: "https://shopify.com",
     },
     {
       name: "Portfolio",
@@ -189,12 +205,6 @@ export default function SecondPage() {
       features: ["Free Domain", "Free Hosting"],
       exampleUrl: "https://event-demo.vercel.app",
     },
-    {
-      name: "Social Media Template 1",
-      price: "Rp 10,000",
-      category: "kebutuhan_bisnis",
-      imageUrl: "/templates/template1.jpg",
-    },
   ]
 
   const filteredProducts = products.filter((product) => {
@@ -217,8 +227,8 @@ export default function SecondPage() {
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
-      <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
-        <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-6">
+      <div className="container mx-auto max-w-full">
+        <div className="grid grid-cols-2 gap-2 mb-6">
           <button
             onClick={() => {
               setActiveCategory("kebutuhan_bisnis")
@@ -256,7 +266,7 @@ export default function SecondPage() {
         </div>
 
         {activeCategory === "website" && (
-          <div className="flex justify-center gap-2 sm:gap-4 mb-6">
+          <div className="flex justify-center gap-2 mb-6">
             <button
               onClick={() => setActiveSubcategory("business")}
               className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
@@ -288,16 +298,39 @@ export default function SecondPage() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 gap-3 sm:gap-4">
+        <div className="space-y-4">
           {filteredProducts.map((product, index) => (
             <div
               key={index}
               className={`rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${
                 theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
-              } ${product.name === "Kebutuhan Bisnis" ? "col-span-1" : ""}`}
+              } ${product.name === "Kebutuhan Bisnis" ? "grid grid-cols-1" : "grid grid-cols-2 gap-3"}`}
             >
               <div className="p-3">
-                {product.imageUrl ? (
+                {product.name === "Desain Konten" ? (
+                  <Swiper
+                    spaceBetween={10}
+                    slidesPerView={1}
+                    className="w-full h-32 mb-3"
+                  >
+                    {["/templates/template1.jpg", "/templates/template2.jpg", "/templates/template3.jpg"].map((img, i) => (
+                      <SwiperSlide key={i}>
+                        <div className="relative w-full h-32">
+                          <img
+                            src={img}
+                            alt={`Desain Konten ${i + 1}`}
+                            className="w-full h-full object-cover rounded-md"
+                          />
+                          <span
+                            className={`absolute top-2 left-2 px-2 py-1 text-xs font-bold text-white bg-black bg-opacity-50 rounded`}
+                          >
+                            No {i + 1}
+                          </span>
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                ) : product.imageUrl ? (
                   <img
                     src={product.imageUrl}
                     alt={product.name}
@@ -327,7 +360,7 @@ export default function SecondPage() {
 
                 {product.name === "Instagram Booster" && (
                   <div className="mb-3">
-                    <label className={`block text-xs font-medium mb-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                    <label className={`block text-xs font-medium mb-1 ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
                       Select Option:
                     </label>
                     <select
@@ -348,7 +381,7 @@ export default function SecondPage() {
 
                 {product.name === "TikTok Booster" && (
                   <div className="mb-3">
-                    <label className={`block text-xs font-medium mb-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                    <label className={`block text-xs font-medium mb-1 ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
                       Select Follower Count:
                     </label>
                     <select
@@ -369,7 +402,7 @@ export default function SecondPage() {
 
                 {product.name === "Telegram Booster" && (
                   <div className="mb-3">
-                    <label className={`block text-xs font-medium mb-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                    <label className={`block text-xs font-medium mb-1 ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
                       Select Follower Count:
                     </label>
                     <select
@@ -411,7 +444,7 @@ export default function SecondPage() {
                   <button
                     className={`flex-1 py-1.5 px-3 rounded-md font-medium text-xs transition-all duration-300 shadow-sm hover:shadow-md ${
                       theme === "dark"
-                        ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hovered:to-blue-800 text-white"
+                        ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
                         : "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white"
                     }`}
                   >
@@ -437,9 +470,9 @@ export default function SecondPage() {
         </div>
 
         {showExample && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2">
             <div
-              className={`max-w-5xl w-full h-[90vh] sm:h-[85vh] rounded-xl ${
+              className={`max-w-full w-full h-[90vh] rounded-xl ${
                 theme === "dark" ? "bg-gray-800" : "bg-white"
               } overflow-hidden shadow-2xl`}
             >
@@ -462,7 +495,7 @@ export default function SecondPage() {
                   <X className="h-5 w-5" />
                 </button>
               </div>
-              <div className="h-full pb-12 sm:pb-10">
+              <div className="h-full pb-12">
                 <iframe
                   src={showExample.exampleUrl}
                   title={`Example ${showExample.name}`}
@@ -477,4 +510,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-                      }
+    }
