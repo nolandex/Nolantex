@@ -78,7 +78,7 @@ export default function SecondPage() {
       name: "Kebutuhan Bisnis",
       price: "Rp 50,000",
       category: "kebutuhan_bisnis",
-      features: ["Landing Page Website", "Automatic Chatbot", "Social Media Content", "Social Media Booster", "Alat Promosi"],
+      features: ["Website", "Chatbot", "Social Media Content", "Social Media Booster", "Alat Promosi"],
       exampleUrl: "https://example.com",
     },
     {
