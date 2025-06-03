@@ -103,7 +103,7 @@ export default function SecondPage() {
     },
     {
       name: "Telegram Booster",
-      price: telegramBoosterOption === "3000" ? "Rp 50,000" : telegramBoosterOption === "6000" ? "Rp 100,000" : "Rp 150,000",
+      price: telegramBoosterOption === "3000" ? "Rp 50,000" : telegramBoosterOption === "5000" ? "Rp 70,000" : "Rp 140,000",
       category: "paket_bisnis",
       features: getTelegramBoosterFeatures(telegramBoosterOption),
       exampleUrl: "https://example.com/telegram",
