@@ -60,12 +60,7 @@ export default function SecondPage() {
       case "2000":
         return [`${baseViews} Views`, `${baseLikes} Likes`, `${baseShares} Shares`, `${baseSaves} Saves`]
       case "5000":
-        return [
-          `${baseViews * 2.5} Views`,
-          `${baseLikes * 2.5} Likes`,
-          `${baseShares * 2.5} Shares`,
-          `${baseSaves * 2.5} Saves`,
-        ]
+        return [`${baseViews * 2.5} Views`, `${baseLikes * 2.5} Likes`, `${baseShares * 2.5} Shares`, `${baseSaves * 2.5} Saves`]
       default:
         return []
     }
@@ -94,12 +89,7 @@ export default function SecondPage() {
     },
     {
       name: "Instagram Booster",
-      price:
-        instagramBoosterOption === "3000"
-          ? "Rp 50,000"
-          : instagramBoosterOption === "5000"
-            ? "Rp 80,000"
-            : "Rp 150,000",
+      price: instagramBoosterOption === "3000" ? "Rp 50,000" : instagramBoosterOption === "5000" ? "Rp 80,000" : "Rp 150,000",
       category: "paket_bisnis",
       features: getInstagramBoosterFeatures(instagramBoosterOption),
       exampleUrl: "https://example.com/instagram",
@@ -114,7 +104,11 @@ export default function SecondPage() {
     {
       name: "Telegram Booster",
       price:
-        telegramBoosterOption === "3000" ? "Rp 50,000" : telegramBoosterOption === "5000" ? "Rp 70,000" : "Rp 140,000",
+        telegramBoosterOption === "3000"
+          ? "Rp 50,000"
+          : telegramBoosterOption === "5000"
+          ? "Rp 70,000"
+          : "Rp 140,000",
       category: "paket_bisnis",
       features: getTelegramBoosterFeatures(telegramBoosterOption),
       exampleUrl: "https://example.com/telegram",
@@ -350,7 +344,7 @@ export default function SecondPage() {
           <div className="flex justify-center gap-2 mb-6">
             <button
               onClick={() => setActiveSubcategory("business")}
-              className={`px-4 py-2 rounded-md font-medium text-sm transition-all duration-300 ${
+              className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
                 activeSubcategory === "business"
                   ? theme === "dark"
                     ? "bg-blue-600 text-white shadow-lg"
@@ -364,7 +358,7 @@ export default function SecondPage() {
             </button>
             <button
               onClick={() => setActiveSubcategory("non-business")}
-              className={`px-4 py-2 rounded-md font-medium text-sm transition-all duration-300 ${
+              className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
                 activeSubcategory === "non-business"
                   ? theme === "dark"
                     ? "bg-blue-600 text-white shadow-lg"
@@ -391,12 +385,12 @@ export default function SecondPage() {
                 >
                   <div className="p-3">
                     <div className="flex justify-between items-start mb-2">
-                      <div className="flex items-center gap-2 flex-1">
-                        {["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(product.name) ? (
+                      {["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(product.name) ? (
+                        <div className="inline-flex items-center">
                           <select
                             value={boosterType}
                             onChange={(e) => setBoosterType(e.target.value)}
-                            className={`text-sm font-bold leading-tight border-none bg-transparent p-0 focus:outline-none focus:ring-0 ${
+                            className={`text-sm font-bold leading-tight bg-transparent border-none appearance-none focus:outline-none ${
                               theme === "dark" ? "text-white" : "text-gray-900"
                             }`}
                           >
@@ -404,29 +398,27 @@ export default function SecondPage() {
                             <option value="TikTok Booster">TikTok Booster</option>
                             <option value="Telegram Booster">Telegram Booster</option>
                           </select>
-                        ) : (
-                          <h3
-                            className={`text-sm font-bold leading-tight ${theme === "dark" ? "text-white" : "text-gray-900"}`}
-                          >
-                            {product.name}
-                          </h3>
-                        )}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span
-                          className={`px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap ${
-                            product.price === "Rp 0"
-                              ? theme === "dark"
-                                ? "bg-green-600 text-white"
-                                : "bg-green-500 text-white"
-                              : theme === "dark"
-                                ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white"
-                                : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
-                          } shadow-sm`}
+                        </div>
+                      ) : (
+                        <h3
+                          className={`text-sm font-bold leading-tight ${theme === "dark" ? "text-white" : "text-gray-900"}`}
                         >
-                          {product.price}
-                        </span>
-                      </div>
+                          {product.name}
+                        </h3>
+                      )}
+                      <span
+                        className={`px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap ${
+                          product.price === "Rp 0"
+                            ? theme === "dark"
+                              ? "bg-green-600 text-white"
+                              : "bg-green-500 text-white"
+                            : theme === "dark"
+                              ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white"
+                              : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
+                        } shadow-sm`}
+                      >
+                        {product.price}
+                      </span>
                     </div>
 
                     {product.name === "Paket Bisnis" && (
@@ -705,31 +697,33 @@ export default function SecondPage() {
                 <X className="h-5 w-5" />
               </button>
               <ul className="space-y-2">
-                {showDetails.name === "Paket Bisnis"
-                  ? showDetails.features?.slice(3).map((feature, i) => (
-                      <li key={i} className="flex items-center">
-                        <CheckCircle
-                          className={`h-4 w-4 mr-2 flex-shrink-0 ${
-                            theme === "dark" ? "text-green-400" : "text-green-500"
-                          }`}
-                        />
-                        <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-                          {feature}
-                        </span>
-                      </li>
-                    ))
-                  : showDetails.features?.map((feature, i) => (
-                      <li key={i} className="flex items-center">
-                        <CheckCircle
-                          className={`h-4 w-4 mr-2 flex-shrink-0 ${
-                            theme === "dark" ? "text-green-400" : "text-green-500"
-                          }`}
-                        />
-                        <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-                          {feature}
-                        </span>
-                      </li>
-                    ))}
+                {showDetails.name === "Paket Bisnis" ? (
+                  showDetails.features?.slice(3).map((feature, i) => (
+                    <li key={i} className="flex items-center">
+                      <CheckCircle
+                        className={`h-4 w-4 mr-2 flex-shrink-0 ${
+                          theme === "dark" ? "text-green-400" : "text-green-500"
+                        }`}
+                      />
+                      <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                        {feature}
+                      </span>
+                    </li>
+                  ))
+                ) : (
+                  showDetails.features?.map((feature, i) => (
+                    <li key={i} className="flex items-center">
+                      <CheckCircle
+                        className={`h-4 w-4 mr-2 flex-shrink-0 ${
+                          theme === "dark" ? "text-green-400" : "text-green-500"
+                        }`}
+                      />
+                      <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                        {feature}
+                      </span>
+                    </li>
+                  ))
+                )}
               </ul>
             </div>
           </div>
@@ -752,12 +746,12 @@ export default function SecondPage() {
               >
                 <X className="h-5 w-5" />
               </button>
-              <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64 pointer-events-none">
+              <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
                 {["/images/template1.jpg", "/images/template2.jpg", "/images/template3.jpg"].map((img, i) => (
                   <SwiperSlide key={i}>
                     <div className="relative w-full h-64">
                       <img
-                        src={img || "/placeholder.svg"}
+                        src={img}
                         alt={`Desain Konten ${i + 1}`}
                         className="w-full h-full object-cover rounded-md"
                       />
@@ -822,12 +816,12 @@ export default function SecondPage() {
               >
                 <X className="h-5 w-5" />
               </button>
-              <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64 pointer-events-none">
+              <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
                 {["/images/seo1.jpg", "/images/seo2.jpg", "/images/seo3.jpg"].map((img, i) => (
                   <SwiperSlide key={i}>
                     <div className="relative w-full h-64">
                       <img
-                        src={img || "/placeholder.svg"}
+                        src={img}
                         alt={`SEO Example ${i + 1}`}
                         className="w-full h-full object-cover rounded-md"
                       />
@@ -861,12 +855,12 @@ export default function SecondPage() {
               >
                 <X className="h-5 w-5" />
               </button>
-              <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64 pointer-events-none">
+              <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
                 {["/images/ads1.jpg", "/images/ads2.jpg", "/images/ads3.jpg"].map((img, i) => (
                   <SwiperSlide key={i}>
                     <div className="relative w-full h-64">
                       <img
-                        src={img || "/placeholder.svg"}
+                        src={img}
                         alt={`Jasa Iklan Online Example ${i + 1}`}
                         className="w-full h-full object-cover rounded-md"
                       />
@@ -885,4 +879,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-}
+                    }
