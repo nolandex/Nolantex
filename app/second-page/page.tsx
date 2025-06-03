@@ -25,6 +25,7 @@ export default function SecondPage() {
   const [showContentImages, setShowContentImages] = useState(false)
   const [showVideoPromo, setShowVideoPromo] = useState(false)
   const [showSEOImages, setShowSEOImages] = useState(false)
+  const [showAdsImages, setShowAdsImages] = useState(false) // New state for Jasa Iklan Online images
   const [instagramBoosterOption, setInstagramBoosterOption] = useState("3000")
   const [tiktokBoosterOption, setTiktokBoosterOption] = useState("2000")
   const [telegramBoosterOption, setTelegramBoosterOption] = useState("3000")
@@ -129,6 +130,12 @@ export default function SecondPage() {
       price: "Rp 25,000",
       category: "paket_bisnis",
       features: ["Keyword Research", "On-Page Optimization", "Link Building"],
+    },
+    {
+      name: "Jasa Iklan Online", // New product
+      price: "Rp 100,000",
+      category: "paket_bisnis",
+      features: ["Meta Ads", "TikTok Ads"],
     },
     {
       name: "Landing Page",
@@ -279,6 +286,14 @@ export default function SecondPage() {
 
   const closeSEOImages = () => {
     setShowSEOImages(false)
+  }
+
+  const openAdsImages = () => {
+    setShowAdsImages(true) // New function for Jasa Iklan Online images
+  }
+
+  const closeAdsImages = () => {
+    setShowAdsImages(false) // New function for Jasa Iklan Online images
   }
 
   if (!mounted) return null
@@ -512,6 +527,25 @@ export default function SecondPage() {
                       </div>
                     )}
 
+                    {product.name === "Jasa Iklan Online" && (
+                      <div className="mb-3">
+                        <ul className="space-y-1">
+                          {product.features?.map((feature, i) => (
+                            <li key={i} className="flex items-center">
+                              <CheckCircle
+                                className={`h-3 w-3 mr-2 flex-shrink-0 ${
+                                  theme === "dark" ? "text-green-400" : "text-green-500"
+                                }`}
+                              />
+                              <span className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                                {feature}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
                     {activeCategory === "website" && product.features && (
                       <div className="mb-3">
                         <ul className="space-y-1">
@@ -593,6 +627,18 @@ export default function SecondPage() {
                       {product.name === "SEO Website" && (
                         <button
                           onClick={openSEOImages}
+                          className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
+                            theme === "dark"
+                              ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500"
+                              : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
+                          } flex items-center gap-1 shadow-sm hover:shadow-md`}
+                        >
+                          Contoh
+                        </button>
+                      )}
+                      {product.name === "Jasa Iklan Online" && (
+                        <button
+                          onClick={openAdsImages}
                           className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
                             theme === "dark"
                               ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500"
@@ -692,7 +738,7 @@ export default function SecondPage() {
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div
               className={`max-w-2xl w-full rounded-xl ${
-                theme === "dark" ? "bg-gray[..., gray-800" : "bg-white"
+                theme === "dark" ? "bg-gray-800" : "bg-white"
               } overflow-hidden shadow-2xl p-4 relative`}
             >
               <button
@@ -812,7 +858,54 @@ export default function SecondPage() {
             </div>
           </div>
         )}
+
+        {showAdsImages && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div
+              className={`max-w-2xl w-full rounded-xl ${
+                theme === "dark" ? "bg-gray-800" : "bg-white"
+              } overflow-hidden shadow-2xl p-4 relative`}
+            >
+              <button
+                onClick={closeAdsImages}
+                className={`absolute top-4 right-4 p-3 rounded-lg transition-all duration-200 z-50 pointer-events-auto ${
+                  theme === "dark"
+                    ? "hover:bg-gray-700 text-gray-400 hover:text-white"
+                    : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                <X className="h-5 w-5" />
+              </button>
+              <Swiper
+                spaceBetween={10}
+                slidesPerView={1}
+                className="w-full h-64 pointer-events-none"
+              >
+                {[
+                  "/images/ads1.jpg",
+                  "/images/ads2.jpg",
+                  "/images/ads3.jpg",
+                ].map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <div className="relative w-full h-64">
+                      <img
+                        src={img}
+                        alt={`Jasa Iklan Online Example ${i + 1}`}
+                        className="w-full h-full object-cover rounded-md"
+                      />
+                      <span
+                        className={`absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded`}
+                      >
+                        No {i + 1}
+                      </span>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
-                 }
+}
