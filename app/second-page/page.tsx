@@ -16,9 +16,9 @@ interface Product {
 }
 
 export default function SecondPage() {
-  const { theme } = useTheme()
+  const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const [activeCategory, setActiveCategory] = useState("kebutuhan_bisnis")
+  const [activeCategory, setActiveCategory] = useState("paket_bisnis")
   const [activeSubcategory, setActiveSubcategory] = useState("business")
   const [showExample, setShowExample] = useState<Product | null>(null)
   const [showDetails, setShowDetails] = useState<Product | null>(null)
@@ -32,7 +32,8 @@ export default function SecondPage() {
 
   useEffect(() => {
     setMounted(true)
-  }, [])
+    setTheme("light") // Set default theme to light mode
+  }, [setTheme])
 
   const getInstagramBoosterFeatures = (option: string) => {
     switch (option) {
@@ -56,10 +57,8 @@ export default function SecondPage() {
     switch (option) {
       case "2000":
         return [`${baseViews} Views`, `${baseLikes} Likes`, `${baseShares} Shares`, `${baseSaves} Saves`]
-      case "4000":
-        return [`${baseViews * 2} Views`, `${baseLikes * 2} Likes`, `${baseShares * 2} Shares`, `${baseSaves * 2} Saves`]
-      case "6000":
-        return [`${baseViews * 3} Views`, `${baseLikes * 3} Likes`, `${baseShares * 3} Shares`, `${baseSaves * 3} Saves`]
+      case "5000":
+        return [`${baseViews * 2.5} Views`, `${baseLikes * 2.5} Likes`, `${baseShares * 2.5} Shares`, `${baseSaves * 2.5} Saves`]
       default:
         return []
     }
@@ -80,41 +79,41 @@ export default function SecondPage() {
 
   const products: Product[] = [
     {
-      name: "Kebutuhan Bisnis",
+      name: "Paket Bisnis",
       price: "Rp 50,000",
-      category: "kebutuhan_bisnis",
+      category: "paket_bisnis",
       features: ["Landing Page Website", "Social Media Content", "Social Media Booster", "Alat Promosi"],
       exampleUrl: "https://example.com",
     },
     {
       name: "Instagram Booster",
       price: instagramBoosterOption === "3000" ? "Rp 50,000" : instagramBoosterOption === "5000" ? "Rp 80,000" : "Rp 150,000",
-      category: "kebutuhan_bisnis",
+      category: "paket_bisnis",
       features: getInstagramBoosterFeatures(instagramBoosterOption),
       exampleUrl: "https://example.com/instagram",
     },
     {
       name: "TikTok Booster",
-      price: tiktokBoosterOption === "2000" ? "Rp 50,000" : tiktokBoosterOption === "4000" ? "Rp 80,000" : "Rp 120,000",
-      category: "kebutuhan_bisnis",
+      price: tiktokBoosterOption === "2000" ? "Rp 50,000" : "Rp 100,000",
+      category: "paket_bisnis",
       features: getTikTokBoosterFeatures(tiktokBoosterOption),
       exampleUrl: "https://example.com/tiktok",
     },
     {
       name: "Telegram Booster",
       price: telegramBoosterOption === "3000" ? "Rp 50,000" : telegramBoosterOption === "6000" ? "Rp 100,000" : "Rp 150,000",
-      category: "kebutuhan_bisnis",
+      category: "paket_bisnis",
       features: getTelegramBoosterFeatures(telegramBoosterOption),
-      exampleUrl: "https://example.com/telegram",
+      exampleUrl: "https://example.com/fr",
     },
     {
       name: "Desain Konten",
       price: "Rp 10,000",
-      category: "kebutuhan_bisnis",
+      category: "paket_bisnis",
     },
     {
       name: "Landing Page",
-      price: "Rp 25,000",
+      price: "Rp 25,200",
       category: "website",
       subcategory: "business",
       features: ["Free Domain", "Free Hosting"],
@@ -255,11 +254,11 @@ export default function SecondPage() {
         <div className="grid grid-cols-2 gap-2 mb-6">
           <button
             onClick={() => {
-              setActiveCategory("kebutuhan_bisnis")
+              setActiveCategory("paket_bisnis")
               setActiveSubcategory("business")
             }}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
-              activeCategory === "kebutuhan_bisnis"
+              activeCategory === "paket_bisnis"
                 ? theme === "dark"
                   ? "bg-blue-600 text-white shadow-lg"
                   : "bg-blue-500 text-white shadow-lg"
@@ -268,7 +267,7 @@ export default function SecondPage() {
                   : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
             }`}
           >
-            Kebutuhan Bisnis
+            Paket Bisnis
           </button>
           <button
             onClick={() => {
@@ -354,7 +353,7 @@ export default function SecondPage() {
                       </span>
                     </div>
 
-                    {product.name === "Kebutuhan Bisnis" && (
+                    {product.name === "Paket Bisnis" && (
                       <div className="mb-3">
                         <ul className="space-y-1">
                           {product.features?.slice(0, 3).map((feature, i) => (
@@ -414,8 +413,7 @@ export default function SecondPage() {
                           } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         >
                           <option value="2000">2000 Followers</option>
-                          <option value="4000">4000 Followers</option>
-                          <option value="6000">6000 Followers</option>
+                          <option value="5000">5000 Followers</option>
                         </select>
                         <input
                           type="text"
@@ -489,7 +487,7 @@ export default function SecondPage() {
                       >
                         Pay
                       </button>
-                      {product.exampleUrl && activeCategory === "kebutuhan_bisnis" && (
+                      {product.exampleUrl && activeCategory === "paket_bisnis" && (
                         <button
                           onClick={() => openDetails(product)}
                           className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
@@ -580,7 +578,7 @@ export default function SecondPage() {
                 <X className="h-5 w-5" />
               </button>
               <ul className="space-y-2">
-                {showDetails.name === "Kebutuhan Bisnis" ? (
+                {showDetails.name === "Paket Bisnis" ? (
                   showDetails.features?.slice(3).map((feature, i) => (
                     <li key={i} className="flex items-center">
                       <CheckCircle
@@ -635,9 +633,9 @@ export default function SecondPage() {
                 className="w-full h-64"
               >
                 {[
-                  "https://via.placeholder.com/300x200?text=Template+1",
-                  "https://via.placeholder.com/300x200?text=Template+2",
-                  "https://via.placeholder.com/300x200?text=Template+3",
+                  "/images/template1.jpg",
+                  "/images/template2.jpg",
+                  "/images/template3.jpg",
                 ].map((img, i) => (
                   <SwiperSlide key={i}>
                     <div className="relative w-full h-64">
@@ -661,4 +659,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-        }
+            }
