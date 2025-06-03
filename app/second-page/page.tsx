@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
-import { CheckCircle, ExternalLink, X } from "lucide-react"
+import { CheckCircle, ExternalLink, X, Rocket } from "lucide-react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 
@@ -384,9 +384,9 @@ export default function SecondPage() {
                   }`}
                 >
                   <div className="p-3">
-                    <div className="flex justify-between items-start mb-2">
+                    <div className="flex justify-between items-center mb-2">
                       {["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(product.name) ? (
-                        <div className="inline-flex items-center">
+                        <div className="inline-flex items-center gap-1">
                           <select
                             value={boosterType}
                             onChange={(e) => setBoosterType(e.target.value)}
@@ -394,10 +394,11 @@ export default function SecondPage() {
                               theme === "dark" ? "text-white" : "text-gray-900"
                             }`}
                           >
-                            <option value="Instagram Booster">Instagram Booster</option>
-                            <option value="TikTok Booster">TikTok Booster</option>
-                            <option value="Telegram Booster">Telegram Booster</option>
+                            <option value="Instagram Booster">Instagram</option>
+                            <option value="TikTok Booster">TikTok</option>
+                            <option value="Telegram Booster">Telegram</option>
                           </select>
+                          <Rocket className={`h-4 w-4 ${theme === "dark" ? "text-blue-400" : "text-blue-500"}`} />
                         </div>
                       ) : (
                         <h3
@@ -879,4 +880,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-                    }
+}
