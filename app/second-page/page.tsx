@@ -307,7 +307,7 @@ export default function SecondPage() {
           <button
             onClick={() => {
               setActiveCategory("paket_bisnis")
-              setActiveSubcategory("business")
+              setActiveSubcategory("business") // Reset subcategory when changing main category
             }}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
               activeCategory === "paket_bisnis"
@@ -324,7 +324,7 @@ export default function SecondPage() {
           <button
             onClick={() => {
               setActiveCategory("website")
-              setActiveSubcategory("business")
+              setActiveSubcategory("business") // Default to business when website is selected
             }}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
               activeCategory === "website"
@@ -384,35 +384,32 @@ export default function SecondPage() {
                   }`}
                 >
                   <div className="p-3">
-                    <div className="flex justify-between items-center mb-2">
+                    <div className="flex justify-between items-start mb-2"> {/* Changed to items-start for better alignment with multiline title select */}
                       {["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(product.name) ? (
-                        <div className="flex flex-col">
+                        <div className="flex-grow mr-2"> {/* Added flex-grow and mr-2 for better spacing */}
                           <select
                             value={boosterType}
                             onChange={(e) => setBoosterType(e.target.value)}
-                            className={`text-sm font-bold leading-tight bg-transparent border-none appearance-none focus:outline-none cursor-pointer ${
-                              theme === "dark" ? "text-white" : "text-gray-900"
-                            }`}
+                            className={`w-full px-2 py-1.5 rounded-md text-sm font-bold leading-tight border ${
+                              theme === "dark"
+                                ? "bg-gray-700 border-gray-600 text-white"
+                                : "bg-white border-gray-300 text-gray-900"
+                            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                           >
-                            <option value="Instagram Booster">Instagram ▼</option>
-                            <option value="TikTok Booster">TikTok ▼</option>
-                            <option value="Telegram Booster">Telegram ▼</option>
+                            <option value="Instagram Booster">Instagram Booster</option>
+                            <option value="TikTok Booster">TikTok Booster</option>
+                            <option value="Telegram Booster">Telegram Booster</option>
                           </select>
-                          <span
-                            className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"} mt-0.5`}
-                          >
-                            Booster
-                          </span>
                         </div>
                       ) : (
                         <h3
-                          className={`text-sm font-bold leading-tight ${theme === "dark" ? "text-white" : "text-gray-900"}`}
+                          className={`text-sm font-bold leading-tight flex-grow mr-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}  /* Added flex-grow and mr-2 */
                         >
                           {product.name}
                         </h3>
                       )}
                       <span
-                        className={`px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap ${
+                        className={`px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap self-start ${ /* Added self-start for alignment */
                           product.price === "Rp 0"
                             ? theme === "dark"
                               ? "bg-green-600 text-white"
@@ -501,8 +498,8 @@ export default function SecondPage() {
                           placeholder="Link Akun"
                           className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
                             theme === "dark"
-                              ? "bg-gray-700 border-gray-600 text-gray-200"
-                              : "bg-white border-gray-300 text-gray-700"
+                              ? "bg-gray-700 border-gray-600 text-gray-200 placeholder-gray-400"
+                              : "bg-white border-gray-300 text-gray-700 placeholder-gray-500"
                           } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         />
                       </div>
@@ -701,6 +698,7 @@ export default function SecondPage() {
               >
                 <X className="h-5 w-5" />
               </button>
+              <h3 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{showDetails.name} - Rincian</h3>
               <ul className="space-y-2">
                 {showDetails.name === "Paket Bisnis" ? (
                   showDetails.features?.slice(3).map((feature, i) => (
@@ -751,6 +749,7 @@ export default function SecondPage() {
               >
                 <X className="h-5 w-5" />
               </button>
+              <h3 className={`text-lg font-semibold mb-3 text-center ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Contoh Desain Konten</h3>
               <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
                 {["/images/template1.jpg", "/images/template2.jpg", "/images/template3.jpg"].map((img, i) => (
                   <SwiperSlide key={i}>
@@ -758,12 +757,12 @@ export default function SecondPage() {
                       <img
                         src={img}
                         alt={`Desain Konten ${i + 1}`}
-                        className="w-full h-full object-cover rounded-md"
+                        className="w-full h-full object-contain rounded-md" /* Changed to object-contain */
                       />
                       <span
-                        className={`absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded`}
+                        className={`absolute top-2 left-2 px-2 py-1 text-xs font-medium text-white bg-black bg-opacity-50 rounded`}
                       >
-                        No {i + 1}
+                        Contoh {i + 1}
                       </span>
                     </div>
                   </SwiperSlide>
@@ -790,11 +789,12 @@ export default function SecondPage() {
               >
                 <X className="h-5 w-5" />
               </button>
-              <div className="relative w-full h-64">
+              <h3 className={`text-lg font-semibold mb-3 text-center ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Contoh Video Promosi</h3>
+              <div className="relative w-full" style={{ paddingTop: "56.25%" }}> {/* 16:9 Aspect Ratio */}
                 <iframe
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ" /* Replace with actual valid YouTube embed link */
                   title="Video Promosi Example"
-                  className="w-full h-full rounded-md"
+                  className="absolute top-0 left-0 w-full h-full rounded-md"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -821,6 +821,7 @@ export default function SecondPage() {
               >
                 <X className="h-5 w-5" />
               </button>
+              <h3 className={`text-lg font-semibold mb-3 text-center ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Contoh Hasil SEO</h3>
               <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
                 {["/images/seo1.jpg", "/images/seo2.jpg", "/images/seo3.jpg"].map((img, i) => (
                   <SwiperSlide key={i}>
@@ -828,12 +829,12 @@ export default function SecondPage() {
                       <img
                         src={img}
                         alt={`SEO Example ${i + 1}`}
-                        className="w-full h-full object-cover rounded-md"
+                        className="w-full h-full object-contain rounded-md" /* Changed to object-contain */
                       />
-                      <span
-                        className={`absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded`}
+                       <span
+                        className={`absolute top-2 left-2 px-2 py-1 text-xs font-medium text-white bg-black bg-opacity-50 rounded`}
                       >
-                        No {i + 1}
+                        Contoh {i + 1}
                       </span>
                     </div>
                   </SwiperSlide>
@@ -860,6 +861,7 @@ export default function SecondPage() {
               >
                 <X className="h-5 w-5" />
               </button>
+              <h3 className={`text-lg font-semibold mb-3 text-center ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Contoh Jasa Iklan Online</h3>
               <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
                 {["/images/ads1.jpg", "/images/ads2.jpg", "/images/ads3.jpg"].map((img, i) => (
                   <SwiperSlide key={i}>
@@ -867,12 +869,12 @@ export default function SecondPage() {
                       <img
                         src={img}
                         alt={`Jasa Iklan Online Example ${i + 1}`}
-                        className="w-full h-full object-cover rounded-md"
+                        className="w-full h-full object-contain rounded-md" /* Changed to object-contain */
                       />
-                      <span
-                        className={`absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded`}
+                       <span
+                        className={`absolute top-2 left-2 px-2 py-1 text-xs font-medium text-white bg-black bg-opacity-50 rounded`}
                       >
-                        No {i + 1}
+                        Contoh {i + 1}
                       </span>
                     </div>
                   </SwiperSlide>
@@ -884,4 +886,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-                            }
+}
