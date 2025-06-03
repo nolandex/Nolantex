@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
-import { CheckCircle, ExternalLink, X, Rocket } from "lucide-react"
+import { CheckCircle, ExternalLink, X, Rocket, ChevronDown } from "lucide-react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 
@@ -312,7 +312,7 @@ export default function SecondPage() {
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
               activeCategory === "paket_bisnis"
                 ? theme === "dark"
-                  ? "bg-blue-600 text-white shadow-lg"
+                  ? "bg-green-600 text-white shadow-lg"
                   : "bg-blue-500 text-white shadow-lg"
                 : theme === "dark"
                   ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
@@ -329,7 +329,7 @@ export default function SecondPage() {
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
               activeCategory === "website"
                 ? theme === "dark"
-                  ? "bg-blue-600 text-white shadow-lg"
+                  ? "bg-green-600 text-white shadow-lg"
                   : "bg-blue-500 text-white shadow-lg"
                 : theme === "dark"
                   ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
@@ -347,7 +347,7 @@ export default function SecondPage() {
               className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
                 activeSubcategory === "business"
                   ? theme === "dark"
-                    ? "bg-blue-600 text-white shadow-lg"
+                    ? "bg-green-600 text-white shadow-lg"
                     : "bg-blue-500 text-white shadow-lg"
                   : theme === "dark"
                     ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
@@ -361,7 +361,7 @@ export default function SecondPage() {
               className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
                 activeSubcategory === "non-business"
                   ? theme === "dark"
-                    ? "bg-blue-600 text-white shadow-lg"
+                    ? "bg-green-600 text-white shadow-lg"
                     : "bg-blue-500 text-white shadow-lg"
                   : theme === "dark"
                     ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
@@ -390,7 +390,7 @@ export default function SecondPage() {
                           <select
                             value={boosterType}
                             onChange={(e) => setBoosterType(e.target.value)}
-                            className={`text-sm font-bold leading-tight bg-transparent border-none appearance-none focus:outline-none ${
+                            className={`text-sm font-bold leading-tight bg-transparent border-none appearance-none focus:outline-none cursor-pointer ${
                               theme === "dark" ? "text-white" : "text-gray-900"
                             }`}
                           >
@@ -398,6 +398,9 @@ export default function SecondPage() {
                             <option value="TikTok Booster">TikTok</option>
                             <option value="Telegram Booster">Telegram</option>
                           </select>
+                          <ChevronDown
+                            className={`h-4 w-4 ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}
+                          />
                           <Rocket className={`h-4 w-4 ${theme === "dark" ? "text-blue-400" : "text-blue-500"}`} />
                         </div>
                       ) : (
@@ -880,4 +883,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-}
+                        }
