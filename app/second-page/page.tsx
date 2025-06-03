@@ -26,13 +26,11 @@ export default function SecondPage() {
   const [showVideoPromo, setShowVideoPromo] = useState(false)
   const [showSEOImages, setShowSEOImages] = useState(false)
   const [showAdsImages, setShowAdsImages] = useState(false)
+  const [boosterType, setBoosterType] = useState("Instagram Booster") // State untuk tipe booster
   const [instagramBoosterOption, setInstagramBoosterOption] = useState("3000")
   const [tiktokBoosterOption, setTiktokBoosterOption] = useState("2000")
   const [telegramBoosterOption, setTelegramBoosterOption] = useState("3000")
-  const [instagramLink, setInstagramLink] = useState("")
-  const [tiktokLink, setTiktokLink] = useState("")
-  const [telegramLink, setTelegramLink] = useState("")
-  const [showSocialBoosters, setShowSocialBoosters] = useState(false) // New state to toggle TikTok and Telegram visibility
+  const [boosterLink, setBoosterLink] = useState("") // Satu input untuk link akun
 
   useEffect(() => {
     setMounted(true)
@@ -115,13 +113,134 @@ export default function SecondPage() {
       features: getTelegramBoosterFeatures(telegramBoosterOption),
       exampleUrl: "https://example.com/telegram",
     },
-    // ... other products remain unchanged
+    {
+      name: "Desain Konten",
+      price: "Rp 10,000",
+      category: "paket_bisnis",
+    },
+    {
+      name: "Video Promosi",
+      price: "Rp 10,000",
+      category: "paket_bisnis",
+      exampleUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    },
+    {
+      name: "SEO Website",
+      price: "Rp 25,000",
+      category: "paket_bisnis",
+      features: ["Keyword Research", "On-Page Optimization", "Link Building"],
+    },
+    {
+      name: "Jasa Iklan Online",
+      price: "Rp 100,000",
+      category: "paket_bisnis",
+      features: ["Meta Ads", "TikTok Ads"],
+    },
+    {
+      name: "Landing Page",
+      price: "Rp 25,000",
+      category: "website",
+      subcategory: "business",
+      features: ["Free Domain", "Free Hosting"],
+      exampleUrl: "https://unbounce.com",
+    },
+    {
+      name: "Profil Bisnis",
+      price: "Rp 25,000",
+      category: "website",
+      subcategory: "business",
+      features: ["Free Domain", "Free Hosting"],
+      exampleUrl: "https://profil-bisnis-demo.vercel.app",
+    },
+    {
+      name: "Simple Store",
+      price: "Rp 25,000",
+      category: "website",
+      subcategory: "business",
+      features: ["Free Domain", "Free Hosting"],
+      exampleUrl: "https://shopify.com",
+    },
+    {
+      name: "Portfolio",
+      price: "Rp 25,000",
+      category: "website",
+      subcategory: "business",
+      features: ["Free Domain", "Free Hosting"],
+      exampleUrl: "https://portfolio-demo.vercel.app",
+    },
+    {
+      name: "Online Course",
+      price: "Rp 25,000",
+      category: "website",
+      subcategory: "business",
+      features: ["Free Domain", "Free Hosting"],
+      exampleUrl: "https://course-demo.vercel.app",
+    },
+    {
+      name: "Membership",
+      price: "Rp 25,000",
+      category: "website",
+      subcategory: "business",
+      features: ["Free Domain", "Free Hosting"],
+      exampleUrl: "https://membership-demo.vercel.app",
+    },
+    {
+      name: "Booking",
+      price: "Rp 25,000",
+      category: "website",
+      subcategory: "business",
+      features: ["Free Domain", "Free Hosting"],
+      exampleUrl: "https://booking-demo.vercel.app",
+    },
+    {
+      name: "Affiliate",
+      price: "Rp 25,000",
+      category: "website",
+      subcategory: "business",
+      features: ["Free Domain", "Free Hosting"],
+      exampleUrl: "https://affiliate-demo.vercel.app",
+    },
+    {
+      name: "Link in Bio",
+      price: "Rp 25,000",
+      category: "website",
+      subcategory: "business",
+      features: ["Free Domain", "Free Hosting"],
+      exampleUrl: "https://linkinbio-demo.vercel.app",
+    },
+    {
+      name: "Digital Invitation",
+      price: "Rp 25,000",
+      category: "website",
+      subcategory: "non-business",
+      features: ["Free Domain", "Free Hosting"],
+      exampleUrl: "https://invitation-demo.vercel.app",
+    },
+    {
+      name: "Birthday",
+      price: "Rp 25,000",
+      category: "website",
+      subcategory: "non-business",
+      features: ["Free Domain", "Free Hosting"],
+      exampleUrl: "https://birthday-demo.vercel.app",
+    },
+    {
+      name: "Event",
+      price: "Rp 25,000",
+      category: "website",
+      subcategory: "non-business",
+      features: ["Free Domain", "Free Hosting"],
+      exampleUrl: "https://event-demo.vercel.app",
+    },
   ]
 
   const filteredProducts = products.filter((product) => {
     if (product.category !== activeCategory) return false
     if (activeCategory === "website") {
       return product.subcategory === activeSubcategory
+    }
+    if (["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(product.name)) {
+      return product.name === boosterType
     }
     return true
   })
@@ -147,7 +266,37 @@ export default function SecondPage() {
     setShowDetails(null)
   }
 
-  // ... other modal handlers remain unchanged
+  const openContentImages = () => {
+    setShowContentImages(true)
+  }
+
+  const closeContentImages = () => {
+    setShowContentImages(false)
+  }
+
+  const openVideoPromo = () => {
+    setShowVideoPromo(true)
+  }
+
+  const closeVideoPromo = () => {
+    setShowVideoPromo(false)
+  }
+
+  const openSEOImages = () => {
+    setShowSEOImages(true)
+  }
+
+  const closeSEOImages = () => {
+    setShowSEOImages(false)
+  }
+
+  const openAdsImages = () => {
+    setShowAdsImages(true)
+  }
+
+  const closeAdsImages = () => {
+    setShowAdsImages(false)
+  }
 
   if (!mounted) return null
 
@@ -275,83 +424,73 @@ export default function SecondPage() {
                       </div>
                     )}
 
-                    {product.name === "Instagram Booster" && (
+                    {["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(product.name) && (
                       <div className="mb-3">
                         <select
-                          value={instagramBoosterOption}
-                          onClick={() => setShowSocialBoosters(true)} // Show TikTok and Telegram on click
-                          onChange={(e) => setInstagramBoosterOption(e.target.value)}
+                          value={boosterType}
+                          onChange={(e) => setBoosterType(e.target.value)}
                           className={`w-full px-2 py-1.5 rounded-md text-xs border ${
                             theme === "dark"
                               ? "bg-gray-700 border-gray-600 text-gray-200"
                               : "bg-white border-gray-300 text-gray-700"
                           } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         >
-                          <option value="3000">3000 Followers</option>
-                          <option value="5000">5000 Followers</option>
-                          <option value="10000">10000 Followers</option>
+                          <option value="Instagram Booster">Instagram Booster</option>
+                          <option value="TikTok Booster">TikTok Booster</option>
+                          <option value="Telegram Booster">Telegram Booster</option>
                         </select>
-                        <input
-                          type="text"
-                          value={instagramLink}
-                          onChange={(e) => setInstagramLink(e.target.value)}
-                          placeholder="Link Akun"
-                          className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
-                            theme === "dark"
-                              ? "bg-gray-700 border-gray-600 text-gray-200"
-                              : "bg-white border-gray-300 text-gray-700"
-                          } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                        />
-                      </div>
-                    )}
 
-                    {showSocialBoosters && product.name === "TikTok Booster" && (
-                      <div className="mb-3">
-                        <select
-                          value={tiktokBoosterOption}
-                          onChange={(e) => setTiktokBoosterOption(e.target.value)}
-                          className={`w-full px-2 py-1.5 rounded-md text-xs border ${
-                            theme === "dark"
-                              ? "bg-gray-700 border-gray-600 text-gray-200"
-                              : "bg-white border-gray-300 text-gray-700"
-                          } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                        >
-                          <option value="2000">2000 Followers</option>
-                          <option value="5000">5000 Followers</option>
-                        </select>
-                        <input
-                          type="text"
-                          value={tiktokLink}
-                          onChange={(e) => setTiktokLink(e.target.value)}
-                          placeholder="Link Akun"
-                          className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
-                            theme === "dark"
-                              ? "bg-gray-700 border-gray-600 text-gray-200"
-                              : "bg-white border-gray-300 text-gray-700"
-                          } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                        />
-                      </div>
-                    )}
+                        {product.name === "Instagram Booster" && (
+                          <select
+                            value={instagramBoosterOption}
+                            onChange={(e) => setInstagramBoosterOption(e.target.value)}
+                            className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
+                              theme === "dark"
+                                ? "bg-gray-700 border-gray-600 text-gray-200"
+                                : "bg-white border-gray-300 text-gray-700"
+                            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                          >
+                            <option value="3000">3000 Followers</option>
+                            <option value="5000">5000 Followers</option>
+                            <option value="10000">10000 Followers</option>
+                          </select>
+                        )}
 
-                    {showSocialBoosters && product.name === "Telegram Booster" && (
-                      <div className="mb-3">
-                        <select
-                          value={telegramBoosterOption}
-                          onChange={(e) => setTelegramBoosterOption(e.target.value)}
-                          className={`w-full px-2 py-1.5 rounded-md text-xs border ${
-                            theme === "dark"
-                              ? "bg-gray-700 border-gray-600 text-gray-200"
-                              : "bg-white border-gray-300 text-gray-700"
-                          } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                        >
-                          <option value="3000">3000 Followers</option>
-                          <option value="5000">5000 Followers</option>
-                          <option value="10000">10000 Followers</option>
-                        </select>
+                        {product.name === "TikTok Booster" && (
+                          <select
+                            value={tiktokBoosterOption}
+                            onChange={(e) => setTiktokBoosterOption(e.target.value)}
+                            className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
+                              theme === "dark"
+                                ? "bg-gray-700 border-gray-600 text-gray-200"
+                                : "bg-white border-gray-300 text-gray-700"
+                            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                          >
+                            <option value="2000">2000 Followers</option>
+                            <option value="5000">5000 Followers</option>
+                          </select>
+                        )}
+
+                        {product.name === "Telegram Booster" && (
+                          <select
+                            value={telegramBoosterOption}
+                            onChange={(e) => setTelegramBoosterOption(e.target.value)}
+                            className=`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
+                              theme === "dark"
+                                ? "bg-gray-700 border-gray-600 text-gray-200"
+                                : "bg-white border-gray-300 text-gray-700"
+                            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                          >
+                            <option value="3000">3000 Followers</option>
+                            <option value="5000">5000 Followers</option>
+                            <option value="10000">10000 Followers</option>
+                          </select>
+                        )}
+
                         <input
                           type="text"
-                          value={telegramLink}
-                          onChange={(e) => setTelegramLink(e.target.value)}
+                          value={boosterLink}
+                          onChange={(e) => setBoosterLink(e.target.value)}
                           placeholder="Link Akun"
                           className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
                             theme === "dark"
@@ -456,7 +595,7 @@ export default function SecondPage() {
                       )}
                       {product.name === "Desain Konten" && (
                         <button
-                          onClick={() => setShowContentImages(true)}
+                          onClick={openContentImages}
                           className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
                             theme === "dark"
                               ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500"
@@ -468,7 +607,7 @@ export default function SecondPage() {
                       )}
                       {product.name === "Video Promosi" && (
                         <button
-                          onClick={() => setShowVideoPromo(true)}
+                          onClick={openVideoPromo}
                           className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
                             theme === "dark"
                               ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500"
@@ -480,7 +619,7 @@ export default function SecondPage() {
                       )}
                       {product.name === "SEO Website" && (
                         <button
-                          onClick={() => setShowSEOImages(true)}
+                          onClick={openSEOImages}
                           className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
                             theme === "dark"
                               ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500"
@@ -492,7 +631,7 @@ export default function SecondPage() {
                       )}
                       {product.name === "Jasa Iklan Online" && (
                         <button
-                          onClick={() => setShowAdsImages(true)}
+                          onClick={openAdsImages}
                           className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
                             theme === "dark"
                               ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500"
@@ -510,7 +649,6 @@ export default function SecondPage() {
           ))}
         </div>
 
-        {/* Modals remain unchanged */}
         {showExample && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div
@@ -589,8 +727,178 @@ export default function SecondPage() {
           </div>
         )}
 
-        {/* Other modals (showContentImages, showVideoPromo, showSEOImages, showAdsImages) remain unchanged */}
+        {showContentImages && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div
+              className={`max-w-2xl w-full rounded-xl ${
+                theme === "dark" ? "bg-gray-800" : "bg-white"
+              } overflow-hidden shadow-2xl p-4 relative`}
+            >
+              <button
+                onClick={closeContentImages}
+                className={`absolute top-4 right-4 p-3 rounded-lg transition-all duration-200 z-50 pointer-events-auto ${
+                  theme === "dark"
+                    ? "hover:bg-gray-700 text-gray-400 hover:text-white"
+                    : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                <X className="h-5 w-5" />
+              </button>
+              <Swiper
+                spaceBetween={10}
+                slidesPerView={1}
+                className="w-full h-64 pointer-events-none"
+              >
+                {[
+                  "/images/template1.jpg",
+                  "/images/template2.jpg",
+                  "/images/template3.jpg",
+                ].map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <div className="relative w-full h-64">
+                      <img
+                        src={img}
+                        alt={`Desain Konten ${i + 1}`}
+                        className="w-full h-full object-cover rounded-md"
+                      />
+                      <span
+                        className={`absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded`}
+                      >
+                        No {i + 1}
+                      </span>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </div>
+        )}
+
+        {showVideoPromo && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div
+              className={`max-w-2xl w-full rounded-xl ${
+                theme === "dark" ? "bg-gray-800" : "bg-white"
+              } overflow-hidden shadow-2xl p-4 relative`}
+            >
+              <button
+                onClick={closeVideoPromo}
+                className={`absolute top-4 right-4 p-3 rounded-lg transition-all duration-200 z-50 pointer-events-auto ${
+                  theme === "dark"
+                    ? "hover:bg-gray-700 text-gray-400 hover:text-white"
+                    : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                <X className="h-5 w-5" />
+              </button>
+              <div className="relative w-full h-64">
+                <iframe
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                  title="Video Promosi Example"
+                  className="w-full h-full rounded-md"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {showSEOImages && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div
+              className={`max-w-2xl w-full rounded-xl ${
+                theme === "dark" ? "bg-gray-800" : "bg-white"
+              } overflow-hidden shadow-2xl p-4 relative`}
+            >
+              <button
+                onClick={closeSEOImages}
+                className={`absolute top-4 right-4 p-3 rounded-lg transition-all duration-200 z-50 pointer-events-auto ${
+                  theme === "dark"
+                    ? "hover:bg-gray-700 text-gray-400 hover:text-white"
+                    : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                <X className="h-5 w-5" />
+              </button>
+              <Swiper
+                spaceBetween={10}
+                slidesPerView={1}
+                className="w-full h-64 pointer-events-none"
+              >
+                {[
+                  "/images/seo1.jpg",
+                  "/images/seo2.jpg",
+                  "/images/seo3.jpg",
+                ].map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <div className="relative w-full h-64">
+                      <img
+                        src={img}
+                        alt={`SEO Example ${i + 1}`}
+                        className="w-full h-full object-cover rounded-md"
+                      />
+                      <span
+                        className={`absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded`}
+                      >
+                        No {i + 1}
+                      </span>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </div>
+        )}
+
+        {showAdsImages && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div
+              className={`max-w-2xl w-full rounded-xl ${
+                theme === "dark" ? "bg-gray-800" : "bg-white"
+              } overflow-hidden shadow-2xl p-4 relative`}
+            >
+              <button
+                onClick={closeAdsImages}
+                className={`absolute top-4 right-4 p-3 rounded-lg transition-all duration-200 z-50 pointer-events-auto ${
+                  theme === "dark"
+                    ? "hover:bg-gray-700 text-gray-400 hover:text-white"
+                    : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                <X className="h-5 w-5" />
+              </button>
+              <Swiper
+                spaceBetween={10}
+                slidesPerView={1}
+                className="w-full h-64 pointer-events-none"
+              >
+                {[
+                  "/images/ads1.jpg",
+                  "/images/ads2.jpg",
+                  "/images/ads3.jpg",
+                ].map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <div className="relative w-full h-64">
+                      <img
+                        src={img}
+                        alt={`Jasa Iklan Online Example ${i + 1}`}
+                        className="w-full h-full object-cover rounded-md"
+                      />
+                      <span
+                        className={`absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded`}
+                      >
+                        No {i + 1}
+                      </span>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
-                                                                 }
+    }
