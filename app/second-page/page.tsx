@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
-import { X, CheckCircle, ExternalLink, ChevronRight } from "lucide-react"
+import { X, CheckCircle, ExternalLink } from "lucide-react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 
@@ -13,7 +13,6 @@ interface Product {
   subcategory?: string
   features?: string[]
   exampleUrl?: string
-  imageUrl?: string
 }
 
 export default function SecondPage() {
@@ -84,7 +83,7 @@ export default function SecondPage() {
       name: "Kebutuhan Bisnis",
       price: "Rp 50,000",
       category: "kebutuhan_bisnis",
-      features: ["Landing Page Website", "Automatic Chatbot", "Social Media Content", "Social Media Booster", "Alat Promosi"],
+      features: ["Landing Page Website", "Social Media Content", "Social Media Booster", "Alat Promosi"],
       exampleUrl: "https://example.com",
     },
     {
@@ -112,7 +111,6 @@ export default function SecondPage() {
       name: "Desain Konten",
       price: "Rp 10,000",
       category: "kebutuhan_bisnis",
-      imageUrl: "/templates/template1.jpg",
     },
     {
       name: "Landing Page",
@@ -335,13 +333,6 @@ export default function SecondPage() {
                   }`}
                 >
                   <div className="p-3">
-                    {product.name === "Desain Konten" && product.imageUrl && (
-                      <img
-                        src={product.imageUrl}
-                        alt={product.name}
-                        className="w-full h-32 object-cover rounded-md mb-3"
-                      />
-                    )}
                     <div className="flex justify-between items-start mb-2">
                       <h3
                         className={`text-sm font-bold leading-tight ${theme === "dark" ? "text-white" : "text-gray-900"}`}
@@ -362,6 +353,25 @@ export default function SecondPage() {
                         {product.price}
                       </span>
                     </div>
+
+                    {product.name === "Kebutuhan Bisnis" && (
+                      <div className="mb-3">
+                        <ul className="space-y-1">
+                          {product.features?.slice(0, 3).map((feature, i) => (
+                            <li key={i} className="flex items-center">
+                              <CheckCircle
+                                className={`h-3 w-3 mr-2 flex-shrink-0 ${
+                                  theme === "dark" ? "text-green-400" : "text-green-500"
+                                }`}
+                              />
+                              <span className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                                {feature}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
 
                     {product.name === "Instagram Booster" && (
                       <div className="mb-3">
@@ -447,6 +457,25 @@ export default function SecondPage() {
                               : "bg-white border-gray-300 text-gray-700"
                           } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         />
+                      </div>
+                    )}
+
+                    {activeCategory === "website" && product.features && (
+                      <div className="mb-3">
+                        <ul className="space-y-1">
+                          {product.features.map((feature, i) => (
+                            <li key={i} className="flex items-center">
+                              <CheckCircle
+                                className={`h-3 w-3 mr-2 flex-shrink-0 ${
+                                  theme === "dark" ? "text-green-400" : "text-green-500"
+                                }`}
+                              />
+                              <span className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                                {feature}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     )}
 
@@ -572,18 +601,33 @@ export default function SecondPage() {
               </div>
               <div className="p-4">
                 <ul className="space-y-2">
-                  {showDetails.features?.map((feature, i) => (
-                    <li key={i} className="flex items-center">
-                      <CheckCircle
-                        className={`h-4 w-4 mr-2 flex-shrink-0 ${
-                          theme === "dark" ? "text-green-400" : "text-green-500"
-                        }`}
-                      />
-                      <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-                        {feature}
-                      </span>
-                    </li>
-                  ))}
+                  {showDetails.name === "Kebutuhan Bisnis" ? (
+                    showDetails.features?.slice(3).map((feature, i) => (
+                      <li key={i} className="flex items-center">
+                        <CheckCircle
+                          className={`h-4 w-4 mr-2 flex-shrink-0 ${
+                            theme === "dark" ? "text-green-400" : "text-green-500"
+                          }`}
+                        />
+                        <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                          {feature}
+                        </span>
+                      </li>
+                    ))
+                  ) : (
+                    showDetails.features?.map((feature, i) => (
+                      <li key={i} className="flex items-center">
+                        <CheckCircle
+                          className={`h-4 w-4 mr-2 flex-shrink-0 ${
+                            theme === "dark" ? "text-green-400" : "text-green-500"
+                          }`}
+                        />
+                        <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                          {feature}
+                        </span>
+                      </li>
+                    ))
+                  )}
                 </ul>
               </div>
             </div>
@@ -650,4 +694,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-                       }
+                            }
