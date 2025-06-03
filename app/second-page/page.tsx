@@ -1,10 +1,8 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
 import { CheckCircle, ExternalLink, X } from "lucide-react"
-import { useState } from "react"
-
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 
@@ -20,24 +18,23 @@ interface Product {
 export default function SecondPage() {
   const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const [activeCategory, setActiveCategory] = useState("kebut_b_bisnis")
+  const [activeCategory, setActiveCategory] = useState("kebutuhan_bisnis")
   const [activeSubcategory, setActiveSubcategory] = useState("business")
-  const [showExample, setShowEx] = useState<Product | null>(null)
-  const [showDetails, setShowDetails] = useState("")
-  const [showContentImages, setShowContentImages] = useState("")
-  const [instagramBoosterOption, setInstagramBooster] = useState("3000")
-  const [tiktokOption, setTiktokOption] = useState("")
-  const [tiktokBoosterOption, setTikTokBooster] = useState("2000")
-  const [telegramBoosterOption, setTelegramBooster] = useState("3000")
+  const [showExample, setShowExample] = useState<Product | null>(null)
+  const [showDetails, setShowDetails] = useState<Product | null>(null)
+  const [showContentImages, setShowContentImages] = useState(false)
+  const [instagramBoosterOption, setInstagramBoosterOption] = useState("3000")
+  const [tiktokBoosterOption, setTiktokBoosterOption] = useState("2000")
+  const [telegramBoosterOption, setTelegramBoosterOption] = useState("3000")
   const [instagramLink, setInstagramLink] = useState("")
-  const [tiktokLink, setTikLink] = useState("")
+  const [tiktokLink, setTiktokLink] = useState("")
   const [telegramLink, setTelegramLink] = useState("")
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  const getInstagramBooster = (option: string) => {
+  const getInstagramBoosterFeatures = (option: string) => {
     switch (option) {
       case "3000":
         return ["5000 Likes", "100000 Views"]
@@ -50,9 +47,12 @@ export default function SecondPage() {
     }
   }
 
-  const getTikTokBooster = (option: string) => {
+  const getTikTokBoosterFeatures = (option: string) => {
     const baseViews = 70000
     const baseLikes = 5000
+    const baseShares = 700
+    const baseSaves = 700
+
     switch (option) {
       case "2000":
         return [`${baseViews} Views`, `${baseLikes} Likes`, `${baseShares} Shares`, `${baseSaves} Saves`]
@@ -65,7 +65,7 @@ export default function SecondPage() {
     }
   }
 
-  const getTelegramBooster = (option: string) => {
+  const getTelegramBoosterFeatures = (option: string) => {
     switch (option) {
       case "3000":
         return ["10000 Views", "1000 Reactions"]
@@ -82,35 +82,35 @@ export default function SecondPage() {
     {
       name: "Kebutuhan Bisnis",
       price: "Rp 50,000",
-      category: "kebut_b_bisnis",
+      category: "kebutuhan_bisnis",
       features: ["Landing Page Website", "Social Media Content", "Social Media Booster", "Alat Promosi"],
       exampleUrl: "https://example.com",
     },
     {
       name: "Instagram Booster",
       price: instagramBoosterOption === "3000" ? "Rp 50,000" : instagramBoosterOption === "5000" ? "Rp 80,000" : "Rp 150,000",
-      category: "kebut_b_bisnis",
+      category: "kebutuhan_bisnis",
       features: getInstagramBoosterFeatures(instagramBoosterOption),
       exampleUrl: "https://example.com/instagram",
     },
     {
       name: "TikTok Booster",
       price: tiktokBoosterOption === "2000" ? "Rp 50,000" : tiktokBoosterOption === "4000" ? "Rp 80,000" : "Rp 120,000",
-      category: "kebut_b_bisnis",
+      category: "kebutuhan_bisnis",
       features: getTikTokBoosterFeatures(tiktokBoosterOption),
       exampleUrl: "https://example.com/tiktok",
     },
     {
       name: "Telegram Booster",
       price: telegramBoosterOption === "3000" ? "Rp 50,000" : telegramBoosterOption === "6000" ? "Rp 100,000" : "Rp 150,000",
-      category: "kebut_b_bisnis",
+      category: "kebutuhan_bisnis",
       features: getTelegramBoosterFeatures(telegramBoosterOption),
       exampleUrl: "https://example.com/telegram",
     },
     {
       name: "Desain Konten",
       price: "Rp 10,000",
-      category: "kebut_b_bisnis",
+      category: "kebutuhan_bisnis",
     },
     {
       name: "Landing Page",
@@ -224,11 +224,11 @@ export default function SecondPage() {
   }
 
   const openExample = (product: Product) => {
-    setShowEx(product)
+    setShowExample(product)
   }
 
   const closeExample = () => {
-    setShowEx(null)
+    setShowExample(null)
   }
 
   const openDetails = (product: Product) => {
@@ -255,11 +255,11 @@ export default function SecondPage() {
         <div className="grid grid-cols-2 gap-2 mb-6">
           <button
             onClick={() => {
-              setActiveCategory("kebut_b_bisnis")
+              setActiveCategory("kebutuhan_bisnis")
               setActiveSubcategory("business")
             }}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
-              activeCategory === "kebut_b_bisnis"
+              activeCategory === "kebutuhan_bisnis"
                 ? theme === "dark"
                   ? "bg-blue-600 text-white shadow-lg"
                   : "bg-blue-500 text-white shadow-lg"
@@ -377,7 +377,7 @@ export default function SecondPage() {
                       <div className="mb-3">
                         <select
                           value={instagramBoosterOption}
-                          onChange={(e) => setInstagramBooster(e.target.value)}
+                          onChange={(e) => setInstagramBoosterOption(e.target.value)}
                           className={`w-full px-2 py-1.5 rounded-md text-xs border ${
                             theme === "dark"
                               ? "bg-gray-700 border-gray-600 text-gray-200"
@@ -406,7 +406,7 @@ export default function SecondPage() {
                       <div className="mb-3">
                         <select
                           value={tiktokBoosterOption}
-                          onChange={(e) => setTikTokBooster(e.target.value)}
+                          onChange={(e) => setTiktokBoosterOption(e.target.value)}
                           className={`w-full px-2 py-1.5 rounded-md text-xs border ${
                             theme === "dark"
                               ? "bg-gray-700 border-gray-600 text-gray-200"
@@ -420,7 +420,7 @@ export default function SecondPage() {
                         <input
                           type="text"
                           value={tiktokLink}
-                          onChange={(e) => setTikLink(e.target.value)}
+                          onChange={(e) => setTiktokLink(e.target.value)}
                           placeholder="Link Akun"
                           className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
                             theme === "dark"
@@ -435,7 +435,7 @@ export default function SecondPage() {
                       <div className="mb-3">
                         <select
                           value={telegramBoosterOption}
-                          onChange={(e) => setTelegramBooster(e.target.value)}
+                          onChange={(e) => setTelegramBoosterOption(e.target.value)}
                           className={`w-full px-2 py-1.5 rounded-md text-xs border ${
                             theme === "dark"
                               ? "bg-gray-700 border-gray-600 text-gray-200"
@@ -489,7 +489,7 @@ export default function SecondPage() {
                       >
                         Pay
                       </button>
-                      {product.exampleUrl && activeCategory === "kebut_b_bisnis" && (
+                      {product.exampleUrl && activeCategory === "kebutuhan_bisnis" && (
                         <button
                           onClick={() => openDetails(product)}
                           className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
@@ -536,11 +536,17 @@ export default function SecondPage() {
 
         {showExample && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2">
-            <div className={`max-w-full w-full h-[90vh] rounded-xl ${theme === "dark" ? "bg-gray-800" : "bg-white"} overflow-hidden shadow-2xl relative`}>
+            <div
+              className={`max-w-full w-full h-[90vh] rounded-xl ${
+                theme === "dark" ? "bg-gray-800" : "bg-white"
+              } overflow-hidden shadow-2xl relative`}
+            >
               <button
                 onClick={closeExample}
                 className={`absolute top-2 right-2 p-2 rounded-lg transition-all duration-200 ${
-                  theme === "dark" ? "hover:bg-gray-700 text-gray-400 hover:text-white" : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                  theme === "dark"
+                    ? "hover:bg-gray-700 text-gray-400 hover:text-white"
+                    : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
                 }`}
               >
                 <X className="h-5 w-5" />
@@ -558,11 +564,17 @@ export default function SecondPage() {
 
         {showDetails && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2">
-            <div className={`max-w-md w-full rounded-xl ${theme === "dark" ? "bg-gray-800" : "bg-white"} overflow-hidden shadow-2xl p-4 relative`}>
+            <div
+              className={`max-w-md w-full rounded-xl ${
+                theme === "dark" ? "bg-gray-800" : "bg-white"
+              } overflow-hidden shadow-2xl p-4 relative`}
+            >
               <button
                 onClick={closeDetails}
                 className={`absolute top-2 right-2 p-2 rounded-lg transition-all duration-200 ${
-                  theme === "dark" ? "hover:bg-gray-700 text-gray-400 hover:text-white" : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                  theme === "dark"
+                    ? "hover:bg-gray-700 text-gray-400 hover:text-white"
+                    : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
                 }`}
               >
                 <X className="h-5 w-5" />
@@ -572,18 +584,26 @@ export default function SecondPage() {
                   showDetails.features?.slice(3).map((feature, i) => (
                     <li key={i} className="flex items-center">
                       <CheckCircle
-                        className={`h-4 w-4 mr-2 flex-shrink-0 ${theme === "dark" ? "text-green-400" : "text-green-500"}`}
+                        className={`h-4 w-4 mr-2 flex-shrink-0 ${
+                          theme === "dark" ? "text-green-400" : "text-green-500"
+                        }`}
                       />
-                      <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{feature}</span>
+                      <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                        {feature}
+                      </span>
                     </li>
                   ))
                 ) : (
                   showDetails.features?.map((feature, i) => (
                     <li key={i} className="flex items-center">
                       <CheckCircle
-                        className={`h-4 w-4 mr-2 flex-shrink-0 ${theme === "dark" ? "text-green-400" : "text-green-500"}`}
+                        className={`h-4 w-4 mr-2 flex-shrink-0 ${
+                          theme === "dark" ? "text-green-400" : "text-green-500"
+                        }`}
                       />
-                      <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{feature}</span>
+                      <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                        {feature}
+                      </span>
                     </li>
                   ))
                 )}
@@ -594,16 +614,26 @@ export default function SecondPage() {
 
         {showContentImages && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2">
-            <div className={`max-w-2xl w-full rounded-xl ${theme === "dark" ? "bg-gray-800" : "bg-white"} overflow-hidden shadow-2xl p-4 relative`}>
+            <div
+              className={`max-w-2xl w-full rounded-xl ${
+                theme === "dark" ? "bg-gray-800" : "bg-white"
+              } overflow-hidden shadow-2xl p-4 relative`}
+            >
               <button
                 onClick={closeContentImages}
                 className={`absolute top-2 right-2 p-2 rounded-lg transition-all duration-200 ${
-                  theme === "dark" ? "hover:bg-gray-700 text-gray-400 hover:text-white" : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                  theme === "dark"
+                    ? "hover:bg-gray-700 text-gray-400 hover:text-white"
+                    : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
                 }`}
               >
                 <X className="h-5 w-5" />
               </button>
-              <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
+              <Swiper
+                spaceBetween={10}
+                slidesPerView={1}
+                className="w-full h-64"
+              >
                 {[
                   "https://via.placeholder.com/300x200?text=Template+1",
                   "https://via.placeholder.com/300x200?text=Template+2",
@@ -611,7 +641,11 @@ export default function SecondPage() {
                 ].map((img, i) => (
                   <SwiperSlide key={i}>
                     <div className="relative w-full h-64">
-                      <img src={img} alt={`Desain Konten ${i + 1}`} className="w-full h-full object-cover rounded-md" />
+                      <img
+                        src={img}
+                        alt={`Desain Konten ${i + 1}`}
+                        className="w-full h-full object-cover rounded-md"
+                      />
                       <span
                         className={`absolute top-2 left-2 px-2 py-1 text-xs font-bold text-white bg-black bg-opacity-50 rounded`}
                       >
@@ -627,4 +661,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-                        }
+        }
