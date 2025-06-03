@@ -185,22 +185,6 @@ export default function SecondPage() {
       exampleUrl: "https://membership-demo.vercel.app",
     },
     {
-      name: "Booking",
-      price: "Rp 25,000",
-      category: "website",
-      subcategory: "business",
-      features: ["Free Domain", "Free Hosting"],
-      exampleUrl: "https://booking-demo.vercel.app",
-    },
-    {
-      name: "Affiliate",
-      price: "Rp 25,000",
-      category: "website",
-      subcategory: "business",
-      features: ["Free Domain", "Free Hosting"],
-      exampleUrl: "https://affiliate-demo.vercel.app",
-    },
-    {
       name: "Link in Bio",
       price: "Rp 25,000",
       category: "website",
@@ -533,8 +517,7 @@ export default function SecondPage() {
                               <CheckCircle
                                 className={`h-3 w-3 mr-2 flex-shrink-0 ${
                                   theme === "dark" ? "text-green-400" : "text-green-500"
-                                }`}
-                              />
+                                }`} />
                               <span className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
                                 {feature}
                               </span>
@@ -882,4 +865,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-      }
+                            }
