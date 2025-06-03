@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
-import { CheckCircle, ExternalLink, X } from "lucide-react"
+import { CheckCircle, ExternalLink, X, Zap } from "lucide-react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 
@@ -307,7 +307,7 @@ export default function SecondPage() {
           <button
             onClick={() => {
               setActiveCategory("paket_bisnis")
-              setActiveSubcategory("business") // Reset subcategory when changing main category
+              setActiveSubcategory("business")
             }}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
               activeCategory === "paket_bisnis"
@@ -324,7 +324,7 @@ export default function SecondPage() {
           <button
             onClick={() => {
               setActiveCategory("website")
-              setActiveSubcategory("business") // Default to business when website is selected
+              setActiveSubcategory("business")
             }}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
               activeCategory === "website"
@@ -384,32 +384,23 @@ export default function SecondPage() {
                   }`}
                 >
                   <div className="p-3">
-                    <div className="flex justify-between items-start mb-2"> {/* Changed to items-start for better alignment with multiline title select */}
+                    <div className="flex justify-between items-center mb-2">
                       {["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(product.name) ? (
-                        <div className="flex-grow mr-2"> {/* Added flex-grow and mr-2 for better spacing */}
-                          <select
-                            value={boosterType}
-                            onChange={(e) => setBoosterType(e.target.value)}
-                            className={`w-full px-2 py-1.5 rounded-md text-sm font-bold leading-tight border ${
-                              theme === "dark"
-                                ? "bg-gray-700 border-gray-600 text-white"
-                                : "bg-white border-gray-300 text-gray-900"
-                            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                          >
-                            <option value="Instagram Booster">Instagram Booster</option>
-                            <option value="TikTok Booster">TikTok Booster</option>
-                            <option value="Telegram Booster">Telegram Booster</option>
-                          </select>
-                        </div>
+                        <h3
+                          className={`text-sm font-bold leading-tight ${theme === "dark" ? "text-white" : "text-gray-900"} inline-flex items-center gap-1`}
+                        >
+                          <Zap className={`h-4 w-4 ${theme === "dark" ? "text-yellow-400" : "text-yellow-500"}`} />
+                          Booster
+                        </h3>
                       ) : (
                         <h3
-                          className={`text-sm font-bold leading-tight flex-grow mr-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}  /* Added flex-grow and mr-2 */
+                          className={`text-sm font-bold leading-tight ${theme === "dark" ? "text-white" : "text-gray-900"}`}
                         >
                           {product.name}
                         </h3>
                       )}
                       <span
-                        className={`px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap self-start ${ /* Added self-start for alignment */
+                        className={`px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap ${
                           product.price === "Rp 0"
                             ? theme === "dark"
                               ? "bg-green-600 text-white"
@@ -423,27 +414,22 @@ export default function SecondPage() {
                       </span>
                     </div>
 
-                    {product.name === "Paket Bisnis" && (
-                      <div className="mb-3">
-                        <ul className="space-y-1">
-                          {product.features?.slice(0, 3).map((feature, i) => (
-                            <li key={i} className="flex items-center">
-                              <CheckCircle
-                                className={`h-3 w-3 mr-2 flex-shrink-0 ${
-                                  theme === "dark" ? "text-green-400" : "text-green-500"
-                                }`}
-                              />
-                              <span className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-                                {feature}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-
                     {["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(product.name) && (
                       <div className="mb-3">
+                        <select
+                          value={boosterType}
+                          onChange={(e) => setBoosterType(e.target.value)}
+                          className={`w-full px-2 py-1.5 rounded-md text-xs border ${
+                            theme === "dark"
+                              ? "bg-gray-700 border-gray-600 text-gray-200"
+                              : "bg-white border-gray-300 text-gray-700"
+                          } focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2`}
+                        >
+                          <option value="Instagram Booster">Instagram</option>
+                          <option value="TikTok Booster">TikTok</option>
+                          <option value="Telegram Booster">Telegram</option>
+                        </select>
+
                         {product.name === "Instagram Booster" && (
                           <select
                             value={instagramBoosterOption}
@@ -498,10 +484,29 @@ export default function SecondPage() {
                           placeholder="Link Akun"
                           className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
                             theme === "dark"
-                              ? "bg-gray-700 border-gray-600 text-gray-200 placeholder-gray-400"
-                              : "bg-white border-gray-300 text-gray-700 placeholder-gray-500"
+                              ? "bg-gray-700 border-gray-600 text-gray-200"
+                              : "bg-white border-gray-300 text-gray-700"
                           } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         />
+                      </div>
+                    )}
+
+                    {product.name === "Paket Bisnis" && (
+                      <div className="mb-3">
+                        <ul className="space-y-1">
+                          {product.features?.slice(0, 3).map((feature, i) => (
+                            <li key={i} className="flex items-center">
+                              <CheckCircle
+                                className={`h-3 w-3 mr-2 flex-shrink-0 ${
+                                  theme === "dark" ? "text-green-400" : "text-green-500"
+                                }`}
+                              />
+                              <span className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                                {feature}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     )}
 
@@ -550,7 +555,7 @@ export default function SecondPage() {
                             <li key={i} className="flex items-center">
                               <CheckCircle
                                 className={`h-3 w-3 mr-2 flex-shrink-0 ${
-                                  theme === "dark" ? "text-green-400" : "text-green-500"
+                                  theme === "dark" ? "text-green-400" : "text-green-500"}
                                 }`}
                               />
                               <span className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
@@ -612,7 +617,7 @@ export default function SecondPage() {
                       {product.name === "Video Promosi" && (
                         <button
                           onClick={openVideoPromo}
-                          className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
+                          className={`px-2 py-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
                             theme === "dark"
                               ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500"
                               : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
@@ -662,25 +667,20 @@ export default function SecondPage() {
             >
               <button
                 onClick={closeExample}
-                className={`absolute top-4 right-4 p-3 rounded-md transition-all duration-200 z-10 pointer-events-auto ${
-                  theme === "dark"
-                    ? "hover:bg-gray-700 text-gray-400 hover:text-white"
-                    : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
-                }`}
-              >
-                <X className="h-5 w-5" />
-              </button>
+                className="absolute top-10 top-4 right-4 p-3 rounded-md transition-all duration-200 z-10 pointer-auto events-auto"`
+                >
+                  <X className="h-5 w-5" />
+                  </button>
               <iframe
                 src={showExample.exampleUrl}
                 title={`Example ${showExample.name}`}
-                className="w-full h-full"
-                frameBorder="0"
+                className="w-full h-full`}
+                frameBorder="0"}
                 sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
               />
             </div>
           </div>
         )}
-
         {showDetails && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div
@@ -698,7 +698,6 @@ export default function SecondPage() {
               >
                 <X className="h-5 w-5" />
               </button>
-              <h3 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{showDetails.name} - Rincian</h3>
               <ul className="space-y-2">
                 {showDetails.name === "Paket Bisnis" ? (
                   showDetails.features?.slice(3).map((feature, i) => (
@@ -741,15 +740,9 @@ export default function SecondPage() {
             >
               <button
                 onClick={closeContentImages}
-                className={`absolute top-4 right-4 p-3 rounded-lg transition-all duration-200 z-50 pointer-events-auto ${
-                  theme === "dark"
-                    ? "hover:bg-gray-700 text-gray-400 hover:text-white"
-                    : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
-                }`}
-              >
+                className="absolute top-4 right-4 p-3 rounded-lg transition-all duration-200 z-50 pointer-events-auto ${theme === 'dark' ? 'hover:bg-gray-700 text-gray-400 hover:text-white' : 'hover:bg-gray-200 text-gray-600 hover:text-gray-900'}">
                 <X className="h-5 w-5" />
               </button>
-              <h3 className={`text-lg font-semibold mb-3 text-center ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Contoh Desain Konten</h3>
               <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
                 {["/images/template1.jpg", "/images/template2.jpg", "/images/template3.jpg"].map((img, i) => (
                   <SwiperSlide key={i}>
@@ -757,12 +750,10 @@ export default function SecondPage() {
                       <img
                         src={img}
                         alt={`Desain Konten ${i + 1}`}
-                        className="w-full h-full object-contain rounded-md" /* Changed to object-contain */
+                        className="w-full h-full object-cover rounded-md"
                       />
-                      <span
-                        className={`absolute top-2 left-2 px-2 py-1 text-xs font-medium text-white bg-black bg-opacity-50 rounded`}
-                      >
-                        Contoh {i + 1}
+                      <span className="absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded">
+                        No {i + 1}
                       </span>
                     </div>
                   </SwiperSlide>
@@ -789,12 +780,11 @@ export default function SecondPage() {
               >
                 <X className="h-5 w-5" />
               </button>
-              <h3 className={`text-lg font-semibold mb-3 text-center ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Contoh Video Promosi</h3>
-              <div className="relative w-full" style={{ paddingTop: "56.25%" }}> {/* 16:9 Aspect Ratio */}
+              <div className="relative w-full h-64">
                 <iframe
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ" /* Replace with actual valid YouTube embed link */
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
                   title="Video Promosi Example"
-                  className="absolute top-0 left-0 w-full h-full rounded-md"
+                  className="w-full h-full rounded-md"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -818,10 +808,9 @@ export default function SecondPage() {
                     ? "hover:bg-gray-700 text-gray-400 hover:text-white"
                     : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
                 }`}
-              >
-                <X className="h-5 w-5" />
-              </button>
-              <h3 className={`text-lg font-semibold mb-3 text-center ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Contoh Hasil SEO</h3>
+                >
+                  <X className="h-5 w-5" />
+                </button>
               <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
                 {["/images/seo1.jpg", "/images/seo2.jpg", "/images/seo3.jpg"].map((img, i) => (
                   <SwiperSlide key={i}>
@@ -829,12 +818,10 @@ export default function SecondPage() {
                       <img
                         src={img}
                         alt={`SEO Example ${i + 1}`}
-                        className="w-full h-full object-contain rounded-md" /* Changed to object-contain */
+                        className="w-full h-full object-cover rounded-md"
                       />
-                       <span
-                        className={`absolute top-2 left-2 px-2 py-1 text-xs font-medium text-white bg-black bg-opacity-50 rounded`}
-                      >
-                        Contoh {i + 1}
+                      <span className="absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded">
+                        No {i + 1}
                       </span>
                     </div>
                   </SwiperSlide>
@@ -861,7 +848,6 @@ export default function SecondPage() {
               >
                 <X className="h-5 w-5" />
               </button>
-              <h3 className={`text-lg font-semibold mb-3 text-center ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Contoh Jasa Iklan Online</h3>
               <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
                 {["/images/ads1.jpg", "/images/ads2.jpg", "/images/ads3.jpg"].map((img, i) => (
                   <SwiperSlide key={i}>
@@ -869,12 +855,10 @@ export default function SecondPage() {
                       <img
                         src={img}
                         alt={`Jasa Iklan Online Example ${i + 1}`}
-                        className="w-full h-full object-contain rounded-md" /* Changed to object-contain */
+                        className="w-full h-full object-cover rounded-md"
                       />
-                       <span
-                        className={`absolute top-2 left-2 px-2 py-1 text-xs font-medium text-white bg-black bg-opacity-50 rounded`}
-                      >
-                        Contoh {i + 1}
+                      <span className="absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded">
+                        No {i + 1}
                       </span>
                     </div>
                   </SwiperSlide>
@@ -886,4 +870,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-}
+    }
