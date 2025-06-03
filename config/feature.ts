@@ -9,27 +9,27 @@ export const FEATURES_EN = [
   {
     title: "Website profesional",
     content: "Dapatkan website yang responsif",
-    icon: GlobeIcon, // Changed to GlobeIcon for better relevance to websites
+    icon: GlobeIcon, // Represents websites/internet
   },
   {
     title: "Sosmed Booster",
     content: "Dapatkan peningkatan sosial media dengan booster followers like view dll.",
-    icon: DollarSignIcon, // Relevant for boosting/growth
+    icon: DollarSignIcon, // Placeholder; a "heart" or "people" icon would be ideal
   },
   {
-    title: "Gratis Trik & Alat Promosi",
-    content: "Dapatkan akses ke berbagai trik promosi dan alat promosi gratis untuk meningkatkan penjualan.",
-    icon: MdCampaign, // Campaign icon fits promotion tools
+    title: "Trik & Alat Promosi",
+    content: "Dapatkan akses ke berbagai trik promosi dan alat promosi untuk meningkatkan penjualan.",
+    icon: MdCampaign, // Perfect for promotion/marketing tools
   },
   {
     title: "Chatbot 24 Jam",
     content: "Capek balas chat? Chatbot kami layani pembeli otomatis, bahkan saat kamu offline.",
-    icon: FaRobot, // Robot icon fits chatbot
+    icon: FaRobot, // Ideal for automation/chatbots
   },
   {
     title: "Desain konten Siap Pakai",
     content: "Susah bikin konten? Dapatkan puluhan desain konten yang siap posting.",
-    icon: FaImages, // Images icon fits content design
+    icon: FaImages, // Perfect for content designs
   },
 ];
 
