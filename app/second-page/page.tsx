@@ -70,9 +70,9 @@ export default function SecondPage() {
     switch (option) {
       case "3000":
         return ["10000 Views", "1000 Reactions"]
-      case "6000":
-        return ["20000 Views", "2000 Reactions"]
-      case "9000":
+      case "5000":
+        return ["15000 Views", "1500 Reactions"]
+      case "10000":
         return ["30000 Views", "3000 Reactions"]
       default:
         return []
@@ -103,7 +103,12 @@ export default function SecondPage() {
     },
     {
       name: "Telegram Booster",
-      price: telegramBoosterOption === "3000" ? "Rp 50,000" : telegramBoosterOption === "5000" ? "Rp 70,000" : "Rp 140,000",
+      price:
+        telegramBoosterOption === "3000"
+          ? "Rp 50,000"
+          : telegramBoosterOption === "5000"
+          ? "Rp 70,000"
+          : "Rp 140,000",
       category: "paket_bisnis",
       features: getTelegramBoosterFeatures(telegramBoosterOption),
       exampleUrl: "https://example.com/telegram",
@@ -471,8 +476,8 @@ export default function SecondPage() {
                           } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         >
                           <option value="3000">3000 Followers</option>
-                          <option value="6000">6000 Followers</option>
-                          <option value="9000">9000 Followers</option>
+                          <option value="5000">5000 Followers</option>
+                          <option value="10000">10000 Followers</option>
                         </select>
                         <input
                           type="text"
@@ -539,7 +544,8 @@ export default function SecondPage() {
                       {product.exampleUrl && activeCategory === "paket_bisnis" && product.name !== "Video Promosi" && (
                         <button
                           onClick={() => openDetails(product)}
-                          className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border                    theme === "dark"
+                          className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
+                            theme === "dark"
                               ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500"
                               : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
                           } flex items-center gap-1 shadow-sm hover:shadow-md`}
@@ -686,7 +692,7 @@ export default function SecondPage() {
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div
               className={`max-w-2xl w-full rounded-xl ${
-                theme === "dark" ? "bg-gray-800" : "bg-white"
+                theme === "dark" ? "bg-gray[..., gray-800" : "bg-white"
               } overflow-hidden shadow-2xl p-4 relative`}
             >
               <button
@@ -809,4 +815,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-        }
+                 }
