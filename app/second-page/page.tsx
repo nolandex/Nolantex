@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
-import { CheckCircle, ExternalLink, X, ChevronDown } from "lucide-react"
+import { CheckCircle, ExternalLink, X } from "lucide-react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 
@@ -387,22 +387,17 @@ export default function SecondPage() {
                     <div className="flex justify-between items-center mb-2">
                       {["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(product.name) ? (
                         <div className="flex flex-col">
-                          <div className="inline-flex items-center gap-1">
-                            <select
-                              value={boosterType}
-                              onChange={(e) => setBoosterType(e.target.value)}
-                              className={`text-sm font-bold leading-tight bg-transparent border-none appearance-none focus:outline-none cursor-pointer ${
-                                theme === "dark" ? "text-white" : "text-gray-900"
-                              }`}
-                            >
-                              <option value="Instagram Booster">Instagram</option>
-                              <option value="TikTok Booster">TikTok</option>
-                              <option value="Telegram Booster">Telegram</option>
-                            </select>
-                            <ChevronDown
-                              className={`h-4 w-4 ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}
-                            />
-                          </div>
+                          <select
+                            value={boosterType}
+                            onChange={(e) => setBoosterType(e.target.value)}
+                            className={`text-sm font-bold leading-tight bg-transparent border-none appearance-none focus:outline-none cursor-pointer ${
+                              theme === "dark" ? "text-white" : "text-gray-900"
+                            }`}
+                          >
+                            <option value="Instagram Booster">Instagram ▼</option>
+                            <option value="TikTok Booster">TikTok ▼</option>
+                            <option value="Telegram Booster">Telegram ▼</option>
+                          </select>
                           <span
                             className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"} mt-0.5`}
                           >
@@ -557,9 +552,9 @@ export default function SecondPage() {
                           {product.features.map((feature, i) => (
                             <li key={i} className="flex items-center">
                               <CheckCircle
-                                className=`h-3 w-3 mr-2 flex-shrink-0 ${
+                                className={`h-3 w-3 mr-2 flex-shrink-0 ${
                                   theme === "dark" ? "text-green-400" : "text-green-500"
-                                }`
+                                }`}
                               />
                               <span className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
                                 {feature}
@@ -889,4 +884,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-                          }
+                            }
