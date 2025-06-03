@@ -119,7 +119,6 @@ export default function SecondPage() {
       category: "paket_bisnis",
       exampleUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     },
-’él
     {
       name: "SEO Website",
       price: "Rp 25,000",
@@ -540,8 +539,7 @@ export default function SecondPage() {
                       {product.exampleUrl && activeCategory === "paket_bisnis" && product.name !== "Video Promosi" && (
                         <button
                           onClick={() => openDetails(product)}
-                          className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
-                            theme === "dark"
+                          className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border                    theme === "dark"
                               ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500"
                               : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
                           } flex items-center gap-1 shadow-sm hover:shadow-md`}
@@ -811,4 +809,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-      }
+        }
