@@ -84,7 +84,7 @@ export default function SecondPage() {
       name: "Paket Bisnis",
       price: "Rp 50,000",
       category: "paket_bisnis",
-      features: ["Landing Page Website", "Social Media Content", "Social Media Booster", "SEO Website", "Copywriting"],
+      features: ["Website", "Content Design", "Social Media Booster", "SEO Website", "Copywriting"],
       exampleUrl: "https://example.com",
     },
     {
