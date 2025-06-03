@@ -368,7 +368,7 @@ export default function SecondPage() {
                     : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
               }`}
             >
-              Undangan Digital
+              Non-Business
             </button>
           </div>
         )}
@@ -882,4 +882,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-    }
+      }
