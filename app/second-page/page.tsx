@@ -60,7 +60,12 @@ export default function SecondPage() {
       case "2000":
         return [`${baseViews} Views`, `${baseLikes} Likes`, `${baseShares} Shares`, `${baseSaves} Saves`]
       case "5000":
-        return [`${baseViews * 2.5} Views`, `${baseLikes * 2.5} Likes`, `${baseShares * 2.5} Shares`, `${baseSaves * 2.5} Saves`]
+        return [
+          `${baseViews * 2.5} Views`,
+          `${baseLikes * 2.5} Likes`,
+          `${baseShares * 2.5} Shares`,
+          `${baseSaves * 2.5} Saves`,
+        ]
       default:
         return []
     }
@@ -89,7 +94,12 @@ export default function SecondPage() {
     },
     {
       name: "Instagram Booster",
-      price: instagramBoosterOption === "3000" ? "Rp 50,000" : instagramBoosterOption === "5000" ? "Rp 80,000" : "Rp 150,000",
+      price:
+        instagramBoosterOption === "3000"
+          ? "Rp 50,000"
+          : instagramBoosterOption === "5000"
+            ? "Rp 80,000"
+            : "Rp 150,000",
       category: "paket_bisnis",
       features: getInstagramBoosterFeatures(instagramBoosterOption),
       exampleUrl: "https://example.com/instagram",
@@ -104,11 +114,7 @@ export default function SecondPage() {
     {
       name: "Telegram Booster",
       price:
-        telegramBoosterOption === "3000"
-          ? "Rp 50,000"
-          : telegramBoosterOption === "5000"
-          ? "Rp 70,000"
-          : "Rp 140,000",
+        telegramBoosterOption === "3000" ? "Rp 50,000" : telegramBoosterOption === "5000" ? "Rp 70,000" : "Rp 140,000",
       category: "paket_bisnis",
       features: getTelegramBoosterFeatures(telegramBoosterOption),
       exampleUrl: "https://example.com/telegram",
@@ -128,7 +134,7 @@ export default function SecondPage() {
       name: "SEO Website",
       price: "Rp 25,000",
       category: "paket_bisnis",
-      features: ["Keyword Research", "On-Page Optimization", "SEO Website"],
+      features: ["Keyword Research", "On-Page Optimization", "Link Building"],
     },
     {
       name: "Jasa Iklan Online",
@@ -344,7 +350,7 @@ export default function SecondPage() {
           <div className="flex justify-center gap-2 mb-6">
             <button
               onClick={() => setActiveSubcategory("business")}
-              className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
+              className={`px-4 py-2 rounded-md font-medium text-sm transition-all duration-300 ${
                 activeSubcategory === "business"
                   ? theme === "dark"
                     ? "bg-blue-600 text-white shadow-lg"
@@ -358,7 +364,7 @@ export default function SecondPage() {
             </button>
             <button
               onClick={() => setActiveSubcategory("non-business")}
-              className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
+              className={`px-4 py-2 rounded-md font-medium text-sm transition-all duration-300 ${
                 activeSubcategory === "non-business"
                   ? theme === "dark"
                     ? "bg-blue-600 text-white shadow-lg"
@@ -385,12 +391,12 @@ export default function SecondPage() {
                 >
                   <div className="p-3">
                     <div className="flex justify-between items-start mb-2">
-                      {["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(product.name) ? (
-                        <div className="inline-flex items-center">
+                      <div className="flex items-center gap-2 flex-1">
+                        {["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(product.name) ? (
                           <select
                             value={boosterType}
                             onChange={(e) => setBoosterType(e.target.value)}
-                            className={`text-sm font-bold leading-tight bg-transparent border-none appearance-none focus:outline-none ${
+                            className={`text-sm font-bold leading-tight border-none bg-transparent p-0 focus:outline-none focus:ring-0 ${
                               theme === "dark" ? "text-white" : "text-gray-900"
                             }`}
                           >
@@ -398,27 +404,29 @@ export default function SecondPage() {
                             <option value="TikTok Booster">TikTok Booster</option>
                             <option value="Telegram Booster">Telegram Booster</option>
                           </select>
-                        </div>
-                      ) : (
-                        <h3
-                          className={`text-sm font-bold leading-tight ${theme === "dark" ? "text-white" : "text-gray-900"}`}
+                        ) : (
+                          <h3
+                            className={`text-sm font-bold leading-tight ${theme === "dark" ? "text-white" : "text-gray-900"}`}
+                          >
+                            {product.name}
+                          </h3>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span
+                          className={`px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap ${
+                            product.price === "Rp 0"
+                              ? theme === "dark"
+                                ? "bg-green-600 text-white"
+                                : "bg-green-500 text-white"
+                              : theme === "dark"
+                                ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white"
+                                : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
+                          } shadow-sm`}
                         >
-                          {product.name}
-                        </h3>
-                      )}
-                      <span
-                        className={`px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap ${
-                          product.price === "Rp 0"
-                            ? theme === "dark"
-                              ? "bg-green-600 text-white"
-                              : "bg-green-500 text-white"
-                            : theme === "dark"
-                              ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white"
-                              : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
-                        } shadow-sm`}
-                      >
-                        {product.price}
-                      </span>
+                          {product.price}
+                        </span>
+                      </div>
                     </div>
 
                     {product.name === "Paket Bisnis" && (
@@ -697,33 +705,31 @@ export default function SecondPage() {
                 <X className="h-5 w-5" />
               </button>
               <ul className="space-y-2">
-                {showDetails.name === "Paket Bisnis" ? (
-                  showDetails.features?.slice(3).map((feature, i) => (
-                    <li key={i} className="flex items-center">
-                      <CheckCircle
-                        className={`h-4 w-4 mr-2 flex-shrink-0 ${
-                          theme === "dark" ? "text-green-400" : "text-green-500"
-                        }`}
-                      />
-                      <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-                        {feature}
-                      </span>
-                    </li>
-                  ))
-                ) : (
-                  showDetails.features?.map((feature, i) => (
-                    <li key={i} className="flex items-center">
-                      <CheckCircle
-                        className={`h-4 w-4 mr-2 flex-shrink-0 ${
-                          theme === "dark" ? "text-green-400" : "text-green-500"
-                        }`}
-                      />
-                      <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-                        {feature}
-                      </span>
-                    </li>
-                  ))
-                )}
+                {showDetails.name === "Paket Bisnis"
+                  ? showDetails.features?.slice(3).map((feature, i) => (
+                      <li key={i} className="flex items-center">
+                        <CheckCircle
+                          className={`h-4 w-4 mr-2 flex-shrink-0 ${
+                            theme === "dark" ? "text-green-400" : "text-green-500"
+                          }`}
+                        />
+                        <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                          {feature}
+                        </span>
+                      </li>
+                    ))
+                  : showDetails.features?.map((feature, i) => (
+                      <li key={i} className="flex items-center">
+                        <CheckCircle
+                          className={`h-4 w-4 mr-2 flex-shrink-0 ${
+                            theme === "dark" ? "text-green-400" : "text-green-500"
+                          }`}
+                        />
+                        <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
               </ul>
             </div>
           </div>
@@ -746,20 +752,12 @@ export default function SecondPage() {
               >
                 <X className="h-5 w-5" />
               </button>
-              <Swiper
-                spaceBetween={10}
-                slidesPerView={1}
-                className="w-full h-64 pointer-events-none"
-              >
-                {[
-                  "/images/template1.jpg",
-                  "/images/template2.jpg",
-                  "/images/template3.jpg",
-                ].map((img, i) => (
+              <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64 pointer-events-none">
+                {["/images/template1.jpg", "/images/template2.jpg", "/images/template3.jpg"].map((img, i) => (
                   <SwiperSlide key={i}>
                     <div className="relative w-full h-64">
                       <img
-                        src={img}
+                        src={img || "/placeholder.svg"}
                         alt={`Desain Konten ${i + 1}`}
                         className="w-full h-full object-cover rounded-md"
                       />
@@ -810,86 +808,75 @@ export default function SecondPage() {
         {showSEOImages && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div
-              className="fixed inset-4 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div
-              className="relative w-full h-full max-w-2xl w-full rounded-lg bg-black bg-opacity-50">
+              className={`max-w-2xl w-full rounded-xl ${
+                theme === "dark" ? "bg-gray-800" : "bg-white"
+              } overflow-hidden shadow-2xl p-4 relative`}
+            >
               <button
-                className="absolute top-4 right-4 p-3 rounded-lg bg-gray-300 bg-opacity-50 transition-all duration-200 z-50 pointer-events-auto hover:bg-gray-200 hover:text-gray-900"
                 onClick={closeSEOImages}
+                className={`absolute top-4 right-4 p-3 rounded-lg transition-all duration-200 z-50 pointer-events-auto ${
+                  theme === "dark"
+                    ? "hover:bg-gray-700 text-gray-400 hover:text-white"
+                    : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                }`}
               >
-                <X className="text-white h-5 w-5 text-gray-600" />
+                <X className="h-5 w-5" />
               </button>
-              <div className="relative">
-              <Swiper
-                spaceBetween={10}
-                slidesPerView={1}
-                className="w-full h-64 pointer-events-none"
-              >
-                {[
-                  "/images/seo1.jpg",
-                  "/images/seo2.jpg",
-                  "/images/seo3.jpg",
-                ].map((img, i) => (
+              <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64 pointer-events-none">
+                {["/images/seo1.jpg", "/images/seo2.jpg", "/images/seo3.jpg"].map((img, i) => (
                   <SwiperSlide key={i}>
                     <div className="relative w-full h-64">
-                      <div className="relative w-full h-full">
-                        <img
-                          src={img}
-                          alt={`SEO Example ${i + 1}`}
-                          className="w-full h-full object-cover rounded-md"
-                        />
-                        <span
-                          className={`absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded-md`}
-                            >
-                              No {i + 1}
-                          </span>
+                      <img
+                        src={img || "/placeholder.svg"}
+                        alt={`SEO Example ${i + 1}`}
+                        className="w-full h-full object-cover rounded-md"
+                      />
+                      <span
+                        className={`absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded`}
+                      >
+                        No {i + 1}
+                      </span>
                     </div>
                   </SwiperSlide>
                 ))}
               </Swiper>
-              </div>
             </div>
           </div>
         )}
+
         {showAdsImages && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div
-              className="fixed inset-4 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div
-              className="relative w-full h-full max-w-2xl relative">
+              className={`max-w-2xl w-full rounded-xl ${
+                theme === "dark" ? "bg-gray-800" : "bg-white"
+              } overflow-hidden shadow-2xl p-4 relative`}
+            >
               <button
-                className="absolute top-4 right-4 p-3 rounded bg-gray-300 bg-opacity-50 rounded-lg transition-all duration-300 z-200 pointer-events-auto hover:bg-gray-200 hover:text-gray-400"
                 onClick={closeAdsImages}
+                className={`absolute top-4 right-4 p-3 rounded-lg transition-all duration-200 z-50 pointer-events-auto ${
+                  theme === "dark"
+                    ? "hover:bg-gray-700 text-gray-400 hover:text-white"
+                    : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                }`}
               >
-                <X className="text-white h-5 w-5 text-gray-600" />
+                <X className="h-5 w-5" />
               </button>
-            <Swiper slide>
-              <Swiper
-                spaceBetween={10}
-                slidesPerView={1}
-                slideClassName="w-full h-64 pointer-events-none"
-              >
-                {[
-                  "/images/ads1.jpg",
-                  "/images/ads2.jpg",
-                  "/images/ads3.jpg",
-                ].map((img, i) => (
+              <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64 pointer-events-none">
+                {["/images/ads1.jpg", "/images/ads2.jpg", "/images/ads3.jpg"].map((img, i) => (
                   <SwiperSlide key={i}>
                     <div className="relative w-full h-64">
-                      <div className="relative w-full h-full">
-                        <img
-                          src={img}
-                          alt={`Jasa Iklan Online Example ${i + 1}`}
-                          className="w-full h-full object-cover rounded-md"
-                        />
-                        <span
-                          className="span absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded"
-                        >
-                          No {i + 1}
-                        </span>
-                        </div>
-                      </div>
-                    </SwiperSlide>
+                      <img
+                        src={img || "/placeholder.svg"}
+                        alt={`Jasa Iklan Online Example ${i + 1}`}
+                        className="w-full h-full object-cover rounded-md"
+                      />
+                      <span
+                        className={`absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded`}
+                      >
+                        No {i + 1}
+                      </span>
+                    </div>
+                  </SwiperSlide>
                 ))}
               </Swiper>
             </div>
@@ -898,4 +885,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-                                  }
+}
