@@ -421,7 +421,7 @@ export default function SecondPage() {
                         <select
                           value={tiktokBoosterOption}
                           onChange={(e) => setTiktokBoosterOption(e.target.value)}
-                          className={`w-full px-2 py-1.5 rounded-lg font-medium text-sm="w-full rounded-md text-xs border ${
+                          className={`w-full px-2 py-1.5 rounded-md text-xs border ${
                             theme === "dark"
                               ? "bg-gray-700 border-gray-600 text-gray-200"
                               : "bg-white border-gray-300 text-gray-700"
@@ -453,7 +453,7 @@ export default function SecondPage() {
                             theme === "dark"
                               ? "bg-gray-700 border-gray-600 text-gray-200"
                               : "bg-white border-gray-300 text-gray-700"
-                          } focus:outline-none focus:ring-2 focus:ring-blue-500"}
+                          } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         >
                           <option value="3000">3000 Followers</option>
                           <option value="6000">6000 Followers</option>
@@ -468,7 +468,7 @@ export default function SecondPage() {
                             theme === "dark"
                               ? "bg-gray-700 border-gray-600 text-gray-200"
                               : "bg-white border-gray-300 text-gray-700"
-                          } focus:outline-none focus:ring-2 focus:ring-blue-500"}
+                          } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         />
                       </div>
                     )}
@@ -490,7 +490,7 @@ export default function SecondPage() {
                           ))}
                         </ul>
                       </div>
-                    ))}
+                    )}
 
                     <div className="flex gap-2">
                       <button
@@ -513,7 +513,7 @@ export default function SecondPage() {
                         >
                           Rincian
                         </button>
-                      ))}
+                      )}
                       {product.exampleUrl && activeCategory === "website" && (
                         <button
                           onClick={() => openExample(product)}
@@ -523,199 +523,302 @@ export default function SecondPage() {
                               : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
                           } flex items-center gap-1 shadow-sm hover:shadow-md`}
                         >
-                            <ExternalLink className="h-3 w-3" />
-                            Example
-                          </button>
-                        ))}
-                        {product.name === "Desain Konten" && (
-                          <button
-                            onClick={openContentImages}
-                            className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
-                              theme === "dark"
-                                ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500"
-                              : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
-                            } flex items-center gap-1 shadow-sm hover:shadow-md`}
-                            >
-                              Contoh
-                            </button>
-                        ))}
-                        {product.name === "Video Promosi" && (
-                          <button
-                            onClick={openVideoPromo}
-                            className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
-                              theme === "dark"
-                                ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500"
-                              : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
-                            } flex items-center gap-1 shadow-sm hover:shadow-md`}
-                            >
-                              Contoh
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-
-            {showExample && (
-              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-                <div
-                  className={`max-w-full w-full h-[90vh] rounded-xl ${
-                    theme === "dark" ? "bg-gray-800" : "bg-white"
-                  } overflow-hidden shadow-2xl relative`}
-                >
-                  <button
-                    onClick={closeExample}
-                    className={`absolute top-4 right-4 p-3 rounded-md transition-all duration-200 z-10 pointer-events-auto ${
-                      theme === "dark"
-                        ? "hover:bg-gray-700 text-gray-400 hover:text-white"
-                        : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
-                    }`}
-                    >
-                      <X className="h-5 w-5" />
-                    </button>
-                  <iframe
-                    src={showExample.exampleUrl}
-                    title={`Example ${showExample.name}`}
-                    className="w-full h-full"
-                    frameBorder="0"
-                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                    />
-                </div>
-              </div>
-            ))}
-
-            {showDetails && (
-              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-                <div
-                  className={`max-w-md w-full rounded-xl ${
-                    theme === "dark" ? "bg-gray-800" : "bg-white"
-                  } overflow-hidden shadow-2xl p-4 relative`}
-                >
-                  <button
-                    onClick={closeDetails}
-                    className={`absolute top-4 right-4 p-3 rounded-md transition-all duration-200 z-10 pointer-events-auto ${
-                      theme === "dark"
-                        ? "hover:bg-gray-700 text-gray-400 hover:text-white"
-                        : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
-                    }`}
-                    >
-                      <X className="h-5 w-5" />
-                    </button>
-                  <ul className="space-y-2">
-                    {showDetails.name === "Paket Bisnis" ? (
-                      showDetails.features?.slice(3).map((feature, i) => (
-                        <li key={i} className="flex items-center">
-                          <CheckCircle
-                            className={`h-4 w-4 mr-2 flex-shrink-0 ${
-                              theme === "dark" ? "text-green-400" : "text-green-500"
-                            }`}
-                          />
-                          <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-                            {feature}
-                          </span>
-                        </li>
-                      ))))
-                      : (
-                        showDetails.features?.map((feature, i) => (
-                          <li key={i} className="flex items-center">
-                            <CheckCircle
-                              className={`h-4 w-4 mr-2 flex-shrink-0 ${
-                                theme === "dark" ? "text-green-400" : "text-green-500"
-                              }`}
-                            />
-                            <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-                              {feature}
-                            </span>
-                          </li>
-                        ))))
-                      }
-                    </ul>
-                  </div>
-                </div>
-              ))}
-
-              {showContentImages && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-100 p-4">
-                  <div
-                    className={`max-w-2xl w-full rounded-xl ${
-                      theme === "dark" ? "bg-gray-800" : "bg-white"
-                    } overflow-hidden shadow-2xl p-4 relative`}
-                    >
-                      <button
-                        onClick={closeContentImages}
-                        className={`absolute top-4 right-4 p-3 rounded-lg transition-all duration-200 z-100 pointer-events-auto ${
-                          theme === "dark"
-                            ? "hover:bg-gray-700 text-gray-400 hover:text-white"
-                          : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
-                      }`}
-                      >
-                        <X className="h-5 w-5" />
-                      </button>
-                      <Swiper
-                        spaceBetween={10}
-                        slidesPerView={1}
-                        className="w-full h-64 pointer-events-none"
-                      >
-                        {[
-                          "/images/template1.jpg",
-                          "/images/template2.jpg",
-                          "/images/template3.jpg",
-                        ].map((img, i) => (
-                          <SwiperSlide key={i}>
-                            <div className="relative w-full h-64">
-                              <img
-                                src={img}
-                                alt={`Desain Konten ${i + 1}`}
-                                className="w-full h-full object-cover rounded-md"
-                              />
-                              <span
-                                className={`absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded`}
-                              >
-                                No {i + 1}
-                              </span>
-                            </div>
-                          </SwiperSlide>
-                        ))}
-                      </Swiper>
-                    </div>
-                  </div>
-                ))}
-
-                {showVideoPromo && (
-                  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-100 p-4">
-                    <div
-                      className={`max-w-2xl w-full rounded-xl ${
-                        theme === "dark" ? "bg-gray-800" : "bg-white"
-                      } overflow-hidden shadow-2xl p-4 relative`}
-                      >
-                        <button
-                          onClick={closeVideoPromo}
-                          className={`absolute top-4 right-4 p-3 rounded-lg transition-all duration-200 z-100 pointer-events-auto ${
-                            theme === "dark"
-                              ? "hover:bg-gray-700 text-gray-400 hover:text-white"
-                              : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
-                          }`}
-                        >
-                          <X className="h-5 w-5" />
+                          <ExternalLink className="h-3 w-3" />
+                          Example
                         </button>
-                        <div className="relative w-full h-64">
-                          <iframe
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                            title="Video Promosi Example"
-                            className="w-full h-full rounded-md"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          />
-                        </div>
-                      </div>
+                      )}
+                      {product.name === "Desain Konten" && (
+                        <button
+                          onClick={openContentImages}
+                          className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
+                            theme === "dark"
+                              ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500"
+                              : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
+                          } flex items-center gap-1 shadow-sm hover:shadow-md`}
+                        >
+                          Contoh
+                        </button>
+                      )}
+                      {product.name === "Video Promosi" && (
+                        <button
+                          onClick={openVideoPromo}
+                          className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
+                            theme === "dark"
+                              ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500"
+                              : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
+                          } flex items-center gap-1 shadow-sm hover:shadow-md`}
+                        >
+                          Contoh
+                        </button>
+                      )}
                     </div>
-                  ))}
+                  </div>
                 </div>
               ))}
             </div>
-          )
-                    }
+          ))}
+        </div>
+
+        {showExample && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-100 p-4">
+            <div
+              className={`max-w-full w-full h-[90vh] rounded-xl ${
+                theme === "dark" ? "bg-gray-800" : "bg-white"
+              } overflow-hidden shadow-2xl relative`}
+            >
+              <button
+                onClick={closeExample}
+                className={`absolute top-4 right-4 p-3 rounded-lg transition-all duration-200 z-100 pointer-events-auto ${
+                  theme === "dark"
+                    ? "hover:bg-gray-700 text-gray-400 hover:text-white"
+                    : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                <X className="h-5 w-5" />
+              </button>
+              <iframe
+                src={showExample.exampleUrl}
+                title={`Example ${showExample.name}`}
+                className="w-full h-full"
+                frameBorder="0"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+              />
+            </div>
+          </div>
+        )}
+
+        {showDetails && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-100 p-4">
+            <div
+              className={`max-w-md w-full rounded-xl ${
+                theme === "dark" ? "bg-gray-800" : "bg-white"
+              } overflow-hidden shadow-2xl p-4 relative`}
+            >
+              <button
+                onClick={closeDetails}
+                className={`absolute top-4 right-4 p-3 rounded-lg transition-all duration-200 z-100 pointer-events-auto ${
+                  theme === "dark"
+                    ? "hover:bg-gray-700 text-gray-400 hover:text-white"
+                    : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                <X className="h-5 w-5" />
+              </button>
+              <ul className="space-y-2">
+                {showDetails.name === "Paket Bisnis"
+                  ? showDetails.features?.slice(3).map((feature, i) => (
+                      <li key={i} className="flex items-center">
+                        <CheckCircle
+                          className={`Circle
+                          className={`h-4h-4 w-4 w-4 mr-2 mr flex-shrink--2 flex0 ${
+-shrink-0                            theme ${
+                            theme === "dark" ? " === "dark" ? "text-green-400text-green-400" :" : "text-green-500 "text-green-500"
+                         "
+                          }`}
+                        />
+ }`}
+                        />
+                        <span className={`                        <span className={`text-sm ${themetext-sm ${theme === === "dark" ? " "dark" ? "text-gray-300text-gray-300" : "text" : "text-gray-gray-600"}-600"}`}>
+                          {feature`}>
+                          {feature}
+}
+                        </span>
+                                             </span>
+                      </li> </li>
+                    ))
+                    ))
+                  :
+                  : showDetails.features showDetails.features?.map((?.map((featurefeature, i) => (
+, i) => (
+                                           <li key={ <li key={i} classi} className="flexName="flex items-center"> items-center">
+                        <Check
+                        <CheckCircle
+                          className={`h-Circle
+                          className={`h-4 w-4 w-44 mr- mr-2 flex2 flex-shrink-0 ${
+                           -shrink-0 ${
+                            theme theme === "dark" ? === "dark" ? "text-green-400 "text-green-400" : "text-green-" : "text-green-500500""
+
+                          }                          }`}`}
+                       
+                        />
+                        <span className />
+                        <span className={`text-sm={`text-sm ${theme === ${theme === "dark "dark"" ? "text ? "text-gray--gray-300" : "text-gray300" : "text-gray-600-600"}`}>"}`}>
+
+                          {feature}
+                          {feature}
+                        </span                        </span>>
+                     
+                      </ </li>
+li>
+                    ))}
+              </                    ))}
+              </ul>
+            </div>
+ul>
+            </div>
+          </div>
+          </div>
+        )}
+
+        {showContent        )}
+
+        {showContentImages && (
+Images && (
+                   <div className="fixed <div className="fixed inset-0 bg-black inset-0 bg-black bg bg-opacity-50 flex-opacity-50 flex items items-center justify-center z-center justify-center z-100 p--100 p-4">
+            <div
+4">
+            <div
+              className={`              className={`max-w-max-w-2xl2xl w-full rounded w-full rounded-xl-xl ${
+                theme === ${
+                theme === "dark" "dark" ? "bg ? "bg-gray-800-gray-800" : "bg-white"
+" : "bg-white"
+              } overflow-hidden              } overflow-hidden shadow-2 shadow-2xl pxl p-4 relative-4 relative`}
+            >
+              <button`}
+            >
+              <button
+                onClick={
+                onClick={closeContentImagescloseContentImages}
+               } class
+                className={`Name={`absolute topabsolute top-4 right-4 p-4 right-4 p-3 rounded-lg-3 rounded-lg transition-all duration-200 transition-all duration-200 z-100 z-100 pointer pointer-events-auto-events-auto ${ ${
+                  theme
+                  theme === "dark === "dark"
+                   "
+                    ? ? "hover "hover:bg-gray-700:bg-gray-700 text text-gray-400-gray-400 hover:text hover:text-white"
+                    : "hover-white"
+                    : "hover:bg-gray-200 text:bg-gray-200 text-gray-600-gray-600 hover hover:text-gray-:text-gray-900"
+                }`}900"
+                }`}
+             
+              >
+                >
+                <X <X className className="h-5 w-="h-5 w-5" />5" />
+              </
+              </buttonbutton>
+              <Swiper>
+              <Swiper
+                space
+                spaceBetween={10}Between={10}
+                slides
+                slidesPerView={1PerView={1}
+                className="}
+                className="ww-full h-64-full h-64 pointer-events-none pointer-events-none"
+             "
+              >
+                >
+                {[
+ {[
+                  "/images                  "/images/template/template1.jpg",1.jpg",
+                  "/images
+                  "/images/template2/template2.jpg.jpg",
+",
+                                   "/ "/images/template3images/template3.jpg",
+.jpg",
+                               ].map((img ].map((img, i) => (
+                 , i) => (
+                  <SwiperSlide key <SwiperSlide key={i}>={i}>
+                    <div
+                    <div class className="relativeName="relative w-full h-64">
+                      w-full h- <img
+                        src={img}
+64">
+                        alt={`                      <imgDes
+                        src={img}
+                        alt={`Desain Kontain Konten ${i +en ${i + 1}`}
+ 1}`}
+                        className                        className="w-full h-full="w-full h-full object object-cover rounded-md-cover rounded-md"
+                     "
+                      />
+                      />
+                      <span <span
+                       
+                        className={` className={`absolute topabsolute top-2 left-2 left-2 px-2 px-2-2 py-1 py-1 text text-xs-xs font-bold font-bold text-white bg text-white bg-black bg-black bg-opacity-50 rounded-opacity-50 rounded`}
+                     `}
+                      >
+ >
+                        No                        No {i + {i + 1}
+ 1}
+                      </span                      </span>
+                   >
+                    </div> </div>
+                 
+                  </Swiper </SwiperSlide>
+                ))}
+Slide>
+                ))}
+              </Swiper              </Swiper>
+            </div>
+         >
+            </div>
+          </div>
+        )}
+ </div>
+        )}
+
+
+        {showVideoPromo && (
+          <div        {showVideoPromo && (
+          <div class className="fixed inset-Name="fixed inset-00 bg-black bg bg-black bg-opacity-opacity-50 flex-50 flex items-center justify items-center justify-center z-100 p-center z-100 p-4">-4">
+            <div
+            <div
+             
+              className={` className={`max-w-max-w-2xl w2xl w-full rounded-full rounded-xl ${
+-xl ${
+                theme === "dark"                theme === "dark" ? "bg-gray ? "bg-gray-800-800" : "bg" : "bg-white"
+              } overflow-white"
+              } overflow-hidden shadow-hidden shadow-2xl p-2xl p-4 relative-4 relative`}
+            >`}
+            >
+              <button
+              <button
+                onClick={
+                onClick={closeVideoPromo}
+                classcloseVideoPromo}
+                className={`absoluteName={`absolute top-4 top-4 right right-4-4 p p-3-3 rounded-lg rounded-lg transition transition-all duration--all duration-200 z200 z-100 pointer-100 pointer-events-auto ${-events-auto ${
+                 
+                  theme === " theme === "dark"
+                   dark"
+                    ? "hover ? "hover:bg-gray-700:bg-gray-700 text text-gray-400 hover:text-white-gray-400 hover:text-white"
+                   "
+                    : "hover : "hover:bg-gray-200:bg-gray-200 text text-gray-600 hover:text-gray-600 hover:text-gray--gray-900"
+                }`}
+             900"
+                }`}
+              >
+                <X >
+                <X className className="h-="h-55 w-5 w-5" />
+" />
+                           </button </button>>
+
+              <div class              <div classNameName="relative w-full h="relative w-full h-64">
+                <iframe-64">
+                <iframe
+                 
+                  src="https:// src="https://www.youtube.com/embed/dQw4wwww.youtube.com/embed/dQw4w9WgXcQ"
+                 9WgXcQ"
+                  title="Video title="Video Promosi Example"
+                  Promosi Example className="w-full h-full"
+                  className=" rounded-mdw-full h-full rounded-md"
+                  frame"
+                  frameBorder="0"
+                  allowBorder="0"
+                  allow="acceler="accelerometerometer;; autoplay; clipboard-write; encrypted autoplay; clipboard-write; encrypted-media; gyroscope-media; gyroscope; picture-in; picture-in-picture"
+                 -picture"
+                  allowFullScreen allowFullScreen
+                />
+
+                />
+              </div>
+            </              </div>
+            </div>
+          </divdiv>
+          </div>
+        )}
+>
+        )}
+      </div      </div>
+   >
+    </div </div>
+  )
+>
+  )}
