@@ -26,15 +26,15 @@ export default function SecondPage() {
   const [showVideoPromo, setShowVideoPromo] = useState(false)
   const [showSEOImages, setShowSEOImages] = useState(false)
   const [showAdsImages, setShowAdsImages] = useState(false)
-  const [boosterType, setBoosterType] = useState("Instagram Booster") // New state for booster type
+  const [boosterType, setBoosterType] = useState("Instagram Booster")
   const [instagramBoosterOption, setInstagramBoosterOption] = useState("3000")
   const [tiktokBoosterOption, setTiktokBoosterOption] = useState("2000")
   const [telegramBoosterOption, setTelegramBoosterOption] = useState("3000")
-  const [boosterLink, setBoosterLink] = useState("") // Single input for booster link
+  const [boosterLink, setBoosterLink] = useState("")
 
   useEffect(() => {
     setMounted(true)
-    setTheme("light") // Set default theme to light mode
+    setTheme("light")
   }, [setTheme])
 
   const getInstagramBoosterFeatures = (option: string) => {
@@ -240,7 +240,7 @@ export default function SecondPage() {
       return product.subcategory === activeSubcategory
     }
     if (["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(product.name)) {
-      return product.name === boosterType // Only show the selected booster
+      return product.name === boosterType
     }
     return true
   })
@@ -344,7 +344,7 @@ export default function SecondPage() {
           <div className="flex justify-center gap-2 mb-6">
             <button
               onClick={() => setActiveSubcategory("business")}
-              className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
+              className={`px-4 py-2 rounded-md font-medium text-sm transition-all duration-300 ${
                 activeSubcategory === "business"
                   ? theme === "dark"
                     ? "bg-blue-600 text-white shadow-lg"
@@ -358,7 +358,7 @@ export default function SecondPage() {
             </button>
             <button
               onClick={() => setActiveSubcategory("non-business")}
-              className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
+              className={`px-4 py-2 rounded-md font-medium text-sm transition-all duration-300 ${
                 activeSubcategory === "non-business"
                   ? theme === "dark"
                     ? "bg-blue-600 text-white shadow-lg"
@@ -390,19 +390,36 @@ export default function SecondPage() {
                       >
                         {product.name}
                       </h3>
-                      <span
-                        className={`px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap ml-2 ${
-                          product.price === "Rp 0"
-                            ? theme === "dark"
-                              ? "bg-green-600 text-white"
-                              : "bg-green-500 text-white"
-                            : theme === "dark"
-                              ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white"
-                              : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
-                        } shadow-sm`}
-                      >
-                        {product.price}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <span
+                          className={`px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap ${
+                            product.price === "Rp 0"
+                              ? theme === "dark"
+                                ? "bg-green-600 text-white"
+                                : "bg-green-500 text-white"
+                              : theme === "dark"
+                                ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white"
+                                : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
+                          } shadow-sm`}
+                        >
+                          {product.price}
+                        </span>
+                        {["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(product.name) && (
+                          <select
+                            value={boosterType}
+                            onChange={(e) => setBoosterType(e.target.value)}
+                            className={`px-2 py-1 rounded-md text-xs border ${
+                              theme === "dark"
+                                ? "bg-gray-700 border-gray-600 text-gray-200"
+                                : "bg-white border-gray-300 text-gray-700"
+                            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                          >
+                            <option value="Instagram Booster">Instagram</option>
+                            <option value="TikTok Booster">TikTok</option>
+                            <option value="Telegram Booster">Telegram</option>
+                          </select>
+                        )}
+                      </div>
                     </div>
 
                     {product.name === "Paket Bisnis" && (
@@ -426,25 +443,11 @@ export default function SecondPage() {
 
                     {["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(product.name) && (
                       <div className="mb-3">
-                        <select
-                          value={boosterType}
-                          onChange={(e) => setBoosterType(e.target.value)}
-                          className={`w-full px-2 py-1.5 rounded-md text-xs border ${
-                            theme === "dark"
-                              ? "bg-gray-700 border-gray-600 text-gray-200"
-                              : "bg-white border-gray-300 text-gray-700"
-                          } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                        >
-                          <option value="Instagram Booster">Instagram Booster</option>
-                          <option value="TikTok Booster">TikTok Booster</option>
-                          <option value="Telegram Booster">Telegram Booster</option>
-                        </select>
-
                         {product.name === "Instagram Booster" && (
                           <select
                             value={instagramBoosterOption}
                             onChange={(e) => setInstagramBoosterOption(e.target.value)}
-                            className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
+                            className={`w-full px-2 py-1.5 rounded-md text-xs border ${
                               theme === "dark"
                                 ? "bg-gray-700 border-gray-600 text-gray-200"
                                 : "bg-white border-gray-300 text-gray-700"
@@ -460,7 +463,7 @@ export default function SecondPage() {
                           <select
                             value={tiktokBoosterOption}
                             onChange={(e) => setTiktokBoosterOption(e.target.value)}
-                            className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
+                            className={`w-full px-2 py-1.5 rounded-md text-xs border ${
                               theme === "dark"
                                 ? "bg-gray-700 border-gray-600 text-gray-200"
                                 : "bg-white border-gray-300 text-gray-700"
@@ -475,13 +478,13 @@ export default function SecondPage() {
                           <select
                             value={telegramBoosterOption}
                             onChange={(e) => setTelegramBoosterOption(e.target.value)}
-                            className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
+                            className={`w-full px-2 py-1.5 rounded-md text-xs border ${
                               theme === "dark"
                                 ? "bg-gray-700 border-gray-600 text-gray-200"
                                 : "bg-white border-gray-300 text-gray-700"
                             } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                           >
-                            <option value="3000">3000 Followers</option>
+                          <option value="3000">3000 Followers</option>
                             <option value="5000">5000 Followers</option>
                             <option value="10000">10000 Followers</option>
                           </select>
@@ -901,4 +904,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-    }
+                                                }
