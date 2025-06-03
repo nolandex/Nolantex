@@ -26,15 +26,15 @@ export default function SecondPage() {
   const [showVideoPromo, setShowVideoPromo] = useState(false)
   const [showSEOImages, setShowSEOImages] = useState(false)
   const [showAdsImages, setShowAdsImages] = useState(false)
-  const [boosterType, setBoosterType] = useState("Instagram Booster") // State untuk tipe booster
+  const [boosterType, setBoosterType] = useState("Instagram Booster") // New state for booster type
   const [instagramBoosterOption, setInstagramBoosterOption] = useState("3000")
   const [tiktokBoosterOption, setTiktokBoosterOption] = useState("2000")
   const [telegramBoosterOption, setTelegramBoosterOption] = useState("3000")
-  const [boosterLink, setBoosterLink] = useState("") // Satu input untuk link akun
+  const [boosterLink, setBoosterLink] = useState("") // Single input for booster link
 
   useEffect(() => {
     setMounted(true)
-    setTheme("light")
+    setTheme("light") // Set default theme to light mode
   }, [setTheme])
 
   const getInstagramBoosterFeatures = (option: string) => {
@@ -240,7 +240,7 @@ export default function SecondPage() {
       return product.subcategory === activeSubcategory
     }
     if (["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(product.name)) {
-      return product.name === boosterType
+      return product.name === boosterType // Only show the selected booster
     }
     return true
   })
@@ -475,7 +475,7 @@ export default function SecondPage() {
                           <select
                             value={telegramBoosterOption}
                             onChange={(e) => setTelegramBoosterOption(e.target.value)}
-                            className=`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
+                            className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
                               theme === "dark"
                                 ? "bg-gray-700 border-gray-600 text-gray-200"
                                 : "bg-white border-gray-300 text-gray-700"
