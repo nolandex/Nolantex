@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
-import { X, CheckCircle, ExternalLink } from "lucide-react"
+import { CheckCircle, ExternalLink } from "lucide-react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 
@@ -83,7 +83,7 @@ export default function SecondPage() {
       name: "Kebutuhan Bisnis",
       price: "Rp 50,000",
       category: "kebutuhan_bisnis",
-      features: ["Landing Page Website", "Social Media Content", "Social Media Booster", "Alat Promosi"],
+      features: ["Website", "Social Media Content", "Social Media Booster", "Alat Promosi"],
       exampleUrl: "https://example.com",
     },
     {
@@ -535,163 +535,112 @@ export default function SecondPage() {
         </div>
 
         {showExample && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2">
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2"
+            onClick={closeExample}
+          >
             <div
               className={`max-w-full w-full h-[90vh] rounded-xl ${
                 theme === "dark" ? "bg-gray-800" : "bg-white"
               } overflow-hidden shadow-2xl`}
+              onClick={(e) => e.stopPropagation()}
             >
-              <div
-                className={`flex justify-between items-center p-4 border-b ${
-                  theme === "dark" ? "border-gray-700 bg-gray-750" : "border-gray-200 bg-gray-50"
-                }`}
-              >
-                <h2 className={`text-lg font-bold ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-                  Example: {showExample.name}
-                </h2>
-                <button
-                  onClick={closeExample}
-                  className={`p-2 rounded-lg transition-all duration-200 ${
-                    theme === "dark"
-                      ? "hover:bg-gray-700 text-gray-400 hover:text-white"
-                      : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
-                  }`}
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
-              <div className="h-full pb-12">
-                <iframe
-                  src={showExample.exampleUrl}
-                  title={`Example ${showExample.name}`}
-                  className="w-full h-full"
-                  frameBorder="0"
-                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                />
-              </div>
+              <iframe
+                src={showExample.exampleUrl}
+                title={`Example ${showExample.name}`}
+                className="w-full h-full"
+                frameBorder="0"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+              />
             </div>
           </div>
         )}
 
         {showDetails && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2">
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2"
+            onClick={closeDetails}
+          >
             <div
               className={`max-w-md w-full rounded-xl ${
                 theme === "dark" ? "bg-gray-800" : "bg-white"
-              } overflow-hidden shadow-2xl`}
+              } overflow-hidden shadow-2xl p-4`}
+              onClick={(e) => e.stopPropagation()}
             >
-              <div
-                className={`flex justify-between items-center p-4 border-b ${
-                  theme === "dark" ? "border-gray-700 bg-gray-750" : "border-gray-200 bg-gray-50"
-                }`}
-              >
-                <h2 className={`text-lg font-bold ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-                  Rincian: {showDetails.name}
-                </h2>
-                <button
-                  onClick={closeDetails}
-                  className={`p-2 rounded-lg transition-all duration-200 ${
-                    theme === "dark"
-                      ? "hover:bg-gray-700 text-gray-400 hover:text-white"
-                      : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
-                  }`}
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
-              <div className="p-4">
-                <ul className="space-y-2">
-                  {showDetails.name === "Kebutuhan Bisnis" ? (
-                    showDetails.features?.slice(3).map((feature, i) => (
-                      <li key={i} className="flex items-center">
-                        <CheckCircle
-                          className={`h-4 w-4 mr-2 flex-shrink-0 ${
-                            theme === "dark" ? "text-green-400" : "text-green-500"
-                          }`}
-                        />
-                        <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-                          {feature}
-                        </span>
-                      </li>
-                    ))
-                  ) : (
-                    showDetails.features?.map((feature, i) => (
-                      <li key={i} className="flex items-center">
-                        <CheckCircle
-                          className={`h-4 w-4 mr-2 flex-shrink-0 ${
-                            theme === "dark" ? "text-green-400" : "text-green-500"
-                          }`}
-                        />
-                        <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-                          {feature}
-                        </span>
-                      </li>
-                    ))
-                  )}
-                </ul>
-              </div>
+              <ul className="space-y-2">
+                {showDetails.name === "Kebutuhan Bisnis" ? (
+                  showDetails.features?.slice(3).map((feature, i) => (
+                    <li key={i} className="flex items-center">
+                      <CheckCircle
+                        className={`h-4 w-4 mr-2 flex-shrink-0 ${
+                          theme === "dark" ? "text-green-400" : "text-green-500"
+                        }`}
+                      />
+                      <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                        {feature}
+                      </span>
+                    </li>
+                  ))
+                ) : (
+                  showDetails.features?.map((feature, i) => (
+                    <li key={i} className="flex items-center">
+                      <CheckCircle
+                        className={`h-4 w-4 mr-2 flex-shrink-0 ${
+                          theme === "dark" ? "text-green-400" : "text-green-500"
+                        }`}
+                      />
+                      <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                        {feature}
+                      </span>
+                    </li>
+                  ))
+                )}
+              </ul>
             </div>
           </div>
         )}
 
         {showContentImages && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2">
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2"
+            onClick={closeContentImages}
+          >
             <div
               className={`max-w-2xl w-full rounded-xl ${
                 theme === "dark" ? "bg-gray-800" : "bg-white"
-              } overflow-hidden shadow-2xl`}
+              } overflow-hidden shadow-2xl p-4`}
+              onClick={(e) => e.stopPropagation()}
             >
-              <div
-                className={`flex justify-between items-center p-4 border-b ${
-                  theme === "dark" ? "border-gray-700 bg-gray-750" : "border-gray-200 bg-gray-50"
-                }`}
+              <Swiper
+                spaceBetween={10}
+                slidesPerView={1}
+                className="w-full h-64"
               >
-                <h2 className={`text-lg font-bold ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-                  Contoh Desain Konten
-                </h2>
-                <button
-                  onClick={closeContentImages}
-                  className={`p-2 rounded-lg transition-all duration-200 ${
-                    theme === "dark"
-                      ? "hover:bg-gray-700 text-gray-400 hover:text-white"
-                      : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
-                  }`}
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
-              <div className="p-4">
-                <Swiper
-                  spaceBetween={10}
-                  slidesPerView={1}
-                  className="w-full h-64"
-                >
-                  {[
-                    "https://via.placeholder.com/300x200?text=Template+1",
-                    "https://via.placeholder.com/300x200?text=Template+2",
-                    "https://via.placeholder.com/300x200?text=Template+3",
-                  ].map((img, i) => (
-                    <SwiperSlide key={i}>
-                      <div className="relative w-full h-64">
-                        <img
-                          src={img}
-                          alt={`Desain Konten ${i + 1}`}
-                          className="w-full h-full object-cover rounded-md"
-                        />
-                        <span
-                          className={`absolute top-2 left-2 px-2 py-1 text-xs font-bold text-white bg-black bg-opacity-50 rounded`}
-                        >
-                          No {i + 1}
-                        </span>
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </div>
+                {[
+                  "https://via.placeholder.com/300x200?text=Template+1",
+                  "https://via.placeholder.com/300x200?text=Template+2",
+                  "https://via.placeholder.com/300x200?text=Template+3",
+                ].map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <div className="relative w-full h-64">
+                      <img
+                        src={img}
+                        alt={`Desain Konten ${i + 1}`}
+                        className="w-full h-full object-cover rounded-md"
+                      />
+                      <span
+                        className={`absolute top-2 left-2 px-2 py-1 text-xs font-bold text-white bg-black bg-opacity-50 rounded`}
+                      >
+                        No {i + 1}
+                      </span>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
           </div>
         )}
       </div>
     </div>
   )
-                            }
+                          }
