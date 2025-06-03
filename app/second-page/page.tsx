@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
-import { CheckCircle, ExternalLink, X, Rocket, ChevronDown } from "lucide-react"
+import { CheckCircle, ExternalLink, X, ChevronDown } from "lucide-react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 
@@ -401,7 +401,6 @@ export default function SecondPage() {
                           <ChevronDown
                             className={`h-4 w-4 ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}
                           />
-                          <Rocket className={`h-4 w-4 ${theme === "dark" ? "text-blue-400" : "text-blue-500"}`} />
                         </div>
                       ) : (
                         <h3
@@ -883,4 +882,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-                                                 }
+    }
