@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
-import { CheckCircle, ExternalLink, X, Rocket, ChevronDown } from "lucide-react"
+import { CheckCircle, ExternalLink, X, Rocket, ChevronDown } from "lucide-react" // Rocket akan dihapus dari penggunaan di kartu booster
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 
@@ -26,7 +26,7 @@ export default function SecondPage() {
   const [showVideoPromo, setShowVideoPromo] = useState(false)
   const [showSEOImages, setShowSEOImages] = useState(false)
   const [showAdsImages, setShowAdsImages] = useState(false)
-  const [boosterType, setBoosterType] = useState("Instagram Booster")
+  const [boosterType, setBoosterType] = useState("Instagram Booster") // Tetap mengontrol produk booster mana yang aktif
   const [instagramBoosterOption, setInstagramBoosterOption] = useState("3000")
   const [tiktokBoosterOption, setTiktokBoosterOption] = useState("2000")
   const [telegramBoosterOption, setTelegramBoosterOption] = useState("3000")
@@ -34,7 +34,7 @@ export default function SecondPage() {
 
   useEffect(() => {
     setMounted(true)
-    setTheme("light")
+    setTheme("light") // Default theme ke light
   }, [setTheme])
 
   const getInstagramBoosterFeatures = (option: string) => {
@@ -239,6 +239,7 @@ export default function SecondPage() {
     if (activeCategory === "website") {
       return product.subcategory === activeSubcategory
     }
+    // This logic correctly filters to show only the active boosterType product
     if (["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(product.name)) {
       return product.name === boosterType
     }
@@ -307,7 +308,7 @@ export default function SecondPage() {
           <button
             onClick={() => {
               setActiveCategory("paket_bisnis")
-              setActiveSubcategory("business")
+              setActiveSubcategory("business") // Reset subcategory if needed
             }}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
               activeCategory === "paket_bisnis"
@@ -324,7 +325,7 @@ export default function SecondPage() {
           <button
             onClick={() => {
               setActiveCategory("website")
-              setActiveSubcategory("business")
+              setActiveSubcategory("business") // Default to business when website is clicked
             }}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
               activeCategory === "website"
@@ -385,32 +386,43 @@ export default function SecondPage() {
                 >
                   <div className="p-3">
                     <div className="flex justify-between items-center mb-2">
+                      {/* MODIFIED TITLE FOR BOOSTER PRODUCTS */}
                       {["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(product.name) ? (
-                        <div className="inline-flex items-center gap-1">
-                          <select
-                            value={boosterType}
-                            onChange={(e) => setBoosterType(e.target.value)}
-                            className={`text-sm font-bold leading-tight bg-transparent border-none appearance-none focus:outline-none cursor-pointer ${
-                              theme === "dark" ? "text-white" : "text-gray-900"
-                            }`}
-                          >
-                            <option value="Instagram Booster">Instagram</option>
-                            <option value="TikTok Booster">TikTok</option>
-                            <option value="Telegram Booster">Telegram</option>
-                          </select>
-                          <ChevronDown
-                            className={`h-4 w-4 ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}
-                          />
-                          <Rocket className={`h-4 w-4 ${theme === "dark" ? "text-blue-400" : "text-blue-500"}`} />
+                        <div className="flex flex-col"> {/* Container for "Platform" (Select) and "Booster" (Text) */}
+                          <div className="inline-flex items-center relative"> {/* For select and custom arrow */}
+                            <select
+                              value={boosterType} // State that determines which booster's data (IG, TT, TG) is active
+                              onChange={(e) => setBoosterType(e.target.value)}
+                              className={`text-sm font-bold leading-tight bg-transparent border-none appearance-none focus:outline-none cursor-pointer py-1 pl-1 pr-6 ${ // Added padding for better click area and space for arrow
+                                theme === "dark" ? "text-white" : "text-gray-900"
+                              }`}
+                            >
+                              {/* Value attribute must match the product.name in your products array */}
+                              <option value="Instagram Booster">Instagram</option>
+                              <option value="TikTok Booster">TikTok</option>
+                              <option value="Telegram Booster">Telegram</option>
+                            </select>
+                            <ChevronDown // Custom dropdown arrow
+                              className={`h-4 w-4 absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none ${
+                                theme === "dark" ? "text-gray-400" : "text-gray-500"
+                              }`}
+                            />
+                          </div>
+                          <span className={`text-xs font-semibold leading-none ${theme === "dark" ? "text-gray-300" : "text-gray-600"} pl-1`}> {/* "Booster" text below the select */}
+                            Booster
+                          </span>
                         </div>
                       ) : (
+                        // Fallback for other product names (non-booster)
                         <h3
                           className={`text-sm font-bold leading-tight ${theme === "dark" ? "text-white" : "text-gray-900"}`}
                         >
                           {product.name}
                         </h3>
                       )}
-                      <span
+                      {/* END OF MODIFIED TITLE */}
+
+                      <span // Price display - remains the same
                         className={`px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap ${
                           product.price === "Rp 0"
                             ? theme === "dark"
@@ -791,7 +803,7 @@ export default function SecondPage() {
               </button>
               <div className="relative w-full h-64">
                 <iframe
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ" // Pastikan URL ini valid
                   title="Video Promosi Example"
                   className="w-full h-full rounded-md"
                   frameBorder="0"
@@ -883,4 +895,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-                        }
+}
