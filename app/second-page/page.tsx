@@ -64,7 +64,7 @@ export default function SecondPage() {
     }
   }
 
-  const getTelegramBoosterOptions = (option: string) => {
+  const getTelegramBoosterFeatures = (option: string) => {
     switch (option) {
       case "3000":
         return ["10000 Views", "1000 Reactions"]
@@ -103,7 +103,7 @@ export default function SecondPage() {
       name: "Telegram Booster",
       price: telegramBoosterOption === "3000" ? "Rp 50,000" : telegramBoosterOption === "6000" ? "Rp 100,000" : "Rp 150,000",
       category: "paket_bisnis",
-      features: getTelegramBoosterOptions(telegramBoosterOption),
+      features: getTelegramBoosterFeatures(telegramBoosterOption),
       exampleUrl: "https://example.com/telegram",
     },
     {
@@ -504,4 +504,159 @@ export default function SecondPage() {
                           onClick={() => openExample(product)}
                           className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
                             theme === "dark"
-                              ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500
+                              ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500"
+                              : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
+                          } flex items-center gap-1 shadow-sm hover:shadow-md`}
+                        >
+                          <ExternalLink className="h-3 w-3" />
+                          Example
+                        </button>
+                      )}
+                      {product.name === "Desain Konten" && (
+                        <button
+                          onClick={openContentImages}
+                          className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
+                            theme === "dark"
+                              ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500"
+                              : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
+                          } flex items-center gap-1 shadow-sm hover:shadow-md`}
+                        >
+                          Contoh
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {showExample && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2">
+            <div
+              className={`max-w-full w-full h-[90vh] rounded-xl ${
+                theme === "dark" ? "bg-gray-800" : "bg-white"
+              } overflow-hidden shadow-2xl relative`}
+            >
+              <button
+                onClick={closeExample}
+                className={`absolute top-4 right-4 p-3 rounded-lg transition-all duration-200 z-10 pointer-events-auto ${
+                  theme === "dark"
+                    ? "hover:bg-gray-700 text-gray-400 hover:text-white"
+                    : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                <X className="h-5 w-5" />
+              </button>
+              <iframe
+                src={showExample.exampleUrl}
+                title={`Example ${showExample.name}`}
+                className="w-full h-full"
+                frameBorder="0"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+              />
+            </div>
+          </div>
+        )}
+
+        {showDetails && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2">
+            <div
+              className={`max-w-md w-full rounded-xl ${
+                theme === "dark" ? "bg-gray-800" : "bg-white"
+              } overflow-hidden shadow-2xl p-4 relative`}
+            >
+              <button
+                onClick={closeDetails}
+                className={`absolute top-4 right-4 p-3 rounded-lg transition-all duration-200 z-10 pointer-events-auto ${
+                  theme === "dark"
+                    ? "hover:bg-gray-700 text-gray-400 hover:text-white"
+                    : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                <X className="h-5 w-5" />
+              </button>
+              <ul className="space-y-2">
+                {showDetails.name === "Paket Bisnis" ? (
+                  showDetails.features?.slice(3).map((feature, i) => (
+                    <li key={i} className="flex items-center">
+                      <CheckCircle
+                        className={`h-4 w-4 mr-2 flex-shrink-0 ${
+                          theme === "dark" ? "text-green-400" : "text-green-500"
+                        }`}
+                      />
+                      <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                        {feature}
+                      </span>
+                    </li>
+                  ))
+                ) : (
+                  showDetails.features?.map((feature, i) => (
+                    <li key={i} className="flex items-center">
+                      <CheckCircle
+                        className={`h-4 w-4 mr-2 flex-shrink-0 ${
+                          theme === "dark" ? "text-green-400" : "text-green-500"
+                        }`}
+                      />
+                      <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                        {feature}
+                      </span>
+                    </li>
+                  ))
+                )}
+              </ul>
+            </div>
+          </div>
+        )}
+
+        {showContentImages && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2">
+            <div
+              className={`max-w-2xl w-full rounded-xl ${
+                theme === "dark" ? "bg-gray-800" : "bg-white"
+              } overflow-hidden shadow-2xl p-4 relative`}
+            >
+              <button
+                onClick={closeContentImages}
+                className={`absolute top-4 right-4 p-3 rounded-lg transition-all duration-200 z-10 pointer-events-auto ${
+                  theme === "dark"
+                    ? "hover:bg-gray-700 text-gray-400 hover:text-white"
+                    : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                <X className="h-5 w-5" />
+              </button>
+              <Swiper
+                spaceBetween={10}
+                slidesPerView={1}
+                className="w-full h-64 pointer-events-none"
+              >
+                {[
+                  "/images/template1.jpg",
+                  "/images/template2.jpg",
+                  "/images/template3.jpg",
+                ].map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <div className="relative w-full h-64">
+                      <img
+                        src={img}
+                        alt={`Desain Konten ${i + 1}`}
+                        className="w-full h-full object-cover rounded-md"
+                      />
+                      <span
+                        className={`absolute top-2 left-2 px-2 py-1 text-xs font-bold text-white bg-black bg-opacity-50 rounded`}
+                      >
+                        No {i + 1}
+                      </span>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+          }
