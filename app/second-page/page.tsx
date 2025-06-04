@@ -1,4 +1,4 @@
-// src/app/SecondPage.tsx
+// app/second-page/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -84,9 +84,27 @@ export default function SecondPage() {
 
   const products: Product[] = [
     { name: "Paket Bisnis", price: "Rp 50,000", category: CATEGORIES.PAKET_BISNIS, features: ["Website", "Content Design", "Social Media Booster", "SEO Website", "Copywriting"], exampleUrl: "https://example.com" },
-    { name: BOOSTER_TYPES.INSTAGRAM, price: boosterOptions.instagram === "3000" ? "Rp 50,000" : boosterOptions.instagram === "5000" ? "Rp 80,000" : "Rp 150,000", category: CATEGORIES.PAKET_BISNIS, features: getBoosterFeatures(BOOSTER_TYPES.INSTAGRAM, boosterOptions.instagram), exampleUrl: "https://example.com/instagram" },
-    { name: BOOSTER_TYPES.TIKTOK, price: boosterOptions.tiktok === "2000" ? "Rp 50,000" : "Rp 100,000", category: CATEGORIES.PAKET_BISNIS, features: getBoosterFeatures(BOOSTER_TYPES.TIKTOK, boosterOptions.tiktok), exampleUrl: "https://example.com/tiktok" },
-    { name: BOOSTER_TYPES.TELEGRAM, price: boosterOptions.telegram === "3000" ? "Rp 50,000" : boosterOptions.telegram === "5000" ? "Rp 70,000" : "Rp 140,000", category: CATEGORIES.PAKET_BISNIS, features: getBoosterFeatures(BOOSTER_TYPES.TELEGRAM, boosterOptions.telegram), exampleUrl: "https://example.com/telegram" },
+    {
+      name: BOOSTER_TYPES.INSTAGRAM,
+      price: boosterOptions.instagram === "3000" ? "Rp 50,000" : boosterOptions.instagram === "5000" ? "Rp 80,000" : "Rp 150,000",
+      category: CATEGORIES.PAKET_BISNIS,
+      features: getBoosterFeatures(BOOSTER_TYPES.INSTAGRAM, boosterOptions.instagram),
+      exampleUrl: "https://example.com/instagram",
+    },
+    {
+      name: BOOSTER_TYPES.TIKTOK,
+      price: boosterOptions.tiktok === "2000" ? "Rp 50,000" : "Rp 100,000",
+      category: CATEGORIES.PAKET_BISNIS,
+      features: getBoosterFeatures(BOOSTER_TYPES.TIKTOK, boosterOptions.tiktok),
+      exampleUrl: "https://example.com/tiktok",
+    },
+    {
+      name: BOOSTER_TYPES.TELEGRAM,
+      price: boosterOptions.telegram === "3000" ? "Rp 50,000" : boosterOptions.telegram === "5000" ? "Rp 70,000" : "Rp 140,000",
+      category: CATEGORIES.PAKET_BISNIS,
+      features: getBoosterFeatures(BOOSTER_TYPES.TELEGRAM, boosterOptions.telegram),
+      exampleUrl: "https://example.com/telegram",
+    },
     { name: "Desain Konten", price: "Rp 10,000", category: CATEGORIES.PAKET_BISNIS },
     { name: "Video Promosi", price: "Rp 10,000", category: CATEGORIES.PAKET_BISNIS, exampleUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
     { name: "SEO Website", price: "Rp 25,000", category: CATEGORIES.PAKET_BISNIS, features: ["Keyword Research", "On-Page Optimization", "Link Building"] },
@@ -115,42 +133,45 @@ export default function SecondPage() {
     groupedProducts.push(filteredProducts.slice(i, i + 2));
   }
 
-  const getButtonStyles = (isActive: boolean) =>
-    `px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
-      isActive
-        ? theme === "dark"
-          ? "bg-green-600 text-white shadow-lg"
-          : "bg-blue-500 text-white shadow-lg"
-        : theme === "dark"
-        ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
-        : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
-    }`;
-
-  const getCardStyles = () =>
-    `rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${
-      theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
-    }`;
-
-  const getPriceStyles = (price: string) =>
-    `px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap ${
-      price === "Rp 0"
-        ? theme === "dark"
-          ? "bg-green-600 text-white"
-          : "bg-green-500 text-white"
-        : theme === "dark"
-        ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white"
-        : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
-    } shadow-sm`;
-
-  const getModalStyles = (size: "full" | "md" | "2xl") =>
-    `max-w-${size} w-full rounded-xl ${theme === "dark" ? "bg-gray-800" : "bg-white"} overflow-hidden shadow-2xl ${
-      size !== "full" ? "p-4" : ""
-    } relative`;
-
-  const getCloseButtonStyles = () =>
-    `absolute top-4 right-4 p-3 rounded-md transition-all duration-200 z-10 pointer-events-auto ${
-      theme === "dark" ? "hover:bg-gray-700 text-gray-400 hover:text-white" : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
-    }`;
+  const getStyles = (type: "button" | "card" | "price" | "modal" | "close", isActive?: boolean, size?: "full" | "md" | "2xl") => {
+    if (type === "button") {
+      return `px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
+        isActive
+          ? theme === "dark"
+            ? "bg-green-600 text-white shadow-lg"
+            : "bg-blue-500 text-white shadow-lg"
+          : theme === "dark"
+          ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+          : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
+      }`;
+    }
+    if (type === "card") {
+      return `rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${
+        theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
+      }`;
+    }
+    if (type === "price") {
+      return (price: string) =>
+        `px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap ${
+          price === "Rp 0"
+            ? theme === "dark"
+              ? "bg-green-600 text-white"
+              : "bg-green-500 text-white"
+            : theme === "dark"
+            ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white"
+            : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
+        } shadow-sm`;
+    }
+    if (type === "modal") {
+      return `max-w-${size} w-full rounded-xl ${theme === "dark" ? "bg-gray-800" : "bg-white"} overflow-hidden shadow-2xl ${size !== "full" ? "p-4" : ""} relative`;
+    }
+    if (type === "close") {
+      return `absolute top-4 right-4 p-3 rounded-md transition-all duration-200 z-10 pointer-events-auto ${
+        theme === "dark" ? "hover:bg-gray-700 text-gray-400 hover:text-white" : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+      }`;
+    }
+    return "";
+  };
 
   if (!mounted) return null;
 
@@ -163,7 +184,7 @@ export default function SecondPage() {
               setActiveCategory(CATEGORIES.PAKET_BISNIS);
               setActiveSubcategory(SUBCATEGORIES.BUSINESS);
             }}
-            className={getButtonStyles(activeCategory === CATEGORIES.PAKET_BISNIS)}
+            className={getStyles("button", activeCategory === CATEGORIES.PAKET_BISNIS)}
           >
             Paket Bisnis
           </button>
@@ -172,7 +193,7 @@ export default function SecondPage() {
               setActiveCategory(CATEGORIES.WEBSITE);
               setActiveSubcategory(SUBCATEGORIES.BUSINESS);
             }}
-            className={getButtonStyles(activeCategory === CATEGORIES.WEBSITE)}
+            className={getStyles("button", activeCategory === CATEGORIES.WEBSITE)}
           >
             Website
           </button>
@@ -182,13 +203,13 @@ export default function SecondPage() {
           <div className="flex justify-center gap-2 mb-6">
             <button
               onClick={() => setActiveSubcategory(SUBCATEGORIES.BUSINESS)}
-              className={getButtonStyles(activeSubcategory === SUBCATEGORIES.BUSINESS)}
+              className={getStyles("button", activeSubcategory === SUBCATEGORIES.BUSINESS)}
             >
               Business
             </button>
             <button
               onClick={() => setActiveSubcategory(SUBCATEGORIES.NON_BUSINESS)}
-              className={getButtonStyles(activeSubcategory === SUBCATEGORIES.NON_BUSINESS)}
+              className={getStyles("button", activeSubcategory === SUBCATEGORIES.NON_BUSINESS)}
             >
               Non-Business
             </button>
@@ -199,7 +220,7 @@ export default function SecondPage() {
           {groupedProducts.map((group, groupIndex) => (
             <div key={groupIndex} className="grid grid-cols-2 gap-3">
               {group.map((product, index) => (
-                <div key={index} className={getCardStyles()}>
+                <div key={index} className={getStyles("card")}>
                   <div className="p-3">
                     <div className="flex justify-between items-center mb-2">
                       {Object.values(BOOSTER_TYPES).includes(product.name) ? (
@@ -224,7 +245,7 @@ export default function SecondPage() {
                           {product.name}
                         </h3>
                       )}
-                      <span className={getPriceStyles(product.price)}>{product.price}</span>
+                      <span className={getStyles("price")(product.price)}>{product.price}</span>
                     </div>
 
                     {(product.name === "Paket Bisnis" || product.name === "SEO Website" || product.name === "Jasa Iklan Online" || activeCategory === CATEGORIES.WEBSITE) && product.features && (
@@ -359,8 +380,8 @@ export default function SecondPage() {
 
         {modal.example && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className={getModalStyles("full")}>
-              <button onClick={() => setModal({ ...modal, example: null })} className={getCloseButtonStyles()}>
+            <div className={getStyles("modal", false, "full")}>
+              <button onClick={() => setModal({ ...modal, example: null })} className={getStyles("close")}>
                 <X className="h-5 w-5" />
               </button>
               <iframe
@@ -376,14 +397,108 @@ export default function SecondPage() {
 
         {modal.details && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className={getModalStyles("md")}>
-              <button onClick={() => setModal({ ...modal, details: null })} className={getCloseButtonStyles()}>
+            <div className={getStyles("modal", false, "md")}>
+              <button onClick={() => setModal({ ...modal, details: null })} className={getStyles("close")}>
                 <X className="h-5 w-5" />
               </button>
               <ul className="space-y-2">
                 {(modal.details.name === "Paket Bisnis" ? modal.details.features?.slice(3) : modal.details.features)?.map((feature, i) => (
                   <li key={i} className="flex items-center">
                     <CheckCircle className={`h-4 w-4 mr-2 flex-shrink-0 ${theme === "dark" ? "text-green-400" : "text-green-500"}`} />
-                    <span className={`text-smස
+                    <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
 
-System: It looks like the code you provided was cut off. Would you like me to continue simplifying the remaining part of the code or address any specific section? Additionally, could you clarify if you want me to focus on a particular functionality or just complete the simplified version of the modal section?
+        {modal.contentImages && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className={getStyles("modal", false, "2xl")}>
+              <button onClick={() => setModal({ ...modal, contentImages: false })} className={getStyles("close")}>
+                <X className="h-5 w-5" />
+              </button>
+              <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
+                {["/images/template1.jpg", "/images/template2.jpg", "/images/template3.jpg"].map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <div className="relative w-full h-64">
+                      <img src={img} alt={`Desain Konten ${i + 1}`} className="w-full h-full object-cover rounded-md" />
+                      <span className="absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded">
+                        No {i + 1}
+                      </span>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </div>
+        )}
+
+        {modal.videoPromo && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className={getStyles("modal", false, "2xl")}>
+              <button onClick={() => setModal({ ...modal, videoPromo: false })} className={getStyles("close")}>
+                <X className="h-5 w-5" />
+              </button>
+              <div className="relative w-full h-64">
+                <iframe
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                  title="Video Promosi Example"
+                  className="w-full h-full rounded-md"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {modal.seoImages && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className={getStyles("modal", false, "2xl")}>
+              <button onClick={() => setModal({ ...modal, seoImages: false })} className={getStyles("close")}>
+                <X className="h-5 w-5" />
+              </button>
+              <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
+                {["/images/seo1.jpg", "/images/seo2.jpg", "/images/seo3.jpg"].map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <div className="relative w-full h-64">
+                      <img src={img} alt={`SEO Example ${i + 1}`} className="w-full h-full object-cover rounded-md" />
+                      <span className="absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded">
+                        No {i + 1}
+                      </span>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </div>
+        )}
+
+        {modal.adsImages && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className={getStyles("modal", false, "2xl")}>
+              <button onClick={() => setModal({ ...modal, adsImages: false })} className={getStyles("close")}>
+                <X className="h-5 w-5" />
+              </button>
+              <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
+                {["/images/ads1.jpg", "/images/ads2.jpg", "/images/ads3.jpg"].map((img, i) => (
+                  <SwiperSlide key={i}>
+                    <div className="relative w-full h-64">
+                      <img src={img} alt={`Jasa Iklan Online Example ${i + 1}`} className="w-full h-full object-cover rounded-md" />
+                      <span className="absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded">
+                        No {i + 1}
+                      </span>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
