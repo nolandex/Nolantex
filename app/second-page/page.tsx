@@ -1,187 +1,404 @@
-// app/second-page/page.tsx
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import { useTheme } from "next-themes";
-import { CheckCircle, ExternalLink, X, ChevronDown } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+import { useEffect, useState, useCallback } from "react"
+import { useTheme } from "next-themes"
+import { CheckCircle, ExternalLink, X, ChevronDown } from "lucide-react"
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css"
 
-interface Product {
-  name: string;
-  price: string;
-  category: string;
-  subcategory?: string;
-  features?: string[];
-  exampleUrl?: string;
+// Asumsi ini di file terpisah, misal: components/Modal.tsx
+interface ModalProps {
+  isOpen: boolean
+  onClose: () => void
+  children: React.ReactNode
+  size?: "sm" | "md" | "lg" | "full" // Tambahkan ukuran modal
 }
 
-const CATEGORIES = {
-  PAKET_BISNIS: "paket_bisnis",
-  WEBSITE: "website",
-} as const;
+function Modal({ isOpen, onClose, children, size = "full" }: ModalProps) {
+  const { theme } = useTheme()
+  if (!isOpen) return null
 
-const SUBCATEGORIES = {
-  BUSINESS: "business",
-  NON_BUSINESS: "non-business",
-} as const;
+  const sizeClasses = {
+    sm: "max-w-sm",
+    md: "max-w-md",
+    lg: "max-w-2xl",
+    full: "max-w-full w-full h-[90vh]",
+  }[size]
 
-const BOOSTER_TYPES = {
-  INSTAGRAM: "Instagram Booster",
-  TIKTOK: "TikTok Booster",
-  TELEGRAM: "Telegram Booster",
-} as const;
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div
+        className={`${sizeClasses} ${
+          theme === "dark" ? "bg-gray-800" : "bg-white"
+        } rounded-xl overflow-hidden shadow-2xl relative p-4`}
+      >
+        <button
+          onClick={onClose}
+          className={`absolute top-4 right-4 p-3 rounded-md transition-all duration-200 z-10 ${
+            theme === "dark"
+              ? "hover:bg-gray-700 text-gray-400 hover:text-white"
+              : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+          }`}
+        >
+          <X className="h-5 w-5" />
+        </button>
+        {children}
+      </div>
+    </div>
+  )
+}
+
+// Asumsi ini di file terpisah, misal: components/FeatureList.tsx
+interface FeatureListProps {
+  features: string[]
+  textColor?: string
+}
+
+function FeatureList({ features, textColor }: FeatureListProps) {
+  const { theme } = useTheme()
+  return (
+    <ul className="space-y-1">
+      {features.map((feature, i) => (
+        <li key={i} className="flex items-center">
+          <CheckCircle
+            className={`h-3 w-3 mr-2 flex-shrink-0 ${
+              theme === "dark" ? "text-green-400" : "text-green-500"
+            }`}
+          />
+          <span className={`text-xs ${textColor || (theme === "dark" ? "text-gray-300" : "text-gray-600")}`}>
+            {feature}
+          </span>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+interface Product {
+  name: string
+  price: string
+  category: string
+  subcategory?: string
+  features?: string[]
+  exampleUrl?: string
+  modalType?:
+    | "example"
+    | "details"
+    | "contentImages"
+    | "videoPromo"
+    | "seoImages"
+    | "adsImages"
+    | null
+}
+
+const getInstagramBoosterFeatures = (option: string) => {
+  switch (option) {
+    case "3000":
+      return ["5000 Likes", "100000 Views"]
+    case "5000":
+      return ["10000 Likes", "170000 Views"]
+    case "10000":
+      return ["15000 Likes", "300000 Views"]
+    default:
+      return []
+  }
+}
+
+const getTikTokBoosterFeatures = (option: string) => {
+  const baseViews = 70000
+  const baseLikes = 5000
+  const baseShares = 700
+  const baseSaves = 700
+
+  switch (option) {
+    case "2000":
+      return [`${baseViews} Views`, `${baseLikes} Likes`, `${baseShares} Shares`, `${baseSaves} Saves`]
+    case "5000":
+      return [`${baseViews * 2.5} Views`, `${baseLikes * 2.5} Likes`, `${baseShares * 2.5} Shares`, `${baseSaves * 2.5} Saves`]
+    default:
+      return []
+  }
+}
+
+const getTelegramBoosterFeatures = (option: string) => {
+  switch (option) {
+    case "3000":
+      return ["10000 Views", "1000 Reactions"]
+    case "5000":
+      return ["15000 Views", "1500 Reactions"]
+    case "10000":
+      return ["30000 Views", "3000 Reactions"]
+    default:
+      return []
+  }
+}
+
+const productData: Product[] = [
+  {
+    name: "Paket Bisnis",
+    price: "Rp 50,000",
+    category: "paket_bisnis",
+    features: ["Website", "Content Design", "Social Media Booster", "SEO Website", "Copywriting"],
+    exampleUrl: "https://example.com",
+    modalType: "details",
+  },
+  {
+    name: "Instagram Booster",
+    price: "", // Harga akan dihitung dinamis
+    category: "paket_bisnis",
+    features: [], // Fitur akan dihitung dinamis
+    exampleUrl: "https://example.com/instagram",
+    modalType: "details",
+  },
+  {
+    name: "TikTok Booster",
+    price: "", // Harga akan dihitung dinamis
+    category: "paket_bisnis",
+    features: [], // Fitur akan dihitung dinamis
+    exampleUrl: "https://example.com/tiktok",
+    modalType: "details",
+  },
+  {
+    name: "Telegram Booster",
+    price: "", // Harga akan dihitung dinamis
+    category: "paket_bisnis",
+    features: [], // Fitur akan dihitung dinamis
+    exampleUrl: "https://example.com/telegram",
+    modalType: "details",
+  },
+  {
+    name: "Desain Konten",
+    price: "Rp 10,000",
+    category: "paket_bisnis",
+    modalType: "contentImages",
+  },
+  {
+    name: "Video Promosi",
+    price: "Rp 10,000",
+    category: "paket_bisnis",
+    exampleUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    modalType: "videoPromo",
+  },
+  {
+    name: "SEO Website",
+    price: "Rp 25,000",
+    category: "paket_bisnis",
+    features: ["Keyword Research", "On-Page Optimization", "Link Building"],
+    modalType: "seoImages",
+  },
+  {
+    name: "Jasa Iklan Online",
+    price: "Rp 100,000",
+    category: "paket_bisnis",
+    features: ["Meta Ads", "TikTok Ads"],
+    modalType: "adsImages",
+  },
+  {
+    name: "Landing Page",
+    price: "Rp 25,000",
+    category: "website",
+    subcategory: "business",
+    features: ["Free Domain", "Free Hosting"],
+    exampleUrl: "https://unbounce.com",
+    modalType: "example",
+  },
+  {
+    name: "Profil Bisnis",
+    price: "Rp 25,000",
+    category: "website",
+    subcategory: "business",
+    features: ["Free Domain", "Free Hosting"],
+    exampleUrl: "https://profil-bisnis-demo.vercel.app",
+    modalType: "example",
+  },
+  {
+    name: "Simple Store",
+    price: "Rp 25,000",
+    category: "website",
+    subcategory: "business",
+    features: ["Free Domain", "Free Hosting"],
+    exampleUrl: "https://shopify.com",
+    modalType: "example",
+  },
+  {
+    name: "Portfolio",
+    price: "Rp 25,000",
+    category: "website",
+    subcategory: "business",
+    features: ["Free Domain", "Free Hosting"],
+    exampleUrl: "https://portfolio-demo.vercel.app",
+    modalType: "example",
+  },
+  {
+    name: "Online Course",
+    price: "Rp 25,000",
+    category: "website",
+    subcategory: "business",
+    features: ["Free Domain", "Free Hosting"],
+    exampleUrl: "https://course-demo.vercel.app",
+    modalType: "example",
+  },
+  {
+    name: "Membership",
+    price: "Rp 25,000",
+    category: "website",
+    subcategory: "business",
+    features: ["Free Domain", "Free Hosting"],
+    exampleUrl: "https://membership-demo.vercel.app",
+    modalType: "example",
+  },
+  {
+    name: "Link in Bio",
+    price: "Rp 25,000",
+    category: "website",
+    subcategory: "business",
+    features: ["Free Domain", "Free Hosting"],
+    exampleUrl: "https://linkinbio-demo.vercel.app",
+    modalType: "example",
+  },
+  {
+    name: "Digital Invitation",
+    price: "Rp 25,000",
+    category: "website",
+    subcategory: "non-business",
+    features: ["Free Domain", "Free Hosting"],
+    exampleUrl: "https://invitation-demo.vercel.app",
+    modalType: "example",
+  },
+  {
+    name: "Birthday",
+    price: "Rp 25,000",
+    category: "website",
+    subcategory: "non-business",
+    features: ["Free Domain", "Free Hosting"],
+    exampleUrl: "https://birthday-demo.vercel.app",
+    modalType: "example",
+  },
+  {
+    name: "Event",
+    price: "Rp 25,000",
+    category: "website",
+    subcategory: "non-business",
+    features: ["Free Domain", "Free Hosting"],
+    exampleUrl: "https://event-demo.vercel.app",
+    modalType: "example",
+  },
+]
+
+const imageSources = {
+  contentImages: ["/images/template1.jpg", "/images/template2.jpg", "/images/template3.jpg"],
+  seoImages: ["/images/seo1.jpg", "/images/seo2.jpg", "/images/seo3.jpg"],
+  adsImages: ["/images/ads1.jpg", "/images/ads2.jpg", "/images/ads3.jpg"],
+}
 
 export default function SecondPage() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  const [activeCategory, setActiveCategory] = useState(CATEGORIES.PAKET_BISNIS);
-  const [activeSubcategory, setActiveSubcategory] = useState(SUBCATEGORIES.BUSINESS);
-  const [boosterType, setBoosterType] = useState(BOOSTER_TYPES.INSTAGRAM);
-  const [boosterOptions, setBoosterOptions] = useState({
-    instagram: "3000",
-    tiktok: "2000",
-    telegram: "3000",
-    link: "",
-  });
-  const [modal, setModal] = useState<{
-    example?: Product | null;
-    details?: Product | null;
-    contentImages?: boolean;
-    videoPromo?: boolean;
-    seoImages?: boolean;
-    adsImages?: boolean;
-  }>({});
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  const [activeCategory, setActiveCategory] = useState("paket_bisnis")
+  const [activeSubcategory, setActiveSubcategory] = useState("business")
+  const [activeModal, setActiveModal] = useState<Product["modalType"]>(null)
+  const [modalProduct, setModalProduct] = useState<Product | null>(null)
+
+  const [boosterType, setBoosterType] = useState("Instagram Booster")
+  const [instagramBoosterOption, setInstagramBoosterOption] = useState("3000")
+  const [tiktokBoosterOption, setTiktokBoosterOption] = useState("2000")
+  const [telegramBoosterOption, setTelegramBoosterOption] = useState("3000")
+  const [boosterLink, setBoosterLink] = useState("")
 
   useEffect(() => {
-    setMounted(true);
-    setTheme("light");
-  }, [setTheme]);
+    setMounted(true)
+    setTheme("light")
+  }, [setTheme])
 
-  const getBoosterFeatures = (type: string, option: string) => {
-    if (type === BOOSTER_TYPES.INSTAGRAM) {
-      return option === "3000"
-        ? ["5000 Likes", "100000 Views"]
-        : option === "5000"
-        ? ["10000 Likes", "170000 Views"]
-        : ["15000 Likes", "300000 Views"];
-    }
-    if (type === BOOSTER_TYPES.TIKTOK) {
-      const base = { views: 70000, likes: 5000, shares: 700, saves: 700 };
-      return option === "2000"
-        ? [`${base.views} Views`, `${base.likes} Likes`, `${base.shares} Shares`, `${base.saves} Saves`]
-        : [`${base.views * 2.5} Views`, `${base.likes * 2.5} Likes`, `${base.shares * 2.5} Shares`, `${base.saves * 2.5} Saves`];
-    }
-    if (type === BOOSTER_TYPES.TELEGRAM) {
-      return option === "3000"
-        ? ["10000 Views", "1000 Reactions"]
-        : option === "5000"
-        ? ["15000 Views", "1500 Reactions"]
-        : ["30000 Views", "3000 Reactions"];
-    }
-    return [];
-  };
+  const getProductDisplayData = useCallback(
+    (product: Product): Product => {
+      let currentPrice = product.price
+      let currentFeatures = product.features || []
 
-  const products: Product[] = [
-    {
-      name: "Paket Bisnis",
-      price: "Rp 50,000",
-      category: CATEGORIES.PAKET_BISNIS,
-      features: ["Website", "Content Design", "Social Media Booster", "SEO Website", "Copywriting"],
-      exampleUrl: "https://example.com",
+      if (product.name === "Instagram Booster") {
+        currentPrice =
+          instagramBoosterOption === "3000"
+            ? "Rp 50,000"
+            : instagramBoosterOption === "5000"
+            ? "Rp 80,000"
+            : "Rp 150,000"
+        currentFeatures = getInstagramBoosterFeatures(instagramBoosterOption)
+      } else if (product.name === "TikTok Booster") {
+        currentPrice = tiktokBoosterOption === "2000" ? "Rp 50,000" : "Rp 100,000"
+        currentFeatures = getTikTokBoosterFeatures(tiktokBoosterOption)
+      } else if (product.name === "Telegram Booster") {
+        currentPrice =
+          telegramBoosterOption === "3000"
+            ? "Rp 50,000"
+            : telegramBoosterOption === "5000"
+            ? "Rp 70,000"
+            : "Rp 140,000"
+        currentFeatures = getTelegramBoosterFeatures(telegramBoosterOption)
+      }
+      return { ...product, price: currentPrice, features: currentFeatures }
     },
-    {
-      name: BOOSTER_TYPES.INSTAGRAM,
-      price: boosterOptions.instagram === "3000" ? "Rp 50,000" : boosterOptions.instagram === "5000" ? "Rp 80,000" : "Rp 150,000",
-      category: CATEGORIES.PAKET_BISNIS,
-      features: getBoosterFeatures(BOOSTER_TYPES.INSTAGRAM, boosterOptions.instagram),
-      exampleUrl: "https://example.com/instagram",
-    },
-    {
-      name: BOOSTER_TYPES.TIKTOK,
-      price: boosterOptions.tiktok === "2000" ? "Rp 50,000" : "Rp 100,000",
-      category: CATEGORIES.PAKET_BISNIS,
-      features: getBoosterFeatures(BOOSTER_TYPES.TIKTOK, boosterOptions.tiktok),
-      exampleUrl: "https://example.com/tiktok",
-    },
-    {
-      name: BOOSTER_TYPES.TELEGRAM,
-      price: boosterOptions.telegram === "3000" ? "Rp 50,000" : boosterOptions.telegram === "5000" ? "Rp 70,000" : "Rp 140,000",
-      category: CATEGORIES.PAKET_BISNIS,
-      features: getBoosterFeatures(BOOSTER_TYPES.TELEGRAM, boosterOptions.telegram),
-      exampleUrl: "https://example.com/telegram",
-    },
-    { name: "Desain Konten", price: "Rp 10,000", category: CATEGORIES.PAKET_BISNIS },
-    { name: "Video Promosi", price: "Rp 10,000", category: CATEGORIES.PAKET_BISNIS, exampleUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
-    { name: "SEO Website", price: "Rp 25,000", category: CATEGORIES.PAKET_BISNIS, features: ["Keyword Research", "On-Page Optimization", "Link Building"] },
-    { name: "Jasa Iklan Online", price: "Rp 100,000", category: CATEGORIES.PAKET_BISNIS, features: ["Meta Ads", "TikTok Ads"] },
-    { name: "Landing Page", price: "Rp 25,000", category: CATEGORIES.WEBSITE, subcategory: SUBCATEGORIES.BUSINESS, features: ["Free Domain", "Free Hosting"], exampleUrl: "https://unbounce.com" },
-    { name: "Profil Bisnis", price: "Rp 25,000", category: CATEGORIES.WEBSITE, subcategory: SUBCATEGORIES.BUSINESS, features: ["Free Domain", "Free Hosting"], exampleUrl: "https://profil-bisnis-demo.vercel.app" },
-    { name: "Simple Store", price: "Rp 25,000", category: CATEGORIES.WEBSITE, subcategory: SUBCATEGORIES.BUSINESS, features: ["Free Domain", "Free Hosting"], exampleUrl: "https://shopify.com" },
-    { name: "Portfolio", price: "Rp 25,000", category: CATEGORIES.WEBSITE, subcategory: SUBCATEGORIES.BUSINESS, features: ["Free Domain", "Free Hosting"], exampleUrl: "https://portfolio-demo.vercel.app" },
-    { name: "Online Course", price: "Rp 25,000", category: CATEGORIES.WEBSITE, subcategory: SUBCATEGORIES.BUSINESS, features: ["Free Domain", "Free Hosting"], exampleUrl: "https://course-demo.vercel.app" },
-    { name: "Membership", price: "Rp 25,000", category: CATEGORIES.WEBSITE, subcategory: SUBCATEGORIES.BUSINESS, features: ["Free Domain", "Free Hosting"], exampleUrl: "https://membership-demo.vercel.app" },
-    { name: "Link in Bio", price: "Rp 25,000", category: CATEGORIES.WEBSITE, subcategory: SUBCATEGORIES.BUSINESS, features: ["Free Domain", "Free Hosting"], exampleUrl: "https://linkinbio-demo.vercel.app" },
-    { name: "Digital Invitation", price: "Rp 25,000", category: CATEGORIES.WEBSITE, subcategory: SUBCATEGORIES.NON_BUSINESS, features: ["Free Domain", "Free Hosting"], exampleUrl: "https://invitation-demo.vercel.app" },
-    { name: "Birthday", price: "Rp 25,000", category: CATEGORIES.WEBSITE, subcategory: SUBCATEGORIES.NON_BUSINESS, features: ["Free Domain", "Free Hosting"], exampleUrl: "https://birthday-demo.vercel.app" },
-    { name: "Event", price: "Rp 25,000", category: CATEGORIES.WEBSITE, subcategory: SUBCATEGORIES.NON_BUSINESS, features: ["Free Domain", "Free Hosting"], exampleUrl: "https://event-demo.vercel.app" },
-  ];
+    [instagramBoosterOption, tiktokBoosterOption, telegramBoosterOption]
+  )
 
-  const filteredProducts = products.filter((product) => {
-    if (product.category !== activeCategory) return false;
-    if (activeCategory === CATEGORIES.WEBSITE) {
-      return product.subcategory ? product.subcategory === activeSubcategory : false; // Type guard for subcategory
+  const filteredProducts = productData.filter((product) => {
+    if (product.category !== activeCategory) return false
+    if (activeCategory === "website") {
+      return product.subcategory === activeSubcategory
     }
-    if (Object.values(BOOSTER_TYPES).includes(product.name)) return product.name === boosterType;
-    return true;
-  });
+    // Booster products are handled by their name, not by boosterType state for filtering
+    // Only show the selected booster type if it's a booster product
+    if (["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(product.name)) {
+      return product.name === boosterType
+    }
+    return true
+  })
 
-  const groupedProducts: Product[][] = [];
+  const groupedProducts: Product[][] = []
   for (let i = 0; i < filteredProducts.length; i += 2) {
-    groupedProducts.push(filteredProducts.slice(i, i + 2));
+    groupedProducts.push(filteredProducts.slice(i, i + 2))
   }
 
-  const getStyles = (type: "button" | "card" | "price" | "modal" | "close", isActive?: boolean, size?: "full" | "md" | "2xl") => {
-    if (type === "button") {
-      return `px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
-        isActive
-          ? theme === "dark"
-            ? "bg-green-600 text-white shadow-lg"
-            : "bg-blue-500 text-white shadow-lg"
-          : theme === "dark"
-          ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
-          : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
-      }`;
+  const openModal = useCallback((type: Product["modalType"], product?: Product) => {
+    setActiveModal(type)
+    if (product) {
+      setModalProduct(product)
+    } else {
+      setModalProduct(null)
     }
-    if (type === "card") {
-      return `rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${
-        theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
-      }`;
-    }
-    if (type === "price") {
-      return (price: string) =>
-        `px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap ${
-          price === "Rp 0"
-            ? theme === "dark"
-              ? "bg-green-600 text-white"
-              : "bg-green-500 text-white"
-            : theme === "dark"
-              ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white"
-              : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
-        } shadow-sm`;
-    }
-    if (type === "modal") {
-      return `max-w-${size} w-full rounded-xl ${theme === "dark" ? "bg-gray-800" : "bg-white"} overflow-hidden shadow-2xl ${size !== "full" ? "p-4" : ""} relative`;
-    }
-    if (type === "close") {
-      return `absolute top-4 right-4 p-3 rounded-md transition-all duration-200 z-10 pointer-events-auto ${
-        theme === "dark" ? "hover:bg-gray-700 text-gray-400 hover:text-white" : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
-      }`;
-    }
-    return "";
-  };
+  }, [])
 
-  if (!mounted) return null;
+  const closeModal = useCallback(() => {
+    setActiveModal(null)
+    setModalProduct(null)
+  }, [])
+
+  const getButtonClasses = (isActive: boolean) => {
+    const baseClasses =
+      "px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300"
+    const activeClasses =
+      theme === "dark" ? "bg-green-600 text-white shadow-lg" : "bg-blue-500 text-white shadow-lg"
+    const inactiveClasses =
+      theme === "dark"
+        ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+        : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
+    return `${baseClasses} ${isActive ? activeClasses : inactiveClasses}`
+  }
+
+  const getCardButtonClasses = (isPrimary: boolean = false) => {
+    const baseClasses =
+      "flex-1 py-1.5 px-3 rounded-md font-medium text-xs transition-all duration-300 shadow-sm hover:shadow-md"
+    const primaryClasses =
+      theme === "dark"
+        ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
+        : "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white"
+    const secondaryClasses =
+      theme === "dark"
+        ? "border border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500"
+        : "border border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
+    return `${baseClasses} ${isPrimary ? primaryClasses : secondaryClasses}`
+  }
+
+  if (!mounted) return null
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
@@ -189,35 +406,35 @@ export default function SecondPage() {
         <div className="grid grid-cols-2 gap-2 mb-6">
           <button
             onClick={() => {
-              setActiveCategory(CATEGORIES.PAKET_BISNIS);
-              setActiveSubcategory(SUBCATEGORIES.BUSINESS);
+              setActiveCategory("paket_bisnis")
+              setActiveSubcategory("business")
             }}
-            className={getStyles("button", activeCategory === CATEGORIES.PAKET_BISNIS)}
+            className={getButtonClasses(activeCategory === "paket_bisnis")}
           >
             Paket Bisnis
           </button>
           <button
             onClick={() => {
-              setActiveCategory(CATEGORIES.WEBSITE);
-              setActiveSubcategory(SUBCATEGORIES.BUSINESS);
+              setActiveCategory("website")
+              setActiveSubcategory("business")
             }}
-            className={getStyles("button", activeCategory === CATEGORIES.WEBSITE)}
+            className={getButtonClasses(activeCategory === "website")}
           >
             Website
           </button>
         </div>
 
-        {activeCategory === CATEGORIES.WEBSITE && (
+        {activeCategory === "website" && (
           <div className="flex justify-center gap-2 mb-6">
             <button
-              onClick={() => setActiveSubcategory(SUBCATEGORIES.BUSINESS)}
-              className={getStyles("button", activeSubcategory === SUBCATEGORIES.BUSINESS)}
+              onClick={() => setActiveSubcategory("business")}
+              className={getButtonClasses(activeSubcategory === "business")}
             >
               Business
             </button>
             <button
-              onClick={() => setActiveSubcategory(SUBCATEGORIES.NON_BUSINESS)}
-              className={getStyles("button", activeSubcategory === SUBCATEGORIES.NON_BUSINESS)}
+              onClick={() => setActiveSubcategory("non-business")}
+              className={getButtonClasses(activeSubcategory === "non-business")}
             >
               Non-Business
             </button>
@@ -227,292 +444,249 @@ export default function SecondPage() {
         <div className="space-y-3">
           {groupedProducts.map((group, groupIndex) => (
             <div key={groupIndex} className="grid grid-cols-2 gap-3">
-              {group.map((product, index) => (
-                <div key={index} className={getStyles("card")}>
-                  <div className="p-3">
-                    <div className="flex justify-between items-center mb-2">
-                      {Object.values(BOOSTER_TYPES).includes(product.name) ? (
-                        <div className="inline-flex items-center gap-1">
-                          <select
-                            value={boosterType}
-                            onChange={(e) => setBoosterType(e.target.value)}
-                            className={`text-sm font-bold leading-tight bg-transparent border-none appearance-none focus:outline-none cursor-pointer ${
+              {group.map((product, index) => {
+                const displayProduct = getProductDisplayData(product)
+                return (
+                  <div
+                    key={index}
+                    className={`rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${
+                      theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
+                    }`}
+                  >
+                    <div className="p-3">
+                      <div className="flex justify-between items-center mb-2">
+                        {["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(displayProduct.name) ? (
+                          <div className="inline-flex items-center gap-1">
+                            <select
+                              value={boosterType}
+                              onChange={(e) => setBoosterType(e.target.value)}
+                              className={`text-sm font-bold leading-tight bg-transparent border-none appearance-none focus:outline-none cursor-pointer ${
+                                theme === "dark" ? "text-white" : "text-gray-900"
+                              }`}
+                            >
+                              <option value="Instagram Booster">Instagram</option>
+                              <option value="TikTok Booster">TikTok</option>
+                              <option value="Telegram Booster">Telegram</option>
+                            </select>
+                            <ChevronDown
+                              className={`h-4 w-4 ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}
+                            />
+                          </div>
+                        ) : (
+                          <h3
+                            className={`text-sm font-bold leading-tight ${
                               theme === "dark" ? "text-white" : "text-gray-900"
                             }`}
                           >
-                            {Object.values(BOOSTER_TYPES).map((type) => (
-                              <option key={type} value={type}>
-                                {type.split(" ")[0]}
-                              </option>
-                            ))}
-                          </select>
-                          <ChevronDown className={`h-4 w-4 ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`} />
-                        </div>
-                      ) : (
-                        <h3 className={`text-sm font-bold leading-tight ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-                          {product.name}
-                        </h3>
-                      )}
-                      <span className={getStyles("price")(product.price)}>{product.price}</span>
-                    </div>
-
-                    {(product.name === "Paket Bisnis" ||
-                      product.name === "SEO Website" ||
-                      product.name === "Jasa Iklan Online" ||
-                      activeCategory === CATEGORIES.WEBSITE) &&
-                      product.features && (
-                        <div className="mb-3">
-                          <ul className="space-y-1">
-                            {product.features.slice(0, product.name === "Paket Bisnis" ? 3 : undefined).map((feature, i) => (
-                              <li key={i} className="flex items-center">
-                                <CheckCircle className={`h-3 w-3 mr-2 flex-shrink-0 ${theme === "dark" ? "text-green-400" : "text-green-500"}`} />
-                                <span className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{feature}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
-                    {Object.values(BOOSTER_TYPES).includes(product.name) && (
-                      <div className="mb-3">
-                        <select
-                          value={
-                            boosterOptions[product.name === BOOSTER_TYPES.INSTAGRAM ? "instagram" : product.name === BOOSTER_TYPES.TIKTOK ? "tiktok" : "telegram"]
-                          }
-                          onChange={(e) =>
-                            setBoosterOptions({
-                              ...boosterOptions,
-                              [product.name === BOOSTER_TYPES.INSTAGRAM ? "instagram" : product.name === BOOSTER_TYPES.TIKTOK ? "tiktok" : "telegram"]: e.target.value,
-                            })
-                          }
-                          className={`w-full px-2 py-1.5 rounded-md text-xs border ${
-                            theme === "dark" ? "bg-gray-700 border-gray-600 text-gray-200" : "bg-white border-gray-300 text-gray-700"
-                          } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                            {displayProduct.name}
+                          </h3>
+                        )}
+                        <span
+                          className={`px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap ${
+                            displayProduct.price === "Rp 0"
+                              ? theme === "dark"
+                                ? "bg-green-600 text-white"
+                                : "bg-green-500 text-white"
+                              : theme === "dark"
+                                ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white"
+                                : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
+                          } shadow-sm`}
                         >
-                          {product.name === BOOSTER_TYPES.TIKTOK
-                            ? ["2000", "5000"].map((opt) => (
-                                <option key={opt} value={opt}>
-                                  {opt} Followers
-                                </option>
-                              ))
-                            : ["3000", "5000", "10000"].map((opt) => (
-                                <option key={opt} value={opt}>
-                                  {opt} Followers
-                                </option>
-                              ))}
-                        </select>
-                        <input
-                          type="text"
-                          value={boosterOptions.link}
-                          onChange={(e) => setBoosterOptions({ ...boosterOptions, link: e.target.value })}
-                          placeholder="Link Akun"
-                          className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
-                            theme === "dark" ? "bg-gray-700 border-gray-600 text-gray-200" : "bg-white border-gray-300 text-gray-700"
-                          } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                        />
+                          {displayProduct.price}
+                        </span>
                       </div>
-                    )}
 
-                    <div className="flex gap-2">
-                      <button
-                        className={`flex-1 py-1.5 px-3 rounded-md font-medium text-xs transition-all duration-300 shadow-sm hover:shadow-md ${
-                          theme === "dark"
-                            ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
-                            : "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white"
-                        }`}
-                      >
-                        Pay
-                      </button>
-                      {product.exampleUrl && activeCategory === CATEGORIES.PAKET_BISNIS && product.name !== "Video Promosi" && (
-                        <button
-                          onClick={() => setModal({ ...modal, details: product })}
-                          className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
-                            theme === "dark" ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500" : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
-                          } flex items-center gap-1 shadow-sm hover:shadow-md`}
-                        >
-                          Rincian
-                        </button>
+                      {/* Booster options and link input */}
+                      {["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(displayProduct.name) && (
+                        <div className="mb-3">
+                          {displayProduct.name === "Instagram Booster" && (
+                            <select
+                              value={instagramBoosterOption}
+                              onChange={(e) => setInstagramBoosterOption(e.target.value)}
+                              className={`w-full px-2 py-1.5 rounded-md text-xs border ${
+                                theme === "dark"
+                                  ? "bg-gray-700 border-gray-600 text-gray-200"
+                                  : "bg-white border-gray-300 text-gray-700"
+                              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                            >
+                              <option value="3000">3000 Followers</option>
+                              <option value="5000">5000 Followers</option>
+                              <option value="10000">10000 Followers</option>
+                            </select>
+                          )}
+
+                          {displayProduct.name === "TikTok Booster" && (
+                            <select
+                              value={tiktokBoosterOption}
+                              onChange={(e) => setTiktokBoosterOption(e.target.value)}
+                              className={`w-full px-2 py-1.5 rounded-md text-xs border ${
+                                theme === "dark"
+                                  ? "bg-gray-700 border-gray-600 text-gray-200"
+                                  : "bg-white border-gray-300 text-gray-700"
+                              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                            >
+                              <option value="2000">2000 Followers</option>
+                              <option value="5000">5000 Followers</option>
+                            </select>
+                          )}
+
+                          {displayProduct.name === "Telegram Booster" && (
+                            <select
+                              value={telegramBoosterOption}
+                              onChange={(e) => setTelegramBoosterOption(e.target.value)}
+                              className={`w-full px-2 py-1.5 rounded-md text-xs border ${
+                                theme === "dark"
+                                  ? "bg-gray-700 border-gray-600 text-gray-200"
+                                  : "bg-white border-gray-300 text-gray-700"
+                              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                            >
+                              <option value="3000">3000 Followers</option>
+                              <option value="5000">5000 Followers</option>
+                              <option value="10000">10000 Followers</option>
+                            </select>
+                          )}
+
+                          <input
+                            type="text"
+                            value={boosterLink}
+                            onChange={(e) => setBoosterLink(e.target.value)}
+                            placeholder="Link Akun"
+                            className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
+                              theme === "dark"
+                                ? "bg-gray-700 border-gray-600 text-gray-200"
+                                : "bg-white border-gray-300 text-gray-700"
+                            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                          />
+                          {displayProduct.features && displayProduct.features.length > 0 && (
+                            <div className="mt-3">
+                              <FeatureList features={displayProduct.features} />
+                            </div>
+                          )}
+                        </div>
                       )}
-                      {product.exampleUrl && activeCategory === CATEGORIES.WEBSITE && (
-                        <button
-                          onClick={() => setModal({ ...modal, example: product })}
-                          className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
-                            theme === "dark" ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500" : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
-                          } flex items-center gap-1 shadow-sm hover:shadow-md`}
-                        >
-                          <ExternalLink className="h-3 w-3" />
-                          Example
-                        </button>
+
+                      {/* Display features for other products */}
+                      {displayProduct.name !== "Paket Bisnis" &&
+                        !["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(displayProduct.name) &&
+                        displayProduct.features &&
+                        displayProduct.features.length > 0 && (
+                          <div className="mb-3">
+                            <FeatureList features={displayProduct.features} />
+                          </div>
+                        )}
+
+                      {displayProduct.name === "Paket Bisnis" && displayProduct.features && (
+                        <div className="mb-3">
+                          <FeatureList features={displayProduct.features.slice(0, 3)} />
+                        </div>
                       )}
-                      {product.name === "Desain Konten" && (
-                        <button
-                          onClick={() => setModal({ ...modal, contentImages: true })}
-                          className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
-                            theme === "dark" ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500" : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
-                          } flex items-center gap-1 shadow-sm hover:shadow-md`}
-                        >
-                          Contoh
-                        </button>
-                      )}
-                      {product.name === "Video Promosi" && (
-                        <button
-                          onClick={() => setModal({ ...modal, videoPromo: true })}
-                          className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
-                            theme === "dark" ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500" : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
-                          } flex items-center gap-1 shadow-sm hover:shadow-md`}
-                        >
-                          Contoh
-                        </button>
-                      )}
-                      {product.name === "SEO Website" && (
-                        <button
-                          onClick={() => setModal({ ...modal, seoImages: true })}
-                          className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
-                            theme === "dark" ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500" : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
-                          } flex items-center gap-1 shadow-sm hover:shadow-md`}
-                        >
-                          Contoh
-                        </button>
-                      )}
-                      {product.name === "Jasa Iklan Online" && (
-                        <button
-                          onClick={() => setModal({ ...modal, adsImages: true })}
-                          className={`px-2 py-1.5 rounded-md font-medium text-xs transition-all duration-300 border ${
-                            theme === "dark" ? "border-gray-600 text-gray-300 hover:bg-gray-700 hover:border-gray-500" : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
-                          } flex items-center gap-1 shadow-sm hover:shadow-md`}
-                        >
-                          Contoh
-                        </button>
-                      )}
+
+                      <div className="flex gap-2">
+                        <button className={getCardButtonClasses(true)}>Pay</button>
+                        {displayProduct.modalType &&
+                          (displayProduct.exampleUrl ||
+                            displayProduct.name === "Desain Konten" ||
+                            displayProduct.name === "Video Promosi" ||
+                            displayProduct.name === "SEO Website" ||
+                            displayProduct.name === "Jasa Iklan Online") && (
+                            <button
+                              onClick={() => openModal(displayProduct.modalType, displayProduct)}
+                              className={getCardButtonClasses()}
+                            >
+                              {displayProduct.modalType === "example" ? (
+                                <>
+                                  <ExternalLink className="h-3 w-3" /> Example
+                                </>
+                              ) : (
+                                "Rincian"
+                              )}
+                            </button>
+                          )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           ))}
         </div>
 
-        {modal.example && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className={getStyles("modal", false, "full")}>
-              <button onClick={() => setModal({ ...modal, example: null })} className={getStyles("close")}>
-                <X className="h-5 w-5" />
-              </button>
-              <iframe
-                src={modal.example.exampleUrl}
-                title={`Example ${modal.example.name}`}
-                className="w-full h-full"
-                frameBorder="0"
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-              />
-            </div>
-          </div>
-        )}
+        {/* Dynamic Modals based on activeModal state */}
+        <Modal
+          isOpen={activeModal === "example" && modalProduct !== null}
+          onClose={closeModal}
+          size="full" // Full size for example iframes
+        >
+          {modalProduct?.exampleUrl && (
+            <iframe
+              src={modalProduct.exampleUrl}
+              title={`Example ${modalProduct.name}`}
+              className="w-full h-full"
+              frameBorder="0"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+            />
+          )}
+        </Modal>
 
-        {modal.details && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className={getStyles("modal", false, "md")}>
-              <button onClick={() => setModal({ ...modal, details: null })} className={getStyles("close")}>
-                <X className="h-5 w-5" />
-              </button>
-              <ul className="space-y-2">
-                {(modal.details.name === "Paket Bisnis" ? modal.details.features?.slice(3) : modal.details.features)?.map((feature, i) => (
-                  <li key={i} className="flex items-center">
-                    <CheckCircle className={`h-4 w-4 mr-2 flex-shrink-0 ${theme === "dark" ? "text-green-400" : "text-green-500"}`} />
-                    <span className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        )}
+        <Modal
+          isOpen={activeModal === "details" && modalProduct !== null}
+          onClose={closeModal}
+          size="md" // Smaller size for detail lists
+        >
+          {modalProduct?.name === "Paket Bisnis" && modalProduct.features && (
+            <FeatureList features={modalProduct.features.slice(3)} textColor={theme === "dark" ? "text-gray-300" : "text-gray-600"} />
+          )}
+          {modalProduct?.name !== "Paket Bisnis" && modalProduct?.features && (
+            <FeatureList features={modalProduct.features} textColor={theme === "dark" ? "text-gray-300" : "text-gray-600"} />
+          )}
+        </Modal>
 
-        {modal.contentImages && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className={getStyles("modal", false, "2xl")}>
-              <button onClick={() => setModal({ ...modal, contentImages: false })} className={getStyles("close")}>
-                <X className="h-5 w-5" />
-              </button>
-              <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
-                {["/images/template1.jpg", "/images/template2.jpg", "/images/template3.jpg"].map((img, i) => (
-                  <SwiperSlide key={i}>
-                    <div className="relative w-full h-64">
-                      <img src={img} alt={`Desain Konten ${i + 1}`} className="w-full h-full object-cover rounded-md" />
-                      <span className="absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded">
-                        No {i + 1}
-                      </span>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
-          </div>
-        )}
+        <Modal
+          isOpen={
+            (activeModal === "contentImages" && modalProduct?.name === "Desain Konten") ||
+            (activeModal === "seoImages" && modalProduct?.name === "SEO Website") ||
+            (activeModal === "adsImages" && modalProduct?.name === "Jasa Iklan Online")
+          }
+          onClose={closeModal}
+          size="lg" // Larger size for image carousels
+        >
+          <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
+            {modalProduct && imageSources[modalProduct.modalType as keyof typeof imageSources]?.map((img, i) => (
+              <SwiperSlide key={i}>
+                <div className="relative w-full h-64">
+                  <img
+                    src={img}
+                    alt={`${modalProduct.name} ${i + 1}`}
+                    className="w-full h-full object-cover rounded-md"
+                  />
+                  <span
+                    className={`absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded`}
+                  >
+                    No {i + 1}
+                  </span>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </Modal>
 
-        {modal.videoPromo && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className={getStyles("modal", false, "2xl")}>
-              <button onClick={() => setModal({ ...modal, videoPromo: false })} className={getStyles("close")}>
-                <X className="h-5 w-5" />
-              </button>
-              <div className="relative w-full h-64">
-                <iframe
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                  title="Video Promosi Example"
-                  className="w-full h-full rounded-md"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            </div>
+        <Modal
+          isOpen={activeModal === "videoPromo" && modalProduct?.name === "Video Promosi"}
+          onClose={closeModal}
+          size="lg"
+        >
+          <div className="relative w-full h-64">
+            <iframe
+              src={modalProduct?.exampleUrl}
+              title="Video Promosi Example"
+              className="w-full h-full rounded-md"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
           </div>
-        )}
-
-        {modal.seoImages && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className={getStyles("modal", false, "2xl")}>
-              <button onClick={() => setModal({ ...modal, seoImages: false })} className={getStyles("close")}>
-                <X className="h-5 w-5" />
-              </button>
-              <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
-                {["/images/seo1.jpg", "/images/seo2.jpg", "/images/seo3.jpg"].map((img, i) => (
-                  <SwiperSlide key={i}>
-                    <div className="relative w-full h-64">
-                      <img src={img} alt={`SEO Example ${i + 1}`} className="w-full h-full object-cover rounded-md" />
-                      <span className="absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded">
-                        No {i + 1}
-                      </span>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
-          </div>
-        )}
-
-        {modal.adsImages && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className={getStyles("modal", false, "2xl")}>
-              <button onClick={() => setModal({ ...modal, adsImages: false })} className={getStyles("close")}>
-                <X className="h-5 w-5" />
-              </button>
-              <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
-                {["/images/ads1.jpg", "/images/ads2.jpg", "/images/ads3.jpg"].map((img, i) => (
-                  <SwiperSlide key={i}>
-                    <div className="relative w-full h-64">
-                      <img src={img} alt={`Jasa Iklan Online Example ${i + 1}`} className="w-full h-full object-cover rounded-md" />
-                      <span className="absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded">
-                        No {i + 1}
-                      </span>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
-          </div>
-        )}
+        </Modal>
       </div>
     </div>
-  );
-     }
+  )
+}
