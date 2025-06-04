@@ -83,7 +83,13 @@ export default function SecondPage() {
   };
 
   const products: Product[] = [
-    { name: "Paket Bisnis", price: "Rp 50,000", category: CATEGORIES.PAKET_BISNIS, features: ["Website", "Content Design", "Social Media Booster", "SEO Website", "Copywriting"], exampleUrl: "https://example.com" },
+    {
+      name: "Paket Bisnis",
+      price: "Rp 50,000",
+      category: CATEGORIES.PAKET_BISNIS,
+      features: ["Website", "Content Design", "Social Media Booster", "SEO Website", "Copywriting"],
+      exampleUrl: "https://example.com",
+    },
     {
       name: BOOSTER_TYPES.INSTAGRAM,
       price: boosterOptions.instagram === "3000" ? "Rp 50,000" : boosterOptions.instagram === "5000" ? "Rp 80,000" : "Rp 150,000",
@@ -123,7 +129,9 @@ export default function SecondPage() {
 
   const filteredProducts = products.filter((product) => {
     if (product.category !== activeCategory) return false;
-    if (activeCategory === CATEGORIES.WEBSITE) return product.subcategory === activeSubcategory;
+    if (activeCategory === CATEGORIES.WEBSITE) {
+      return product.subcategory ? product.subcategory === activeSubcategory : false; // Type guard for subcategory
+    }
     if (Object.values(BOOSTER_TYPES).includes(product.name)) return product.name === boosterType;
     return true;
   });
@@ -158,8 +166,8 @@ export default function SecondPage() {
               ? "bg-green-600 text-white"
               : "bg-green-500 text-white"
             : theme === "dark"
-            ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white"
-            : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
+              ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white"
+              : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
         } shadow-sm`;
     }
     if (type === "modal") {
@@ -248,23 +256,29 @@ export default function SecondPage() {
                       <span className={getStyles("price")(product.price)}>{product.price}</span>
                     </div>
 
-                    {(product.name === "Paket Bisnis" || product.name === "SEO Website" || product.name === "Jasa Iklan Online" || activeCategory === CATEGORIES.WEBSITE) && product.features && (
-                      <div className="mb-3">
-                        <ul className="space-y-1">
-                          {product.features.slice(0, product.name === "Paket Bisnis" ? 3 : undefined).map((feature, i) => (
-                            <li key={i} className="flex items-center">
-                              <CheckCircle className={`h-3 w-3 mr-2 flex-shrink-0 ${theme === "dark" ? "text-green-400" : "text-green-500"}`} />
-                              <span className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
+                    {(product.name === "Paket Bisnis" ||
+                      product.name === "SEO Website" ||
+                      product.name === "Jasa Iklan Online" ||
+                      activeCategory === CATEGORIES.WEBSITE) &&
+                      product.features && (
+                        <div className="mb-3">
+                          <ul className="space-y-1">
+                            {product.features.slice(0, product.name === "Paket Bisnis" ? 3 : undefined).map((feature, i) => (
+                              <li key={i} className="flex items-center">
+                                <CheckCircle className={`h-3 w-3 mr-2 flex-shrink-0 ${theme === "dark" ? "text-green-400" : "text-green-500"}`} />
+                                <span className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
 
                     {Object.values(BOOSTER_TYPES).includes(product.name) && (
                       <div className="mb-3">
                         <select
-                          value={boosterOptions[product.name === BOOSTER_TYPES.INSTAGRAM ? "instagram" : product.name === BOOSTER_TYPES.TIKTOK ? "tiktok" : "telegram"]}
+                          value={
+                            boosterOptions[product.name === BOOSTER_TYPES.INSTAGRAM ? "instagram" : product.name === BOOSTER_TYPES.TIKTOK ? "tiktok" : "telegram"]
+                          }
                           onChange={(e) =>
                             setBoosterOptions({
                               ...boosterOptions,
@@ -501,4 +515,4 @@ export default function SecondPage() {
       </div>
     </div>
   );
-}
+     }
