@@ -94,11 +94,11 @@ interface Product {
 const getInstagramBoosterFeatures = (option: string) => {
   switch (option) {
     case "3000":
-      return ["5000 Suka", "100000 Penayangan"]
+      return ["5000 Likes", "100000 Views"]
     case "5000":
-      return ["10000 Suka", "170000 Penayangan"]
+      return ["10000 Likes", "170000 Views"]
     case "10000":
-      return ["15000 Suka", "300000 Penayangan"]
+      return ["15000 Likes", "300000 Views"]
     default:
       return []
   }
@@ -112,9 +112,9 @@ const getTikTokBoosterFeatures = (option: string) => {
 
   switch (option) {
     case "2000":
-      return [`${baseViews} Penayangan`, `${baseLikes} Suka`, `${baseShares} Bagikan`, `${baseSaves} Simpan`]
+      return [`${baseViews} Views`, `${baseLikes} Likes`, `${baseShares} Shares`, `${baseSaves} Saves`]
     case "5000":
-      return [`${baseViews * 2.5} Penayangan`, `${baseLikes * 2.5} Suka`, `${baseShares * 2.5} Bagikan`, `${baseSaves * 2.5} Simpan`]
+      return [`${baseViews * 2.5} Views`, `${baseLikes * 2.5} Likes`, `${baseShares * 2.5} Shares`, `${baseSaves * 2.5} Saves`]
     default:
       return []
   }
@@ -123,11 +123,11 @@ const getTikTokBoosterFeatures = (option: string) => {
 const getTelegramBoosterFeatures = (option: string) => {
   switch (option) {
     case "3000":
-      return ["10000 Penayangan", "1000 Reaksi"]
+      return ["10000 Views", "1000 Reactions"]
     case "5000":
-      return ["15000 Penayangan", "1500 Reaksi"]
+      return ["15000 Views", "1500 Reactions"]
     case "10000":
-      return ["30000 Penayangan", "3000 Reaksi"]
+      return ["30000 Views", "3000 Reactions"]
     default:
       return []
   }
@@ -136,11 +136,11 @@ const getTelegramBoosterFeatures = (option: string) => {
 const getFacebookBoosterFeatures = (option: string) => {
   switch (option) {
     case "3000":
-      return ["5000 Suka", "100000 Penayangan"]
+      return ["5000 Likes", "100000 Views"]
     case "5000":
-      return ["10000 Suka", "170000 Penayangan"]
+      return ["10000 Likes", "170000 Views"]
     case "10000":
-      return ["15000 Suka", "300000 Penayangan"]
+      return ["15000 Likes", "300000 Views"]
     default:
       return []
   }
@@ -153,7 +153,7 @@ const productData: Product[] = [
     category: "paket_bisnis",
     features: ["Website", "Desain Konten", "Booster Media Sosial", "Video Promosi", "Penulisan Konten"],
     exampleUrl: "https://example.com",
-    modalType: null, // Modal tidak diperlukan karena fitur ditampilkan di utama
+    modalType: null,
   },
   {
     name: "Instagram Booster",
@@ -204,7 +204,7 @@ const productData: Product[] = [
     name: "SEO Website",
     price: "Rp 25,000",
     category: "lainnya",
-    features: ["Video Promosi", "Optimasi Konten Video", "Distribusi Video"],
+    features: ["Riset Kata Kunci", "Optimasi Halaman", "Pembangunan Tautan"],
     modalType: "seoImages",
   },
   {
@@ -381,8 +381,8 @@ export default function SecondPage() {
   if (activeCategory === "paket_bisnis") {
     groupedProducts.push(filteredProducts) // Paket Bisnis ditampilkan satu kolom penuh
   } else if (activeCategory === "sosmed_booster") {
-    for (let i = 0; i < filteredProducts.length; i += 1) {
-      groupedProducts.push([filteredProducts[i]]) // Setiap booster menempati satu baris penuh
+    for (let i = 0; i < filteredProducts.length; i += 2) {
+      groupedProducts.push(filteredProducts.slice(i, i + 2)) // Sosmed Booster 2 kolom per baris
     }
   } else {
     for (let i = 0; i < filteredProducts.length; i += 2) {
@@ -495,7 +495,7 @@ export default function SecondPage() {
           {groupedProducts.map((group, groupIndex) => (
             <div
               key={groupIndex}
-              className={`grid ${activeCategory === "paket_bisnis" || activeCategory === "sosmed_booster" ? "grid-cols-1" : "grid-cols-2"} gap-3`}
+              className={`grid ${activeCategory === "paket_bisnis" ? "grid-cols-1" : "grid-cols-2"} gap-3`}
             >
               {group.map((product, index) => {
                 const displayProduct = getProductDisplayData(product)
@@ -541,9 +541,9 @@ export default function SecondPage() {
                                 : "bg-white border-gray-300 text-gray-700"
                             } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                           >
-                            <option value="3000">3000 Pengikut</option>
-                            <option value="5000">5000 Pengikut</option>
-                            <option value="10000">10000 Pengikut</option>
+                            <option value="3000">3000 Followers</option>
+                            <option value="5000">5000 Followers</option>
+                            <option value="10000">10000 Followers</option>
                           </select>
                         )}
 
@@ -551,15 +551,14 @@ export default function SecondPage() {
                           <select
                             value={tiktokBoosterOption}
                             onChange={(e) => setTiktokBoosterOption(e.target.value)}
-                            className={`w-full px-2 py-1
-                            .5 rounded-md text-xs border ${
+                            className={`w-full px-2 py-1.5 rounded-md text-xs border ${
                               theme === "dark"
                                 ? "bg-gray-700 border-gray-600 text-gray-200"
                                 : "bg-white border-gray-300 text-gray-700"
                             } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                           >
-                            <option value="2000">2000 Pengikut</option>
-                            <option value="5000">5000 Pengikut</option>
+                            <option value="2000">2000 Followers</option>
+                            <option value="5000">5000 Followers</option>
                           </select>
                         )}
 
@@ -573,9 +572,9 @@ export default function SecondPage() {
                                 : "bg-white border-gray-300 text-gray-700"
                             } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                           >
-                            <option value="3000">3000 Pengikut</option>
-                            <option value="5000">5000 Pengikut</option>
-                            <option value="10000">10000 Pengikut</option>
+                            <option value="3000">3000 Followers</option>
+                            <option value="5000">5000 Followers</option>
+                            <option value="10000">10000 Followers</option>
                           </select>
                         )}
 
@@ -589,9 +588,9 @@ export default function SecondPage() {
                                 : "bg-white border-gray-300 text-gray-700"
                             } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                           >
-                            <option value="3000">3000 Pengikut</option>
-                            <option value="5000">5000 Pengikut</option>
-                            <option value="10000">10000 Pengikut</option>
+                            <option value="3000">3000 Followers</option>
+                            <option value="5000">5000 Followers</option>
+                            <option value="10000">10000 Followers</option>
                           </select>
                         )}
 
@@ -599,7 +598,7 @@ export default function SecondPage() {
                           type="text"
                           value={boosterLink}
                           onChange={(e) => setBoosterLink(e.target.value)}
-                          placeholder="Tautan Akun"
+                          placeholder="Account Link"
                           className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
                             theme === "dark"
                               ? "bg-gray-700 border-gray-600 text-gray-200"
@@ -614,11 +613,16 @@ export default function SecondPage() {
                       </div>
                     )}
 
-                    {displayProduct.features && displayProduct.features.length > 0 && (
-                      <div className="mb-3">
-                        <FeatureList features={displayProduct.features} />
-                      </div>
-                    )}
+                    {displayProduct.name !== "Instagram Booster" &&
+                      displayProduct.name !== "TikTok Booster" &&
+                      displayProduct.name !== "Telegram Booster" &&
+                      displayProduct.name !== "Facebook Booster" &&
+                      displayProduct.features &&
+                      displayProduct.features.length > 0 && (
+                        <div className="mb-3">
+                          <FeatureList features={displayProduct.features} />
+                        </div>
+                      )}
 
                     <div className="flex gap-2">
                       <button className={getCardButtonClasses(true)}>Bayar</button>
@@ -723,4 +727,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-        }
+            }
