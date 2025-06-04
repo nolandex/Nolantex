@@ -11,7 +11,7 @@ interface ModalProps {
   isOpen: boolean
   onClose: () => void
   children: React.ReactNode
-  size?: "sm" | "md" | "lg" | "full" // Tambahkan ukuran modal
+  size?: "sm" | "md" | "lg" | "full"
 }
 
 function Modal({ isOpen, onClose, children, size = "full" }: ModalProps) {
@@ -144,52 +144,52 @@ const productData: Product[] = [
   },
   {
     name: "Instagram Booster",
-    price: "", // Harga akan dihitung dinamis
-    category: "paket_bisnis",
-    features: [], // Fitur akan dihitung dinamis
+    price: "",
+    category: "sosmed_booster",
+    features: [],
     exampleUrl: "https://example.com/instagram",
     modalType: "details",
   },
   {
     name: "TikTok Booster",
-    price: "", // Harga akan dihitung dinamis
-    category: "paket_bisnis",
-    features: [], // Fitur akan dihitung dinamis
+    price: "",
+    category: "sosmed_booster",
+    features: [],
     exampleUrl: "https://example.com/tiktok",
     modalType: "details",
   },
   {
     name: "Telegram Booster",
-    price: "", // Harga akan dihitung dinamis
-    category: "paket_bisnis",
-    features: [], // Fitur akan dihitung dinamis
+    price: "",
+    category: "sosmed_booster",
+    features: [],
     exampleUrl: "https://example.com/telegram",
     modalType: "details",
   },
   {
     name: "Desain Konten",
     price: "Rp 10,000",
-    category: "paket_bisnis",
+    category: "lainnya",
     modalType: "contentImages",
   },
   {
     name: "Video Promosi",
     price: "Rp 10,000",
-    category: "paket_bisnis",
+    category: "lainnya",
     exampleUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     modalType: "videoPromo",
   },
   {
     name: "SEO Website",
     price: "Rp 25,000",
-    category: "paket_bisnis",
+    category: "lainnya",
     features: ["Keyword Research", "On-Page Optimization", "Link Building"],
     modalType: "seoImages",
   },
   {
     name: "Jasa Iklan Online",
     price: "Rp 100,000",
-    category: "paket_bisnis",
+    category: "lainnya",
     features: ["Meta Ads", "TikTok Ads"],
     modalType: "adsImages",
   },
@@ -345,8 +345,6 @@ export default function SecondPage() {
     if (activeCategory === "website") {
       return product.subcategory === activeSubcategory
     }
-    // Booster products are handled by their name, not by boosterType state for filtering
-    // Only show the selected booster type if it's a booster product
     if (["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(product.name)) {
       return product.name === boosterType
     }
@@ -403,7 +401,7 @@ export default function SecondPage() {
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
       <div className="container mx-auto max-w-full px-2">
-        <div className="grid grid-cols-2 gap-2 mb-6">
+        <div className="grid grid-cols-3 gap-2 mb-6">
           <button
             onClick={() => {
               setActiveCategory("paket_bisnis")
@@ -422,6 +420,24 @@ export default function SecondPage() {
           >
             Website
           </button>
+          <button
+            onClick={() => {
+              setActiveCategory("sosmed_booster")
+              setActiveSubcategory("business")
+            }}
+            className={getButtonClasses(activeCategory === "sosmed_booster")}
+          >
+            Sosmed Booster
+          </button>
+          <button
+            onClick={() => {
+              setActiveCategory("lainnya")
+              setActiveSubcategory("business")
+            }}
+            className={getButtonClasses(activeCategory === "lainnya")}
+          >
+            Lainnya
+          </button>
         </div>
 
         {activeCategory === "website" && (
@@ -430,13 +446,13 @@ export default function SecondPage() {
               onClick={() => setActiveSubcategory("business")}
               className={getButtonClasses(activeSubcategory === "business")}
             >
-              Business
+              Bisnis
             </button>
             <button
               onClick={() => setActiveSubcategory("non-business")}
               className={getButtonClasses(activeSubcategory === "non-business")}
             >
-              Non-Business
+              Non-Bisnis
             </button>
           </div>
         )}
@@ -496,7 +512,6 @@ export default function SecondPage() {
                         </span>
                       </div>
 
-                      {/* Booster options and link input */}
                       {["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(displayProduct.name) && (
                         <div className="mb-3">
                           {displayProduct.name === "Instagram Booster" && (
@@ -509,9 +524,9 @@ export default function SecondPage() {
                                   : "bg-white border-gray-300 text-gray-700"
                               } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                             >
-                              <option value="3000">3000 Followers</option>
-                              <option value="5000">5000 Followers</option>
-                              <option value="10000">10000 Followers</option>
+                              <option value="3000">3000 Pengikut</option>
+                              <option value="5000">5000 Pengikut</option>
+                              <option value="10000">10000 Pengikut</option>
                             </select>
                           )}
 
@@ -525,8 +540,8 @@ export default function SecondPage() {
                                   : "bg-white border-gray-300 text-gray-700"
                               } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                             >
-                              <option value="2000">2000 Followers</option>
-                              <option value="5000">5000 Followers</option>
+                              <option value="2000">2000 Pengikut</option>
+                              <option value="5000">5000 Pengikut</option>
                             </select>
                           )}
 
@@ -540,9 +555,9 @@ export default function SecondPage() {
                                   : "bg-white border-gray-300 text-gray-700"
                               } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                             >
-                              <option value="3000">3000 Followers</option>
-                              <option value="5000">5000 Followers</option>
-                              <option value="10000">10000 Followers</option>
+                              <option value="3000">3000 Pengikut</option>
+                              <option value="5000">5000 Pengikut</option>
+                              <option value="10000">10000 Pengikut</option>
                             </select>
                           )}
 
@@ -550,7 +565,7 @@ export default function SecondPage() {
                             type="text"
                             value={boosterLink}
                             onChange={(e) => setBoosterLink(e.target.value)}
-                            placeholder="Link Akun"
+                            placeholder="Tautan Akun"
                             className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
                               theme === "dark"
                                 ? "bg-gray-700 border-gray-600 text-gray-200"
@@ -565,7 +580,6 @@ export default function SecondPage() {
                         </div>
                       )}
 
-                      {/* Display features for other products */}
                       {displayProduct.name !== "Paket Bisnis" &&
                         !["Instagram Booster", "TikTok Booster", "Telegram Booster"].includes(displayProduct.name) &&
                         displayProduct.features &&
@@ -582,7 +596,7 @@ export default function SecondPage() {
                       )}
 
                       <div className="flex gap-2">
-                        <button className={getCardButtonClasses(true)}>Pay</button>
+                        <button className={getCardButtonClasses(true)}>Bayar</button>
                         {displayProduct.modalType &&
                           (displayProduct.exampleUrl ||
                             displayProduct.name === "Desain Konten" ||
@@ -595,7 +609,7 @@ export default function SecondPage() {
                             >
                               {displayProduct.modalType === "example" ? (
                                 <>
-                                  <ExternalLink className="h-3 w-3" /> Example
+                                  <ExternalLink className="h-3 w-3" /> Contoh
                                 </>
                               ) : (
                                 "Rincian"
@@ -611,16 +625,15 @@ export default function SecondPage() {
           ))}
         </div>
 
-        {/* Dynamic Modals based on activeModal state */}
         <Modal
           isOpen={activeModal === "example" && modalProduct !== null}
           onClose={closeModal}
-          size="full" // Full size for example iframes
+          size="full"
         >
           {modalProduct?.exampleUrl && (
             <iframe
               src={modalProduct.exampleUrl}
-              title={`Example ${modalProduct.name}`}
+              title={`Contoh ${modalProduct.name}`}
               className="w-full h-full"
               frameBorder="0"
               sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
@@ -631,7 +644,7 @@ export default function SecondPage() {
         <Modal
           isOpen={activeModal === "details" && modalProduct !== null}
           onClose={closeModal}
-          size="md" // Smaller size for detail lists
+          size="md"
         >
           {modalProduct?.name === "Paket Bisnis" && modalProduct.features && (
             <FeatureList features={modalProduct.features.slice(3)} textColor={theme === "dark" ? "text-gray-300" : "text-gray-600"} />
@@ -648,7 +661,7 @@ export default function SecondPage() {
             (activeModal === "adsImages" && modalProduct?.name === "Jasa Iklan Online")
           }
           onClose={closeModal}
-          size="lg" // Larger size for image carousels
+          size="lg"
         >
           <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
             {modalProduct && imageSources[modalProduct.modalType as keyof typeof imageSources]?.map((img, i) => (
@@ -678,7 +691,7 @@ export default function SecondPage() {
           <div className="relative w-full h-64">
             <iframe
               src={modalProduct?.exampleUrl}
-              title="Video Promosi Example"
+              title="Contoh Video Promosi"
               className="w-full h-full rounded-md"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -689,4 +702,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-}
+          }
