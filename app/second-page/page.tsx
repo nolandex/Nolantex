@@ -7,7 +7,7 @@ import { CheckCircle, ExternalLink, X } from "lucide-react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 
-// ... (Komponen Modal, FeatureList, OrderingInstructions tetap sama) ...
+// Komponen Modal
 interface ModalProps {
   isOpen: boolean
   onClose: () => void
@@ -49,6 +49,7 @@ function Modal({ isOpen, onClose, children, size = "full" }: ModalProps) {
   )
 }
 
+// Komponen FeatureList
 interface FeatureListProps {
   features: string[]
   textColor?: string
@@ -73,6 +74,7 @@ function FeatureList({ features, textColor, textSize = "text-xs" }: FeatureListP
   )
 }
 
+// Komponen untuk instruksi pemesanan
 function OrderingInstructions() {
   const { theme } = useTheme()
   return (
@@ -192,7 +194,7 @@ const productData: Product[] = [
     price: "Rp 50,000",
     category: "paket_bisnis",
     features: ["Website Premium", "Desain Konten Profesional", "Booster Media Sosial Powerfull", "Video Promosi Menarik", "Penulisan Konten SEO Friendly"],
-    exampleUrl: "[https://example.com](https://example.com)",
+    exampleUrl: "https://example.com",
     modalType: null,
   },
   {
@@ -200,7 +202,7 @@ const productData: Product[] = [
     price: "",
     category: "sosmed_booster",
     features: [],
-    exampleUrl: "[https://example.com/instagram](https://example.com/instagram)",
+    exampleUrl: "https://example.com/instagram",
     modalType: "details",
   },
   {
@@ -208,7 +210,7 @@ const productData: Product[] = [
     price: "",
     category: "sosmed_booster",
     features: [],
-    exampleUrl: "[https://example.com/tiktok](https://example.com/tiktok)",
+    exampleUrl: "https://example.com/tiktok",
     modalType: "details",
   },
   {
@@ -216,7 +218,7 @@ const productData: Product[] = [
     price: "",
     category: "sosmed_booster",
     features: [],
-    exampleUrl: "[https://example.com/telegram](https://example.com/telegram)",
+    exampleUrl: "https://example.com/telegram",
     modalType: "details",
   },
   {
@@ -224,7 +226,7 @@ const productData: Product[] = [
     price: "",
     category: "sosmed_booster",
     features: [],
-    exampleUrl: "[https://example.com/facebook](https://example.com/facebook)",
+    exampleUrl: "https://example.com/facebook",
     modalType: "details",
   },
   {
@@ -237,7 +239,7 @@ const productData: Product[] = [
     name: "Video Promosi",
     price: "Rp 10,000",
     category: "lainnya",
-    exampleUrl: "[https://www.youtube.com/embed/dQw4w9WgXcQ](https://www.youtube.com/embed/dQw4w9WgXcQ)",
+    exampleUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     modalType: "videoPromo",
   },
   {
@@ -260,7 +262,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "[https://unbounce.com](https://unbounce.com)",
+    exampleUrl: "https://unbounce.com",
     modalType: "example",
   },
   {
@@ -269,7 +271,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "[https://profil-bisnis-demo.vercel.app](https://profil-bisnis-demo.vercel.app)",
+    exampleUrl: "https://profil-bisnis-demo.vercel.app",
     modalType: "example",
   },
   {
@@ -278,7 +280,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "[https://shopify.com](https://shopify.com)",
+    exampleUrl: "https://shopify.com",
     modalType: "example",
   },
   {
@@ -287,7 +289,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "[https://portfolio-demo.vercel.app](https://portfolio-demo.vercel.app)",
+    exampleUrl: "https://portfolio-demo.vercel.app",
     modalType: "example",
   },
   {
@@ -296,7 +298,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "[https://course-demo.vercel.app](https://course-demo.vercel.app)",
+    exampleUrl: "https://course-demo.vercel.app",
     modalType: "example",
   },
   {
@@ -305,7 +307,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "[https://membership-demo.vercel.app](https://membership-demo.vercel.app)",
+    exampleUrl: "https://membership-demo.vercel.app",
     modalType: "example",
   },
   {
@@ -314,7 +316,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "[https://linkinbio-demo.vercel.app](https://linkinbio-demo.vercel.app)",
+    exampleUrl: "https://linkinbio-demo.vercel.app",
     modalType: "example",
   },
   {
@@ -323,7 +325,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "non-business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "[https://invitation-demo.vercel.app](https://invitation-demo.vercel.app)",
+    exampleUrl: "https://invitation-demo.vercel.app",
     modalType: "example",
   },
   {
@@ -332,7 +334,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "non-business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "[https://birthday-demo.vercel.app](https://birthday-demo.vercel.app)",
+    exampleUrl: "https://birthday-demo.vercel.app",
     modalType: "example",
   },
   {
@@ -341,7 +343,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "non-business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "[https://event-demo.vercel.app](https://event-demo.vercel.app)",
+    exampleUrl: "https://event-demo.vercel.app",
     modalType: "example",
   },
 ]
@@ -353,7 +355,7 @@ const imageSources = {
 }
 
 export default function SecondPage() {
-  const { theme, setTheme } = useTheme()
+  const { theme } = useTheme() // setTheme tidak digunakan, bisa dihapus jika tidak ada rencana penggunaan
   const [mounted, setMounted] = useState(false)
   const [activeCategory, setActiveCategory] = useState("paket_bisnis")
   const [activeSubcategory, setActiveSubcategory] = useState("business")
@@ -397,8 +399,7 @@ export default function SecondPage() {
       }
       return { ...product, price: currentPrice, features: currentFeatures }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
+    [instagramBoosterOption, tiktokBoosterOption, telegramBoosterOption, facebookBoosterOption] // Dependensi ditambahkan
   )
 
   const filteredProducts = productData.filter((product) => {
@@ -465,7 +466,9 @@ export default function SecondPage() {
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
+      {/* Kontainer utama dengan padding kondisional */}
       <div className={`mx-auto ${activeCategory === "paket_bisnis" ? "max-w-none px-0" : "container max-w-full px-2"}`}>
+        {/* Kontainer tombol kategori dengan padding kondisional */}
         <div className={`grid grid-cols-2 gap-2 mb-6 ${activeCategory === "paket_bisnis" ? "px-2 sm:px-4" : ""}`}>
           <button
             onClick={() => {
@@ -503,6 +506,8 @@ export default function SecondPage() {
         </div>
 
         {activeCategory === "website" && (
+          // Kontainer tombol subkategori. Tidak memerlukan padding tambahan khusus karena hanya muncul
+          // ketika activeCategory adalah "website", di mana parentnya sudah memiliki px-2.
           <div className="flex justify-center gap-2 mb-6">
             <button
               onClick={() => setActiveSubcategory("business")}
@@ -523,6 +528,8 @@ export default function SecondPage() {
           {groupedProducts.map((group, groupIndex) => (
             <div
               key={groupIndex}
+              // Grid produk: Untuk Paket Bisnis, grid-cols-1 tanpa padding tambahan.
+              // Untuk kategori lain, grid-cols-2 tanpa padding tambahan (padding dari parent).
               className={`grid ${activeCategory === "paket_bisnis" ? "grid-cols-1" : "grid-cols-2"} gap-3`}
             >
               {group.map((product) => {
@@ -532,6 +539,7 @@ export default function SecondPage() {
                 return (
                   <div
                     key={displayProduct.name + (displayProduct.subcategory || '')}
+                    // Kembalikan warna latar card seperti semula
                     className={`flex flex-col rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${
                       theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
                     } ${isPaketBisnisCard ? "py-6 px-4 md:px-6" : "p-3"}`}
@@ -670,4 +678,91 @@ export default function SecondPage() {
                           imageSources[(displayProduct.modalType) as keyof typeof imageSources]?.length > 0 ||
                           displayProduct.modalType === "details") && (
                           <button
-                            onClick={() => open
+                            onClick={() => openModal(displayProduct.modalType, displayProduct)}
+                            className={getCardButtonClasses(false, isPaketBisnisCard)}
+                          >
+                            {displayProduct.modalType === "example" ? (
+                              <>
+                                <ExternalLink className={isPaketBisnisCard ? "h-4 w-4" : "h-3 w-3"} /> Contoh
+                              </>
+                            ) : (
+                              "Rincian"
+                            )}
+                          </button>
+                        )}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          ))}
+        </div>
+
+        <Modal isOpen={activeModal === "example" && modalProduct !== null} onClose={closeModal} size="full">
+          {modalProduct?.exampleUrl && (
+            <iframe
+              src={modalProduct.exampleUrl}
+              title={`Contoh ${modalProduct.name}`}
+              className="w-full h-full border-0"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+            />
+          )}
+        </Modal>
+
+        <Modal isOpen={activeModal === "details" && modalProduct !== null} onClose={closeModal} size="md">
+          <OrderingInstructions />
+        </Modal>
+
+        <Modal
+          isOpen={
+            (activeModal === "contentImages" && modalProduct?.name === "Desain Konten") ||
+            (activeModal === "seoImages" && modalProduct?.name === "SEO Website") ||
+            (activeModal === "adsImages" && modalProduct?.name === "Jasa Iklan Online")
+          }
+          onClose={closeModal}
+          size="lg"
+        >
+          <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64 md:h-96">
+            {modalProduct &&
+              imageSources[(modalProduct.modalType) as keyof typeof imageSources]?.map((img, i) => (
+                <SwiperSlide key={i}>
+                  <div className="relative w-full h-full">
+                    <img
+                      src={img || "/placeholder.svg"}
+                      alt={`${modalProduct.name} Contoh ${i + 1}`}
+                      className="w-full h-full object-contain rounded-md"
+                    />
+                    <span
+                      className={`absolute top-2 left-2 px-2 py-1 text-xs md:text-sm font-medium text-white bg-black bg-opacity-60 rounded`}
+                    >
+                      Gambar {i + 1}
+                    </span>
+                  </div>
+                </SwiperSlide>
+              ))}
+          </Swiper>
+        </Modal>
+
+        <Modal
+          isOpen={activeModal === "videoPromo" && modalProduct?.name === "Video Promosi"}
+          onClose={closeModal}
+          size="lg"
+        >
+          {modalProduct?.exampleUrl && (
+             <div className="aspect-video w-full">
+                <iframe
+                src={modalProduct.exampleUrl}
+                title={`Contoh ${modalProduct.name}`}
+                className="w-full h-full rounded-md"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                />
+            </div>
+          )}
+        </Modal>
+      </div>
+    </div>
+  )
+}
+
