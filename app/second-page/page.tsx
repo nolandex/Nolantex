@@ -355,7 +355,7 @@ const imageSources = {
 }
 
 export default function SecondPage() {
-  const { theme } = useTheme(); // setTheme tidak digunakan, bisa dihapus
+  const { theme } = useTheme();
   const [mounted, setMounted] = useState(false)
   const [activeCategory, setActiveCategory] = useState("paket_bisnis")
   const [activeSubcategory, setActiveSubcategory] = useState("business")
@@ -399,7 +399,7 @@ export default function SecondPage() {
       }
       return { ...product, price: currentPrice, features: currentFeatures }
     },
-    [instagramBoosterOption, tiktokBoosterOption, telegramBoosterOption, facebookBoosterOption] // Perbaikan dependensi
+    [instagramBoosterOption, tiktokBoosterOption, telegramBoosterOption, facebookBoosterOption]
   )
 
   const filteredProducts = productData.filter((product) => {
@@ -466,9 +466,7 @@ export default function SecondPage() {
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
-      {/* Kontainer utama dengan padding kondisional */}
       <div className={`mx-auto ${activeCategory === "paket_bisnis" ? "max-w-none px-0" : "container max-w-full px-2"}`}>
-        {/* Kontainer tombol kategori dengan padding kondisional agar tidak menempel jika parent px-0 */}
         <div className={`grid grid-cols-2 gap-2 mb-6 ${activeCategory === "paket_bisnis" ? "px-2 sm:px-4" : ""}`}>
           <button
             onClick={() => {
@@ -506,7 +504,7 @@ export default function SecondPage() {
         </div>
 
         {activeCategory === "website" && (
-          <div className="flex justify-center gap-2 mb-6"> {/* Padding sudah diatur oleh parent jika bukan paket_bisnis */}
+          <div className="flex justify-center gap-2 mb-6">
             <button
               onClick={() => setActiveSubcategory("business")}
               className={getButtonClasses(activeSubcategory === "business")}
