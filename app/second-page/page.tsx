@@ -53,17 +53,17 @@ function Modal({ isOpen, onClose, children, size = "full" }: ModalProps) {
 interface FeatureListProps {
   features: string[]
   textColor?: string
-  textSize?: string // Prop baru untuk ukuran teks
+  textSize?: string
 }
 
-function FeatureList({ features, textColor, textSize = "text-xs" }: FeatureListProps) { // Default textSize ke "text-xs"
+function FeatureList({ features, textColor, textSize = "text-xs" }: FeatureListProps) {
   const { theme } = useTheme()
   return (
     <ul className="space-y-1">
       {features.map((feature, i) => (
         <li key={i} className="flex items-center">
           <CheckCircle
-            className={`h-3 w-3 mr-2 flex-shrink-0 ${theme === "dark" ? "text-green-400" : "text-green-500"}`}
+            className={`mr-2 flex-shrink-0 ${textSize === "text-sm" ? "h-3.5 w-3.5" : "h-3 w-3"} ${theme === "dark" ? "text-green-400" : "text-green-500"}`} // Icon sedikit lebih besar jika teks sm
           />
           <span className={`${textSize} ${textColor || (theme === "dark" ? "text-gray-300" : "text-gray-600")}`}>
             {feature}
@@ -193,7 +193,7 @@ const productData: Product[] = [
     name: "Paket Bisnis",
     price: "Rp 50,000",
     category: "paket_bisnis",
-    features: ["Website Premium", "Desain Konten Profesional", "Booster Media Sosial Powerfull", "Video Promosi Menarik", "Penulisan Konten SEO Friendly"],
+    features: ["Website Premium Full Fitur", "Desain Konten Profesional & Unik", "Booster Media Sosial Powerfull & Tertarget", "Video Promosi Kreatif & Menarik", "Penulisan Konten SEO Friendly & Engaging"],
     exampleUrl: "https://example.com",
     modalType: null,
   },
@@ -246,14 +246,14 @@ const productData: Product[] = [
     name: "SEO Website",
     price: "Rp 25,000",
     category: "lainnya",
-    features: ["Riset Kata Kunci", "Optimasi Halaman", "Pembangunan Tautan"],
+    features: ["Riset Kata Kunci Mendalam", "Optimasi On-Page & Off-Page", "Pembangunan Tautan Berkualitas"],
     modalType: "seoImages",
   },
   {
     name: "Jasa Iklan Online",
     price: "Rp 100,000",
     category: "lainnya",
-    features: ["Iklan Meta", "Iklan TikTok"],
+    features: ["Kampanye Iklan Meta (FB & IG)", "Kampanye Iklan TikTok Ads"],
     modalType: "adsImages",
   },
   {
@@ -261,7 +261,7 @@ const productData: Product[] = [
     price: "Rp 25,000",
     category: "website",
     subcategory: "business",
-    features: ["Domain Gratis", "Hosting Gratis"],
+    features: ["Desain Menarik & Responsif", "Domain Gratis (.com/.id/dll)", "Hosting Gratis Cepat & Aman"],
     exampleUrl: "https://unbounce.com",
     modalType: "example",
   },
@@ -270,7 +270,7 @@ const productData: Product[] = [
     price: "Rp 25,000",
     category: "website",
     subcategory: "business",
-    features: ["Domain Gratis", "Hosting Gratis"],
+    features: ["Desain Profesional & Elegan", "Domain Gratis (.com/.id/dll)", "Hosting Gratis Cepat & Aman"],
     exampleUrl: "https://profil-bisnis-demo.vercel.app",
     modalType: "example",
   },
@@ -279,7 +279,7 @@ const productData: Product[] = [
     price: "Rp 25,000",
     category: "website",
     subcategory: "business",
-    features: ["Domain Gratis", "Hosting Gratis"],
+    features: ["Toko Online Siap Pakai", "Domain Gratis (.com/.id/dll)", "Hosting Gratis Cepat & Aman"],
     exampleUrl: "https://shopify.com",
     modalType: "example",
   },
@@ -288,7 +288,7 @@ const productData: Product[] = [
     price: "Rp 25,000",
     category: "website",
     subcategory: "business",
-    features: ["Domain Gratis", "Hosting Gratis"],
+    features: ["Desain Kreatif & Modern", "Domain Gratis (.com/.id/dll)", "Hosting Gratis Cepat & Aman"],
     exampleUrl: "https://portfolio-demo.vercel.app",
     modalType: "example",
   },
@@ -297,7 +297,7 @@ const productData: Product[] = [
     price: "Rp 25,000",
     category: "website",
     subcategory: "business",
-    features: ["Domain Gratis", "Hosting Gratis"],
+    features: ["Platform E-Learning Lengkap", "Domain Gratis (.com/.id/dll)", "Hosting Gratis Cepat & Aman"],
     exampleUrl: "https://course-demo.vercel.app",
     modalType: "example",
   },
@@ -306,7 +306,7 @@ const productData: Product[] = [
     price: "Rp 25,000",
     category: "website",
     subcategory: "business",
-    features: ["Domain Gratis", "Hosting Gratis"],
+    features: ["Sistem Keanggotaan Terintegrasi", "Domain Gratis (.com/.id/dll)", "Hosting Gratis Cepat & Aman"],
     exampleUrl: "https://membership-demo.vercel.app",
     modalType: "example",
   },
@@ -315,7 +315,7 @@ const productData: Product[] = [
     price: "Rp 25,000",
     category: "website",
     subcategory: "business",
-    features: ["Domain Gratis", "Hosting Gratis"],
+    features: ["Halaman Bio Kustom & Stylish", "Domain Gratis (.com/.id/dll)", "Hosting Gratis Cepat & Aman"],
     exampleUrl: "https://linkinbio-demo.vercel.app",
     modalType: "example",
   },
@@ -324,7 +324,7 @@ const productData: Product[] = [
     price: "Rp 25,000",
     category: "website",
     subcategory: "non-business",
-    features: ["Domain Gratis", "Hosting Gratis"],
+    features: ["Desain Undangan Interaktif", "Domain Gratis (.com/.id/dll)", "Hosting Gratis Cepat & Aman"],
     exampleUrl: "https://invitation-demo.vercel.app",
     modalType: "example",
   },
@@ -333,7 +333,7 @@ const productData: Product[] = [
     price: "Rp 25,000",
     category: "website",
     subcategory: "non-business",
-    features: ["Domain Gratis", "Hosting Gratis"],
+    features: ["Website Ulang Tahun Meriah", "Domain Gratis (.com/.id/dll)", "Hosting Gratis Cepat & Aman"],
     exampleUrl: "https://birthday-demo.vercel.app",
     modalType: "example",
   },
@@ -342,7 +342,7 @@ const productData: Product[] = [
     price: "Rp 25,000",
     category: "website",
     subcategory: "non-business",
-    features: ["Domain Gratis", "Hosting Gratis"],
+    features: ["Informasi Acara Lengkap & Jelas", "Domain Gratis (.com/.id/dll)", "Hosting Gratis Cepat & Aman"],
     exampleUrl: "https://event-demo.vercel.app",
     modalType: "example",
   },
@@ -435,17 +435,19 @@ export default function SecondPage() {
     setModalProduct(null)
   }, [])
 
+  // Fungsi untuk styling tombol kategori (atas)
   const getButtonClasses = (isActive: boolean) => {
-    const baseClasses = "px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300"
-    const activeClasses = theme === "dark" ? "bg-green-600 text-white shadow-lg" : "bg-blue-500 text-white shadow-lg"
-    const inactiveClasses =
-      theme === "dark"
-        ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
-        : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
-    return `${baseClasses} ${isActive ? activeClasses : inactiveClasses}`
+    const baseClasses = "px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300";
+    const shadowStyle = "shadow-md"; // Bayangan konsisten untuk aktif dan tidak aktif
+
+    const activeClasses = `${theme === "dark" ? "bg-green-600 text-white" : "bg-blue-500 text-white"} ${shadowStyle}`;
+    const inactiveClasses = `${theme === "dark" ? "bg-gray-700 text-gray-200 hover:bg-gray-600" : "bg-white text-gray-700 hover:bg-gray-100"} ${shadowStyle}`;
+    
+    return `${baseClasses} ${isActive ? activeClasses : inactiveClasses}`;
   }
 
-  const getCardButtonClasses = (isPrimary = false, isLargeStyle = false) => { // Tambah parameter isLargeStyle
+  // Fungsi untuk styling tombol di dalam kartu produk
+  const getCardButtonClasses = (isPrimary = false, isLargeStyle = false) => {
     const sizeClasses = isLargeStyle
       ? "py-2 px-4 text-sm" // Gaya lebih besar untuk Paket Bisnis
       : "py-1.5 px-3 text-xs"; // Gaya standar
@@ -468,8 +470,7 @@ export default function SecondPage() {
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
-      {/* Kontainer utama untuk produk, Paket Bisnis akan menggunakan max-w-none px-1 */}
-      <div className={`mx-auto ${activeCategory === "paket_bisnis" ? "max-w-none px-1" : "container max-w-full px-2"}`}>
+      <div className={`mx-auto ${activeCategory === "paket_bisnis" ? "max-w-none px-1" : "container max-w-full px-2"}`}> {/* px-1 untuk paket bisnis agar hampir menyentuh tepi */}
         <div className="grid grid-cols-2 gap-2 mb-6">
           <button
             onClick={() => {
@@ -531,20 +532,20 @@ export default function SecondPage() {
             >
               {group.map((product) => {
                 const displayProduct = getProductDisplayData(product)
-                const isPaketBisnisCard = activeCategory === "paket_bisnis"; // Flag untuk kemudahan
+                const isPaketBisnisCard = activeCategory === "paket_bisnis";
 
                 return (
                   <div
                     key={displayProduct.name + (displayProduct.subcategory || '')}
-                    className={`flex flex-col rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${ // Tambah flex flex-col
+                    className={`flex flex-col rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${
                       theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
-                    } ${isPaketBisnisCard ? "py-6 px-4 md:px-8" : "p-3"}`} // Sesuaikan padding untuk paket bisnis
+                    } ${isPaketBisnisCard ? "py-6 px-2" : "p-3"}`} {/* Padding horizontal internal px-2 untuk Paket Bisnis */}
                   >
                     <div className="flex justify-between items-start mb-2">
                       <h3
                         className={`font-bold leading-tight ${
                           theme === "dark" ? "text-white" : "text-gray-900"
-                        } ${isPaketBisnisCard ? "text-xl md:text-2xl" : "text-sm"}`} // Ukuran teks judul lebih besar untuk paket bisnis
+                        } ${isPaketBisnisCard ? "text-xl md:text-2xl" : "text-sm"}`}
                       >
                         {displayProduct.name}
                       </h3>
@@ -557,19 +558,17 @@ export default function SecondPage() {
                             : theme === "dark"
                               ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white"
                               : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
-                        } ${isPaketBisnisCard ? "text-base md:text-lg px-3 py-1.5" : "text-xs"}`} // Ukuran teks harga lebih besar untuk paket bisnis
+                        } ${isPaketBisnisCard ? "text-base md:text-lg px-3 py-1.5" : "text-xs"}`}
                       >
                         {displayProduct.price}
                       </span>
                     </div>
 
-                    {/* Bagian Fitur dan Input Booster */}
-                    <div className="flex-grow"> {/* Tambah flex-grow agar konten ini mengisi ruang */}
+                    <div className="flex-grow">
                       {["Instagram Booster", "TikTok Booster", "Telegram Booster", "Facebook Booster"].includes(
                         displayProduct.name,
                       ) && (
                         <div className="mb-3 space-y-2">
-                          {/* ... (kode select dan input booster tetap sama) ... */}
                           {displayProduct.name === "Instagram Booster" && (
                           <select
                             value={instagramBoosterOption}
@@ -647,7 +646,7 @@ export default function SecondPage() {
                             <div className="mt-1">
                               <FeatureList 
                                 features={displayProduct.features} 
-                                textSize={isPaketBisnisCard ? "text-sm" : "text-xs"} // Sesuaikan ukuran teks fitur
+                                textSize={isPaketBisnisCard ? "text-sm" : "text-xs"}
                               />
                             </div>
                           )}
@@ -660,17 +659,15 @@ export default function SecondPage() {
                         displayProduct.name !== "Facebook Booster" &&
                         displayProduct.features &&
                         displayProduct.features.length > 0 && (
-                          <div className={`mb-3 ${isPaketBisnisCard ? 'mt-4' : ''}`}> {/* Tambah margin atas untuk paket bisnis */}
+                          <div className={`mb-3 ${isPaketBisnisCard ? 'mt-4' : ''}`}>
                             <FeatureList 
                               features={displayProduct.features} 
-                              textSize={isPaketBisnisCard ? "text-sm" : "text-xs"} // Sesuaikan ukuran teks fitur
+                              textSize={isPaketBisnisCard ? "text-sm" : "text-xs"}
                             />
                           </div>
                         )}
                     </div>
 
-
-                    {/* Tombol Aksi */}
                     <div className="flex gap-2 mt-auto">
                       <button className={getCardButtonClasses(true, isPaketBisnisCard)}>Bayar</button>
                       {displayProduct.modalType &&
@@ -683,7 +680,7 @@ export default function SecondPage() {
                           >
                             {displayProduct.modalType === "example" ? (
                               <>
-                                <ExternalLink className={isPaketBisnisCard ? "h-4 w-4" : "h-3 w-3"} /> Contoh {/* Icon lebih besar untuk paket bisnis */}
+                                <ExternalLink className={isPaketBisnisCard ? "h-4 w-4" : "h-3 w-3"} /> Contoh
                               </>
                             ) : (
                               "Rincian"
