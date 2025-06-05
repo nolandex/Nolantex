@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useEffect, useState, useCallback } from "react"
 import { useTheme } from "next-themes"
 import { CheckCircle, ExternalLink, X } from "lucide-react"
@@ -153,9 +152,9 @@ const getTikTokBoosterFeatures = (option: string) => {
     case "5000":
       return [
         `${baseViews * 2.5} Views`,
-        `${baseLikes * 2.5} Likes`,
-        `${baseShares * 2.5} Shares`,
-        `${baseSaves * 2.5} Saves`,
+        `${(baseLikes * 2.5).toLocaleString()} Likes`,
+        `${(baseShares * 2.5).toLocaleString()} Shares`,
+        `${(baseSaves * 2.5).toLocaleString()} Saves`,
       ]
     default:
       return []
@@ -199,33 +198,33 @@ const productData: Product[] = [
   },
   {
     name: "Instagram Booster",
-    price: "",
+    price: "", // Akan diupdate oleh getProductDisplayData
     category: "sosmed_booster",
-    features: [],
+    features: [], // Akan diupdate oleh getProductDisplayData
     exampleUrl: "https://example.com/instagram",
     modalType: "details",
   },
   {
     name: "TikTok Booster",
-    price: "",
+    price: "", // Akan diupdate oleh getProductDisplayData
     category: "sosmed_booster",
-    features: [],
+    features: [], // Akan diupdate oleh getProductDisplayData
     exampleUrl: "https://example.com/tiktok",
     modalType: "details",
   },
   {
     name: "Telegram Booster",
-    price: "",
+    price: "", // Akan diupdate oleh getProductDisplayData
     category: "sosmed_booster",
-    features: [],
+    features: [], // Akan diupdate oleh getProductDisplayData
     exampleUrl: "https://example.com/telegram",
     modalType: "details",
   },
   {
     name: "Facebook Booster",
-    price: "",
+    price: "", // Akan diupdate oleh getProductDisplayData
     category: "sosmed_booster",
-    features: [],
+    features: [], // Akan diupdate oleh getProductDisplayData
     exampleUrl: "https://example.com/facebook",
     modalType: "details",
   },
@@ -239,7 +238,7 @@ const productData: Product[] = [
     name: "Video Promosi",
     price: "Rp 10,000",
     category: "lainnya",
-    exampleUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    exampleUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Ganti dengan URL video embed yang valid
     modalType: "videoPromo",
   },
   {
@@ -350,8 +349,8 @@ const productData: Product[] = [
 
 const imageSources = {
   contentImages: ["/images/template1.jpg", "/images/template2.jpg", "/images/template3.jpg"],
-  seoImages: ["/images/seo1.jpg"], // Reduced from 3 to 1 image
-  adsImages: ["/images/ads1.jpg"], // Reduced from 3 to 1 image
+  seoImages: ["/images/seo1.jpg"],
+  adsImages: ["/images/ads1.jpg"],
 }
 
 export default function SecondPage() {
@@ -370,7 +369,8 @@ export default function SecondPage() {
 
   useEffect(() => {
     setMounted(true)
-    setTheme("light")
+    // Default theme bisa diatur di sini jika diperlukan, atau dari _app.tsx
+    // setTheme("light") // Contoh: set tema default ke light
   }, [setTheme])
 
   const getProductDisplayData = useCallback(
@@ -413,25 +413,22 @@ export default function SecondPage() {
 
   const groupedProducts: Product[][] = []
   if (activeCategory === "paket_bisnis") {
-    groupedProducts.push(filteredProducts) // Paket Bisnis ditampilkan satu kolom penuh
-  } else if (activeCategory === "sosmed_booster") {
+    groupedProducts.push(filteredProducts)
+  } else if (activeCategory === "sosmed_booster" || activeCategory === "website" || activeCategory === "lainnya") {
     for (let i = 0; i < filteredProducts.length; i += 2) {
-      groupedProducts.push(filteredProducts.slice(i, i + 2)) // Sosmed Booster 2 kolom per baris
-    }
-  } else {
-    for (let i = 0; i < filteredProducts.length; i += 2) {
-      groupedProducts.push(filteredProducts.slice(i, i + 2)) // Produk lain 2 kolom per baris
+      groupedProducts.push(filteredProducts.slice(i, i + 2))
     }
   }
+
 
   const openModal = useCallback((type: Product["modalType"], product?: Product) => {
     setActiveModal(type)
     if (product) {
-      setModalProduct(product)
+      setModalProduct(getProductDisplayData(product)); // Pastikan data modal juga terupdate dengan harga & fitur terkini
     } else {
       setModalProduct(null)
     }
-  }, [])
+  }, [getProductDisplayData])
 
   const closeModal = useCallback(() => {
     setActiveModal(null)
@@ -450,7 +447,7 @@ export default function SecondPage() {
 
   const getCardButtonClasses = (isPrimary = false) => {
     const baseClasses =
-      "flex-1 py-1.5 px-3 rounded-md font-medium text-xs transition-all duration-300 shadow-sm hover:shadow-md"
+      "flex-1 py-1.5 px-3 rounded-md font-medium text-xs transition-all duration-300 shadow-sm hover:shadow-md flex items-center justify-center gap-1" // Tambahkan flex, items-center, justify-center, gap-1
     const primaryClasses =
       theme === "dark"
         ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
@@ -471,7 +468,7 @@ export default function SecondPage() {
           <button
             onClick={() => {
               setActiveCategory("paket_bisnis")
-              setActiveSubcategory("business")
+              // setActiveSubcategory("business") // Tidak relevan untuk paket bisnis
             }}
             className={getButtonClasses(activeCategory === "paket_bisnis")}
           >
@@ -480,7 +477,7 @@ export default function SecondPage() {
           <button
             onClick={() => {
               setActiveCategory("website")
-              setActiveSubcategory("business")
+              setActiveSubcategory("business") // Default ke business saat klik kategori Website
             }}
             className={getButtonClasses(activeCategory === "website")}
           >
@@ -489,7 +486,7 @@ export default function SecondPage() {
           <button
             onClick={() => {
               setActiveCategory("sosmed_booster")
-              setActiveSubcategory("business")
+               // setActiveSubcategory("business") // Tidak relevan untuk sosmed booster
             }}
             className={getButtonClasses(activeCategory === "sosmed_booster")}
           >
@@ -498,7 +495,7 @@ export default function SecondPage() {
           <button
             onClick={() => {
               setActiveCategory("lainnya")
-              setActiveSubcategory("business")
+              // setActiveSubcategory("business") // Tidak relevan untuk lainnya
             }}
             className={getButtonClasses(activeCategory === "lainnya")}
           >
@@ -529,16 +526,16 @@ export default function SecondPage() {
               key={groupIndex}
               className={`grid ${activeCategory === "paket_bisnis" ? "grid-cols-1" : "grid-cols-2"} gap-3`}
             >
-              {group.map((product, index) => {
+              {group.map((product) => { // Hapus 'index' jika tidak digunakan sebagai key unik utama
                 const displayProduct = getProductDisplayData(product)
                 return (
                   <div
-                    key={index}
+                    key={displayProduct.name + (displayProduct.subcategory || '')} // Key lebih unik
                     className={`rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${
                       theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
                     } ${activeCategory === "paket_bisnis" ? "py-6 px-8" : "p-3"}`}
                   >
-                    <div className="flex justify-between items-center mb-2">
+                    <div className="flex justify-between items-start mb-2"> {/* Ganti items-center ke items-start */}
                       <h3
                         className={`text-sm font-bold leading-tight ${
                           theme === "dark" ? "text-white" : "text-gray-900"
@@ -548,7 +545,7 @@ export default function SecondPage() {
                       </h3>
                       <span
                         className={`px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap ${
-                          displayProduct.price === "Rp 0"
+                          displayProduct.price === "Rp 0" // Cek jika gratis (contoh)
                             ? theme === "dark"
                               ? "bg-green-600 text-white"
                               : "bg-green-500 text-white"
@@ -564,7 +561,7 @@ export default function SecondPage() {
                     {["Instagram Booster", "TikTok Booster", "Telegram Booster", "Facebook Booster"].includes(
                       displayProduct.name,
                     ) && (
-                      <div className="mb-3">
+                      <div className="mb-3 space-y-2"> {/* Tambah space-y-2 */}
                         {displayProduct.name === "Instagram Booster" && (
                           <select
                             value={instagramBoosterOption}
@@ -632,15 +629,15 @@ export default function SecondPage() {
                           type="text"
                           value={boosterLink}
                           onChange={(e) => setBoosterLink(e.target.value)}
-                          placeholder="Account Link"
-                          className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
+                          placeholder="Masukkan Link Akun" // Placeholder lebih jelas
+                          className={`w-full px-2 py-1.5 rounded-md text-xs border ${
                             theme === "dark"
-                              ? "bg-gray-700 border-gray-600 text-gray-200"
-                              : "bg-white border-gray-300 text-gray-700"
+                              ? "bg-gray-700 border-gray-600 text-gray-200 placeholder-gray-400"
+                              : "bg-white border-gray-300 text-gray-700 placeholder-gray-500"
                           } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         />
                         {displayProduct.features && displayProduct.features.length > 0 && (
-                          <div className="mt-3">
+                          <div className="mt-1"> {/* Kurangi margin top jika ada space-y-2 di parent */}
                             <FeatureList features={displayProduct.features} />
                           </div>
                         )}
@@ -658,14 +655,12 @@ export default function SecondPage() {
                         </div>
                       )}
 
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 mt-auto"> {/* Tambah mt-auto agar tombol di bawah jika ada ruang */}
                       <button className={getCardButtonClasses(true)}>Bayar</button>
                       {displayProduct.modalType &&
                         (displayProduct.exampleUrl ||
-                          displayProduct.name === "Desain Konten" ||
-                          displayProduct.name === "Video Promosi" ||
-                          displayProduct.name === "SEO Website" ||
-                          displayProduct.name === "Jasa Iklan Online") && (
+                          imageSources[displayProduct.modalType as keyof typeof imageSources]?.length > 0 || // Cek apakah ada gambar untuk modal
+                          displayProduct.modalType === "details") && ( // Selalu tampilkan rincian untuk booster
                           <button
                             onClick={() => openModal(displayProduct.modalType, displayProduct)}
                             className={getCardButtonClasses()}
@@ -692,8 +687,7 @@ export default function SecondPage() {
             <iframe
               src={modalProduct.exampleUrl}
               title={`Contoh ${modalProduct.name}`}
-              className="w-full h-full"
-              frameBorder="0"
+              className="w-full h-full border-0" // Hapus frameBorder, gunakan class border-0
               sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
             />
           )}
@@ -712,20 +706,20 @@ export default function SecondPage() {
           onClose={closeModal}
           size="lg"
         >
-          <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
+          <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64 md:h-96"> {/* Tingkatkan tinggi untuk layar lebih besar */}
             {modalProduct &&
               imageSources[modalProduct.modalType as keyof typeof imageSources]?.map((img, i) => (
                 <SwiperSlide key={i}>
-                  <div className="relative w-full h-64">
+                  <div className="relative w-full h-full"> {/* Ganti h-64 menjadi h-full */}
                     <img
-                      src={img || "/placeholder.svg"}
-                      alt={`${modalProduct.name} ${i + 1}`}
-                      className="w-full h-full object-cover rounded-md"
+                      src={img || "/placeholder.svg"} // Fallback jika img null/undefined
+                      alt={`${modalProduct.name} Contoh ${i + 1}`}
+                      className="w-full h-full object-contain rounded-md" // Ganti object-cover ke object-contain agar gambar tidak terpotong
                     />
                     <span
-                      className={`absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded`}
+                      className={`absolute top-2 left-2 px-2 py-1 text-xs md:text-sm font-medium text-white bg-black bg-opacity-60 rounded`}
                     >
-                      No {i + 1}
+                      Gambar {i + 1}
                     </span>
                   </div>
                 </SwiperSlide>
@@ -738,18 +732,20 @@ export default function SecondPage() {
           onClose={closeModal}
           size="lg"
         >
-          <div className="relative w-full h-64">
-            <iframe
-              src={modalProduct?.exampleUrl}
-              title="Contoh Video Promosi"
-              className="w-full h-full rounded-md"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
+          {modalProduct?.exampleUrl && (
+             <div className="aspect-video w-full"> {/* Gunakan aspect-video untuk rasio video */}
+                <iframe
+                src={modalProduct.exampleUrl}
+                title={`Contoh ${modalProduct.name}`}
+                className="w-full h-full rounded-md"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                />
+            </div>
+          )}
         </Modal>
       </div>
     </div>
   )
-          }
+}
