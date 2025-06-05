@@ -7,8 +7,7 @@ import { CheckCircle, ExternalLink, X } from "lucide-react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 
-// ... (Komponen Modal, FeatureList, OrderingInstructions tetap sama seperti sebelumnya) ...
-// Komponen Modal
+// ... (Komponen Modal, FeatureList, OrderingInstructions tetap sama) ...
 interface ModalProps {
   isOpen: boolean
   onClose: () => void
@@ -50,7 +49,6 @@ function Modal({ isOpen, onClose, children, size = "full" }: ModalProps) {
   )
 }
 
-// Komponen FeatureList
 interface FeatureListProps {
   features: string[]
   textColor?: string
@@ -75,7 +73,6 @@ function FeatureList({ features, textColor, textSize = "text-xs" }: FeatureListP
   )
 }
 
-// Komponen untuk instruksi pemesanan
 function OrderingInstructions() {
   const { theme } = useTheme()
   return (
@@ -118,7 +115,6 @@ function OrderingInstructions() {
     </div>
   )
 }
-
 
 interface Product {
   name: string
@@ -196,7 +192,7 @@ const productData: Product[] = [
     price: "Rp 50,000",
     category: "paket_bisnis",
     features: ["Website Premium", "Desain Konten Profesional", "Booster Media Sosial Powerfull", "Video Promosi Menarik", "Penulisan Konten SEO Friendly"],
-    exampleUrl: "https://example.com",
+    exampleUrl: "[https://example.com](https://example.com)",
     modalType: null,
   },
   {
@@ -204,7 +200,7 @@ const productData: Product[] = [
     price: "",
     category: "sosmed_booster",
     features: [],
-    exampleUrl: "https://example.com/instagram",
+    exampleUrl: "[https://example.com/instagram](https://example.com/instagram)",
     modalType: "details",
   },
   {
@@ -212,7 +208,7 @@ const productData: Product[] = [
     price: "",
     category: "sosmed_booster",
     features: [],
-    exampleUrl: "https://example.com/tiktok",
+    exampleUrl: "[https://example.com/tiktok](https://example.com/tiktok)",
     modalType: "details",
   },
   {
@@ -220,7 +216,7 @@ const productData: Product[] = [
     price: "",
     category: "sosmed_booster",
     features: [],
-    exampleUrl: "https://example.com/telegram",
+    exampleUrl: "[https://example.com/telegram](https://example.com/telegram)",
     modalType: "details",
   },
   {
@@ -228,7 +224,7 @@ const productData: Product[] = [
     price: "",
     category: "sosmed_booster",
     features: [],
-    exampleUrl: "https://example.com/facebook",
+    exampleUrl: "[https://example.com/facebook](https://example.com/facebook)",
     modalType: "details",
   },
   {
@@ -241,7 +237,7 @@ const productData: Product[] = [
     name: "Video Promosi",
     price: "Rp 10,000",
     category: "lainnya",
-    exampleUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", 
+    exampleUrl: "[https://www.youtube.com/embed/dQw4w9WgXcQ](https://www.youtube.com/embed/dQw4w9WgXcQ)",
     modalType: "videoPromo",
   },
   {
@@ -264,7 +260,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "https://unbounce.com",
+    exampleUrl: "[https://unbounce.com](https://unbounce.com)",
     modalType: "example",
   },
   {
@@ -273,7 +269,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "https://profil-bisnis-demo.vercel.app",
+    exampleUrl: "[https://profil-bisnis-demo.vercel.app](https://profil-bisnis-demo.vercel.app)",
     modalType: "example",
   },
   {
@@ -282,7 +278,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "https://shopify.com",
+    exampleUrl: "[https://shopify.com](https://shopify.com)",
     modalType: "example",
   },
   {
@@ -291,7 +287,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "https://portfolio-demo.vercel.app",
+    exampleUrl: "[https://portfolio-demo.vercel.app](https://portfolio-demo.vercel.app)",
     modalType: "example",
   },
   {
@@ -300,7 +296,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "https://course-demo.vercel.app",
+    exampleUrl: "[https://course-demo.vercel.app](https://course-demo.vercel.app)",
     modalType: "example",
   },
   {
@@ -309,7 +305,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "https://membership-demo.vercel.app",
+    exampleUrl: "[https://membership-demo.vercel.app](https://membership-demo.vercel.app)",
     modalType: "example",
   },
   {
@@ -318,7 +314,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "https://linkinbio-demo.vercel.app",
+    exampleUrl: "[https://linkinbio-demo.vercel.app](https://linkinbio-demo.vercel.app)",
     modalType: "example",
   },
   {
@@ -327,7 +323,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "non-business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "https://invitation-demo.vercel.app",
+    exampleUrl: "[https://invitation-demo.vercel.app](https://invitation-demo.vercel.app)",
     modalType: "example",
   },
   {
@@ -336,7 +332,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "non-business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "https://birthday-demo.vercel.app",
+    exampleUrl: "[https://birthday-demo.vercel.app](https://birthday-demo.vercel.app)",
     modalType: "example",
   },
   {
@@ -345,7 +341,7 @@ const productData: Product[] = [
     category: "website",
     subcategory: "non-business",
     features: ["Domain Gratis", "Hosting Gratis"],
-    exampleUrl: "https://event-demo.vercel.app",
+    exampleUrl: "[https://event-demo.vercel.app](https://event-demo.vercel.app)",
     modalType: "example",
   },
 ]
@@ -401,7 +397,8 @@ export default function SecondPage() {
       }
       return { ...product, price: currentPrice, features: currentFeatures }
     },
-    [instagramBoosterOption, tiktokBoosterOption, telegramBoosterOption, facebookBoosterOption],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
   )
 
   const filteredProducts = productData.filter((product) => {
@@ -447,12 +444,12 @@ export default function SecondPage() {
 
   const getCardButtonClasses = (isPrimary = false, isLargeStyle = false) => {
     const sizeClasses = isLargeStyle
-      ? "py-2 px-4 text-sm" 
-      : "py-1.5 px-3 text-xs"; 
+      ? "py-2 px-4 text-sm"
+      : "py-1.5 px-3 text-xs";
 
     const baseClasses =
       `flex-1 rounded-md font-medium transition-all duration-300 shadow-sm hover:shadow-md flex items-center justify-center gap-1 ${sizeClasses}`;
-      
+
     const primaryClasses =
       theme === "dark"
         ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
@@ -481,7 +478,7 @@ export default function SecondPage() {
           <button
             onClick={() => {
               setActiveCategory("website")
-              setActiveSubcategory("business") 
+              setActiveSubcategory("business")
             }}
             className={getButtonClasses(activeCategory === "website")}
           >
@@ -515,7 +512,7 @@ export default function SecondPage() {
             </button>
             <button
               onClick={() => setActiveSubcategory("non-business")}
-              className={getButtonClasses(activeSubcategory === "non-business")} 
+              className={getButtonClasses(activeSubcategory === "non-business")}
             >
               Non-Bisnis
             </button>
@@ -530,27 +527,14 @@ export default function SecondPage() {
             >
               {group.map((product) => {
                 const displayProduct = getProductDisplayData(product)
-                const isPaketBisnisCard = activeCategory === "paket_bisnis"; 
-
-                // PERUBAHAN: Tentukan warna latar dan border kartu secara dinamis
-                let cardBgColorClass = "";
-                let cardBorderColorClass = "";
-
-                if (theme === "dark") {
-                  cardBgColorClass = isPaketBisnisCard ? "bg-gray-900" : "bg-gray-800";
-                  // Jika bg-gray-900, border mungkin perlu disesuaikan agar terlihat atau dihilangkan
-                  cardBorderColorClass = isPaketBisnisCard ? "border-gray-700" : "border-gray-700"; // Atau "border-gray-800" / "border-transparent"
-                } else {
-                  cardBgColorClass = "bg-white";
-                  cardBorderColorClass = "border-gray-200";
-                }
+                const isPaketBisnisCard = activeCategory === "paket_bisnis";
 
                 return (
                   <div
                     key={displayProduct.name + (displayProduct.subcategory || '')}
-                    className={`flex flex-col rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg 
-                      ${cardBgColorClass} ${cardBorderColorClass}
-                      ${isPaketBisnisCard ? "py-6 px-4 md:px-6" : "p-3"}`} 
+                    className={`flex flex-col rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${
+                      theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
+                    } ${isPaketBisnisCard ? "py-6 px-4 md:px-6" : "p-3"}`}
                   >
                     <div className="flex justify-between items-start mb-2">
                       <h3
@@ -574,7 +558,7 @@ export default function SecondPage() {
                         {displayProduct.price}
                       </span>
                     </div>
-                    
+
                     <div className="flex-grow">
                       {["Instagram Booster", "TikTok Booster", "Telegram Booster", "Facebook Booster"].includes(
                         displayProduct.name,
@@ -655,8 +639,8 @@ export default function SecondPage() {
                           />
                           {displayProduct.features && displayProduct.features.length > 0 && (
                             <div className="mt-1">
-                              <FeatureList 
-                                features={displayProduct.features} 
+                              <FeatureList
+                                features={displayProduct.features}
                                 textSize={isPaketBisnisCard ? "text-sm" : "text-xs"}
                               />
                             </div>
@@ -671,8 +655,8 @@ export default function SecondPage() {
                         displayProduct.features &&
                         displayProduct.features.length > 0 && (
                           <div className={`mb-3 ${isPaketBisnisCard ? 'mt-4' : ''}`}>
-                            <FeatureList 
-                              features={displayProduct.features} 
+                            <FeatureList
+                              features={displayProduct.features}
                               textSize={isPaketBisnisCard ? "text-sm" : "text-xs"}
                             />
                           </div>
@@ -683,94 +667,7 @@ export default function SecondPage() {
                       <button className={getCardButtonClasses(true, isPaketBisnisCard)}>Bayar</button>
                       {displayProduct.modalType &&
                         (displayProduct.exampleUrl ||
-                          imageSources[displayProduct.modalType as keyof typeof imageSources]?.length > 0 ||
+                          imageSources[(displayProduct.modalType) as keyof typeof imageSources]?.length > 0 ||
                           displayProduct.modalType === "details") && (
                           <button
-                            onClick={() => openModal(displayProduct.modalType, displayProduct)}
-                            className={getCardButtonClasses(false, isPaketBisnisCard)}
-                          >
-                            {displayProduct.modalType === "example" ? (
-                              <>
-                                <ExternalLink className={isPaketBisnisCard ? "h-4 w-4" : "h-3 w-3"} /> Contoh
-                              </>
-                            ) : (
-                              "Rincian"
-                            )}
-                          </button>
-                        )}
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          ))}
-        </div>
-
-        {/* ... (Modal-modal tetap sama seperti sebelumnya) ... */}
-        <Modal isOpen={activeModal === "example" && modalProduct !== null} onClose={closeModal} size="full">
-          {modalProduct?.exampleUrl && (
-            <iframe
-              src={modalProduct.exampleUrl}
-              title={`Contoh ${modalProduct.name}`}
-              className="w-full h-full border-0"
-              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-            />
-          )}
-        </Modal>
-
-        <Modal isOpen={activeModal === "details" && modalProduct !== null} onClose={closeModal} size="md">
-          <OrderingInstructions />
-        </Modal>
-
-        <Modal
-          isOpen={
-            (activeModal === "contentImages" && modalProduct?.name === "Desain Konten") ||
-            (activeModal === "seoImages" && modalProduct?.name === "SEO Website") ||
-            (activeModal === "adsImages" && modalProduct?.name === "Jasa Iklan Online")
-          }
-          onClose={closeModal}
-          size="lg"
-        >
-          <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64 md:h-96">
-            {modalProduct &&
-              imageSources[modalProduct.modalType as keyof typeof imageSources]?.map((img, i) => (
-                <SwiperSlide key={i}>
-                  <div className="relative w-full h-full">
-                    <img
-                      src={img || "/placeholder.svg"}
-                      alt={`${modalProduct.name} Contoh ${i + 1}`}
-                      className="w-full h-full object-contain rounded-md"
-                    />
-                    <span
-                      className={`absolute top-2 left-2 px-2 py-1 text-xs md:text-sm font-medium text-white bg-black bg-opacity-60 rounded`}
-                    >
-                      Gambar {i + 1}
-                    </span>
-                  </div>
-                </SwiperSlide>
-              ))}
-          </Swiper>
-        </Modal>
-
-        <Modal
-          isOpen={activeModal === "videoPromo" && modalProduct?.name === "Video Promosi"}
-          onClose={closeModal}
-          size="lg"
-        >
-          {modalProduct?.exampleUrl && (
-             <div className="aspect-video w-full">
-                <iframe
-                src={modalProduct.exampleUrl}
-                title={`Contoh ${modalProduct.name}`}
-                className="w-full h-full rounded-md"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                />
-            </div>
-          )}
-        </Modal>
-      </div>
-    </div>
-  )
-}
+                            onClick={() => open
