@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { useEffect, useState, useCallback } from "react"
 import { useTheme } from "next-themes"
 import { CheckCircle, ExternalLink, X } from "lucide-react"
@@ -61,9 +63,7 @@ function FeatureList({ features, textColor }: FeatureListProps) {
       {features.map((feature, i) => (
         <li key={i} className="flex items-center">
           <CheckCircle
-            className={`h-3 w-3 mr-2 flex-shrink-0 ${
-              theme === "dark" ? "text-green-400" : "text-green-500"
-            }`}
+            className={`h-3 w-3 mr-2 flex-shrink-0 ${theme === "dark" ? "text-green-400" : "text-green-500"}`}
           />
           <span className={`text-xs ${textColor || (theme === "dark" ? "text-gray-300" : "text-gray-600")}`}>
             {feature}
@@ -74,6 +74,50 @@ function FeatureList({ features, textColor }: FeatureListProps) {
   )
 }
 
+// Komponen untuk instruksi pemesanan
+function OrderingInstructions() {
+  const { theme } = useTheme()
+  return (
+    <div className="space-y-4">
+      <h3 className={`text-lg font-bold ${theme === "dark" ? "text-white" : "text-gray-900"}`}>Cara Pemesanan</h3>
+      <div className="space-y-3">
+        <div className={`p-3 rounded-lg ${theme === "dark" ? "bg-gray-700" : "bg-gray-100"}`}>
+          <h4 className={`font-semibold text-sm mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+            1. Pilih Paket
+          </h4>
+          <p className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+            Pilih jumlah followers yang diinginkan dari dropdown menu
+          </p>
+        </div>
+        <div className={`p-3 rounded-lg ${theme === "dark" ? "bg-gray-700" : "bg-gray-100"}`}>
+          <h4 className={`font-semibold text-sm mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+            2. Masukkan Link
+          </h4>
+          <p className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+            Masukkan link akun media sosial Anda pada kolom yang tersedia
+          </p>
+        </div>
+        <div className={`p-3 rounded-lg ${theme === "dark" ? "bg-gray-700" : "bg-gray-100"}`}>
+          <h4 className={`font-semibold text-sm mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+            3. Pembayaran
+          </h4>
+          <p className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+            Klik tombol "Bayar" dan ikuti instruksi pembayaran
+          </p>
+        </div>
+        <div className={`p-3 rounded-lg ${theme === "dark" ? "bg-gray-700" : "bg-gray-100"}`}>
+          <h4 className={`font-semibold text-sm mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+            4. Proses
+          </h4>
+          <p className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+            Proses akan dimulai dalam 1-24 jam setelah pembayaran dikonfirmasi
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 interface Product {
   name: string
   price: string
@@ -81,14 +125,7 @@ interface Product {
   subcategory?: string
   features?: string[]
   exampleUrl?: string
-  modalType?:
-    | "example"
-    | "details"
-    | "contentImages"
-    | "videoPromo"
-    | "seoImages"
-    | "adsImages"
-    | null
+  modalType?: "example" | "details" | "contentImages" | "videoPromo" | "seoImages" | "adsImages" | null
 }
 
 const getInstagramBoosterFeatures = (option: string) => {
@@ -114,7 +151,12 @@ const getTikTokBoosterFeatures = (option: string) => {
     case "2000":
       return [`${baseViews} Views`, `${baseLikes} Likes`, `${baseShares} Shares`, `${baseSaves} Saves`]
     case "5000":
-      return [`${baseViews * 2.5} Views`, `${baseLikes * 2.5} Likes`, `${baseShares * 2.5} Shares`, `${baseSaves * 2.5} Saves`]
+      return [
+        `${baseViews * 2.5} Views`,
+        `${baseLikes * 2.5} Likes`,
+        `${baseShares * 2.5} Shares`,
+        `${baseSaves * 2.5} Saves`,
+      ]
     default:
       return []
   }
@@ -153,15 +195,15 @@ const productData: Product[] = [
     category: "paket_bisnis",
     features: ["Website", "Desain Konten", "Booster Media Sosial", "Video Promosi", "Penulisan Konten"],
     exampleUrl: "https://example.com",
-    modalType: null, // Biasanya paket bisnis tidak punya rincian spesifik atau contoh tunggal, melainkan gabungan
+    modalType: null,
   },
   {
     name: "Instagram Booster",
     price: "",
     category: "sosmed_booster",
-    features: [], // Fitur dinamis, ditampilkan di kartu
-    exampleUrl: "https://example.com/instagram", // Bisa jadi link ke info lebih lanjut
-    modalType: "details", // Ganti ke Cara Pemesanan
+    features: [],
+    exampleUrl: "https://example.com/instagram",
+    modalType: "details",
   },
   {
     name: "TikTok Booster",
@@ -169,7 +211,7 @@ const productData: Product[] = [
     category: "sosmed_booster",
     features: [],
     exampleUrl: "https://example.com/tiktok",
-    modalType: "details", // Ganti ke Cara Pemesanan
+    modalType: "details",
   },
   {
     name: "Telegram Booster",
@@ -177,7 +219,7 @@ const productData: Product[] = [
     category: "sosmed_booster",
     features: [],
     exampleUrl: "https://example.com/telegram",
-    modalType: "details", // Ganti ke Cara Pemesanan
+    modalType: "details",
   },
   {
     name: "Facebook Booster",
@@ -185,7 +227,7 @@ const productData: Product[] = [
     category: "sosmed_booster",
     features: [],
     exampleUrl: "https://example.com/facebook",
-    modalType: "details", // Ganti ke Cara Pemesanan
+    modalType: "details",
   },
   {
     name: "Desain Konten",
@@ -204,15 +246,15 @@ const productData: Product[] = [
     name: "SEO Website",
     price: "Rp 25,000",
     category: "lainnya",
-    features: ["Riset Kata Kunci", "Optimasi Halaman", "Pembangunan Tautan"], // Fitur utama ditampilkan di kartu
-    modalType: "seoImages", // Modal untuk contoh gambar/hasil SEO
+    features: ["Riset Kata Kunci", "Optimasi Halaman", "Pembangunan Tautan"],
+    modalType: "seoImages",
   },
   {
     name: "Jasa Iklan Online",
     price: "Rp 100,000",
     category: "lainnya",
-    features: ["Iklan Meta", "Iklan TikTok"], // Fitur utama ditampilkan di kartu
-    modalType: "adsImages", // Modal untuk contoh gambar/hasil Iklan
+    features: ["Iklan Meta", "Iklan TikTok"],
+    modalType: "adsImages",
   },
   {
     name: "Landing Page",
@@ -306,11 +348,10 @@ const productData: Product[] = [
   },
 ]
 
-// --- PERUBAHAN 3: Hapus 2 gambar di produk seo dan jasa iklan ---
 const imageSources = {
   contentImages: ["/images/template1.jpg", "/images/template2.jpg", "/images/template3.jpg"],
-  seoImages: ["/images/seo1.jpg"], // Hanya 1 gambar
-  adsImages: ["/images/ads1.jpg"],   // Hanya 1 gambar
+  seoImages: ["/images/seo1.jpg"], // Reduced from 3 to 1 image
+  adsImages: ["/images/ads1.jpg"], // Reduced from 3 to 1 image
 }
 
 export default function SecondPage() {
@@ -329,7 +370,7 @@ export default function SecondPage() {
 
   useEffect(() => {
     setMounted(true)
-    setTheme("light") // Default theme, bisa disesuaikan
+    setTheme("light")
   }, [setTheme])
 
   const getProductDisplayData = useCallback(
@@ -342,32 +383,24 @@ export default function SecondPage() {
           instagramBoosterOption === "3000"
             ? "Rp 50,000"
             : instagramBoosterOption === "5000"
-            ? "Rp 80,000"
-            : "Rp 150,000"
+              ? "Rp 80,000"
+              : "Rp 150,000"
         currentFeatures = getInstagramBoosterFeatures(instagramBoosterOption)
       } else if (product.name === "TikTok Booster") {
         currentPrice = tiktokBoosterOption === "2000" ? "Rp 50,000" : "Rp 100,000"
         currentFeatures = getTikTokBoosterFeatures(tiktokBoosterOption)
       } else if (product.name === "Telegram Booster") {
         currentPrice =
-          telegramBoosterOption === "3000"
-            ? "Rp 50,000"
-            : telegramBoosterOption === "5000"
-            ? "Rp 70,000"
-            : "Rp 140,000"
+          telegramBoosterOption === "3000" ? "Rp 50,000" : telegramBoosterOption === "5000" ? "Rp 70,000" : "Rp 140,000"
         currentFeatures = getTelegramBoosterFeatures(telegramBoosterOption)
       } else if (product.name === "Facebook Booster") {
         currentPrice =
-          facebookBoosterOption === "3000"
-            ? "Rp 50,000"
-            : facebookBoosterOption === "5000"
-            ? "Rp 80,000"
-            : "Rp 150,000"
+          facebookBoosterOption === "3000" ? "Rp 50,000" : facebookBoosterOption === "5000" ? "Rp 80,000" : "Rp 150,000"
         currentFeatures = getFacebookBoosterFeatures(facebookBoosterOption)
       }
       return { ...product, price: currentPrice, features: currentFeatures }
     },
-    [instagramBoosterOption, tiktokBoosterOption, telegramBoosterOption, facebookBoosterOption]
+    [instagramBoosterOption, tiktokBoosterOption, telegramBoosterOption, facebookBoosterOption],
   )
 
   const filteredProducts = productData.filter((product) => {
@@ -380,27 +413,25 @@ export default function SecondPage() {
 
   const groupedProducts: Product[][] = []
   if (activeCategory === "paket_bisnis") {
-    groupedProducts.push(filteredProducts)
+    groupedProducts.push(filteredProducts) // Paket Bisnis ditampilkan satu kolom penuh
   } else if (activeCategory === "sosmed_booster") {
     for (let i = 0; i < filteredProducts.length; i += 2) {
-      groupedProducts.push(filteredProducts.slice(i, i + 2))
+      groupedProducts.push(filteredProducts.slice(i, i + 2)) // Sosmed Booster 2 kolom per baris
     }
   } else {
     for (let i = 0; i < filteredProducts.length; i += 2) {
-      groupedProducts.push(filteredProducts.slice(i, i + 2))
+      groupedProducts.push(filteredProducts.slice(i, i + 2)) // Produk lain 2 kolom per baris
     }
   }
 
   const openModal = useCallback((type: Product["modalType"], product?: Product) => {
     setActiveModal(type)
     if (product) {
-      // Untuk modal 'details', kita selalu siapkan product, karena isinya kini statis (Cara Pemesanan)
-      // Namun, tetap baik untuk memiliki product jika suatu saat butuh info spesifik product di sana
-      setModalProduct(getProductDisplayData(product)); // Ambil data terupdate jika ini booster
+      setModalProduct(product)
     } else {
       setModalProduct(null)
     }
-  }, [getProductDisplayData])
+  }, [])
 
   const closeModal = useCallback(() => {
     setActiveModal(null)
@@ -408,10 +439,8 @@ export default function SecondPage() {
   }, [])
 
   const getButtonClasses = (isActive: boolean) => {
-    const baseClasses =
-      "px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300"
-    const activeClasses =
-      theme === "dark" ? "bg-green-600 text-white shadow-lg" : "bg-blue-500 text-white shadow-lg"
+    const baseClasses = "px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300"
+    const activeClasses = theme === "dark" ? "bg-green-600 text-white shadow-lg" : "bg-blue-500 text-white shadow-lg"
     const inactiveClasses =
       theme === "dark"
         ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
@@ -419,11 +448,7 @@ export default function SecondPage() {
     return `${baseClasses} ${isActive ? activeClasses : inactiveClasses}`
   }
 
-  const getCardButtonClasses = (isPrimary: boolean = false) => {
-    // --- PERUBAHAN 4: Tombol di kategori website kecilkan (sudah kecil by default) ---
-    // Fungsi ini sudah menghasilkan tombol kecil (text-xs, py-1.5 px-3) secara konsisten.
-    // Tidak ada perbedaan ukuran antara tombol di kategori "Website" dengan "Sosmed Booster" atau "Lainnya".
-    // Perbedaan visual mungkin timbul karena skala elemen lain di kartu "Paket Bisnis", tapi tombolnya sendiri tetap text-xs.
+  const getCardButtonClasses = (isPrimary = false) => {
     const baseClasses =
       "flex-1 py-1.5 px-3 rounded-md font-medium text-xs transition-all duration-300 shadow-sm hover:shadow-md"
     const primaryClasses =
@@ -441,13 +466,12 @@ export default function SecondPage() {
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
-      {/* Container utama sudah max-w-full px-2, ini membuat konten hampir nempel sisi halaman */}
-      <div className="container mx-auto max-w-full px-2">
+      <div className={`mx-auto ${activeCategory === "paket_bisnis" ? "max-w-none px-1" : "container max-w-full px-2"}`}>
         <div className="grid grid-cols-2 gap-2 mb-6">
           <button
             onClick={() => {
               setActiveCategory("paket_bisnis")
-              setActiveSubcategory("business") // Subkategori default jika kembali ke paket bisnis
+              setActiveSubcategory("business")
             }}
             className={getButtonClasses(activeCategory === "paket_bisnis")}
           >
@@ -456,7 +480,7 @@ export default function SecondPage() {
           <button
             onClick={() => {
               setActiveCategory("website")
-              setActiveSubcategory("business") // Default ke subkategori bisnis
+              setActiveSubcategory("business")
             }}
             className={getButtonClasses(activeCategory === "website")}
           >
@@ -465,7 +489,7 @@ export default function SecondPage() {
           <button
             onClick={() => {
               setActiveCategory("sosmed_booster")
-              // setActiveSubcategory("business") // Sosmed booster tidak punya subkategori di logika ini
+              setActiveSubcategory("business")
             }}
             className={getButtonClasses(activeCategory === "sosmed_booster")}
           >
@@ -474,7 +498,7 @@ export default function SecondPage() {
           <button
             onClick={() => {
               setActiveCategory("lainnya")
-              // setActiveSubcategory("business") // Lainnya tidak punya subkategori di logika ini
+              setActiveSubcategory("business")
             }}
             className={getButtonClasses(activeCategory === "lainnya")}
           >
@@ -512,10 +536,7 @@ export default function SecondPage() {
                     key={index}
                     className={`rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${
                       theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
-                    } ${
-                      // --- PERUBAHAN 1: Lebarkan produk paket bisnis (adjust internal padding) ---
-                      activeCategory === "paket_bisnis" ? "py-6 px-4 sm:px-6" : "p-3" // Kurangi padding horizontal untuk paket bisnis
-                    }`}
+                    } ${activeCategory === "paket_bisnis" ? "py-6 px-8" : "p-3"}`}
                   >
                     <div className="flex justify-between items-center mb-2">
                       <h3
@@ -527,7 +548,7 @@ export default function SecondPage() {
                       </h3>
                       <span
                         className={`px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap ${
-                          displayProduct.price === "Rp 0" // Ini contoh, harga 0 mungkin tidak ada
+                          displayProduct.price === "Rp 0"
                             ? theme === "dark"
                               ? "bg-green-600 text-white"
                               : "bg-green-500 text-white"
@@ -540,7 +561,9 @@ export default function SecondPage() {
                       </span>
                     </div>
 
-                    {["Instagram Booster", "TikTok Booster", "Telegram Booster", "Facebook Booster"].includes(displayProduct.name) && (
+                    {["Instagram Booster", "TikTok Booster", "Telegram Booster", "Facebook Booster"].includes(
+                      displayProduct.name,
+                    ) && (
                       <div className="mb-3">
                         {displayProduct.name === "Instagram Booster" && (
                           <select
@@ -609,14 +632,13 @@ export default function SecondPage() {
                           type="text"
                           value={boosterLink}
                           onChange={(e) => setBoosterLink(e.target.value)}
-                          placeholder="Link Akun Media Sosial"
+                          placeholder="Account Link"
                           className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
                             theme === "dark"
-                              ? "bg-gray-700 border-gray-600 text-gray-200 placeholder-gray-400"
-                              : "bg-white border-gray-300 text-gray-700 placeholder-gray-500"
+                              ? "bg-gray-700 border-gray-600 text-gray-200"
+                              : "bg-white border-gray-300 text-gray-700"
                           } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         />
-                        {/* Fitur untuk booster sudah ditampilkan di kartu utama */}
                         {displayProduct.features && displayProduct.features.length > 0 && (
                           <div className="mt-3">
                             <FeatureList features={displayProduct.features} />
@@ -625,7 +647,6 @@ export default function SecondPage() {
                       </div>
                     )}
 
-                    {/* Tampilkan fitur di kartu utama JIKA BUKAN booster DAN ADA fitur */}
                     {displayProduct.name !== "Instagram Booster" &&
                       displayProduct.name !== "TikTok Booster" &&
                       displayProduct.name !== "Telegram Booster" &&
@@ -642,21 +663,19 @@ export default function SecondPage() {
                       {displayProduct.modalType &&
                         (displayProduct.exampleUrl ||
                           displayProduct.name === "Desain Konten" ||
-                          // displayProduct.name === "Video Promosi" || // Video promo pakai exampleUrl
+                          displayProduct.name === "Video Promosi" ||
                           displayProduct.name === "SEO Website" ||
-                          displayProduct.name === "Jasa Iklan Online" ||
-                          ["Instagram Booster", "TikTok Booster", "Telegram Booster", "Facebook Booster"].includes(displayProduct.name) // Untuk menampilkan tombol Rincian (Cara Pemesanan)
-                          ) && (
+                          displayProduct.name === "Jasa Iklan Online") && (
                           <button
                             onClick={() => openModal(displayProduct.modalType, displayProduct)}
                             className={getCardButtonClasses()}
                           >
                             {displayProduct.modalType === "example" ? (
                               <>
-                                <ExternalLink className="inline h-3 w-3 mr-1" /> Contoh
+                                <ExternalLink className="h-3 w-3" /> Contoh
                               </>
                             ) : (
-                              "Rincian" // Untuk modalType 'details', 'contentImages', 'seoImages', 'adsImages', 'videoPromo'
+                              "Rincian"
                             )}
                           </button>
                         )}
@@ -668,46 +687,20 @@ export default function SecondPage() {
           ))}
         </div>
 
-        <Modal
-          isOpen={activeModal === "example" && modalProduct !== null}
-          onClose={closeModal}
-          size="full"
-        >
+        <Modal isOpen={activeModal === "example" && modalProduct !== null} onClose={closeModal} size="full">
           {modalProduct?.exampleUrl && (
             <iframe
               src={modalProduct.exampleUrl}
               title={`Contoh ${modalProduct.name}`}
               className="w-full h-full"
               frameBorder="0"
-              sandbox="allow-scripts allow-same-origin allow-forms allow-popups" // Sesuaikan sandbox jika perlu
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
             />
           )}
         </Modal>
 
-        {/* --- PERUBAHAN 2: Ganti fitur di rincian dengan Cara Pemesanan --- */}
-        <Modal
-          isOpen={activeModal === "details" && modalProduct !== null}
-          onClose={closeModal}
-          size="md" // Ukuran bisa disesuaikan untuk Cara Pemesanan
-        >
-          <div className="p-2">
-            <h3 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-              Cara Pemesanan {modalProduct?.name && `- ${modalProduct.name}`}
-            </h3>
-            <ol className={`list-decimal list-inside space-y-1.5 text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-              <li>Pastikan Anda telah memilih opsi layanan yang sesuai (jika ada pilihan seperti pada Booster).</li>
-              <li>Isi link akun media sosial Anda pada kolom yang tersedia di kartu produk.</li>
-              <li>Klik tombol "Bayar" pada produk yang Anda inginkan.</li>
-              <li>Anda akan diarahkan ke WhatsApp Admin untuk melanjutkan proses pemesanan dan pembayaran.</li>
-              <li>Tim kami akan memproses pesanan Anda setelah konfirmasi pembayaran diterima.</li>
-              <li>Estimasi pengerjaan akan diinformasikan oleh Admin.</li>
-            </ol>
-            {modalProduct?.name.includes("Booster") && (
-                <p className={`mt-4 text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>
-                    <strong>Catatan Penting untuk Layanan Booster:</strong> Pastikan akun Anda tidak di-private selama proses berlangsung.
-                </p>
-            )}
-          </div>
+        <Modal isOpen={activeModal === "details" && modalProduct !== null} onClose={closeModal} size="md">
+          <OrderingInstructions />
         </Modal>
 
         <Modal
@@ -719,54 +712,42 @@ export default function SecondPage() {
           onClose={closeModal}
           size="lg"
         >
-          <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64 sm:h-80 md:h-96">
-            {modalProduct && imageSources[modalProduct.modalType as keyof typeof imageSources]?.map((img, i) => (
-              <SwiperSlide key={i}>
-                <div className="relative w-full h-full"> {/* SwiperSlide akan mengatur tinggi */}
-                  <img
-                    src={img}
-                    alt={`${modalProduct.name} Contoh ${i + 1}`}
-                    className="w-full h-full object-contain rounded-md" // object-contain agar gambar tidak terpotong
-                  />
-                  {/* --- PERUBAHAN 3b: Sembunyikan badge jika hanya 1 gambar --- */}
-                  {imageSources[modalProduct.modalType as keyof typeof imageSources]?.length > 1 && (
+          <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64">
+            {modalProduct &&
+              imageSources[modalProduct.modalType as keyof typeof imageSources]?.map((img, i) => (
+                <SwiperSlide key={i}>
+                  <div className="relative w-full h-64">
+                    <img
+                      src={img || "/placeholder.svg"}
+                      alt={`${modalProduct.name} ${i + 1}`}
+                      className="w-full h-full object-cover rounded-md"
+                    />
                     <span
-                      className={`absolute top-2 left-2 px-2 py-1 text-xs sm:text-sm font-medium text-white bg-black bg-opacity-50 rounded`}
+                      className={`absolute top-2 left-2 px-2 py-1 text-sm font-medium text-white bg-black bg-opacity-50 rounded`}
                     >
                       No {i + 1}
                     </span>
-                  )}
-                </div>
-              </SwiperSlide>
-            ))}
+                  </div>
+                </SwiperSlide>
+              ))}
           </Swiper>
-          {modalProduct && (
-             <p className={`mt-3 text-center text-sm font-medium ${theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>
-                Contoh {modalProduct.name}
-             </p>
-          )}
         </Modal>
 
         <Modal
           isOpen={activeModal === "videoPromo" && modalProduct?.name === "Video Promosi"}
           onClose={closeModal}
-          size="lg" // Ukuran bisa disesuaikan
+          size="lg"
         >
-          <div className="relative w-full" style={{ paddingTop: '56.25%' }}> {/* Aspect ratio 16:9 */}
+          <div className="relative w-full h-64">
             <iframe
-              src={modalProduct?.exampleUrl} // Pastikan URL adalah URL embed yang valid
+              src={modalProduct?.exampleUrl}
               title="Contoh Video Promosi"
-              className="absolute top-0 left-0 w-full h-full rounded-md"
+              className="w-full h-full rounded-md"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
           </div>
-           {modalProduct && (
-             <p className={`mt-3 text-center text-sm font-medium ${theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>
-                Contoh {modalProduct.name}
-             </p>
-          )}
         </Modal>
       </div>
     </div>
