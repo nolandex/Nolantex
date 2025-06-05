@@ -239,7 +239,7 @@ const productData: Product[] = [
     name: "Video Promosi",
     price: "Rp 10,000",
     category: "lainnya",
-    exampleUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Contoh URL embed YouTube yang valid
+    exampleUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", 
     modalType: "videoPromo",
   },
   {
@@ -370,9 +370,7 @@ export default function SecondPage() {
 
   useEffect(() => {
     setMounted(true)
-    // Default theme bisa diatur di sini jika diperlukan, atau dari _app.tsx
-    // setTheme("light") // Contoh: set tema default ke light
-  }, [setTheme])
+  }, [])
 
   const getProductDisplayData = useCallback(
     (product: Product): Product => {
@@ -445,10 +443,10 @@ export default function SecondPage() {
     return `${baseClasses} ${isActive ? activeClasses : inactiveClasses}`
   }
 
-  const getCardButtonClasses = (isPrimary = false, isLargeStyle = false) => { // Tambah parameter isLargeStyle
+  const getCardButtonClasses = (isPrimary = false, isLargeStyle = false) => {
     const sizeClasses = isLargeStyle
-      ? "py-2 px-4 text-sm" // Gaya lebih besar untuk Paket Bisnis
-      : "py-1.5 px-3 text-xs"; // Gaya standar
+      ? "py-2 px-4 text-sm" 
+      : "py-1.5 px-3 text-xs"; 
 
     const baseClasses =
       `flex-1 rounded-md font-medium transition-all duration-300 shadow-sm hover:shadow-md flex items-center justify-center gap-1 ${sizeClasses}`;
@@ -468,9 +466,8 @@ export default function SecondPage() {
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
-      {/* MODIFIKASI 1: Kontainer utama untuk produk */}
       <div className={`mx-auto ${activeCategory === "paket_bisnis" ? "max-w-none px-0" : "container max-w-full px-2"}`}>
-        <div className="grid grid-cols-2 gap-2 mb-6 px-2 md:px-0"> {/* Tambahkan padding di sini untuk tombol jika container utama px-0 */}
+        <div className="grid grid-cols-2 gap-2 mb-6 px-2 md:px-0">
           <button
             onClick={() => {
               setActiveCategory("paket_bisnis")
@@ -482,7 +479,7 @@ export default function SecondPage() {
           <button
             onClick={() => {
               setActiveCategory("website")
-              setActiveSubcategory("business")
+              setActiveSubcategory("business") 
             }}
             className={getButtonClasses(activeCategory === "website")}
           >
@@ -507,7 +504,7 @@ export default function SecondPage() {
         </div>
 
         {activeCategory === "website" && (
-          <div className="flex justify-center gap-2 mb-6 px-2 md:px-0"> {/* Tambahkan padding di sini juga */}
+          <div className="flex justify-center gap-2 mb-6 px-2 md:px-0">
             <button
               onClick={() => setActiveSubcategory("business")}
               className={getButtonClasses(activeSubcategory === "business")}
@@ -516,7 +513,8 @@ export default function SecondPage() {
             </button>
             <button
               onClick={() => setActiveSubcategory("non-business")}
-              className={getButtonClasses(subCategory === "non-business")}
+              // PERBAIKAN DI SINI: subCategory -> activeSubcategory
+              className={getButtonClasses(activeSubcategory === "non-business")} 
             >
               Non-Bisnis
             </button>
@@ -527,7 +525,6 @@ export default function SecondPage() {
           {groupedProducts.map((group, groupIndex) => (
             <div
               key={groupIndex}
-              // MODIFIKASI 2: Grid produk. Tambahkan padding horizontal untuk Paket Bisnis
               className={`grid ${activeCategory === "paket_bisnis" ? "grid-cols-1 px-2 sm:px-4" : "grid-cols-2"} gap-3`}
             >
               {group.map((product) => {
@@ -539,7 +536,7 @@ export default function SecondPage() {
                     key={displayProduct.name + (displayProduct.subcategory || '')}
                     className={`flex flex-col rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${ 
                       theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
-                    } ${isPaketBisnisCard ? "py-6 px-4 md:px-6" : "p-3"}`} // Sesuaikan padding internal paket bisnis jika perlu
+                    } ${isPaketBisnisCard ? "py-6 px-4 md:px-6" : "p-3"}`} 
                   >
                     <div className="flex justify-between items-start mb-2">
                       <h3
