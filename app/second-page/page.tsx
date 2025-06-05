@@ -7,7 +7,7 @@ import { CheckCircle, ExternalLink, X } from "lucide-react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 
-// ... (Komponen Modal, FeatureList, OrderingInstructions tetap sama) ...
+// ... (Komponen Modal, FeatureList, OrderingInstructions tetap sama seperti sebelumnya) ...
 // Komponen Modal
 interface ModalProps {
   isOpen: boolean
@@ -468,9 +468,7 @@ export default function SecondPage() {
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
-      {/* PERUBAHAN 1: Kontainer utama sekarang kondisional */}
       <div className={`mx-auto ${activeCategory === "paket_bisnis" ? "max-w-none px-0" : "container max-w-full px-2"}`}>
-        {/* PERUBAHAN 2a: Kontainer tombol kategori diberi padding jika Paket Bisnis aktif */}
         <div className={`grid grid-cols-2 gap-2 mb-6 ${activeCategory === "paket_bisnis" ? "px-2 sm:px-4" : ""}`}>
           <button
             onClick={() => {
@@ -508,11 +506,6 @@ export default function SecondPage() {
         </div>
 
         {activeCategory === "website" && (
-          // PERUBAHAN 2b: Kontainer tombol subkategori diberi padding jika Paket Bisnis aktif (meskipun tidak relevan langsung, tapi untuk konsistensi jika struktur berubah)
-          // Sebenarnya, karena ini hanya muncul saat activeCategory === "website", kondisi "paket_bisnis" tidak akan pernah true di sini.
-          // Jadi, bisa dibiarkan tanpa px-2 tambahan, atau untuk super aman jika activeCategory bisa paket_bisnis DAN website (tidak mungkin dengan logika saat ini):
-          // className={`flex justify-center gap-2 mb-6 ${activeCategory === "paket_bisnis" ? "px-2 sm:px-4" : ""}`}
-          // Untuk saat ini, karena hanya aktif saat BUKAN paket_bisnis, tidak perlu padding tambahan:
           <div className="flex justify-center gap-2 mb-6">
             <button
               onClick={() => setActiveSubcategory("business")}
@@ -533,20 +526,31 @@ export default function SecondPage() {
           {groupedProducts.map((group, groupIndex) => (
             <div
               key={groupIndex}
-              // PERUBAHAN 3: Grid produk untuk Paket Bisnis tidak lagi memiliki padding horizontal sendiri, akan mengisi parent px-0.
-              // Untuk kategori lain, akan mengisi parent px-2.
               className={`grid ${activeCategory === "paket_bisnis" ? "grid-cols-1" : "grid-cols-2"} gap-3`}
             >
               {group.map((product) => {
                 const displayProduct = getProductDisplayData(product)
                 const isPaketBisnisCard = activeCategory === "paket_bisnis"; 
 
+                // PERUBAHAN: Tentukan warna latar dan border kartu secara dinamis
+                let cardBgColorClass = "";
+                let cardBorderColorClass = "";
+
+                if (theme === "dark") {
+                  cardBgColorClass = isPaketBisnisCard ? "bg-gray-900" : "bg-gray-800";
+                  // Jika bg-gray-900, border mungkin perlu disesuaikan agar terlihat atau dihilangkan
+                  cardBorderColorClass = isPaketBisnisCard ? "border-gray-700" : "border-gray-700"; // Atau "border-gray-800" / "border-transparent"
+                } else {
+                  cardBgColorClass = "bg-white";
+                  cardBorderColorClass = "border-gray-200";
+                }
+
                 return (
                   <div
                     key={displayProduct.name + (displayProduct.subcategory || '')}
-                    className={`flex flex-col rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${ 
-                      theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
-                    } ${isPaketBisnisCard ? "py-6 px-4 md:px-6" : "p-3"}`} 
+                    className={`flex flex-col rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg 
+                      ${cardBgColorClass} ${cardBorderColorClass}
+                      ${isPaketBisnisCard ? "py-6 px-4 md:px-6" : "p-3"}`} 
                   >
                     <div className="flex justify-between items-start mb-2">
                       <h3
@@ -702,7 +706,7 @@ export default function SecondPage() {
           ))}
         </div>
 
-        {/* ... (Modal-modal tetap sama) ... */}
+        {/* ... (Modal-modal tetap sama seperti sebelumnya) ... */}
         <Modal isOpen={activeModal === "example" && modalProduct !== null} onClose={closeModal} size="full">
           {modalProduct?.exampleUrl && (
             <iframe
