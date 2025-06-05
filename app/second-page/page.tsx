@@ -466,8 +466,8 @@ export default function SecondPage() {
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
-      <div className={`${activeCategory === "paket_bisnis" ? "" : "container mx-auto max-w-full px-2"}`}>
-        <div className={`grid grid-cols-2 gap-2 mb-6 ${activeCategory === "paket_bisnis" ? "px-2" : ""}`}>
+      <div className={`mx-auto ${activeCategory === "paket_bisnis" ? "max-w-none px-1" : "container max-w-full px-2"}`}>
+        <div className="grid grid-cols-2 gap-2 mb-6">
           <button
             onClick={() => {
               setActiveCategory("paket_bisnis")
@@ -523,11 +523,11 @@ export default function SecondPage() {
           </div>
         )}
 
-        <div className={`${activeCategory === "paket_bisnis" ? "space-y-0" : "space-y-3"}`}>
+        <div className="space-y-3">
           {groupedProducts.map((group, groupIndex) => (
             <div
               key={groupIndex}
-              className={`grid ${activeCategory === "paket_bisnis" ? "grid-cols-1 gap-0" : "grid-cols-2 gap-3"}`}
+              className={`grid ${activeCategory === "paket_bisnis" ? "grid-cols-1" : "grid-cols-2"} gap-3`}
             >
               {group.map((product, index) => {
                 const displayProduct = getProductDisplayData(product)
@@ -536,151 +536,149 @@ export default function SecondPage() {
                     key={index}
                     className={`rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${
                       theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
-                    } ${activeCategory === "paket_bisnis" ? "py-6 px-0 mx-0 rounded-none" : "p-3"}`}
+                    } ${activeCategory === "paket_bisnis" ? "py-6 px-8" : "p-3"}`}
                   >
-                    <div className={activeCategory === "paket_bisnis" ? "px-4" : ""}>
-                      <div className="flex justify-between items-center mb-2">
-                        <h3
-                          className={`text-sm font-bold leading-tight ${
-                            theme === "dark" ? "text-white" : "text-gray-900"
-                          } ${activeCategory === "paket_bisnis" ? "text-lg" : ""}`}
-                        >
-                          {displayProduct.name}
-                        </h3>
-                        <span
-                          className={`px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap ${
-                            displayProduct.price === "Rp 0"
-                              ? theme === "dark"
-                                ? "bg-green-600 text-white"
-                                : "bg-green-500 text-white"
-                              : theme === "dark"
-                                ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white"
-                                : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
-                          } shadow-sm ${activeCategory === "paket_bisnis" ? "text-sm px-3 py-1.5" : ""}`}
-                        >
-                          {displayProduct.price}
-                        </span>
-                      </div>
+                    <div className="flex justify-between items-center mb-2">
+                      <h3
+                        className={`text-sm font-bold leading-tight ${
+                          theme === "dark" ? "text-white" : "text-gray-900"
+                        } ${activeCategory === "paket_bisnis" ? "text-lg" : ""}`}
+                      >
+                        {displayProduct.name}
+                      </h3>
+                      <span
+                        className={`px-2 py-1 rounded-md text-xs font-bold whitespace-nowrap ${
+                          displayProduct.price === "Rp 0"
+                            ? theme === "dark"
+                              ? "bg-green-600 text-white"
+                              : "bg-green-500 text-white"
+                            : theme === "dark"
+                              ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white"
+                              : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
+                        } shadow-sm ${activeCategory === "paket_bisnis" ? "text-sm px-3 py-1.5" : ""}`}
+                      >
+                        {displayProduct.price}
+                      </span>
+                    </div>
 
-                      {["Instagram Booster", "TikTok Booster", "Telegram Booster", "Facebook Booster"].includes(
-                        displayProduct.name,
-                      ) && (
-                        <div className="mb-3">
-                          {displayProduct.name === "Instagram Booster" && (
-                            <select
-                              value={instagramBoosterOption}
-                              onChange={(e) => setInstagramBoosterOption(e.target.value)}
-                              className={`w-full px-2 py-1.5 rounded-md text-xs border ${
-                                theme === "dark"
-                                  ? "bg-gray-700 border-gray-600 text-gray-200"
-                                  : "bg-white border-gray-300 text-gray-700"
-                              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                            >
-                              <option value="3000">3000 Followers</option>
-                              <option value="5000">5000 Followers</option>
-                              <option value="10000">10000 Followers</option>
-                            </select>
-                          )}
-
-                          {displayProduct.name === "TikTok Booster" && (
-                            <select
-                              value={tiktokBoosterOption}
-                              onChange={(e) => setTiktokBoosterOption(e.target.value)}
-                              className={`w-full px-2 py-1.5 rounded-md text-xs border ${
-                                theme === "dark"
-                                  ? "bg-gray-700 border-gray-600 text-gray-200"
-                                  : "bg-white border-gray-300 text-gray-700"
-                              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                            >
-                              <option value="2000">2000 Followers</option>
-                              <option value="5000">5000 Followers</option>
-                            </select>
-                          )}
-
-                          {displayProduct.name === "Telegram Booster" && (
-                            <select
-                              value={telegramBoosterOption}
-                              onChange={(e) => setTelegramBoosterOption(e.target.value)}
-                              className={`w-full px-2 py-1.5 rounded-md text-xs border ${
-                                theme === "dark"
-                                  ? "bg-gray-700 border-gray-600 text-gray-200"
-                                  : "bg-white border-gray-300 text-gray-700"
-                              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                            >
-                              <option value="3000">3000 Followers</option>
-                              <option value="5000">5000 Followers</option>
-                              <option value="10000">10000 Followers</option>
-                            </select>
-                          )}
-
-                          {displayProduct.name === "Facebook Booster" && (
-                            <select
-                              value={facebookBoosterOption}
-                              onChange={(e) => setFacebookBoosterOption(e.target.value)}
-                              className={`w-full px-2 py-1.5 rounded-md text-xs border ${
-                                theme === "dark"
-                                  ? "bg-gray-700 border-gray-600 text-gray-200"
-                                  : "bg-white border-gray-300 text-gray-700"
-                              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                            >
-                              <option value="3000">3000 Followers</option>
-                              <option value="5000">5000 Followers</option>
-                              <option value="10000">10000 Followers</option>
-                            </select>
-                          )}
-
-                          <input
-                            type="text"
-                            value={boosterLink}
-                            onChange={(e) => setBoosterLink(e.target.value)}
-                            placeholder="Account Link"
-                            className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
+                    {["Instagram Booster", "TikTok Booster", "Telegram Booster", "Facebook Booster"].includes(
+                      displayProduct.name,
+                    ) && (
+                      <div className="mb-3">
+                        {displayProduct.name === "Instagram Booster" && (
+                          <select
+                            value={instagramBoosterOption}
+                            onChange={(e) => setInstagramBoosterOption(e.target.value)}
+                            className={`w-full px-2 py-1.5 rounded-md text-xs border ${
                               theme === "dark"
                                 ? "bg-gray-700 border-gray-600 text-gray-200"
                                 : "bg-white border-gray-300 text-gray-700"
                             } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                          />
-                          {displayProduct.features && displayProduct.features.length > 0 && (
-                            <div className="mt-3">
-                              <FeatureList features={displayProduct.features} />
-                            </div>
-                          )}
-                        </div>
-                      )}
+                          >
+                            <option value="3000">3000 Followers</option>
+                            <option value="5000">5000 Followers</option>
+                            <option value="10000">10000 Followers</option>
+                          </select>
+                        )}
 
-                      {displayProduct.name !== "Instagram Booster" &&
-                        displayProduct.name !== "TikTok Booster" &&
-                        displayProduct.name !== "Telegram Booster" &&
-                        displayProduct.name !== "Facebook Booster" &&
-                        displayProduct.features &&
-                        displayProduct.features.length > 0 && (
-                          <div className="mb-3">
+                        {displayProduct.name === "TikTok Booster" && (
+                          <select
+                            value={tiktokBoosterOption}
+                            onChange={(e) => setTiktokBoosterOption(e.target.value)}
+                            className={`w-full px-2 py-1.5 rounded-md text-xs border ${
+                              theme === "dark"
+                                ? "bg-gray-700 border-gray-600 text-gray-200"
+                                : "bg-white border-gray-300 text-gray-700"
+                            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                          >
+                            <option value="2000">2000 Followers</option>
+                            <option value="5000">5000 Followers</option>
+                          </select>
+                        )}
+
+                        {displayProduct.name === "Telegram Booster" && (
+                          <select
+                            value={telegramBoosterOption}
+                            onChange={(e) => setTelegramBoosterOption(e.target.value)}
+                            className={`w-full px-2 py-1.5 rounded-md text-xs border ${
+                              theme === "dark"
+                                ? "bg-gray-700 border-gray-600 text-gray-200"
+                                : "bg-white border-gray-300 text-gray-700"
+                            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                          >
+                            <option value="3000">3000 Followers</option>
+                            <option value="5000">5000 Followers</option>
+                            <option value="10000">10000 Followers</option>
+                          </select>
+                        )}
+
+                        {displayProduct.name === "Facebook Booster" && (
+                          <select
+                            value={facebookBoosterOption}
+                            onChange={(e) => setFacebookBoosterOption(e.target.value)}
+                            className={`w-full px-2 py-1.5 rounded-md text-xs border ${
+                              theme === "dark"
+                                ? "bg-gray-700 border-gray-600 text-gray-200"
+                                : "bg-white border-gray-300 text-gray-700"
+                            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                          >
+                            <option value="3000">3000 Followers</option>
+                            <option value="5000">5000 Followers</option>
+                            <option value="10000">10000 Followers</option>
+                          </select>
+                        )}
+
+                        <input
+                          type="text"
+                          value={boosterLink}
+                          onChange={(e) => setBoosterLink(e.target.value)}
+                          placeholder="Account Link"
+                          className={`w-full mt-2 px-2 py-1.5 rounded-md text-xs border ${
+                            theme === "dark"
+                              ? "bg-gray-700 border-gray-600 text-gray-200"
+                              : "bg-white border-gray-300 text-gray-700"
+                          } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                        />
+                        {displayProduct.features && displayProduct.features.length > 0 && (
+                          <div className="mt-3">
                             <FeatureList features={displayProduct.features} />
                           </div>
                         )}
-
-                      <div className="flex gap-2">
-                        <button className={getCardButtonClasses(true)}>Bayar</button>
-                        {displayProduct.modalType &&
-                          (displayProduct.exampleUrl ||
-                            displayProduct.name === "Desain Konten" ||
-                            displayProduct.name === "Video Promosi" ||
-                            displayProduct.name === "SEO Website" ||
-                            displayProduct.name === "Jasa Iklan Online") && (
-                            <button
-                              onClick={() => openModal(displayProduct.modalType, displayProduct)}
-                              className={getCardButtonClasses()}
-                            >
-                              {displayProduct.modalType === "example" ? (
-                                <>
-                                  <ExternalLink className="h-3 w-3" /> Contoh
-                                </>
-                              ) : (
-                                "Rincian"
-                              )}
-                            </button>
-                          )}
                       </div>
+                    )}
+
+                    {displayProduct.name !== "Instagram Booster" &&
+                      displayProduct.name !== "TikTok Booster" &&
+                      displayProduct.name !== "Telegram Booster" &&
+                      displayProduct.name !== "Facebook Booster" &&
+                      displayProduct.features &&
+                      displayProduct.features.length > 0 && (
+                        <div className="mb-3">
+                          <FeatureList features={displayProduct.features} />
+                        </div>
+                      )}
+
+                    <div className="flex gap-2">
+                      <button className={getCardButtonClasses(true)}>Bayar</button>
+                      {displayProduct.modalType &&
+                        (displayProduct.exampleUrl ||
+                          displayProduct.name === "Desain Konten" ||
+                          displayProduct.name === "Video Promosi" ||
+                          displayProduct.name === "SEO Website" ||
+                          displayProduct.name === "Jasa Iklan Online") && (
+                          <button
+                            onClick={() => openModal(displayProduct.modalType, displayProduct)}
+                            className={getCardButtonClasses()}
+                          >
+                            {displayProduct.modalType === "example" ? (
+                              <>
+                                <ExternalLink className="h-3 w-3" /> Contoh
+                              </>
+                            ) : (
+                              "Rincian"
+                            )}
+                          </button>
+                        )}
                     </div>
                   </div>
                 )
@@ -754,4 +752,4 @@ export default function SecondPage() {
       </div>
     </div>
   )
-}
+          }
