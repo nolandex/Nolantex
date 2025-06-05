@@ -86,15 +86,15 @@ function OrderingInstructions() {
             1. Pilih Paket
           </h4>
           <p className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-            Pilih jumlah followers yang diinginkan dari dropdown menu
+            Pilih paket yang sesuai dengan kebutuhan bisnis Anda
           </p>
         </div>
         <div className={`p-3 rounded-lg ${theme === "dark" ? "bg-gray-700" : "bg-gray-100"}`}>
           <h4 className={`font-semibold text-sm mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-            2. Masukkan Link
+            2. Konsultasi
           </h4>
           <p className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-            Masukkan link akun media sosial Anda pada kolom yang tersedia
+            Diskusikan kebutuhan spesifik dan detail proyek dengan tim kami
           </p>
         </div>
         <div className={`p-3 rounded-lg ${theme === "dark" ? "bg-gray-700" : "bg-gray-100"}`}>
@@ -102,15 +102,15 @@ function OrderingInstructions() {
             3. Pembayaran
           </h4>
           <p className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-            Klik tombol "Bayar" dan ikuti instruksi pembayaran
+            Lakukan pembayaran sesuai paket yang dipilih
           </p>
         </div>
         <div className={`p-3 rounded-lg ${theme === "dark" ? "bg-gray-700" : "bg-gray-100"}`}>
           <h4 className={`font-semibold text-sm mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-            4. Proses
+            4. Pengerjaan
           </h4>
           <p className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-            Proses akan dimulai dalam 1-24 jam setelah pembayaran dikonfirmasi
+            Tim kami akan mulai mengerjakan proyek sesuai timeline yang disepakati
           </p>
         </div>
       </div>
@@ -149,7 +149,12 @@ const getTikTokBoosterFeatures = (option: string) => {
 
   switch (option) {
     case "2000":
-      return [`${baseViews.toLocaleString()} Views`, `${baseLikes.toLocaleString()} Likes`, `${baseShares.toLocaleString()} Shares`, `${baseSaves.toLocaleString()} Saves`]
+      return [
+        `${baseViews.toLocaleString()} Views`,
+        `${baseLikes.toLocaleString()} Likes`,
+        `${baseShares.toLocaleString()} Shares`,
+        `${baseSaves.toLocaleString()} Saves`,
+      ]
     case "5000":
       return [
         `${(baseViews * 2.5).toLocaleString()} Views`,
@@ -193,9 +198,31 @@ const productData: Product[] = [
     name: "Paket Bisnis",
     price: "Rp 50,000",
     category: "paket_bisnis",
-    features: ["Website Premium", "Desain Konten Profesional", "Booster Media Sosial Powerfull", "Video Promosi Menarik", "Penulisan Konten SEO Friendly"],
+    features: [
+      "Website Premium",
+      "Desain Konten Profesional",
+      "Booster Media Sosial Powerfull",
+      "Video Promosi Menarik",
+      "Penulisan Konten SEO Friendly",
+      "Video Jasa SEO",
+    ],
     exampleUrl: "https://example.com",
-    modalType: null,
+    modalType: "details",
+  },
+  {
+    name: "Paket Bisnis Reseller",
+    price: "Rp 75,000",
+    category: "paket_bisnis",
+    features: [
+      "Website Premium",
+      "Desain Konten Profesional",
+      "Booster Media Sosial Powerfull",
+      "Video Promosi Menarik",
+      "Penulisan Konten SEO Friendly",
+      "Video Jasa SEO",
+    ],
+    exampleUrl: "https://example.com",
+    modalType: "details",
   },
   {
     name: "Instagram Booster",
@@ -355,7 +382,7 @@ const imageSources = {
 }
 
 export default function SecondPage() {
-  const { theme } = useTheme();
+  const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [activeCategory, setActiveCategory] = useState("paket_bisnis")
   const [activeSubcategory, setActiveSubcategory] = useState("business")
@@ -399,7 +426,7 @@ export default function SecondPage() {
       }
       return { ...product, price: currentPrice, features: currentFeatures }
     },
-    [instagramBoosterOption, tiktokBoosterOption, telegramBoosterOption, facebookBoosterOption]
+    [instagramBoosterOption, tiktokBoosterOption, telegramBoosterOption, facebookBoosterOption],
   )
 
   const filteredProducts = productData.filter((product) => {
@@ -411,22 +438,28 @@ export default function SecondPage() {
   })
 
   const groupedProducts: Product[][] = []
-  if (activeCategory === "paket_bisnis") {
-    groupedProducts.push(filteredProducts)
-  } else if (activeCategory === "sosmed_booster" || activeCategory === "website" || activeCategory === "lainnya") {
+  if (
+    activeCategory === "sosmed_booster" ||
+    activeCategory === "website" ||
+    activeCategory === "lainnya" ||
+    activeCategory === "paket_bisnis"
+  ) {
     for (let i = 0; i < filteredProducts.length; i += 2) {
       groupedProducts.push(filteredProducts.slice(i, i + 2))
     }
   }
 
-  const openModal = useCallback((type: Product["modalType"], product?: Product) => {
-    setActiveModal(type)
-    if (product) {
-      setModalProduct(getProductDisplayData(product));
-    } else {
-      setModalProduct(null)
-    }
-  }, [getProductDisplayData])
+  const openModal = useCallback(
+    (type: Product["modalType"], product?: Product) => {
+      setActiveModal(type)
+      if (product) {
+        setModalProduct(getProductDisplayData(product))
+      } else {
+        setModalProduct(null)
+      }
+    },
+    [getProductDisplayData],
+  )
 
   const closeModal = useCallback(() => {
     setActiveModal(null)
@@ -444,12 +477,9 @@ export default function SecondPage() {
   }
 
   const getCardButtonClasses = (isPrimary = false, isLargeStyle = false) => {
-    const sizeClasses = isLargeStyle
-      ? "py-2 px-4 text-sm"
-      : "py-1.5 px-3 text-xs";
+    const sizeClasses = isLargeStyle ? "py-2 px-4 text-sm" : "py-1.5 px-3 text-xs"
 
-    const baseClasses =
-      `flex-1 rounded-md font-medium transition-all duration-300 shadow-sm hover:shadow-md flex items-center justify-center gap-1 ${sizeClasses}`;
+    const baseClasses = `flex-1 rounded-md font-medium transition-all duration-300 shadow-sm hover:shadow-md flex items-center justify-center gap-1 ${sizeClasses}`
 
     const primaryClasses =
       theme === "dark"
@@ -466,8 +496,8 @@ export default function SecondPage() {
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
-      <div className={`mx-auto ${activeCategory === "paket_bisnis" ? "max-w-none px-0" : "container max-w-full px-2"}`}>
-        <div className={`grid grid-cols-2 gap-2 mb-6 ${activeCategory === "paket_bisnis" ? "px-2 sm:px-4" : ""}`}>
+      <div className="container max-w-full px-2">
+        <div className="grid grid-cols-2 gap-2 mb-6">
           <button
             onClick={() => {
               setActiveCategory("paket_bisnis")
@@ -522,26 +552,23 @@ export default function SecondPage() {
 
         <div className="space-y-3">
           {groupedProducts.map((group, groupIndex) => (
-            <div
-              key={groupIndex}
-              className={`grid ${activeCategory === "paket_bisnis" ? "grid-cols-1" : "grid-cols-2"} gap-3`}
-            >
+            <div key={groupIndex} className="grid grid-cols-2 gap-3">
               {group.map((product) => {
                 const displayProduct = getProductDisplayData(product)
-                const isPaketBisnisCard = activeCategory === "paket_bisnis";
+                const isPaketBisnisCard = activeCategory === "paket_bisnis"
 
                 return (
                   <div
-                    key={displayProduct.name + (displayProduct.subcategory || '')}
+                    key={displayProduct.name + (displayProduct.subcategory || "")}
                     className={`flex flex-col rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${
                       theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
-                    } ${isPaketBisnisCard ? "py-6 px-4 md:px-6" : "p-3"}`}
+                    } ${isPaketBisnisCard ? "py-4 px-3" : "p-3"}`}
                   >
                     <div className="flex justify-between items-start mb-2">
                       <h3
                         className={`font-bold leading-tight ${
                           theme === "dark" ? "text-white" : "text-gray-900"
-                        } ${isPaketBisnisCard ? "text-xl md:text-2xl" : "text-sm"}`}
+                        } ${isPaketBisnisCard ? "text-base" : "text-sm"}`}
                       >
                         {displayProduct.name}
                       </h3>
@@ -554,7 +581,7 @@ export default function SecondPage() {
                             : theme === "dark"
                               ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white"
                               : "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
-                        } ${isPaketBisnisCard ? "text-base md:text-lg px-3 py-1.5" : "text-xs"}`}
+                        } ${isPaketBisnisCard ? "text-sm px-2.5 py-1" : "text-xs"}`}
                       >
                         {displayProduct.price}
                       </span>
@@ -566,67 +593,67 @@ export default function SecondPage() {
                       ) && (
                         <div className="mb-3 space-y-2">
                           {displayProduct.name === "Instagram Booster" && (
-                          <select
-                            value={instagramBoosterOption}
-                            onChange={(e) => setInstagramBoosterOption(e.target.value)}
-                            className={`w-full px-2 py-1.5 rounded-md text-xs border ${
-                              theme === "dark"
-                                ? "bg-gray-700 border-gray-600 text-gray-200"
-                                : "bg-white border-gray-300 text-gray-700"
-                            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                          >
-                            <option value="3000">3000 Followers</option>
-                            <option value="5000">5000 Followers</option>
-                            <option value="10000">10000 Followers</option>
-                          </select>
-                        )}
+                            <select
+                              value={instagramBoosterOption}
+                              onChange={(e) => setInstagramBoosterOption(e.target.value)}
+                              className={`w-full px-2 py-1.5 rounded-md text-xs border ${
+                                theme === "dark"
+                                  ? "bg-gray-700 border-gray-600 text-gray-200"
+                                  : "bg-white border-gray-300 text-gray-700"
+                              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                            >
+                              <option value="3000">3000 Followers</option>
+                              <option value="5000">5000 Followers</option>
+                              <option value="10000">10000 Followers</option>
+                            </select>
+                          )}
 
-                        {displayProduct.name === "TikTok Booster" && (
-                          <select
-                            value={tiktokBoosterOption}
-                            onChange={(e) => setTiktokBoosterOption(e.target.value)}
-                            className={`w-full px-2 py-1.5 rounded-md text-xs border ${
-                              theme === "dark"
-                                ? "bg-gray-700 border-gray-600 text-gray-200"
-                                : "bg-white border-gray-300 text-gray-700"
-                            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                          >
-                            <option value="2000">2000 Followers</option>
-                            <option value="5000">5000 Followers</option>
-                          </select>
-                        )}
+                          {displayProduct.name === "TikTok Booster" && (
+                            <select
+                              value={tiktokBoosterOption}
+                              onChange={(e) => setTiktokBoosterOption(e.target.value)}
+                              className={`w-full px-2 py-1.5 rounded-md text-xs border ${
+                                theme === "dark"
+                                  ? "bg-gray-700 border-gray-600 text-gray-200"
+                                  : "bg-white border-gray-300 text-gray-700"
+                              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                            >
+                              <option value="2000">2000 Followers</option>
+                              <option value="5000">5000 Followers</option>
+                            </select>
+                          )}
 
-                        {displayProduct.name === "Telegram Booster" && (
-                          <select
-                            value={telegramBoosterOption}
-                            onChange={(e) => setTelegramBoosterOption(e.target.value)}
-                            className={`w-full px-2 py-1.5 rounded-md text-xs border ${
-                              theme === "dark"
-                                ? "bg-gray-700 border-gray-600 text-gray-200"
-                                : "bg-white border-gray-300 text-gray-700"
-                            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                          >
-                            <option value="3000">3000 Followers</option>
-                            <option value="5000">5000 Followers</option>
-                            <option value="10000">10000 Followers</option>
-                          </select>
-                        )}
+                          {displayProduct.name === "Telegram Booster" && (
+                            <select
+                              value={telegramBoosterOption}
+                              onChange={(e) => setTelegramBoosterOption(e.target.value)}
+                              className={`w-full px-2 py-1.5 rounded-md text-xs border ${
+                                theme === "dark"
+                                  ? "bg-gray-700 border-gray-600 text-gray-200"
+                                  : "bg-white border-gray-300 text-gray-700"
+                              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                            >
+                              <option value="3000">3000 Followers</option>
+                              <option value="5000">5000 Followers</option>
+                              <option value="10000">10000 Followers</option>
+                            </select>
+                          )}
 
-                        {displayProduct.name === "Facebook Booster" && (
-                          <select
-                            value={facebookBoosterOption}
-                            onChange={(e) => setFacebookBoosterOption(e.target.value)}
-                            className={`w-full px-2 py-1.5 rounded-md text-xs border ${
-                              theme === "dark"
-                                ? "bg-gray-700 border-gray-600 text-gray-200"
-                                : "bg-white border-gray-300 text-gray-700"
-                            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                          >
-                            <option value="3000">3000 Followers</option>
-                            <option value="5000">5000 Followers</option>
-                            <option value="10000">10000 Followers</option>
-                          </select>
-                        )}
+                          {displayProduct.name === "Facebook Booster" && (
+                            <select
+                              value={facebookBoosterOption}
+                              onChange={(e) => setFacebookBoosterOption(e.target.value)}
+                              className={`w-full px-2 py-1.5 rounded-md text-xs border ${
+                                theme === "dark"
+                                  ? "bg-gray-700 border-gray-600 text-gray-200"
+                                  : "bg-white border-gray-300 text-gray-700"
+                              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                            >
+                              <option value="3000">3000 Followers</option>
+                              <option value="5000">5000 Followers</option>
+                              <option value="10000">10000 Followers</option>
+                            </select>
+                          )}
                           <input
                             type="text"
                             value={boosterLink}
@@ -642,7 +669,7 @@ export default function SecondPage() {
                             <div className="mt-1">
                               <FeatureList
                                 features={displayProduct.features}
-                                textSize={isPaketBisnisCard ? "text-sm" : "text-xs"}
+                                textSize={isPaketBisnisCard ? "text-xs" : "text-xs"}
                               />
                             </div>
                           )}
@@ -655,10 +682,10 @@ export default function SecondPage() {
                         displayProduct.name !== "Facebook Booster" &&
                         displayProduct.features &&
                         displayProduct.features.length > 0 && (
-                          <div className={`mb-3 ${isPaketBisnisCard ? 'mt-4' : ''}`}>
+                          <div className={`mb-3 ${isPaketBisnisCard ? "mt-2" : ""}`}>
                             <FeatureList
                               features={displayProduct.features}
-                              textSize={isPaketBisnisCard ? "text-sm" : "text-xs"}
+                              textSize={isPaketBisnisCard ? "text-xs" : "text-xs"}
                             />
                           </div>
                         )}
@@ -668,7 +695,7 @@ export default function SecondPage() {
                       <button className={getCardButtonClasses(true, isPaketBisnisCard)}>Bayar</button>
                       {displayProduct.modalType &&
                         (displayProduct.exampleUrl ||
-                          imageSources[(displayProduct.modalType) as keyof typeof imageSources]?.length > 0 ||
+                          imageSources[displayProduct.modalType as keyof typeof imageSources]?.length > 0 ||
                           displayProduct.modalType === "details") && (
                           <button
                             onClick={() => openModal(displayProduct.modalType, displayProduct)}
@@ -676,7 +703,7 @@ export default function SecondPage() {
                           >
                             {displayProduct.modalType === "example" ? (
                               <>
-                                <ExternalLink className={isPaketBisnisCard ? "h-4 w-4" : "h-3 w-3"} /> Contoh
+                                <ExternalLink className={isPaketBisnisCard ? "h-3 w-3" : "h-3 w-3"} /> Contoh
                               </>
                             ) : (
                               "Rincian"
@@ -717,7 +744,7 @@ export default function SecondPage() {
         >
           <Swiper spaceBetween={10} slidesPerView={1} className="w-full h-64 md:h-96">
             {modalProduct &&
-              imageSources[(modalProduct.modalType) as keyof typeof imageSources]?.map((img, i) => (
+              imageSources[modalProduct.modalType as keyof typeof imageSources]?.map((img, i) => (
                 <SwiperSlide key={i}>
                   <div className="relative w-full h-full">
                     <img
@@ -742,15 +769,15 @@ export default function SecondPage() {
           size="lg"
         >
           {modalProduct?.exampleUrl && (
-             <div className="aspect-video w-full">
-                <iframe
+            <div className="aspect-video w-full">
+              <iframe
                 src={modalProduct.exampleUrl}
                 title={`Contoh ${modalProduct.name}`}
                 className="w-full h-full rounded-md"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-                />
+              />
             </div>
           )}
         </Modal>
