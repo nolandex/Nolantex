@@ -53,10 +53,10 @@ function Modal({ isOpen, onClose, children, size = "full" }: ModalProps) {
 interface FeatureListProps {
   features: string[]
   textColor?: string
-  textSize?: string // Prop baru untuk ukuran teks
+  textSize?: string
 }
 
-function FeatureList({ features, textColor, textSize = "text-xs" }: FeatureListProps) { // Default textSize ke "text-xs"
+function FeatureList({ features, textColor, textSize = "text-xs" }: FeatureListProps) {
   const { theme } = useTheme()
   return (
     <ul className="space-y-1">
@@ -466,8 +466,10 @@ export default function SecondPage() {
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
-      <div className={`mx-auto ${activeCategory === "paket_bisnis" ? "max-w-none px-0" : "container max-w-full px-2"}`}>
-        <div className="grid grid-cols-2 gap-2 mb-6 px-2 md:px-0">
+      {/* PERUBAHAN 1: Kontainer utama sekarang selalu konsisten */}
+      <div className={`mx-auto container max-w-full px-2`}>
+        {/* PERUBAHAN 3a: Menghapus padding tambahan dari kontainer tombol kategori */}
+        <div className="grid grid-cols-2 gap-2 mb-6">
           <button
             onClick={() => {
               setActiveCategory("paket_bisnis")
@@ -504,7 +506,8 @@ export default function SecondPage() {
         </div>
 
         {activeCategory === "website" && (
-          <div className="flex justify-center gap-2 mb-6 px-2 md:px-0">
+          // PERUBAHAN 3b: Menghapus padding tambahan dari kontainer tombol subkategori
+          <div className="flex justify-center gap-2 mb-6">
             <button
               onClick={() => setActiveSubcategory("business")}
               className={getButtonClasses(activeSubcategory === "business")}
@@ -513,7 +516,6 @@ export default function SecondPage() {
             </button>
             <button
               onClick={() => setActiveSubcategory("non-business")}
-              // PERBAIKAN DI SINI: subCategory -> activeSubcategory
               className={getButtonClasses(activeSubcategory === "non-business")} 
             >
               Non-Bisnis
@@ -525,7 +527,8 @@ export default function SecondPage() {
           {groupedProducts.map((group, groupIndex) => (
             <div
               key={groupIndex}
-              className={`grid ${activeCategory === "paket_bisnis" ? "grid-cols-1 px-2 sm:px-4" : "grid-cols-2"} gap-3`}
+              // PERUBAHAN 2: Grid produk untuk Paket Bisnis tidak lagi memiliki padding horizontal sendiri
+              className={`grid ${activeCategory === "paket_bisnis" ? "grid-cols-1" : "grid-cols-2"} gap-3`}
             >
               {group.map((product) => {
                 const displayProduct = getProductDisplayData(product)
