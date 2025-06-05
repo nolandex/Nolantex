@@ -7,6 +7,7 @@ import { CheckCircle, ExternalLink, X } from "lucide-react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 
+// ... (Komponen Modal, FeatureList, OrderingInstructions tetap sama) ...
 // Komponen Modal
 interface ModalProps {
   isOpen: boolean
@@ -117,6 +118,7 @@ function OrderingInstructions() {
     </div>
   )
 }
+
 
 interface Product {
   name: string
@@ -466,10 +468,10 @@ export default function SecondPage() {
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
-      {/* PERUBAHAN 1: Kontainer utama sekarang selalu konsisten */}
-      <div className={`mx-auto container max-w-full px-2`}>
-        {/* PERUBAHAN 3a: Menghapus padding tambahan dari kontainer tombol kategori */}
-        <div className="grid grid-cols-2 gap-2 mb-6">
+      {/* PERUBAHAN 1: Kontainer utama sekarang kondisional */}
+      <div className={`mx-auto ${activeCategory === "paket_bisnis" ? "max-w-none px-0" : "container max-w-full px-2"}`}>
+        {/* PERUBAHAN 2a: Kontainer tombol kategori diberi padding jika Paket Bisnis aktif */}
+        <div className={`grid grid-cols-2 gap-2 mb-6 ${activeCategory === "paket_bisnis" ? "px-2 sm:px-4" : ""}`}>
           <button
             onClick={() => {
               setActiveCategory("paket_bisnis")
@@ -506,7 +508,11 @@ export default function SecondPage() {
         </div>
 
         {activeCategory === "website" && (
-          // PERUBAHAN 3b: Menghapus padding tambahan dari kontainer tombol subkategori
+          // PERUBAHAN 2b: Kontainer tombol subkategori diberi padding jika Paket Bisnis aktif (meskipun tidak relevan langsung, tapi untuk konsistensi jika struktur berubah)
+          // Sebenarnya, karena ini hanya muncul saat activeCategory === "website", kondisi "paket_bisnis" tidak akan pernah true di sini.
+          // Jadi, bisa dibiarkan tanpa px-2 tambahan, atau untuk super aman jika activeCategory bisa paket_bisnis DAN website (tidak mungkin dengan logika saat ini):
+          // className={`flex justify-center gap-2 mb-6 ${activeCategory === "paket_bisnis" ? "px-2 sm:px-4" : ""}`}
+          // Untuk saat ini, karena hanya aktif saat BUKAN paket_bisnis, tidak perlu padding tambahan:
           <div className="flex justify-center gap-2 mb-6">
             <button
               onClick={() => setActiveSubcategory("business")}
@@ -527,7 +533,8 @@ export default function SecondPage() {
           {groupedProducts.map((group, groupIndex) => (
             <div
               key={groupIndex}
-              // PERUBAHAN 2: Grid produk untuk Paket Bisnis tidak lagi memiliki padding horizontal sendiri
+              // PERUBAHAN 3: Grid produk untuk Paket Bisnis tidak lagi memiliki padding horizontal sendiri, akan mengisi parent px-0.
+              // Untuk kategori lain, akan mengisi parent px-2.
               className={`grid ${activeCategory === "paket_bisnis" ? "grid-cols-1" : "grid-cols-2"} gap-3`}
             >
               {group.map((product) => {
@@ -695,6 +702,7 @@ export default function SecondPage() {
           ))}
         </div>
 
+        {/* ... (Modal-modal tetap sama) ... */}
         <Modal isOpen={activeModal === "example" && modalProduct !== null} onClose={closeModal} size="full">
           {modalProduct?.exampleUrl && (
             <iframe
