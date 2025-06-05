@@ -466,7 +466,7 @@ export default function SecondPage() {
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
-      <div className={`mx-auto ${activeCategory === "paket_bisnis" ? "max-w-none px-1" : "container max-w-full px-2"}`}>
+      <div className={`${activeCategory === "paket_bisnis" ? "px-0" : "container mx-auto max-w-full px-2"}`}>
         <div className="grid grid-cols-2 gap-2 mb-6">
           <button
             onClick={() => {
@@ -523,11 +523,11 @@ export default function SecondPage() {
           </div>
         )}
 
-        <div className="space-y-3">
+        <div className={`${activeCategory === "paket_bisnis" ? "space-y-0" : "space-y-3"}`}>
           {groupedProducts.map((group, groupIndex) => (
             <div
               key={groupIndex}
-              className={`grid ${activeCategory === "paket_bisnis" ? "grid-cols-1" : "grid-cols-2"} gap-3`}
+              className={`grid ${activeCategory === "paket_bisnis" ? "grid-cols-1 gap-0" : "grid-cols-2 gap-3"}`}
             >
               {group.map((product, index) => {
                 const displayProduct = getProductDisplayData(product)
@@ -536,7 +536,7 @@ export default function SecondPage() {
                     key={index}
                     className={`rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${
                       theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
-                    } ${activeCategory === "paket_bisnis" ? "py-6 px-8" : "p-3"}`}
+                    } ${activeCategory === "paket_bisnis" ? "py-6 px-4 mx-0" : "p-3"}`}
                   >
                     <div className="flex justify-between items-center mb-2">
                       <h3
