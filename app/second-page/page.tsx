@@ -355,7 +355,7 @@ const imageSources = {
 }
 
 export default function SecondPage() {
-  const { theme } = useTheme() // setTheme tidak digunakan, bisa dihapus jika tidak ada rencana penggunaan
+  const { theme } = useTheme(); // setTheme tidak digunakan, bisa dihapus
   const [mounted, setMounted] = useState(false)
   const [activeCategory, setActiveCategory] = useState("paket_bisnis")
   const [activeSubcategory, setActiveSubcategory] = useState("business")
@@ -399,7 +399,7 @@ export default function SecondPage() {
       }
       return { ...product, price: currentPrice, features: currentFeatures }
     },
-    [instagramBoosterOption, tiktokBoosterOption, telegramBoosterOption, facebookBoosterOption] // Dependensi ditambahkan
+    [instagramBoosterOption, tiktokBoosterOption, telegramBoosterOption, facebookBoosterOption] // Perbaikan dependensi
   )
 
   const filteredProducts = productData.filter((product) => {
@@ -468,7 +468,7 @@ export default function SecondPage() {
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
       {/* Kontainer utama dengan padding kondisional */}
       <div className={`mx-auto ${activeCategory === "paket_bisnis" ? "max-w-none px-0" : "container max-w-full px-2"}`}>
-        {/* Kontainer tombol kategori dengan padding kondisional */}
+        {/* Kontainer tombol kategori dengan padding kondisional agar tidak menempel jika parent px-0 */}
         <div className={`grid grid-cols-2 gap-2 mb-6 ${activeCategory === "paket_bisnis" ? "px-2 sm:px-4" : ""}`}>
           <button
             onClick={() => {
@@ -506,9 +506,7 @@ export default function SecondPage() {
         </div>
 
         {activeCategory === "website" && (
-          // Kontainer tombol subkategori. Tidak memerlukan padding tambahan khusus karena hanya muncul
-          // ketika activeCategory adalah "website", di mana parentnya sudah memiliki px-2.
-          <div className="flex justify-center gap-2 mb-6">
+          <div className="flex justify-center gap-2 mb-6"> {/* Padding sudah diatur oleh parent jika bukan paket_bisnis */}
             <button
               onClick={() => setActiveSubcategory("business")}
               className={getButtonClasses(activeSubcategory === "business")}
@@ -528,8 +526,6 @@ export default function SecondPage() {
           {groupedProducts.map((group, groupIndex) => (
             <div
               key={groupIndex}
-              // Grid produk: Untuk Paket Bisnis, grid-cols-1 tanpa padding tambahan.
-              // Untuk kategori lain, grid-cols-2 tanpa padding tambahan (padding dari parent).
               className={`grid ${activeCategory === "paket_bisnis" ? "grid-cols-1" : "grid-cols-2"} gap-3`}
             >
               {group.map((product) => {
@@ -539,7 +535,6 @@ export default function SecondPage() {
                 return (
                   <div
                     key={displayProduct.name + (displayProduct.subcategory || '')}
-                    // Kembalikan warna latar card seperti semula
                     className={`flex flex-col rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${
                       theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
                     } ${isPaketBisnisCard ? "py-6 px-4 md:px-6" : "p-3"}`}
@@ -765,4 +760,3 @@ export default function SecondPage() {
     </div>
   )
 }
-
