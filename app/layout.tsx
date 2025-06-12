@@ -11,6 +11,7 @@ import "@/styles/globals.css";
 import "@/styles/loading.css";
 import { Analytics } from "@vercel/analytics/react";
 import { Inter as FontSans } from "next/font/google";
+import { headers } from "next/headers";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -43,6 +44,12 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { lang: string | undefined };
 }) {
+  const headersList = headers();
+  const host = headersList.get("host") || "www.bisnovo.com";
+  const protocol = headersList.get("x-forwarded-proto") || "https";
+  const path = headersList.get("x-invoke-path") || "/";
+  const canonicalUrl = `${protocol}://${host}${path}`;
+
   return (
     <html lang={lang || defaultLocale} suppressHydrationWarning>
       <head>
@@ -53,6 +60,10 @@ export default async function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Bisnovo" />
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+
+        {/* ✅ Canonical tag dinamis */}
+        <link rel="canonical" href={canonicalUrl} />
+
         <script
           dangerouslySetInnerHTML={{
             __html: `
