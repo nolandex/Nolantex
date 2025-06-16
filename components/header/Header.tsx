@@ -9,7 +9,7 @@ import { ThemedButton } from "../ThemedButton";
 
 const links = [
   { label: "Home", href: "/" },
-  { label: "Product", href: "/second-page" },
+  { label: "Product", href: "/services" },
 ];
 
 const Header = () => {
