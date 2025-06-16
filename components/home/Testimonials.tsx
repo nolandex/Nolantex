@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-"use client"; // Direktif untuk Client Component
+"use client";
 
 import { TestimonialsData } from "@/config/testimonials";
 import Image from "next/image";
@@ -62,15 +62,14 @@ const Testimonials = ({ id, locale }: { id: string; locale: any }) => {
         </p>
       </div>
       <div className="relative w-full">
-        {/* Konten Testimonial */}
         <div
           ref={scrollRef}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
           onMouseDown={handleTouchStart}
           onMouseUp={handleTouchEnd}
-          // KELAS-KELAS SCROLLBAR SUDAH DIHAPUS DARI BARIS DI BAWAH INI
-          className="w-full overflow-x-auto snap-x snap-mandatory flex flex-row gap-4 pb-4"
+          // PERBAIKAN FINAL UNTUK MENGHILANGKAN SCROLLBAR
+          className="w-full overflow-x-auto snap-x snap-mandatory flex flex-row gap-4 pb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           {TestimonialsData.map((testimonial, index) => (
             <div
