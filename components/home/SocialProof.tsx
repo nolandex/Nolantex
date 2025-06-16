@@ -1,19 +1,17 @@
-// components/SocialProof.tsx (Sudah Diperbarui)
+// components/SocialProof.tsx (FINAL - Sesuai Permintaan)
 
-import { FaDollarSign } from "react-icons/fa"; // 1. Import ikon dollar
-
-// Import 'Makers' sudah tidak diperlukan dan bisa dihapus
-// import { Makers } from "@/config/makers";
+import { FaDollarSign } from "react-icons/fa";
 
 const SocialProof = ({ locale }: { locale: any }) => {
   return (
-    <section className="flex flex-col items-center justify-center gap-10 pt-16 w-full"> {/* Sedikit menambah gap */}
-      <div className="flex flex-col items-center gap-5">
+    // 1. Posisi dinaikkan dengan mengurangi padding atas (pt-16 -> pt-12)
+    <section className="flex flex-col items-center justify-center gap-10 pt-12 w-full">
+      {/* 2. Jarak antara ikon dan teks diperkecil (gap-5 -> gap-4) */}
+      <div className="flex flex-col items-center gap-4">
         
-        {/* 2. Bagian ini diubah dari gambar user menjadi ikon dollar */}
-        <div className="flex items-center justify-center w-24 h-24 bg-blue-100 dark:bg-blue-900/50 rounded-full">
-          <FaDollarSign className="w-14 h-14 text-blue-600 dark:text-blue-500" />
-        </div>
+        {/* 3. LINGKARAN BIRU DIHAPUS. Ikon dollar sekarang berdiri sendiri. */}
+        {/* Ukuran ikon diatur menjadi w-12 h-12 (lebih kecil) */}
+        <FaDollarSign className="w-12 h-12 text-blue-600 dark:text-blue-500" />
 
         <p className="text-sm text-slate-700 dark:text-slate-400 text-center">
           <span className="text-primary font-semibold text-base">1000+</span>{" "}
