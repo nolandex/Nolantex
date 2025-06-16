@@ -14,7 +14,7 @@ export default function CTAButton({ locale }: CTAButtonProps) {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push("/second-page");
+    router.push("/services");
   };
 
   return (
