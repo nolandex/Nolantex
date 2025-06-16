@@ -1,30 +1,30 @@
-"use client";
+"use client"
 
-import type React from "react";
-import { useEffect, useState, useCallback, useMemo } from "react";
-import { useTheme } from "next-themes";
-import { CheckCircle, ExternalLink, X } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+import type React from "react"
+import { useEffect, useState, useCallback } from "react"
+import { useTheme } from "next-themes"
+import { CheckCircle, ExternalLink, X } from "lucide-react"
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css"
 
 // Komponen Modal
 interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
-  size?: "sm" | "md" | "lg" | "full";
+  isOpen: boolean
+  onClose: () => void
+  children: React.ReactNode
+  size?: "sm" | "md" | "lg" | "full"
 }
 
 function Modal({ isOpen, onClose, children, size = "full" }: ModalProps) {
-  const { theme } = useTheme();
-  if (!isOpen) return null;
+  const { theme } = useTheme()
+  if (!isOpen) return null
 
   const sizeClasses = {
     sm: "max-w-sm",
     md: "max-w-md",
     lg: "max-w-2xl",
     full: "max-w-full w-full h-[90vh]",
-  }[size];
+  }[size]
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -40,24 +40,23 @@ function Modal({ isOpen, onClose, children, size = "full" }: ModalProps) {
               ? "hover:bg-gray-700 text-gray-400 hover:text-white"
               : "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
           }`}
-          aria-label="Close modal"
         >
           <X className="h-5 w-5" />
         </button>
         {children}
       </div>
     </div>
-  );
+  )
 }
 
 // Komponen FeatureList
 interface FeatureListProps {
-  features: string[];
-  textColor?: string;
+  features: string[]
+  textColor?: string
 }
 
 function FeatureList({ features, textColor }: FeatureListProps) {
-  const { theme } = useTheme();
+  const { theme } = useTheme()
   return (
     <ul className="space-y-1">
       {features.map((feature, i) => (
@@ -71,219 +70,459 @@ function FeatureList({ features, textColor }: FeatureListProps) {
         </li>
       ))}
     </ul>
-  );
+  )
 }
 
 // Komponen untuk instruksi pemesanan
 function OrderingInstructions() {
-  const { theme } = useTheme();
+  const { theme } = useTheme()
   return (
     <div className="space-y-4">
       <h3 className={`text-lg font-bold ${theme === "dark" ? "text-white" : "text-gray-900"}`}>Cara Pemesanan</h3>
       <div className="space-y-3">
-        {[
-          { step: "Pilih Paket", desc: "Pilih paket yang sesuai dengan kebutuhan bisnis Anda" },
-          { step: "Konsultasi", desc: "Diskusikan kebutuhan spesifik dan detail proyek dengan tim kami" },
-          { step: "Pembayaran", desc: "Lakukan pembayaran sesuai paket yang dipilih" },
-          { step: "Pengerjaan", desc: "Tim kami akan mulai mengerjakan proyek sesuai timeline yang disepakati" },
-        ].map(({ step, desc }, index) => (
-          <div key={index} className={`p-3 rounded-lg ${theme === "dark" ? "bg-gray-700" : "bg-gray-100"}`}>
-            <h4 className={`font-semibold text-sm mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-              {index + 1}. {step}
-            </h4>
-            <p className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{desc}</p>
-          </div>
-        ))}
+        <div className={`p-3 rounded-lg ${theme === "dark" ? "bg-gray-700" : "bg-gray-100"}`}>
+          <h4 className={`font-semibold text-sm mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+            1. Pilih Paket
+          </h4>
+          <p className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+            Pilih paket yang sesuai dengan kebutuhan bisnis Anda
+          </p>
+        </div>
+        <div className={`p-3 rounded-lg ${theme === "dark" ? "bg-gray-700" : "bg-gray-100"}`}>
+          <h4 className={`font-semibold text-sm mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+            2. Konsultasi
+          </h4>
+          <p className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+            Diskusikan kebutuhan spesifik dan detail proyek dengan tim kami
+          </p>
+        </div>
+        <div className={`p-3 rounded-lg ${theme === "dark" ? "bg-gray-700" : "bg-gray-100"}`}>
+          <h4 className={`font-semibold text-sm mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+            3. Pembayaran
+          </h4>
+          <p className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+            Lakukan pembayaran sesuai paket yang dipilih
+          </p>
+        </div>
+        <div className={`p-3 rounded-lg ${theme === "dark" ? "bg-gray-700" : "bg-gray-100"}`}>
+          <h4 className={`font-semibold text-sm mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+            4. Pengerjaan
+          </h4>
+          <p className={`text-xs ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+            Tim kami akan mulai mengerjakan proyek sesuai timeline yang disepakati
+          </p>
+        </div>
       </div>
     </div>
-  );
+  )
 }
 
 interface Product {
-  name: string;
-  price: string;
-  category: string;
-  subcategory?: string;
-  features?: string[];
-  exampleUrl?: string;
-  modalType?: "example" | "details" | "contentImages" | "videoPromo" | "seoImages" | "adsImages" | null;
+  name: string
+  price: string
+  category: string
+  subcategory?: string
+  features?: string[]
+  exampleUrl?: string
+  modalType?: "example" | "details" | "contentImages" | "videoPromo" | "seoImages" | "adsImages" | null
 }
 
 const getInstagramBoosterFeatures = (option: string) => {
-  const features: { [key: string]: string[] } = {
-    "3000": ["5000 Likes", "100000 Views"],
-    "5000": ["10000 Likes", "170000 Views"],
-    "10000": ["15000 Likes", "300000 Views"],
-  };
-  return features[option] || [];
-};
+  switch (option) {
+    case "3000":
+      return ["5000 Likes", "100000 Views"]
+    case "5000":
+      return ["10000 Likes", "170000 Views"]
+    case "10000":
+      return ["15000 Likes", "300000 Views"]
+    default:
+      return []
+  }
+}
 
 const getTikTokBoosterFeatures = (option: string) => {
-  const base = { views: 70000, likes: 5000, shares: 700, saves: 700 };
-  const multipliers: { [key: string]: number } = { "2000": 1, "5000": 2.5 };
-  const multiplier = multipliers[option] || 1;
-  return [
-    `${(base.views * multiplier).toLocaleString()} Views`,
-    `${(base.likes * multiplier).toLocaleString()} Likes`,
-    `${(base.shares * multiplier).toLocaleString()} Shares`,
-    `${(base.saves * multiplier).toLocaleString()} Saves`,
-  ];
-};
+  const baseViews = 70000
+  const baseLikes = 5000
+  const baseShares = 700
+  const baseSaves = 700
+
+  switch (option) {
+    case "2000":
+      return [
+        `${baseViews.toLocaleString()} Views`,
+        `${baseLikes.toLocaleString()} Likes`,
+        `${baseShares.toLocaleString()} Shares`,
+        `${baseSaves.toLocaleString()} Saves`,
+      ]
+    case "5000":
+      return [
+        `${(baseViews * 2.5).toLocaleString()} Views`,
+        `${(baseLikes * 2.5).toLocaleString()} Likes`,
+        `${(baseShares * 2.5).toLocaleString()} Shares`,
+        `${(baseSaves * 2.5).toLocaleString()} Saves`,
+      ]
+    default:
+      return []
+  }
+}
 
 const getTelegramBoosterFeatures = (option: string) => {
-  const features: { [key: string]: string[] } = {
-    "3000": ["10000 Views", "1000 Reactions"],
-    "5000": ["15000 Views", "1500 Reactions"],
-    "10000": ["30000 Views", "3000 Reactions"],
-  };
-  return features[option] || [];
-};
+  switch (option) {
+    case "3000":
+      return ["10000 Views", "1000 Reactions"]
+    case "5000":
+      return ["15000 Views", "1500 Reactions"]
+    case "10000":
+      return ["30000 Views", "3000 Reactions"]
+    default:
+      return []
+  }
+}
 
 const getFacebookBoosterFeatures = (option: string) => {
-  const features: { [key: string]: string[] } = {
-    "3000": ["5000 Likes", "100000 Views"],
-    "5000": ["10000 Likes", "170000 Views"],
-    "10000": ["15000 Likes", "300000 Views"],
-  };
-  return features[option] || [];
-};
+  switch (option) {
+    case "3000":
+      return ["5000 Likes", "100000 Views"]
+    case "5000":
+      return ["10000 Likes", "170000 Views"]
+    case "10000":
+      return ["15000 Likes", "300000 Views"]
+    default:
+      return []
+  }
+}
 
 const productData: Product[] = [
-  // Data produk sama seperti sebelumnya, tidak diubah untuk singkatnya
-  // Pastikan semua URL contoh (exampleUrl) valid untuk menghindari error
-];
+  {
+    name: "Paket Bisnis",
+    price: "Rp 50,000",
+    category: "paket_bisnis",
+    features: [
+      "Website",
+      "Desain Konten Sosmed",
+      "Booster Sosmed",
+      "Video Promosi",
+      "Copywriting",
+      "SEO On-page",
+    ],
+    exampleUrl: "https://example.com",
+    modalType: "details",
+  },
+  {
+    name: "Paket Bisnis Reseller",
+    price: "Rp 25,000",
+    category: "paket_bisnis",
+    features: [
+      "Website",
+      "Desain Konten Sosmed",
+      "Booster Sosmed",
+      "Video Promosi",
+      "Copywriting",
+      "Alat promosi",
+    ],
+    exampleUrl: "https://example.com",
+    modalType: "details",
+  },
+  {
+    name: "Instagram Booster",
+    price: "",
+    category: "sosmed_booster",
+    features: [],
+    exampleUrl: "https://example.com/instagram",
+    modalType: "details",
+  },
+  {
+    name: "TikTok Booster",
+    price: "",
+    category: "sosmed_booster",
+    features: [],
+    exampleUrl: "https://example.com/tiktok",
+    modalType: "details",
+  },
+  {
+    name: "Telegram Booster",
+    price: "",
+    category: "sosmed_booster",
+    features: [],
+    exampleUrl: "https://example.com/telegram",
+    modalType: "details",
+  },
+  {
+    name: "Facebook Booster",
+    price: "",
+    category: "sosmed_booster",
+    features: [],
+    exampleUrl: "https://example.com/facebook",
+    modalType: "details",
+  },
+  {
+    name: "Desain Konten",
+    price: "Rp 10,000",
+    category: "lainnya",
+    modalType: "contentImages",
+  },
+  {
+    name: "Video Promosi",
+    price: "Rp 10,000",
+    category: "lainnya",
+    exampleUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Example video
+    modalType: "videoPromo",
+  },
+  {
+    name: "SEO & Domain Website",
+    price: "Rp 25,000",
+    category: "lainnya",
+    features: ["Riset Kata Kunci", "Optimasi Halaman", "setting dll"],
+    modalType: "seoImages",
+  },
+  {
+    name: "Jasa Iklan Online",
+    price: "Rp 50,000",
+    category: "lainnya",
+    features: ["Meta ads", "Tiktok ads"],
+    modalType: "adsImages",
+  },
+  {
+    name: "Landing Page",
+    price: "Rp 20,000",
+    category: "website",
+    subcategory: "business",
+    features: ["Responsif", "Hosting Gratis"],
+    exampleUrl: "https://unbounce.com",
+    modalType: "example",
+  },
+  {
+    name: "Profil Bisnis",
+    price: "Rp 20,000",
+    category: "website",
+    subcategory: "business",
+    features: ["Responsif", "Hosting Gratis"],
+    exampleUrl: "https://profil-bisnis-demo.vercel.app",
+    modalType: "example",
+  },
+  {
+    name: "Simple Store",
+    price: "Rp 20,000",
+    category: "website",
+    subcategory: "business",
+    features: ["Responsif", "Hosting Gratis"],
+    exampleUrl: "https://shopify.com",
+    modalType: "example",
+  },
+  {
+    name: "Portfolio",
+    price: "Rp 20,000",
+    category: "website",
+    subcategory: "business",
+    features: ["Responsif", "Hosting Gratis"],
+    exampleUrl: "https://portfolio-demo.vercel.app",
+    modalType: "example",
+  },
+  {
+    name: "Online Course",
+    price: "Rp 20,000",
+    category: "website",
+    subcategory: "business",
+    features: ["Responsif", "Hosting Gratis"],
+    exampleUrl: "https://course-demo.vercel.app",
+    modalType: "example",
+  },
+  {
+    name: "Membership",
+    price: "Rp 20,000",
+    category: "website",
+    subcategory: "business",
+    features: ["Responsif", "Hosting Gratis"],
+    exampleUrl: "https://membership-demo.vercel.app",
+    modalType: "example",
+  },
+  {
+    name: "Link in Bio",
+    price: "Rp 20,000",
+    category: "website",
+    subcategory: "business",
+    features: ["Responsif", "Hosting Gratis"],
+    exampleUrl: "https://linkinbio-demo.vercel.app",
+    modalType: "example",
+  },
+  {
+    name: "Digital Invitation",
+    price: "Rp 20,000",
+    category: "website",
+    subcategory: "non-business",
+    features: ["Responsif", "Hosting Gratis"],
+    exampleUrl: "https://invitation-demo.vercel.app",
+    modalType: "example",
+  },
+  {
+    name: "Birthday",
+    price: "Rp 20,000",
+    category: "website",
+    subcategory: "non-business",
+    features: ["Responsif", "Hosting Gratis"],
+    exampleUrl: "https://birthday-demo.vercel.app",
+    modalType: "example",
+  },
+  {
+    name: "Event",
+    price: "Rp 20,000",
+    category: "website",
+    subcategory: "non-business",
+    features: ["Responsif", "Hosting Gratis"],
+    exampleUrl: "https://event-demo.vercel.app",
+    modalType: "example",
+  },
+]
 
 const imageSources = {
   contentImages: ["/images/template1.jpg", "/images/template2.jpg", "/images/template3.jpg"],
   seoImages: ["/images/seo1.jpg"],
   adsImages: ["/images/ads1.jpg"],
-};
+}
 
-export default function ServicesPage() {
-  const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  const [activeCategory, setActiveCategory] = useState("paket_bisnis");
-  const [activeSubcategory, setActiveSubcategory] = useState("business");
-  const [activeModal, setActiveModal] = useState<Product["modalType"]>(null);
-  const [modalProduct, setModalProduct] = useState<Product | null>(null);
-  const [boosterOptions, setBoosterOptions] = useState({
-    instagram: "3000",
-    tiktok: "2000",
-    telegram: "3000",
-    facebook: "3000",
-  });
-  const [boosterLink, setBoosterLink] = useState("");
+export default function ServicesPage() { // Ganti nama fungsi agar lebih deskriptif
+  const { theme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  const [activeCategory, setActiveCategory] = useState("paket_bisnis")
+  const [activeSubcategory, setActiveSubcategory] = useState("business")
+  const [activeModal, setActiveModal] = useState<Product["modalType"]>(null)
+  const [modalProduct, setModalProduct] = useState<Product | null>(null)
+
+  const [instagramBoosterOption, setInstagramBoosterOption] = useState("3000")
+  const [tiktokBoosterOption, setTiktokBoosterOption] = useState("2000")
+  const [telegramBoosterOption, setTelegramBoosterOption] = useState("3000")
+  const [facebookBoosterOption, setFacebookBoosterOption] = useState("3000")
+  const [boosterLink, setBoosterLink] = useState("")
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    setMounted(true)
+  }, [])
 
   const getProductDisplayData = useCallback(
     (product: Product): Product => {
-      const boosterPrices: { [key: string]: { [key: string]: string } } = {
-        "Instagram Booster": { "3000": "Rp 50,000", "5000": "Rp 80,000", "10000": "Rp 150,000" },
-        "TikTok Booster": { "2000": "Rp 50,000", "5000": "Rp 100,000" },
-        "Telegram Booster": { "3000": "Rp 50,000", "5000": "Rp 70,000", "10000": "Rp 140,000" },
-        "Facebook Booster": { "3000": "Rp 50,000", "5000": "Rp 80,000", "10000": "Rp 150,000" },
-      };
+      let currentPrice = product.price
+      let currentFeatures = product.features || []
 
-      const boosterFeatures: { [key: string]: (option: string) => string[] } = {
-        "Instagram Booster": getInstagramBoosterFeatures,
-        "TikTok Booster": getTikTokBoosterFeatures,
-        "Telegram Booster": getTelegramBoosterFeatures,
-        "Facebook Booster": getFacebookBoosterFeatures,
-      };
-
-      const option = boosterOptions[product.name.toLowerCase().split(" ")[0] as keyof typeof boosterOptions];
-      const price = boosterPrices[product.name]?.[option] || product.price;
-      const features = boosterFeatures[product.name]?.(option) || product.features || [];
-
-      return { ...product, price, features };
+      if (product.name === "Instagram Booster") {
+        currentPrice =
+          instagramBoosterOption === "3000"
+            ? "Rp 50,000"
+            : instagramBoosterOption === "5000"
+              ? "Rp 80,000"
+              : "Rp 150,000"
+        currentFeatures = getInstagramBoosterFeatures(instagramBoosterOption)
+      } else if (product.name === "TikTok Booster") {
+        currentPrice = tiktokBoosterOption === "2000" ? "Rp 50,000" : "Rp 100,000"
+        currentFeatures = getTikTokBoosterFeatures(tiktokBoosterOption)
+      } else if (product.name === "Telegram Booster") {
+        currentPrice =
+          telegramBoosterOption === "3000" ? "Rp 50,000" : telegramBoosterOption === "5000" ? "Rp 70,000" : "Rp 140,000"
+        currentFeatures = getTelegramBoosterFeatures(telegramBoosterOption)
+      } else if (product.name === "Facebook Booster") {
+        currentPrice =
+          facebookBoosterOption === "3000" ? "Rp 50,000" : facebookBoosterOption === "5000" ? "Rp 80,000" : "Rp 150,000"
+        currentFeatures = getFacebookBoosterFeatures(facebookBoosterOption)
+      }
+      return { ...product, price: currentPrice, features: currentFeatures }
     },
-    [boosterOptions],
-  );
+    [instagramBoosterOption, tiktokBoosterOption, telegramBoosterOption, facebookBoosterOption],
+  )
 
-  const filteredProducts = useMemo(
-    () =>
-      productData.filter((product) =>
-        activeCategory === "website"
-          ? product.category === activeCategory && product.subcategory === activeSubcategory
-          : product.category === activeCategory,
-      ),
-    [activeCategory, activeSubcategory],
-  );
-
-  const groupedProducts = useMemo(() => {
-    const groups: Product[][] = [];
-    for (let i = 0; i < filteredProducts.length; i += 2) {
-      groups.push(filteredProducts.slice(i, i + 2));
+  const filteredProducts = productData.filter((product) => {
+    if (product.category !== activeCategory) return false
+    if (activeCategory === "website") {
+      return product.subcategory === activeSubcategory
     }
-    return groups;
-  }, [filteredProducts]);
+    return true
+  })
+
+  const groupedProducts: Product[][] = []
+  for (let i = 0; i < filteredProducts.length; i += 2) {
+    groupedProducts.push(filteredProducts.slice(i, i + 2))
+  }
 
   const openModal = useCallback(
     (type: Product["modalType"], product?: Product) => {
-      setActiveModal(type);
-      setModalProduct(product ? getProductDisplayData(product) : null);
+      setActiveModal(type)
+      if (product) {
+        setModalProduct(getProductDisplayData(product))
+      } else {
+        setModalProduct(null)
+      }
     },
     [getProductDisplayData],
-  );
+  )
 
   const closeModal = useCallback(() => {
-    setActiveModal(null);
-    setModalProduct(null);
-  }, []);
+    setActiveModal(null)
+    setModalProduct(null)
+  }, [])
 
-  const getButtonClasses = (isActive: boolean) =>
-    `px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
-      isActive
-        ? theme === "dark"
-          ? "bg-blue-600 text-white shadow-lg"
-          : "bg-blue-500 text-white shadow-lg"
-        : theme === "dark"
-          ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
-          : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
-    }`;
+  const getButtonClasses = (isActive: boolean) => {
+    const baseClasses = "px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300"
+    const activeClasses = theme === "dark" ? "bg-blue-600 text-white shadow-lg" : "bg-blue-500 text-white shadow-lg"
+    const inactiveClasses =
+      theme === "dark"
+        ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+        : "bg-white text-gray-700 hover:bg-gray-100 shadow-md"
+    return `${baseClasses} ${isActive ? activeClasses : inactiveClasses}`
+  }
 
-  if (!mounted) return null;
+  if (!mounted) return null
 
   return (
     <div className={`min-h-screen pt-20 pb-8 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
       <div className="container max-w-4xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-2 sm:flex sm:flex-row sm:justify-center gap-2 sm:gap-4 mb-6">
-          {[
-            { label: "Paket Bisnis", category: "paket_bisnis" },
-            { label: "Website", category: "website", subcategory: "business" },
-            { label: "Sosmed Booster", category: "sosmed_booster" },
-            { label: "Lainnya", category: "lainnya" },
-          ].map(({ label, category, subcategory }) => (
-            <button
-              key={category}
-              onClick={() => {
-                setActiveCategory(category);
-                if (subcategory) setActiveSubcategory(subcategory);
-              }}
-              className={getButtonClasses(activeCategory === category)}
-            >
-              {label}
-            </button>
-          ))}
+          <button
+            onClick={() => {
+              setActiveCategory("paket_bisnis")
+            }}
+            className={getButtonClasses(activeCategory === "paket_bisnis")}
+          >
+            Paket Bisnis
+          </button>
+          <button
+            onClick={() => {
+              setActiveCategory("website")
+              setActiveSubcategory("business")
+            }}
+            className={getButtonClasses(activeCategory === "website")}
+          >
+            Website
+          </button>
+          <button
+            onClick={() => {
+              setActiveCategory("sosmed_booster")
+            }}
+            className={getButtonClasses(activeCategory === "sosmed_booster")}
+          >
+            Sosmed Booster
+          </button>
+          <button
+            onClick={() => {
+              setActiveCategory("lainnya")
+            }}
+            className={getButtonClasses(activeCategory === "lainnya")}
+          >
+            Lainnya
+          </button>
         </div>
 
         {activeCategory === "website" && (
           <div className="flex justify-center gap-2 mb-6">
-            {[
-              { label: "Bisnis", subcategory: "business" },
-              { label: "Non-Bisnis", subcategory: "non-business" },
-            ].map(({ label, subcategory }) => (
-              <button
-                key={subcategory}
-                onClick={() => setActiveSubcategory(subcategory)}
-                className={getButtonClasses(activeSubcategory === subcategory)}
-              >
-                {label}
-              </button>
-            ))}
+            <button
+              onClick={() => setActiveSubcategory("business")}
+              className={getButtonClasses(activeSubcategory === "business")}
+            >
+              Bisnis
+            </button>
+            <button
+              onClick={() => setActiveSubcategory("non-business")}
+              className={getButtonClasses(activeSubcategory === "non-business")}
+            >
+              Non-Bisnis
+            </button>
           </div>
         )}
 
@@ -291,14 +530,11 @@ export default function ServicesPage() {
           {groupedProducts.map((group, groupIndex) => (
             <div key={groupIndex} className="grid grid-cols-2 gap-3 sm:gap-4">
               {group.map((product) => {
-                const displayProduct = getProductDisplayData(product);
-                const isBooster = ["Instagram Booster", "TikTok Booster", "Telegram Booster", "Facebook Booster"].includes(
-                  displayProduct.name,
-                );
+                const displayProduct = getProductDisplayData(product)
 
                 return (
                   <div
-                    key={`${displayProduct.name}-${displayProduct.subcategory || ""}`}
+                    key={displayProduct.name + (displayProduct.subcategory || "")}
                     className={`flex flex-col rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg ${
                       theme === "dark" ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
                     } p-3`}
@@ -327,41 +563,72 @@ export default function ServicesPage() {
                     </div>
 
                     <div className="flex-grow">
-                      {isBooster && (
+                      {["Instagram Booster", "TikTok Booster", "Telegram Booster", "Facebook Booster"].includes(
+                        displayProduct.name,
+                      ) && (
                         <div className="mb-3 space-y-2">
-                          <select
-                            value={boosterOptions[displayProduct.name.toLowerCase().split(" ")[0] as keyof typeof boosterOptions]}
-                            onChange={(e) =>
-                              setBoosterOptions({
-                                ...boosterOptions,
-                                [displayProduct.name.toLowerCase().split(" ")[0]]: e.target.value,
-                              })
-                            }
-                            className={`w-full px-2 py-1.5 rounded-md text-xs border ${
-                              theme === "dark"
-                                ? "bg-gray-700 border-gray-600 text-gray-200"
-                                : "bg-white border-gray-300 text-gray-700"
-                            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                          >
-                            {displayProduct.name === "TikTok Booster"
-                              ? [
-                                  { value: "2000", label: "2000 Followers" },
-                                  { value: "5000", label: "5000 Followers" },
-                                ].map(({ value, label }) => (
-                                  <option key={value} value={value}>
-                                    {label}
-                                  </option>
-                                ))
-                              : [
-                                  { value: "3000", label: "3000 Followers" },
-                                  { value: "5000", label: "5000 Followers" },
-                                  { value: "10000", label: "10000 Followers" },
-                                ].map(({ value, label }) => (
-                                  <option key={value} value={value}>
-                                    {label}
-                                  </option>
-                                ))}
-                          </select>
+                          {displayProduct.name === "Instagram Booster" && (
+                            <select
+                              value={instagramBoosterOption}
+                              onChange={(e) => setInstagramBoosterOption(e.target.value)}
+                              className={`w-full px-2 py-1.5 rounded-md text-xs border ${
+                                theme === "dark"
+                                  ? "bg-gray-700 border-gray-600 text-gray-200"
+                                  : "bg-white border-gray-300 text-gray-700"
+                              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                            >
+                              <option value="3000">3000 Followers</option>
+                              <option value="5000">5000 Followers</option>
+                              <option value="10000">10000 Followers</option>
+                            </select>
+                          )}
+
+                          {displayProduct.name === "TikTok Booster" && (
+                            <select
+                              value={tiktokBoosterOption}
+                              onChange={(e) => setTiktokBoosterOption(e.target.value)}
+                              className={`w-full px-2 py-1.5 rounded-md text-xs border ${
+                                theme === "dark"
+                                  ? "bg-gray-700 border-gray-600 text-gray-200"
+                                  : "bg-white border-gray-300 text-gray-700"
+                              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                            >
+                              <option value="2000">2000 Followers</option>
+                              <option value="5000">5000 Followers</option>
+                            </select>
+                          )}
+
+                          {displayProduct.name === "Telegram Booster" && (
+                            <select
+                              value={telegramBoosterOption}
+                              onChange={(e) => setTelegramBoosterOption(e.target.value)}
+                              className={`w-full px-2 py-1.5 rounded-md text-xs border ${
+                                theme === "dark"
+                                  ? "bg-gray-700 border-gray-600 text-gray-200"
+                                  : "bg-white border-gray-300 text-gray-700"
+                              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                            >
+                              <option value="3000">3000 Followers</option>
+                              <option value="5000">5000 Followers</option>
+                              <option value="10000">10000 Followers</option>
+                            </select>
+                          )}
+
+                          {displayProduct.name === "Facebook Booster" && (
+                            <select
+                              value={facebookBoosterOption}
+                              onChange={(e) => setFacebookBoosterOption(e.target.value)}
+                              className={`w-full px-2 py-1.5 rounded-md text-xs border ${
+                                theme === "dark"
+                                  ? "bg-gray-700 border-gray-600 text-gray-200"
+                                  : "bg-white border-gray-300 text-gray-700"
+                              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                            >
+                              <option value="3000">3000 Followers</option>
+                              <option value="5000">5000 Followers</option>
+                              <option value="10000">10000 Followers</option>
+                            </select>
+                          )}
                           <input
                             type="text"
                             value={boosterLink}
@@ -373,7 +640,7 @@ export default function ServicesPage() {
                                 : "bg-white border-gray-300 text-gray-700 placeholder-gray-500"
                             } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                           />
-                          {displayProduct.features?.length > 0 && (
+                          {displayProduct.features && displayProduct.features.length > 0 && (
                             <div className="mt-1">
                               <FeatureList features={displayProduct.features} />
                             </div>
@@ -381,11 +648,16 @@ export default function ServicesPage() {
                         </div>
                       )}
 
-                      {!isBooster && displayProduct.features?.length > 0 && (
-                        <div className="mb-3">
-                          <FeatureList features={displayProduct.features} />
-                        </div>
-                      )}
+                      {displayProduct.name !== "Instagram Booster" &&
+                        displayProduct.name !== "TikTok Booster" &&
+                        displayProduct.name !== "Telegram Booster" &&
+                        displayProduct.name !== "Facebook Booster" &&
+                        displayProduct.features &&
+                        displayProduct.features.length > 0 && (
+                          <div className="mb-3">
+                            <FeatureList features={displayProduct.features} />
+                          </div>
+                        )}
                     </div>
 
                     <div className="flex gap-2 mt-auto">
@@ -421,13 +693,13 @@ export default function ServicesPage() {
                         )}
                     </div>
                   </div>
-                );
+                )
               })}
             </div>
           ))}
         </div>
 
-        <Modal isOpen={activeModal === "example" && !!modalProduct} onClose={closeModal} size="full">
+        <Modal isOpen={activeModal === "example" && modalProduct !== null} onClose={closeModal} size="full">
           {modalProduct?.exampleUrl && (
             <iframe
               src={modalProduct.exampleUrl}
@@ -438,14 +710,14 @@ export default function ServicesPage() {
           )}
         </Modal>
 
-        <Modal isOpen={activeModal === "details" && !!modalProduct} onClose={closeModal} size="md">
+        <Modal isOpen={activeModal === "details" && modalProduct !== null} onClose={closeModal} size="md">
           <OrderingInstructions />
         </Modal>
 
         <Modal
           isOpen={
             (activeModal === "contentImages" && modalProduct?.name === "Desain Konten") ||
-            (activeModal === "seoImages" && modalProduct?.name === "SEO & Domain Website") ||
+            (activeModal === "seoImages" && modalProduct?.name === "SEO & Domain Website") || // <-- PERBAIKAN BUG
             (activeModal === "adsImages" && modalProduct?.name === "Jasa Iklan Online")
           }
           onClose={closeModal}
@@ -460,7 +732,6 @@ export default function ServicesPage() {
                       src={img || "/placeholder.svg"}
                       alt={`${modalProduct.name} Contoh ${i + 1}`}
                       className="w-full h-full object-contain rounded-md"
-                      loading="lazy"
                     />
                     <span
                       className={`absolute top-2 left-2 px-2 py-1 text-xs md:text-sm font-medium text-white bg-black bg-opacity-60 rounded`}
@@ -473,7 +744,11 @@ export default function ServicesPage() {
           </Swiper>
         </Modal>
 
-        <Modal isOpen={activeModal === "videoPromo" && modalProduct?.name === "Video Promosi"} onClose={closeModal} size="lg">
+        <Modal
+          isOpen={activeModal === "videoPromo" && modalProduct?.name === "Video Promosi"}
+          onClose={closeModal}
+          size="lg"
+        >
           {modalProduct?.exampleUrl && (
             <div className="aspect-video w-full">
               <iframe
@@ -483,12 +758,11 @@ export default function ServicesPage() {
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-                loading="lazy"
               />
             </div>
           )}
         </Modal>
       </div>
     </div>
-  );
-                         }
+  )
+}
