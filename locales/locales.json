@@ -1,0 +1,284 @@
+{
+  "ar": {
+    "Hero": {
+      "title1": "ابدأ",
+      "title2": "عملك عبر الإنترنت",
+      "title3": "بسهولة وسرعة",
+      "description": "ابنِ عملاً احترافيًا موثوقًا به أو انضم إلى برنامج الموزعين عالي الربح!"
+    },
+    "SocialProof": {
+      "maker": "شخصًا نجحوا في بناء أعمالهم التجارية عبر الإنترنت معنا"
+    },
+    "Showcase": {
+      "title": "قصص نجاح",
+      "description": "أكثر من 1000 من الشركات الصغيرة والمتوسطة والموزعين نجحوا في الانتقال إلى الإنترنت بسهولة معنا."
+    },
+    "Feature": {
+      "title": "لماذا Bisnovo؟"
+    },
+    "Pricing": {
+      "title": "اختر باقتك",
+      "title2": "أسعار معقولة، خدمات كاملة",
+      "description": "باقات كاملة للأعمال التجارية عبر الإنترنت أو الموزعين. عملية وسريعة ونتائج حقيقية.",
+      "doYouLike": "هل تريد عملًا تجاريًا سهلًا عبر الإنترنت؟",
+      "follow": "تابعنا على إنستغرام @bisnovoco"
+    },
+    "Testimonials": {
+      "title": "قصص العملاء",
+      "description1": "آراء حقيقية من أولئك الذين بنوا أعمالهم مع Bisnovo",
+      "description2": "شاهد قصصهم",
+      "description3": "والنتائج الحقيقية."
+    },
+    "FAQ": {
+      "title": "الأسئلة الشائعة",
+      "description": "ابحث عن إجابات للأسئلة حول باقات الأعمال التجارية عبر الإنترنت وبرنامج الموزعين لدينا."
+    },
+    "CTA": {
+      "title": "ابدأ عملك على الإنترنت الآن",
+      "description1": "احصل على خصم 50%",
+      "description2": "للموزعين",
+      "description3": "واحصل على الكثير",
+      "description4": "من أدوات",
+      "description5": "الترويج",
+      "description6": "المجانية!"
+    },
+    "CTAButton": {
+      "title": "ابدأ الآن"
+    }
+  },
+  "en": {
+    "Hero": {
+      "title1": "Start",
+      "title2": "Online Business",
+      "title3": "Easy & Fast",
+      "description": "Build a trusted professional business or Join the high-profit reseller program!"
+    },
+    "SocialProof": {
+      "maker": "people have successfully built an online business with us"
+    },
+    "Showcase": {
+      "title": "Success Stories",
+      "description": "More than 1000 SMEs and resellers have successfully gone online easily with us."
+    },
+    "Feature": {
+      "title": "Why Bisnovo?"
+    },
+    "Pricing": {
+      "title": "Choose Your Package",
+      "title2": "Affordable Prices, Complete Services",
+      "description": "Complete packages for online businesses or resellers. Practical, fast, and real results.",
+      "doYouLike": "Want an easy online business?",
+      "follow": "Follow our Instagram @bisnovoco"
+    },
+    "Testimonials": {
+      "title": "Customer Stories",
+      "description1": "Real opinions from those who have built a business with Bisnovo",
+      "description2": "See their stories",
+      "description3": "and the real results."
+    },
+    "FAQ": {
+      "title": "Frequently Asked Questions",
+      "description": "Find answers to questions about our online business packages and reseller program."
+    },
+    "CTA": {
+      "title": "Start Your Online Business Now",
+      "description1": "Get a 50% discount",
+      "description2": "for resellers",
+      "description3": "and receive",
+      "description4": "plenty of",
+      "description5": "free promotional",
+      "description6": "tools!"
+    },
+    "CTAButton": {
+      "title": "Start Now"
+    }
+  },
+  "es": {
+    "Hero": {
+      "title1": "Inicia",
+      "title2": "Negocio Online",
+      "title3": "Fácil y Rápido",
+      "description": "¡Construye un negocio profesional de confianza o únete al programa de revendedores de alta rentabilidad!"
+    },
+    "SocialProof": {
+      "maker": "personas han construido con éxito un negocio en línea con nosotros"
+    },
+    "Showcase": {
+      "title": "Historias de Éxito",
+      "description": "Más de 1000 pymes y revendedores han tenido éxito en línea fácilmente con nosotros."
+    },
+    "Feature": {
+      "title": "¿Por qué Bisnovo?"
+    },
+    "Pricing": {
+      "title": "Elige Tu Paquete",
+      "title2": "Precios Asequibles, Servicios Completos",
+      "description": "Paquetes completos para negocios en línea o revendedores. Práctico, rápido y con resultados reales.",
+      "doYouLike": "¿Quieres un negocio en línea fácil?",
+      "follow": "Sigue nuestro Instagram @bisnovoco"
+    },
+    "Testimonials": {
+      "title": "Historias de Clientes",
+      "description1": "Opiniones reales de quienes han construido un negocio con Bisnovo",
+      "description2": "Mira sus historias",
+      "description3": "y los resultados reales."
+    },
+    "FAQ": {
+      "title": "Preguntas Frecuentes",
+      "description": "Encuentra respuestas a preguntas sobre nuestros paquetes de negocios en línea y programa de revendedores."
+    },
+    "CTA": {
+      "title": "Inicia tu Negocio Online Ahora",
+      "description1": "Obtén un 50% de descuento",
+      "description2": "para revendedores",
+      "description3": "y recibe",
+      "description4": "muchas herramientas",
+      "description5": "de promoción",
+      "description6": "gratuitas!"
+    },
+    "CTAButton": {
+      "title": "Comienza Ahora"
+    }
+  },
+  "ja": {
+    "Hero": {
+      "title1": "始める",
+      "title2": "オンラインビジネス",
+      "title3": "簡単＆迅速",
+      "description": "信頼できるプロのビジネスを構築するか、高収益のリセラープログラムに参加しましょう！"
+    },
+    "SocialProof": {
+      "maker": "人々が私たちと一緒にオンラインビジネスを成功させています"
+    },
+    "Showcase": {
+      "title": "成功事例",
+      "description": "1000以上の中小企業とリセラーが、私たちと共に簡単にオンライン化に成功しました。"
+    },
+    "Feature": {
+      "title": "なぜBisnovo？"
+    },
+    "Pricing": {
+      "title": "パッケージを選択",
+      "title2": "手頃な価格、充実したサービス",
+      "description": "オンラインビジネスまたはリセラー向けの完全なパッケージ。実用的、迅速、そして確かな結果。",
+      "doYouLike": "簡単なオンラインビジネスをしたいですか？",
+      "follow": "私たちのInstagram @bisnovocoをフォローしてください"
+    },
+    "Testimonials": {
+      "title": "お客様の声",
+      "description1": "Bisnovoでビジネスを構築した方々からの実際の意見",
+      "description2": "彼らのストーリーを見る",
+      "description3": "そして実際の結果。"
+    },
+    "FAQ": {
+      "title": "よくある質問",
+      "description": "当社のオンラインビジネスパッケージとリセラープログラムに関する質問への回答をご覧ください。"
+    },
+    "CTA": {
+      "title": "今すぐオンラインビジネスを始めましょう",
+      "description1": "リセラー向けに",
+      "description2": "50%割引を",
+      "description3": "獲得し、",
+      "description4": "さらに多くの",
+      "description5": "無料プロモーション",
+      "description6": "ツールを手に入れましょう！"
+    },
+    "CTAButton": {
+      "title": "今すぐ始める"
+    }
+  },
+  "ru": {
+    "Hero": {
+      "title1": "Начать",
+      "title2": "Онлайн-Бизнес",
+      "title3": "Легко и Быстро",
+      "description": "Создайте надежный профессиональный бизнес или присоединяйтесь к высокодоходной реселлерской программе!"
+    },
+    "SocialProof": {
+      "maker": "человек успешно создали онлайн-бизнес вместе с нами"
+    },
+    "Showcase": {
+      "title": "Истории Успеха",
+      "description": "Более 1000 малых и средних предприятий и реселлеров успешно и легко вышли в онлайн вместе с нами."
+    },
+    "Feature": {
+      "title": "Почему Bisnovo?"
+    },
+    "Pricing": {
+      "title": "Выберите свой пакет",
+      "title2": "Доступные цены, полный комплекс услуг",
+      "description": "Полные пакеты для онлайн-бизнеса или реселлеров. Практично, быстро и с реальными результатами.",
+      "doYouLike": "Хотите легкий онлайн-бизнес?",
+      "follow": "Подписывайтесь на наш Instagram @bisnovoco"
+    },
+    "Testimonials": {
+      "title": "Отзывы клиентов",
+      "description1": "Реальные мнения тех, кто построил бизнес с Bisnovo",
+      "description2": "Посмотрите их истории",
+      "description3": "и реальные результаты."
+    },
+    "FAQ": {
+      "title": "Часто задаваемые вопросы",
+      "description": "Найдите ответы на вопросы о наших пакетах для онлайн-бизнеса и реселлерской программе."
+    },
+    "CTA": {
+      "title": "Начните свой онлайн-бизнес сейчас",
+      "description1": "Получите скидку 50%",
+      "description2": "для реселлеров",
+      "description3": "и получите",
+      "description4": "множество",
+      "description5": "бесплатных рекламных",
+      "description6": "инструментов!"
+    },
+    "CTAButton": {
+      "title": "Начать сейчас"
+    }
+  },
+  "zh": {
+    "Hero": {
+      "title1": "Mulai",
+      "title2": "Bisnis Online",
+      "title3": "Mudah & Cepat",
+      "description": "Bangun bisnis  profesional  yang  terpercaya atau Gabung program reseller dengan profit tinggi!"
+    },
+    "SocialProof": {
+      "maker": "orang sudah sukses membangun bisnis online bersama kami"
+    },
+    "Showcase": {
+      "title": "Kisah Sukses",
+      "description": "Lebih dari 1000 UMKM dan reseller sudah sukses go online dengan mudah bersama kami."
+    },
+    "Feature": {
+      "title": "Kenapa Bisnovo?"
+    },
+    "Pricing": {
+      "title": "Pilih Paket Anda",
+      "title2": "Harga Terjangkau, Layanan Komplit",
+      "description": "Paket lengkap untuk bisnis online atau reseller. Praktis, cepat, dan hasil nyata.",
+      "doYouLike": "Mau bisnis online yang gampang?",
+      "follow": "Ikuti Instagram kami @bisnovoco"
+    },
+    "Testimonials": {
+      "title": "Cerita Pelanggan",
+      "description1": "Pendapat nyata dari mereka yang sudah membangun bisnis dengan Bisnovo",
+      "description2": "Lihat kisah mereka",
+      "description3": "dan hasil nyatanya."
+    },
+    "FAQ": {
+      "title": "Pertanyaan Sering Diajukan",
+      "description": "Cari tahu jawaban atas pertanyaan tentang paket bisnis online dan program reseller kami."
+    },
+    "CTA": {
+      "title": "Mulai Bisnis Online Sekarang",
+      "description1": " Dapatkan diiskon 50%",
+      "description2": "untuk reseller",
+      "description3": "kami ",
+      "description4": "dapatkan banyak",
+      "description5": "dan alat promosi",
+      "description6": "gratis "
+    },
+    "CTAButton": {
+      "title": "Mulai Sekarang"
+    }
+  }
+}
